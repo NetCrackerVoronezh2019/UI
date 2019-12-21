@@ -1,0 +1,47 @@
+<div class="registration-tittle">Registration</div>
+<form class="registration-form" [formGroup]="regService.getRegForm()" (ngSubmit)="onSubmit()" autocomplete="off">
+	 <div class="form-group">
+        <input name="name" formControlName="userName"/>
+        <div class="registration-field"
+        *ngIf="regService.getRegForm().controls['userName'].invalid && regService.getRegForm().controls['userName'].touched">    
+        <span *ngIf="regService.getRegForm().controls['userName'].errors.minlength">Минимальное количество букв-5</span>
+        <span *ngIf="regService.getRegForm().controls['userName'].errors.maxlength">Максимальное количество букв-15</span>
+        </div>
+  </div>
+  <div class="form-group">
+    <input name="name" formControlName="userSurname"/>
+    <div class="registration-field"
+    *ngIf="regService.getRegForm().controls['userSurname'].invalid && regService.getRegForm().controls['userSurname'].touched">    
+    <span *ngIf="regService.getRegForm().controls['userSurname'].errors.minlength">Минимальное количество букв-5</span>
+    <span *ngIf="regService.getRegForm().controls['userSurname'].errors.maxlength">Максимальное количество букв-15</span>
+    </div>
+ </div>
+  <div class="form-group">
+		<input name="email" formControlName="userEmail" autocomplete="off"/>
+        <div class="registration-field"
+        *ngIf="regService.getRegForm().controls['userEmail'].invalid && regService.getRegForm().controls['userEmail'].touched">  
+        <span *ngIf="regService.getRegForm().controls['userEmail'].errors.email"> Некоректный  Email</span>    
+        </div>
+   </div>
+	 <div formGroupName="Passwords" class="passwords">
+			<div class="form-group">
+				<input type="password" formControlName="password"/>
+        <div class="registration-field"
+        *ngIf="regService.getRegForm().controls['Passwords'].controls['password'].invalid && regService.getRegForm().controls['Passwords'].controls['password'].touched">  
+        <span *ngIf="regService.getRegForm().controls['Passwords'].controls['password'].errors.minlength">Минимальное количество букв-5</span>    
+        </div>
+			</div>
+			<div class="form-group">
+				<input type="password" formControlName="confirmPassword"/>
+        <div class="registration-field"
+        *ngIf="regService.getRegForm().controls['Passwords'].controls['confirmPassword'].invalid && regService.getRegForm().controls['Passwords'].controls['confirmPassword'].touched">  
+        <span *ngIf="regService.getRegForm().controls['Passwords'].controls['confirmPassword'].errors.confirm">не совпадают</span>    
+        </div>
+			</div>
+			
+	 </div>
+   <div class="form-group">
+      <button>Send</button>
+    </div>
+</form>
+
