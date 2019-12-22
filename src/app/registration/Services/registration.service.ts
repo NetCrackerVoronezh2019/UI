@@ -38,15 +38,17 @@ export class RegistrationService
     postData(){
          
         const body = {
-                        name:this.myForm.value.userName, 
-                        surname: this.myForm.value.userSurname
+                        firstname:this.myForm.value.userName, 
+                        lastname: this.myForm.value.userSurname,
+                        email:this.myForm.value.userEmail,
+                        password:this.myForm.value.Passwords.password
                     };
                     
         console.log(body);
-         this.http.post('http://localhost:8080/angular',body)
+         this.http.post('http://localhost:8080/registration',body)
 				  .subscribe(
                     data => console.log(data),
-										error => console.log(error)
+					error => console.log(error)
                 );
     }
 }
