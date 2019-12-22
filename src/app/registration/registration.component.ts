@@ -20,6 +20,7 @@ export class RegistrationComponent implements OnInit {
     if(!this.regService.getRegForm().invalid)
     {
       alert("send a data");
+      this.regService.postData();
     }
     else
     {
