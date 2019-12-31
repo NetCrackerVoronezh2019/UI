@@ -43,9 +43,7 @@ export class RegistrationService
                         email:this.myForm.value.userEmail,
                         password:this.myForm.value.Passwords.password
                     };
-                    
-        console.log(body);
-         this.http.post('http://localhost:8080/registration',body)
+        this.http.post('http://localhost:8080/registration',body)
 				  .subscribe(
                     data => console.log(data),
 					error => console.log(error)
