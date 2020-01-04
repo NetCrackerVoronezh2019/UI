@@ -11,13 +11,15 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import {SignInService} from './sign-in/Services/signIn.Service';
-import { ActivatePageComponent } from './activate-page/activate-page.component'
+import { ActivatePageComponent } from './activate-page/activate-page.component';
+import { DialogsComponent } from './dialogs/dialogs.component'
 
 
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
   {path: 'signin',component:SignInComponent},
-  {path:'activate/:activateCode',component:ActivatePageComponent}
+  {path:'activate/:activateCode',component:ActivatePageComponent},
+  {path: 'dialogs',component:DialogsComponent}
 ];
 
 @NgModule({
@@ -26,7 +28,8 @@ const appRoutes: Routes =[
     RegistrationComponent,
     SignInComponent,
     ActivatePageComponent,
-   
+    DialogsComponent,
+
   ],
   imports: [
     BrowserModule,
