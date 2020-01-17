@@ -32,13 +32,6 @@ export class DialogsListService
                        name: this.dialogCreationForm.value.dialogName,
                        creatorId: creatorId
                    };
-        this.http.post('http://localhost:8080/dialogCreate',body).
-                    subscribe(
-                      data => {
-                        console.log(data);
-                        return this.getUserDialogs(creatorId);
-                      },
-					            error => console.log(error)
-                    );
+        return this.http.post('http://localhost:8080/dialogCreate',body);
     }
 }

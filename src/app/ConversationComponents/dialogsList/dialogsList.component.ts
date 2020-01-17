@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogsListService} from './Services/dialogsList.service'
-import { User } from './User'
-import { Dialog } from './dialog'
-import { mergeMap } from 'rxjs/operators';
+import { User } from '@ConversationClasses/User'
+import { Dialog } from '@ConversationClasses/dialog'
 
 @Component({
   selector: 'app-dialogs',
@@ -16,7 +15,7 @@ export class DialogsListComponent implements OnInit {
 
   user:User;
   dialogs:Dialog[];
-  creationDialogVisible:boolean;
+  creationDialogVisible:boolean = false;
 
   ngOnInit() {
       this.creationDialogVisible=false;
@@ -54,8 +53,12 @@ export class DialogsListComponent implements OnInit {
     if (this.dgService.getDialogCreationForm().invalid) {
       alert("Invalid dialog name")
     } else {
-      this.dgService.CreateDialog(this.user.userId);
-      this.showDialogList();
+      this.dgService.CreateDialog(this.user.userId).subscribe(
+        data => {
+          this.showDialogList();
+        },
+        error => console.log(error)
+      );
       this.creationDialogVisible = false;
     }
   }

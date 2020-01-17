@@ -8,17 +8,20 @@ import { HttpClientModule } from '@angular/common/http';
 import {Routes, RouterModule} from '@angular/router';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { DialogsListComponent } from './dialogsList/dialogsList.component'
+import { DialogsListComponent } from './ConversationComponents/dialogsList/dialogsList.component';
+import { DialogComponent } from './ConversationComponents/dialog/dialog.component'
 
 
 const appRoutes: Routes =[
-  {path: 'dialogs',component:DialogsListComponent}
+  {path: 'dialogsList',component:DialogsListComponent},
+  {path: 'dialog/:dialogId', component:DialogComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogsListComponent
+    DialogsListComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,

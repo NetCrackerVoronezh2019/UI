@@ -19,6 +19,12 @@
       "dom"
     ]
   },
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@ConversationClasses/*": ["app/ConversationComponents/classes/*"]
+    }
+  },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
