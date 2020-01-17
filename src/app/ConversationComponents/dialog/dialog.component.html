@@ -4,13 +4,33 @@
  </div>
  <div id="sidebar">
  </div>
+ <div id="Sending">
+   <form class="mt-5" [formGroup]="dgService.getMessageForm()">
+     <div class="container">
+       <div class="form-group">
+         <textarea id="message" type="text" class="form-control" formControlName="text">write message</textarea>
+         <button class="btn btn-light" (click)="sendMessage()">Send</button>
+       </div>
+    </div>
+   </form>
+ </div>
  <div id="content">
    <div class="container">
        <ul *ngFor ='let message of messages'>
-         <div class="alert alert-success">
-         <h1>{{message.sender.name}}</h1>
-         {{message.text}}
-         </div>
+         <div *ngIf="message.sender.userId == userId; then thenBlock else elseBlock"></div>
+              <ng-template #thenBlock>
+                <div class="alert alert-success">
+                  <h3>{{message.sender.name}}</h3>
+                  {{message.text}}
+                </div>
+              </ng-template>
+              <ng-template #elseBlock>
+                <div class="alert alert-primary">
+                  <h3>{{message.sender.name}}</h3>
+                  {{message.text}}
+                </div>
+              </ng-template>
+
        </ul>
    </div>
  </div>

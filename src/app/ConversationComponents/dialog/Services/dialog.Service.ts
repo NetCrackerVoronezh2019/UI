@@ -7,6 +7,13 @@ export class DialogService
 {
     constructor(private http: HttpClient, private fb:FormBuilder) {}
 
+    messageForm=this.fb.group(
+            {
+                "text":[""]
+            }
+          )
+
+
     getDialogMembers(dialogId:string) {
         return this.http.get('http://localhost:8080/getDialogMembers',
                             {params:new HttpParams().set('dialogId',dialogId)});
@@ -22,4 +29,12 @@ export class DialogService
                               {params:new HttpParams().set('dialogId',dialogId)});
       }
 
+      getMessageForm(): FormGroup  {
+         return this.messageForm;
+        }
+
+        getUser(userId:string) {
+          return this.http.get('http://localhost:8080/getUser',
+                              {params:new HttpParams().set('userId',userId)});
+          }
 }

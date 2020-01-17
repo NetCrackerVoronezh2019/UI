@@ -4,8 +4,8 @@ import { ActivatedRoute} from '@angular/router';
 import { User } from '@ConversationClasses/User'
 import { Dialog } from '@ConversationClasses/dialog'
 import { Message } from '@ConversationClasses/message'
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
+import * as Webstomp from 'webstomp-client';
+import { Client} from 'webstomp-client';
 import $ from 'jquery';
 
 @Component({
@@ -19,37 +19,36 @@ export class DialogComponent implements OnInit {
   dialogId:string;
   private userId = '1'; //test userId
   access:boolean = false;
-  dialogMembers:User[];
-  messages:Message[];
-  private serverUrl = 'http://localhost:8080/socket'
-  private stompClient;
+  dialogMembers:User[] = [];
+  messages:Message[] = [];
+  private serverUrl = 'ws://localhost:8080/socket/websocket'
+  private stompClient:Client;
   dialog:Dialog;
+  user:User;
 
   constructor(private dgService:DialogService,private route: ActivatedRoute) {}
 
   initializeWebSocketConnection(){
     this.dgService.getDialogMessages(this.dialogId).subscribe((data:Message[]) => {
-      console.log(data);
       this.messages = data;
-      let ws = new SockJS(this.serverUrl);
-      this.stompClient = Stomp.client(function() {
-        return new SockJS(this.serverUrl);
+      const websocket: WebSocket = new WebSocket(this.serverUrl);
+      this.stompClient = Webstomp.over(websocket);
+      this.stompClient.connect({ login: null, passcode: null }, () => {
+          this.stompClient.subscribe("/dialog/" + this.dialogId, (message) => {
+            this.messages.push(JSON.parse(message.body));
+          });
       });
-      let that = this;
-      this.stompClient.connect({}, function(frame) {
-      that.stompClient.subscribe("/dialog/" + this.dialogId, (message:Message) => {
-        this.messages.push(message);
-      });
-    });
+
     });
   }
-
-  sendMessage(){
-
-  }
-
 
   ngOnInit() {
+    this.dgService.getUser(this.userId).subscribe(
+      (data:User) => {
+        this.user=data;
+      },
+      error => console.log(error)
+    );
       this.route.params.subscribe(params => {
       this.dialogId=params['dialogId'];
       this.dgService.getDialogInfo(this.dialogId).subscribe((data:Dialog) => this.dialog = data);
@@ -69,4 +68,11 @@ export class DialogComponent implements OnInit {
     });
   }
 
+  sendMessage(){
+    this.stompClient.send("/sendMessage" , JSON.stringify({
+      "text": this.dgService.getMessageForm().value.text,
+      "sender": this.user,
+      "dialog": this.dialog.dialogId
+    }));
+  }
 }

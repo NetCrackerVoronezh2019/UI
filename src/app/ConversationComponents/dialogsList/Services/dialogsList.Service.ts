@@ -32,6 +32,7 @@ export class DialogsListService
                        name: this.dialogCreationForm.value.dialogName,
                        creatorId: creatorId
                    };
+                   this.dialogCreationForm.value.dialogName = "";
         return this.http.post('http://localhost:8080/dialogCreate',body);
     }
 }
