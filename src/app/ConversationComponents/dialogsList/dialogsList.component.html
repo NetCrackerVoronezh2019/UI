@@ -6,7 +6,7 @@
   <div id="content">
     <div class="container">
         <ul *ngFor ='let dialog of dialogs'>
-          <div class="alert alert-success">
+          <div class="alert alert-success" routerLink="/dialog/{{dialog.dialogId}}">
           <h1>{{dialog.name}}</h1>
           Creation date: {{dialog.creationDate}}
           </div>

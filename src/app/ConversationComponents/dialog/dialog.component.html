@@ -8,13 +8,13 @@
    <form class="mt-5" [formGroup]="dgService.getMessageForm()">
      <div class="container">
        <div class="form-group">
-         <textarea id="message" type="text" class="form-control" formControlName="text">write message</textarea>
+         <textarea id="message" type="text" class="form-control" formControlName="text" [(ngModel)]="newMessage">write message</textarea>
          <button class="btn btn-light" (click)="sendMessage()">Send</button>
        </div>
     </div>
    </form>
  </div>
- <div id="content">
+ <div id="content" #scrollMe [scrollTop]="scrollMe.scrollHeight">
    <div class="container">
        <ul *ngFor ='let message of messages'>
          <div *ngIf="message.sender.userId == userId; then thenBlock else elseBlock"></div>
