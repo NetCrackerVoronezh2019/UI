@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SignInService} from './Services/signIn.Service'
+import { Router} from '@angular/router';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -8,7 +10,9 @@ import {SignInService} from './Services/signIn.Service'
 })
 export class SignInComponent implements OnInit {
 
-  constructor(public signInService:SignInService){ }
+  errorMessage:String;
+  hasError:any;
+  constructor(public signInService:SignInService,private router: Router){ }
 
   ngOnInit() {
   }
@@ -16,7 +20,23 @@ export class SignInComponent implements OnInit {
   onSubmit()
   {
     alert("отправка данных");
-    this.signInService.sendData();
+    this.signInService.sendData()
+          .subscribe(
+            (data:any) => 
+          {
+          console.log(data.email);
+          localStorage.setItem('token', data.token);
+          this.router.navigate(['/']);
+
+          },
+            (error:any) => 
+			{
+				this.hasError=true;
+				this.errorMessage=error.error;
+			}
+         );
   }
+
+
 
 }

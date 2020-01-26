@@ -11,13 +11,17 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import {SignInService} from './sign-in/Services/signIn.Service';
-import { ActivatePageComponent } from './activate-page/activate-page.component'
+import { ActivatePageComponent } from './activate-page/activate-page.component';
+import { ChangeUserPropertiesComponent } from './admin/change-user-properties/change-user-properties.component'
+import {MatTableModule} from '@angular/material/table'; 
+import { MatInputModule } from '@angular/material/input';
 
 
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
   {path: 'signin',component:SignInComponent},
-  {path:'activate/:activateCode',component:ActivatePageComponent}
+  {path:'activate/:activateCode',component:ActivatePageComponent},
+  {path:'admin/changeprop',component:ChangeUserPropertiesComponent}
 ];
 
 @NgModule({
@@ -26,13 +30,16 @@ const appRoutes: Routes =[
     RegistrationComponent,
     SignInComponent,
     ActivatePageComponent,
+    ChangeUserPropertiesComponent,
    
   ],
   imports: [
+    MatInputModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    MatTableModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],

@@ -22,3 +22,22 @@
 {
   font-size:22px;
 }
+
+.check-button
+{
+    width:50%;
+    padding:7px 0;
+    background-color:#fbfbfb;
+    display:inline-flex;
+    justify-content:center;
+
+    &:hover
+    {
+        cursor:pointer;
+    }
+}
+
+.check-button-border
+{
+    border:2px solid #e64927;
+}

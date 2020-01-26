@@ -48,9 +48,17 @@
                         <span *ngIf="regService.getRegForm().controls['Passwords'].controls['confirmPassword'].errors.confirm">не совпадают</span>    
                     </div>
                 </div>
+                <div class="check-buttons mb-3">
+                    <div  role="TEACHER" [ngClass]="role=='TEACHER'?'check-button check-button-border':'check-button'" (click)="setRole($event)" >
+                        Учитель
+                    </div>
+                    <div role="STUDENT" [ngClass]="role=='STUDENT'?'check-button check-button-border':'check-button'" (click)="setRole($event)">
+                       Студент
+                    </div>
+                </div>
             </div>   
             </div>
-            <div class="col-md-4 col-sm-4 d-flex justify-content-center">
+            <div class="col-md-4 col-sm-4 d-flex justify-content-center mb-5">
                 <button type="button" class="btn btn-success" (click)="onSubmit()">Зарегестрироваться</button>
             </div> 
         </div>

@@ -1,10 +1,18 @@
 
-<p *ngIf="isActivate">
-   Вы прошли активацию   
- </p>
- 
- 
- <p *ngIf="!isActivate">
-  Неактуальный код активации  
- </p>
+ <div class="container activate-container  d-flex align-items-center justify-content-center">
+  <div class="row ">
+  <div class="col d-flex justify-content-center activate-font">
+    <div *ngIf="loaded">
+		<p *ngIf="isActivate">
+				Вы прошли активацию   <i class="fas fa-check-circle"></i>
+		</p>
+		 <p *ngIf="!isActivate">
+				Неактуальный код активации <i class="fas fa-exclamation-circle"></i>
+		</p>
+	</div>
+	<p *ngIf="!loaded">loading . . .</p>
+	</div>
+	</div>
+  </div>
 
+ 

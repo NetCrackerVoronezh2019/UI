@@ -15,8 +15,6 @@ export class SignInService
         }
         
     );
-
-
     getSignInForm(){
         return this.signInForm;
     }
@@ -28,16 +26,9 @@ export class SignInService
 				password:this.signInForm.value.userPassword
 			};
 			
-        this.http.post('http://localhost:8080/signin',body)
-        .subscribe(
-        (data:any) => 
-		{
-			
-			localStorage.setItem('token', data.token);
-		},
-        error => console.log(error)
-  );
+        return this.http.post('http://localhost:8080/signin',body);
    }
+
    
    
 
