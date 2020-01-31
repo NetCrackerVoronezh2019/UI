@@ -19,7 +19,6 @@ export class ChangeUserPropertiesComponent implements OnInit {
     this.getAllUsers();
    }
 
-   
    applyFilter(filterValue: string) {
     this.list.filter = filterValue.trim().toLowerCase();
   }
@@ -30,19 +29,20 @@ export class ChangeUserPropertiesComponent implements OnInit {
   
   openEditForm(row)
   {
-    
-    this.service.setDefaultValuesForEditForm(row);
-	  
+    this.service.setDefaultValuesForEditForm(row);	  
   }
 
   Edit()
   {
     this.service.changeUserProperties()
     .subscribe(
-      data=>{this.allUsers=data; console.log("okkk")},
+      data=>{
+			  this.allUsers=data; 
+			  this.getAllUsers();
+		  },
       error=>console.log(error)
     )
-    this.getAllUsers();
+    
   }
 
   getAllUsers()
@@ -50,8 +50,8 @@ export class ChangeUserPropertiesComponent implements OnInit {
     this.service.getAllUsers()
     .subscribe(
       data=>{
-      this.allUsers=data;
-      this.list=new MatTableDataSource(this.allUsers);
+		  this.allUsers=data;
+		  this.list=new MatTableDataSource(this.allUsers);
 	  },
       error=>console.log(error)
     )

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,13 +16,18 @@ import { ActivatePageComponent } from './activate-page/activate-page.component';
 import { ChangeUserPropertiesComponent } from './admin/change-user-properties/change-user-properties.component'
 import {MatTableModule} from '@angular/material/table'; 
 import { MatInputModule } from '@angular/material/input';
+import {AuthService} from './auth/auth.service';
+import {AuthGuard} from './auth/auth.guard';
+import { HomeComponent } from './home/home.component';
+import {MatButtonModule} from '@angular/material/button'; 
 
 
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
+  {path:'',component:HomeComponent},
   {path: 'signin',component:SignInComponent},
   {path:'activate/:activateCode',component:ActivatePageComponent},
-  {path:'admin/changeprop',component:ChangeUserPropertiesComponent}
+  {path:'admin/changeprop',component:ChangeUserPropertiesComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({
@@ -31,6 +37,7 @@ const appRoutes: Routes =[
     SignInComponent,
     ActivatePageComponent,
     ChangeUserPropertiesComponent,
+    HomeComponent,
    
   ],
   imports: [
@@ -39,7 +46,9 @@ const appRoutes: Routes =[
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
     MatTableModule,
+    MatButtonModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
@@ -47,7 +56,7 @@ const appRoutes: Routes =[
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
+  },AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

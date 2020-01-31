@@ -80,7 +80,7 @@
 				  <option value="ROLE_USER">Студент</option>
 			</select>
             </div>
-            <button type="button" class="btn btn-primary mb-4"  data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Изменить</button>
+            <button type="button" class="btn btn-primary mb-4"  data-toggle="modal" data-target="#editModal" data-whatever="@mdo">Изменить</button>
               </div>
             </div>
         </form>
@@ -88,8 +88,7 @@
     </div>
   </div>
   </div>
-
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -101,8 +100,8 @@
           <h4>Изменить данные ? </h4>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="Edit()" >Send message</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="Edit()" >Да</button>
         </div>
       </div>
     </div>
