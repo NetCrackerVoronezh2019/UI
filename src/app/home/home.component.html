@@ -1,9 +1,16 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbarx navbar-dark bg-dark">
   <div class="navbar-blocks">
-      <div class="navbar-menu"></div>
-      <div class="navbar-auth">
-        <a mat-raised-button class="mr-4" routerLink="/signin">Войти</a>
-        <a mat-raised-button routerLink="/registration">Регистрация</a>
-       </div>
+      <div class="navbar-menu">
+	  <a mat-raised-button routerLink="/user/addnewAdvertisement"><i class="fas fa-plus-circle"></i> Добавить Объявление</a>
+	  </div>
+        <div class="navbar-auth" *ngIf="!isLogin">
+            <a mat-raised-button class="mr-4" routerLink="/signin">Войти</a>
+            <a mat-raised-button routerLink="/registration">Регистрация</a>
+        </div>
+        <div class="navbar-auth" *ngIf="isLogin">
+            <a mat-raised-button class="mr-4" (click)="Logout()">Выход</a>
+            <p class="userInfo">{{UserInfo.userName}}</p>
+        </div>
   </div>
-  </nav>
+</nav>
+<div class="walpaper"></div>

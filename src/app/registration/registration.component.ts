@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators,FormBuilder} from '@angular/forms';
 import {RegistrationService} from './Services/registration.service';
 import {MatInputModule} from '@angular/material/input';
-import {Roles} from '../roles'
+
 
 @Component({
   selector: 'app-registration',

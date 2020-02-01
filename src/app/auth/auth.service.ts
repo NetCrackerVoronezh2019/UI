@@ -14,9 +14,12 @@ export class AuthService
 
     getRole()
     {
-        return this.http.get('http://localhost:8080/getrole');
-        
-        
+        return this.http.get('http://localhost:8080/getrole');  
+    }
+
+    isLogin()
+    {
+        return this.http.get('http://localhost:8080/islogin');  
     }
 
 }

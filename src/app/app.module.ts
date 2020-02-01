@@ -19,7 +19,8 @@ import { MatInputModule } from '@angular/material/input';
 import {AuthService} from './auth/auth.service';
 import {AuthGuard} from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';
-import {MatButtonModule} from '@angular/material/button'; 
+import {MatButtonModule} from '@angular/material/button';
+import { AddAdvertisementComponent } from './user/add-advertisement/add-advertisement.component'; 
 
 
 const appRoutes: Routes =[
@@ -27,7 +28,9 @@ const appRoutes: Routes =[
   {path:'',component:HomeComponent},
   {path: 'signin',component:SignInComponent},
   {path:'activate/:activateCode',component:ActivatePageComponent},
-  {path:'admin/changeprop',component:ChangeUserPropertiesComponent,canActivate:[AuthGuard]}
+  {path:'admin/changeprop',component:ChangeUserPropertiesComponent,canActivate:[AuthGuard]},
+  {path: 'user/addnewAdvertisement',component:AddAdvertisementComponent}
+  
 ];
 
 @NgModule({
@@ -38,6 +41,7 @@ const appRoutes: Routes =[
     ActivatePageComponent,
     ChangeUserPropertiesComponent,
     HomeComponent,
+    AddAdvertisementComponent,
    
   ],
   imports: [

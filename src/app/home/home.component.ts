@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../auth/auth.service';
+import {of} from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  isLogin=false;
+  UserInfo:any;
+  constructor(private authService:AuthService) { }
 
   ngOnInit() {
+     this.authService.isLogin().
+     subscribe(
+       (data:any)=>{
+         if(data!=undefined)
+         {
+           this.isLogin=true;
+           this.UserInfo=data;
+           console.log(this.UserInfo);
+         }
+       },
+       err=>console.log(err)
+     )
   }
 
+  Logout()
+  {
+    localStorage.removeItem('token');
+    this.isLogin=false;
+  }
 }
