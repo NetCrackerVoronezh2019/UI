@@ -14,7 +14,7 @@ export class ChangeUserPropertiesComponent implements OnInit {
   list:MatTableDataSource<any>;
   changingUser:any;
 
-  displayedColumns: string[] = ['userId', 'firstname', 'lastname', 'email','isActivate','role','actions'];
+  displayedColumns: string[] = ['userId', 'firstname', 'lastname', 'email','isActivate','isDeleted','role','actions'];
   constructor(private service:ChangeUserProp) {
     this.getAllUsers();
    }
@@ -30,6 +30,15 @@ export class ChangeUserPropertiesComponent implements OnInit {
   openEditForm(row)
   {
     this.service.setDefaultValuesForEditForm(row);	  
+  }
+  
+  deleteUser(row)
+  {
+    this.service.deleteUser(row)
+    .subscribe(
+      data=>{},
+      error=>console.log(error)
+    )
   }
 
   Edit()
@@ -51,6 +60,7 @@ export class ChangeUserPropertiesComponent implements OnInit {
     .subscribe(
       data=>{
 		  this.allUsers=data;
+		  console.log(data);
 		  this.list=new MatTableDataSource(this.allUsers);
 	  },
       error=>console.log(error)

@@ -20,11 +20,15 @@ import {AuthService} from './auth/auth.service';
 import {AuthGuard} from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';
 import {MatButtonModule} from '@angular/material/button';
-import { AddAdvertisementComponent } from './user/add-advertisement/add-advertisement.component'; 
-
+import { AddAdvertisementComponent } from './student/add-advertisement/add-advertisement.component';
+import {AdvertisementComponent} from './allusers/advertisement/advertisement.component';
+import { AllAdvertisementsComponent } from './allusers/all-advertisements/all-advertisements.component';
+import { AdvertisementCardComponent } from './allusers/advertisement-card/advertisement-card.component'
 
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
+  { path: 'adv/:id', component:AdvertisementComponent},
+  { path: 'alladv', component:AllAdvertisementsComponent},
   {path:'',component:HomeComponent},
   {path: 'signin',component:SignInComponent},
   {path:'activate/:activateCode',component:ActivatePageComponent},
@@ -42,6 +46,9 @@ const appRoutes: Routes =[
     ChangeUserPropertiesComponent,
     HomeComponent,
     AddAdvertisementComponent,
+    AdvertisementComponent,
+    AllAdvertisementsComponent,
+    AdvertisementCardComponent,
    
   ],
   imports: [

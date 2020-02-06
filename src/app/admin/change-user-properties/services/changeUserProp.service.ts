@@ -15,7 +15,8 @@ export class ChangeUserProp
             "userLastname":["",[Validators.required,Validators.minLength(5),Validators.maxLength(15)]],
             "userEmail": ["",[Validators.required,Validators.email]],
             "userRole":[""],
-            "userIsActivate":[""]
+            "userIsActivate":[""],
+            "userIsDeleted":[""]
         }
         
     );
@@ -32,13 +33,13 @@ export class ChangeUserProp
             userLastname:data.lastname,
             userEmail:data.email,
             userRole:data.role.roleName,
-            userIsActivate:data.IsActivate
+            userIsActivate:data.IsActivate,
+            userIsDeleted:data.isDeleted
             
          },{onlySelf:true});
          console.log(this.EditForm.value.userIsActivate);
     }
 
-    
     getAllUsers()
     {
         return this.http.get(this.baseUrl+'/getallusers');
@@ -52,10 +53,21 @@ export class ChangeUserProp
             lastname:this.EditForm.value.userLastname,
             email:this.EditForm.value.userEmail,
             isActivate:this.EditForm.value.userIsActivate,
-            role:this.EditForm.value.userRole
+            role:this.EditForm.value.userRole,
+            isDeleted:this.EditForm.value.userIsDeleted
         }
 
         console.log(body);
         return this.http.post(this.baseUrl+'/changeuser',body);
+    }
+
+    deleteUser(data)
+    {
+        const body={
+            userId:data.userId
+        }
+
+        console.log(body);
+        return this.http.post(this.baseUrl+'/deleteuser',body);
     }
 }

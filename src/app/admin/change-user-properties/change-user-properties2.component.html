@@ -32,6 +32,11 @@
       <td mat-cell *matCellDef="let element"> {{element.IsActivate}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="isDeleted">
+      <th mat-header-cell *matHeaderCellDef> Заблокированный </th>
+      <td mat-cell *matCellDef="let element"> {{element.isDeleted}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="role">
       <th mat-header-cell *matHeaderCellDef> Роль </th>
       <td mat-cell *matCellDef="let element"> {{element.role.roleName}} </td>
@@ -40,7 +45,7 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
         <button class="btn mr-3" (click)="openEditForm(row)" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-user-edit"></i></button>
-          <button class="btn" ><i class="fas fa-user-slash"></i></button>   
+          <button class="btn" (click)="deleteUser(row)" ><i class="fas fa-user-slash"></i></button>   
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -69,7 +74,14 @@
              <select  formControlName="userIsActivate" class="custom-select">
 				       <option value="true">Да</option>
 				       <option value="false">Нет</option>
-			      </select>
+            </select>
+            </div>
+            <div class="form-group" >
+              <label for="exampleInputEmail1">Заблокировать</label>
+             <select  formControlName="userIsDeleted" class="custom-select">
+				       <option value="true">Да</option>
+				       <option value="false">Нет</option>
+            </select>
             </div>
             <div class="form-group" >
               <label for="exampleInputEmail1">Роль</label>

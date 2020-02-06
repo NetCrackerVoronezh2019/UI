@@ -15,6 +15,7 @@ export class SignInComponent implements OnInit {
   constructor(public signInService:SignInService,private router: Router){ }
 
   ngOnInit() {
+    localStorage.removeItem('token');
   }
 
   onSubmit()
@@ -27,13 +28,13 @@ export class SignInComponent implements OnInit {
           console.log(data.email);
           localStorage.setItem('token', data.token);
           this.router.navigate(['/']);
-
           },
             (error:any) => 
-			{
-				this.hasError=true;
-				this.errorMessage=error.error;
-			}
+          {
+            this.hasError=true;
+            this.errorMessage=error.error;
+            console.log(error);
+          }
          );
   }
 

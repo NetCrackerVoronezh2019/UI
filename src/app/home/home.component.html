@@ -1,8 +1,9 @@
 <nav class="navbar navbarx navbar-dark bg-dark">
   <div class="navbar-blocks">
       <div class="navbar-menu">
-	  <a mat-raised-button routerLink="/user/addnewAdvertisement"><i class="fas fa-plus-circle"></i> Добавить Объявление</a>
-	  </div>
+          <a *ngIf="isLogin" mat-raised-button class="mr-2" routerLink="/user/addnewAdvertisement"><i class="fas fa-plus-circle"></i> Добавить Объявление</a>
+          <a  *ngIf="isAdmin" mat-raised-button routerLink="/admin/changeprop">Админ панель</a>  
+      </div>
         <div class="navbar-auth" *ngIf="!isLogin">
             <a mat-raised-button class="mr-4" routerLink="/signin">Войти</a>
             <a mat-raised-button routerLink="/registration">Регистрация</a>

@@ -1,0 +1,8 @@
+<div class="adv-page">
+<div class="adv-tittle"> Все Oбъявлении </div>
+<div class="all-adv">
+ <p *ngFor="let advx of advs; let i = index">
+    <app-advertisement-card [(adv)]="advx"></app-advertisement-card>
+ <p>
+</div>
+</div>

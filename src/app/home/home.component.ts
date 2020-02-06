@@ -11,6 +11,7 @@ import { map, catchError } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
 
   isLogin=false;
+  isAdmin=false;
   UserInfo:any;
   constructor(private authService:AuthService) { }
 
@@ -22,6 +23,8 @@ export class HomeComponent implements OnInit {
          {
            this.isLogin=true;
            this.UserInfo=data;
+           if(this.UserInfo.roleName=="ROLE_ADMIN")
+              this.isAdmin=true;
            console.log(this.UserInfo);
          }
        },
@@ -33,5 +36,7 @@ export class HomeComponent implements OnInit {
   {
     localStorage.removeItem('token');
     this.isLogin=false;
+    this.isAdmin=false;
+    this.UserInfo=undefined;
   }
 }
