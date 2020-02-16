@@ -23,7 +23,9 @@ import {MatButtonModule} from '@angular/material/button';
 import { AddAdvertisementComponent } from './student/add-advertisement/add-advertisement.component';
 import {AdvertisementComponent} from './allusers/advertisement/advertisement.component';
 import { AllAdvertisementsComponent } from './allusers/all-advertisements/all-advertisements.component';
-import { AdvertisementCardComponent } from './allusers/advertisement-card/advertisement-card.component'
+import { AdvertisementCardComponent } from './allusers/advertisement-card/advertisement-card.component';
+import { RoleControlComponent } from './admin/role-control/role-control.component';
+import { SubjectControlComponent } from './admin/subject-control/subject-control.component'
 
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
@@ -33,7 +35,9 @@ const appRoutes: Routes =[
   {path: 'signin',component:SignInComponent},
   {path:'activate/:activateCode',component:ActivatePageComponent},
   {path:'admin/changeprop',component:ChangeUserPropertiesComponent,canActivate:[AuthGuard]},
-  {path: 'user/addnewAdvertisement',component:AddAdvertisementComponent}
+  {path: 'user/addnewAdvertisement',component:AddAdvertisementComponent},
+  {path:'admin/rolecontrol', component:RoleControlComponent,canActivate:[AuthGuard]},
+  {path:'admin/subjectcontrol', component:SubjectControlComponent,canActivate:[AuthGuard]}
   
 ];
 
@@ -49,6 +53,8 @@ const appRoutes: Routes =[
     AdvertisementComponent,
     AllAdvertisementsComponent,
     AdvertisementCardComponent,
+    RoleControlComponent,
+    SubjectControlComponent,
    
   ],
   imports: [

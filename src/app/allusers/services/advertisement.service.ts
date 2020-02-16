@@ -11,4 +11,10 @@ export class AdvertisementService
     {
         return this.http.get('http://localhost:8080/alladvertisements');
     }
+
+    getAdvertisementById(id)
+    {
+        return this.http.get('http://localhost:8080/advertisement/'+id);
+        
+    }
 }

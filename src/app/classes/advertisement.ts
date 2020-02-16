@@ -8,6 +8,7 @@ export class Advertisement
     authorId:Number;
     name:String;
 	dateOfPublishing:String;
-	deadline:String;
+    deadline:String;
+    imageUrl:String;
     constructor() {}
 }

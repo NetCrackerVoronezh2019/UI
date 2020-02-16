@@ -1,0 +1,38 @@
+<div *ngIf="load">
+	<div class="subject-container-prop ">
+      <div class="form-groups">
+        <form [formGroup]="service.sendSubjectForm()" class="form-inline mt-5">
+            <div class="form-group mx-sm-3 mb-2">
+              <input formControlName="name" type="text" class="form-control" id="name" placeholder="Название предмета">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <input formControlName="translateName" type="text" class="form-control" id="translateName" placeholder="Название предмета (RUS)">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <input formControlName="url" type="text" class="form-control" id="url" placeholder="Ссылка">
+            </div>
+            <button type="submit" (click)="Submit()" class="btn btn-primary mb-2">Добавить</button>
+        </form>
+    </div>
+    <table mat-table [dataSource]="subjects" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Предмет</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="translateName">
+            <th mat-header-cell *matHeaderCellDef> Предмет (RUS) </th>
+            <td mat-cell *matCellDef="let element"> {{element.translateName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="url">
+            <th mat-header-cell *matHeaderCellDef> Ссылка </th>
+            <td mat-cell *matCellDef="let element"> {{element.url}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+<div>

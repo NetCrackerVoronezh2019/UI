@@ -11,6 +11,7 @@
   min-width:400px;
   max-width: 850px;
   display:flex;
+  cursor: pointer;
    align-items: center;
    margin-bottom:30px;
   justify-content: center;
@@ -69,17 +70,16 @@
 }
 
 .content .title{
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   color: #0d0925;
   margin-bottom:5px;
 }
 
 .content .text{
   color: #4e4a67;
-  font-size: 19px;
-  margin-bottom: 8px;
-  line-height: 1em;
+  font-size: 17px;
+  margin-bottom:5px;
   text-align: justify;
 }
 

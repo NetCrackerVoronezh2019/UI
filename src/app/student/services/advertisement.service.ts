@@ -14,16 +14,20 @@ export class AdvertisementService
             "advertisementSection":[""],
             "deadlineDate":[""],	
 			"deadlineTime":[""],	
-            "description":[""]
+            "description":[""],
+            "budget":[""],
+            "imageUrl":[""]
         })       
 
         sendData()
         {
             let body={
 				advertisementName:this.advertisementForm.value.advertisementName,
-                advertisementSection:this.advertisementForm.value.advertisementSection,
-                deadlineDate:this.advertisementForm.value.deadlineDate+" "+this.advertisementForm.value.deadlineTime,
-                description:this.advertisementForm.value.description
+                section:this.advertisementForm.value.advertisementSection,
+                deadline:this.advertisementForm.value.deadlineDate+"T"+this.advertisementForm.value.deadlineTime,
+                description:this.advertisementForm.value.description,
+                budget:this.advertisementForm.value.budget,
+                imageUrl:this.advertisementForm.value.imageUrl
             };
             
             console.log(body);
@@ -36,5 +40,11 @@ export class AdvertisementService
         getAdvForm()
         {
             return this.advertisementForm;
+        }
+
+
+        getSubjects()
+        {
+            return this.http.get("http://localhost:1122/allsubjects");
         }
 }

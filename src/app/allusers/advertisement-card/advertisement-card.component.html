@@ -1,14 +1,13 @@
-<div class="blog-card">
+
+<div *ngIf="true" class="blog-card" routerLink="/adv/{{adv.advertisementId}}">
     <div class="inner-part">
       <label class="img">
-        <img *ngIf="adv.section=='PROGRAMMING'" src="https://ogotop.com/uploads/posts/2016-10/1476437147_14.jpg"/>
-        <img *ngIf="adv.section!='PROGRAMMING'" src="https://lab2biz.pro/fon.png"/>
+        <img  src='{{adv.imageUrl}}'/>
       </label>
       <div class="content ">
         <span>30 Январь 2020</span>
         <div class="title">{{adv.advertisementName}}</div>
         <div class="text">Цена - {{adv.budget}} руб. </div>
-         <button>Подробнее</button>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-<div class="adv-page">
+<div *ngIf="isLoading" class="adv-page">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8 col-md-12" >
@@ -6,27 +6,23 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 advertisement-tittle">
-                                Креативный, стильный, адаптивный логотип
+                                {{adv.advertisementName}}
                             </div>
                             <div class="col-12 p-0 advertisement-img">
-                                <img src="https://lab2biz.pro/fon.png"/>
+                                <img src="{{adv.imageUrl}}"/>
+                               
                             </div>
                             <div class="col-12  advertisement-des"> 
                                 <p class="tittle">Описание<p>
                                 <p class="adv-des">
-                                    Во вложении бриф на разработку логотипа:<br>
-                                    -Скачайте его.<br>
-                                    -Заполните максимально подробно, следуя инструкции внутри файла.<br>
-                                    -Сохраните результат.<br>
-                                    -Отправьте получившийся с информацией файл мне.<br>
-                                    Любые мысли и предложения будут полезны!<br>
+                                   {{adv.description}}
                                 </p>
                                 <p class="tittle">
                                     Дедлайн до 
                                 </p>
-                                <p>30 Марта 2020 12:00</p>
+                                <p>{{adv.deadline}}</p>
                                 <p class="tittle">
-                                    Цена - 100 руб.
+                                    Цена - {{adv.budget}} руб.
                                 </p>
                             </div>
                         </div>
@@ -39,3 +35,9 @@
         </div>
     </div>
 </div>
+
+
+<div *ngIf="!isLoading" class="loading">
+    ...loading
+    </div>
+
