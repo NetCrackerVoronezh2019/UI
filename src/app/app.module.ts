@@ -23,9 +23,11 @@ import {AdvertisementComponent} from './allusers/advertisement/advertisement.com
 import { AllAdvertisementsComponent } from './allusers/all-advertisements/all-advertisements.component';
 import { AdvertisementCardComponent } from './allusers/advertisement-card/advertisement-card.component';
 import { RoleControlComponent } from './admin/role-control/role-control.component';
+import {RegistrationComponent} from './registration/registration.component';
+import {SignInComponent} from './sign-in/sign-in.component'
 import { SubjectControlComponent } from './admin/subject-control/subject-control.component'
 import { DialogsListComponent } from './ConversationComponents/dialogsList/dialogsList.component';
-import { DialogComponent } from './ConversationComponents/dialog/dialog.component'
+import { DialogComponent } from './ConversationComponents/dialog/dialog.component';
 
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
