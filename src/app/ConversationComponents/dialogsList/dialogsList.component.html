@@ -1,0 +1,33 @@
+ <body>
+  <div id="header"><h1><mark>Your dialogs</mark></h1></div>
+  <div id="sidebar">
+      <button class="btn btn-info btn-primary-spacing" (click)="openDialogform()">Create new dialog</button>
+  </div>
+  <div id="content">
+    <div class="container">
+        <ul *ngFor ='let dialog of dialogs'>
+          <div class="alert alert-success" routerLink="/dialog/{{dialog.dialogId}}">
+          <h1>{{dialog.name}}</h1>
+          Creation date: {{dialog.creationDate}}
+          </div>
+        </ul>
+    </div>
+  </div>
+  <div id=CreationDialogForm *ngIf="creationDialogVisible">
+    <div class="container">
+      <form [formGroup]="dgService.getDialogCreationForm()" class="mt-5">
+        <h1>Create Dialog</h1>
+          <div class="form-group">
+            <label for="">Dialog name</label>
+            <input id="Name" type="text" class="form-control" formControlName="dialogName" autocomplete="off" placeholder="Dialog name" [(ngModel)]="newMessage">
+            <div *ngIf="dgService.getDialogCreationForm().controls['dialogName'].invalid && dgService.getDialogCreationForm().controls['dialogName'].touched" >
+              <small class="form-text text-muted" *ngIf="dgService.getDialogCreationForm().controls['dialogName'].errors.minlength">name is too short</small>
+              <small  class="form-text text-muted" *ngIf="dgService.getDialogCreationForm().controls['dialogName'].errors.maxlength">name is too long</small>
+            </div>
+          </div>
+      </form>
+      <button class="btn btn-light btn-primary-spacing" (click)="createDialog()">Create</button>
+      <button class="btn btn-dark btn-primary-spacing" (click)="closeDialogForm()">Cancel</button>
+    </div>
+  </div>
+ </body>

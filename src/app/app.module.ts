@@ -1,20 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule }   from '@angular/forms';
-import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
 import {Routes, RouterModule} from '@angular/router';
-import { SignInComponent } from './sign-in/sign-in.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import {SignInService} from './sign-in/Services/signIn.Service';
 import { ActivatePageComponent } from './activate-page/activate-page.component';
 import { ChangeUserPropertiesComponent } from './admin/change-user-properties/change-user-properties.component'
-import {MatTableModule} from '@angular/material/table'; 
+import {MatTableModule} from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import {AuthService} from './auth/auth.service';
 import {AuthGuard} from './auth/auth.guard';
@@ -26,6 +24,8 @@ import { AllAdvertisementsComponent } from './allusers/all-advertisements/all-ad
 import { AdvertisementCardComponent } from './allusers/advertisement-card/advertisement-card.component';
 import { RoleControlComponent } from './admin/role-control/role-control.component';
 import { SubjectControlComponent } from './admin/subject-control/subject-control.component'
+import { DialogsListComponent } from './ConversationComponents/dialogsList/dialogsList.component';
+import { DialogComponent } from './ConversationComponents/dialog/dialog.component'
 
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
@@ -37,8 +37,9 @@ const appRoutes: Routes =[
   {path:'admin/changeprop',component:ChangeUserPropertiesComponent,canActivate:[AuthGuard]},
   {path: 'user/addnewAdvertisement',component:AddAdvertisementComponent},
   {path:'admin/rolecontrol', component:RoleControlComponent,canActivate:[AuthGuard]},
-  {path:'admin/subjectcontrol', component:SubjectControlComponent,canActivate:[AuthGuard]}
-  
+  {path:'admin/subjectcontrol', component:SubjectControlComponent,canActivate:[AuthGuard]},
+  {path: 'dialogsList',component:DialogsListComponent},
+  {path: 'dialog/:dialogId', component:DialogComponent}
 ];
 
 @NgModule({
@@ -55,7 +56,8 @@ const appRoutes: Routes =[
     AdvertisementCardComponent,
     RoleControlComponent,
     SubjectControlComponent,
-   
+    DialogsListComponent,
+    DialogComponent
   ],
   imports: [
     MatInputModule,
@@ -69,7 +71,7 @@ const appRoutes: Routes =[
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [SignInService,{
+  providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
