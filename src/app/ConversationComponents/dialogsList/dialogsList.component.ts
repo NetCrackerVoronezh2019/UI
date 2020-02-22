@@ -16,6 +16,7 @@ export class DialogsListComponent implements OnInit {
   user:User;
   dialogs:Dialog[];
   creationDialogVisible:boolean = false;
+  newDialogName:string = "";
 
   ngOnInit() {
       this.creationDialogVisible=false;
@@ -61,6 +62,7 @@ export class DialogsListComponent implements OnInit {
       );
       this.creationDialogVisible = false;
     }
+    this.newDialogName = "";
   }
 
 }

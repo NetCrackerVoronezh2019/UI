@@ -2,6 +2,6 @@ export class Dialog
 {
   name:string;
   creationDate:Date;
-  CreatorId:number;
+  creatorId:number;
   dialogId:number;
 }
