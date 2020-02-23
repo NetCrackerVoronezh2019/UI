@@ -18,15 +18,25 @@ export class AddAdvertisementComponent implements OnInit {
      (data:Subject[])=>{this.subjects=data; console.log(this.subjects)},
      error=>console.log(error)
    )
+   
+  }
+
+  handleFileInput(file: FileList) {
+    let uploadfile = file.item(0);
+    this.advService.getAdvForm().get("image").setValue({
+      value:uploadfile
+    })
+    
   }
 
   onSubmit()
   {
     this.advService.sendData()
-   .subscribe(
+     .subscribe(
       (data:any) => console.log(data),
       (error:any) => console.log(error) 
    );
+   
   }
 
 

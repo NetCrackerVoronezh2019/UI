@@ -12,11 +12,11 @@ export class AdvertisementService
         {  
             "advertisementName":[""],
             "advertisementSection":[""],
-            "deadlineDate":[""],	
-			"deadlineTime":[""],	
+            "deadlineDate":[""],		
             "description":[""],
             "budget":[""],
-            "imageUrl":[""]
+            "imageUrl":[""],
+            "image":[""]
         })       
 
         sendData()
@@ -24,15 +24,18 @@ export class AdvertisementService
             let body={
 				advertisementName:this.advertisementForm.value.advertisementName,
                 section:this.advertisementForm.value.advertisementSection,
-                deadline:this.advertisementForm.value.deadlineDate+"T"+this.advertisementForm.value.deadlineTime,
+                deadline:this.advertisementForm.value.deadlineDate,
                 description:this.advertisementForm.value.description,
                 budget:this.advertisementForm.value.budget,
-                imageUrl:this.advertisementForm.value.imageUrl
+                image:this.advertisementForm.value.image
             };
-            
             console.log(body);
-
-            return this.http.post('http://localhost:8080/student/addadvertisement',body);
+            
+            const formdata: FormData = new FormData();
+            formdata.append('file', body.image.value);
+            formdata.append("advertisement",JSON.stringify(body));
+            console.log(formdata);
+            return this.http.post('http://localhost:8080/addadvertisement',formdata);
             
         }
 
