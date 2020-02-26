@@ -28,7 +28,7 @@
  <div id="content" #scrollMe [scrollTop]="scrollMe.scrollHeight">
    <div class="container">
        <ul *ngFor ='let message of messages'>
-         <div *ngIf="message.sender.userId == userId; then thisUserMessage else enatherUserMessage"></div>
+         <div *ngIf="message.sender.userId == user.userId; then thisUserMessage else enatherUserMessage"></div>
               <ng-template #thisUserMessage>
                 <div class="alert alert-info">
                   <h3>{{message.sender.name}}</h3>

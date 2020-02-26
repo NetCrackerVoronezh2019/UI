@@ -17,18 +17,24 @@ import $ from 'jquery';
 export class DialogComponent implements OnInit {
 
   dialogId:string;
-  private userId = '1'; //test userId
   access:boolean = false;
   addUserVisible:boolean = false;
   dialogMembers:User[] = [];
   messages:Message[] = [];
-  private serverUrl = 'ws://localhost:8080/socket/websocket'
+  private serverUrl = 'ws://localhost:8088/socket/websocket'
   private stompClient:Client;
   dialog:Dialog;
   user:User;
   textbox:string = "";
 
-  constructor(public dgService:DialogService,private route: ActivatedRoute,private location: Router) {}
+  constructor(public dgService:DialogService,private route: ActivatedRoute,private location: Router) {
+    this.dgService.getUser().subscribe(
+      (data:User) => {
+        this.user=data;
+      },
+      error => console.log(error)
+    );
+  }
 
   initializeWebSocketConnection(){
     this.dgService.getDialogMessages(this.dialogId).subscribe((data:Message[]) => {
@@ -46,21 +52,18 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() {
     this.addUserVisible = false;
-    this.dgService.getUser(this.userId).subscribe(
+    this.dgService.getUser().subscribe(
       (data:User) => {
         this.user=data;
-      },
-      error => console.log(error)
-    );
       this.route.params.subscribe(params => {
-      this.dialogId=params['dialogId'];
-      this.dgService.getDialogInfo(this.dialogId).subscribe((data:Dialog) =>{
+        this.dialogId=params['dialogId'];
+        this.dgService.getDialogInfo(this.dialogId).subscribe((data:Dialog) =>{
         this.dialog = data;
       });
       this.dgService.getDialogMembers(this.dialogId).subscribe((data:User[]) => {
         this.dialogMembers = data;
         data.forEach(user => {
-          if (<string><unknown>user.userId == this.userId) {
+          if (user.userId == this.user.userId) {
             this.access = true;
           }
         });
@@ -71,13 +74,16 @@ export class DialogComponent implements OnInit {
       error => console.log(error)
       );
     });
+  },
+  error => console.log(error)
+);
   }
 
   sendMessage(){
     if (this.dgService.getMessageForm().invalid) {
       alert("message is empty")
     } else {
-      this.stompClient.send("/sendMessage" , JSON.stringify({
+      this.stompClient.send("/sendMessage/" , JSON.stringify({
         "text": this.dgService.getMessageForm().value.text,
         "sender": this.user,
         "dialog": this.dialog.dialogId
@@ -106,7 +112,7 @@ export class DialogComponent implements OnInit {
 
   liveDialog() {
     if (confirm("Are you sure")) {
-      this.dgService.liveDialog(this.dialogId, this.userId).subscribe(data => this.location.navigateByUrl('/dialogsList'));
+      this.dgService.liveDialog(this.dialogId).subscribe(data => this.location.navigateByUrl('/dialogsList'));
     }
   }
 

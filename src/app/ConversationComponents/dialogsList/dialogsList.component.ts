@@ -20,7 +20,7 @@ export class DialogsListComponent implements OnInit {
 
   ngOnInit() {
       this.creationDialogVisible=false;
-      this.dgService.getUser('1').subscribe(
+      this.dgService.getUser().subscribe(
         (data:User) => {
           console.log(data);
           this.user=data;
@@ -31,7 +31,7 @@ export class DialogsListComponent implements OnInit {
   }
 
   showDialogList() {
-    this.dgService.getUserDialogs(<string><unknown>(this.user.userId)).subscribe(
+    this.dgService.getUserDialogs().subscribe(
       (data:Dialog[]) => {
         console.log(data);
         this.dialogs=data;
@@ -54,7 +54,7 @@ export class DialogsListComponent implements OnInit {
     if (this.dgService.getDialogCreationForm().invalid) {
       alert("Invalid dialog name")
     } else {
-      this.dgService.CreateDialog(this.user.userId).subscribe(
+      this.dgService.CreateDialog().subscribe(
         data => {
           this.showDialogList();
         },

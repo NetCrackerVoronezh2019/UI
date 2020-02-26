@@ -14,23 +14,23 @@ export class DialogService
           )
     addUserForm=this.fb.group(
             {
-                "userName":["",[Validators.required,Validators.minLength(5),Validators.maxLength(15)]]
+                "userName":["",[Validators.required,Validators.minLength(5),Validators.maxLength(20)]]
             }
           )
 
 
     getDialogMembers(dialogId:string) {
-        return this.http.get('http://localhost:8080/getDialogMembers',
+        return this.http.get('http://localhost:8080/student/getDialogMembers/',
                             {params:new HttpParams().set('dialogId',dialogId)});
       }
 
       getDialogMessages(dialogId:string) {
-        return this.http.get('http://localhost:8080/getDialogMessages',
+        return this.http.get('http://localhost:8080/student/getDialogMessages/',
                               {params:new HttpParams().set('dialogId',dialogId)});
       }
 
       getDialogInfo(dialogId:string) {
-        return this.http.get('http://localhost:8080/getDialog',
+        return this.http.get('http://localhost:8080/student/getDialog/',
                               {params:new HttpParams().set('dialogId',dialogId)});
       }
 
@@ -41,24 +41,22 @@ export class DialogService
           return this.addUserForm;
         }
 
-        getUser(userId:string) {
-          return this.http.get('http://localhost:8080/getUser',
-                              {params:new HttpParams().set('userId',userId)});
+        getUser() {
+          return this.http.get('http://localhost:8080/student/getUser/',
+                              {params:new HttpParams()});
           }
 
           deleteDialog(dialogId:string) {
-            return this.http.delete('http://localhost:8080/deleteDialog',
+            return this.http.delete('http://localhost:8080/student/deleteDialog/',
                               {params:new HttpParams().set('dialogId',dialogId)})
           }
 
-          liveDialog(dialogId:string, userId:string) {
-            return this.http.delete('http://localhost:8080/liveDialog',
-                              {params:new HttpParams().set('dialogId',dialogId).set('userId', userId)})
+          liveDialog(dialogId:string) {
+            return this.http.delete('http://localhost:8080/student/liveDialog/',
+                              {params:new HttpParams().set('dialogId',dialogId)})
           }
 
           addUserInDialog(dialogId:string) {
-            return this.http.get('http://localhost:8080/addUserInDialog',{params:new HttpParams().set('dialogId',dialogId).set('userName', this.addUserForm.value.userName)})
+            return this.http.get('http://localhost:8080/student/addUserInDialog/',{params:new HttpParams().set('dialogId',dialogId).set('userName', this.addUserForm.value.userName)})
           }
-
-
 }

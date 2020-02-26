@@ -14,25 +14,24 @@ export class DialogsListService
           )
 
 
-    getUser(userId:string) {
-      return this.http.get('http://localhost:8080/getUser',
-                          {params:new HttpParams().set('userId',userId)});
+    getUser() {
+      return this.http.get('http://localhost:8080/student/getUser/',
+                          {params:new HttpParams()});
       }
-    getUserDialogs(userId:string) {
-        return this.http.get('http://localhost:8080//getUserDialogs',
-                            {params:new HttpParams().set('userId',userId)});
+    getUserDialogs() {
+        return this.http.get('http://localhost:8080/student/getUserDialogs/',
+                            {params:new HttpParams()});
       }
 
     getDialogCreationForm(): FormGroup  {
        return this.dialogCreationForm;
       }
 
-   CreateDialog(creatorId){
+   CreateDialog(){
      const body = {
-                       name: this.dialogCreationForm.value.dialogName,
-                       creatorId: creatorId
+                       name: this.dialogCreationForm.value.dialogName
                    };
         this.dialogCreationForm.value.dialogName = "";
-        return this.http.post('http://localhost:8080/dialogCreate',body);
+        return this.http.post('http://localhost:8080/student/dialogCreate/',body);
     }
 }
