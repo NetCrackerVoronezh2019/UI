@@ -9,6 +9,6 @@ export class ActivateService
 
     sendActivateCode(code:String)
     {
-           return this.http.get('http://localhost:8080/activate/'+code);	
+           return this.http.get('http://localhost:9080/activate/'+code);	
     }
 }

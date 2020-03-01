@@ -9,12 +9,12 @@ export class AdvertisementService
 
     getAllAdvertisements()
     {
-        return this.http.get('http://localhost:8080/alladvertisements');
+        return this.http.get('http://localhost:9080/alladvertisements');
     }
 
     getAdvertisementById(id)
     {
-        return this.http.get('http://localhost:8080/advertisement/'+id);
+        return this.http.get('http://localhost:9080/advertisement/'+id);
         
     }
 }

@@ -33,7 +33,7 @@ export class SubjectService
             url:this.subjectForm.value.url
         }
 
-        return this.http.post("http://localhost:8080/addnewsubject",body);
+        return this.http.post("http://localhost:9080/addnewsubject",body);
     }
 
 }

@@ -20,7 +20,7 @@ export class RoleService
         return this.roleForm;
     }
     getRoles(){
-        return this.http.get('http://localhost:8080/admin/getallroles');
+        return this.http.get('http://localhost:9080/admin/getallroles');
     }
 
     sendRoleName()
@@ -29,7 +29,7 @@ export class RoleService
             roleName:this.roleForm.value.roleName
         }
 
-      return  this.http.post("http://localhost:8080/admin/setroles",body);
+      return  this.http.post("http://localhost:9080/admin/setroles",body);
 
     }
 }

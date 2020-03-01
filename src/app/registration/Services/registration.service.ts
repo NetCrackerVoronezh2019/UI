@@ -46,7 +46,7 @@ export class RegistrationService
                     };
 
         console.log(body);
-        this.http.post('http://localhost:8080/registration',body)
+        this.http.post('http://localhost:9080/registration',body)
 				  .subscribe(
                     data => console.log(data),
 					error => console.log(error)
