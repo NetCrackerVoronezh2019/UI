@@ -10,6 +10,7 @@ import {Routes, RouterModule} from '@angular/router';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import {SignInService} from './sign-in/Services/signIn.Service';
+import {WebSocketService} from './home/Services/WebSocket.Service';
 import { ActivatePageComponent } from './activate-page/activate-page.component';
 import { ChangeUserPropertiesComponent } from './admin/change-user-properties/change-user-properties.component'
 import {MatTableModule} from '@angular/material/table';
