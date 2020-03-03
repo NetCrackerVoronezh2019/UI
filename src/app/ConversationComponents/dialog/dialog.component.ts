@@ -21,7 +21,7 @@ export class DialogComponent implements OnInit {
   addUserVisible:boolean = false;
   dialogMembers:User[] = [];
   messages:Message[] = [];
-  private serverUrl = 'ws://localhost:8088/socket/websocket'
+  private serverUrl = 'ws://localhost:9080/socket/websocket'
   private stompClient:Client;
   dialog:Dialog;
   user:User;
