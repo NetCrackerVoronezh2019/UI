@@ -29,6 +29,7 @@ import {SignInComponent} from './sign-in/sign-in.component'
 import { SubjectControlComponent } from './admin/subject-control/subject-control.component'
 import { DialogsListComponent } from './ConversationComponents/dialogsList/dialogsList.component';
 import { DialogComponent } from './ConversationComponents/dialog/dialog.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
@@ -42,7 +43,7 @@ const appRoutes: Routes =[
   {path:'admin/rolecontrol', component:RoleControlComponent,canActivate:[AuthGuard]},
   {path:'admin/subjectcontrol', component:SubjectControlComponent,canActivate:[AuthGuard]},
   {path: 'dialogsList',component:DialogsListComponent},
-  {path: 'dialog/:dialogId', component:DialogComponent}
+  {path: 'dialog/:dialogId', component:DialogComponent},
 ];
 
 @NgModule({
@@ -60,7 +61,8 @@ const appRoutes: Routes =[
     RoleControlComponent,
     SubjectControlComponent,
     DialogsListComponent,
-    DialogComponent
+    DialogComponent,
+    NavbarComponent
   ],
   imports: [
     MatInputModule,

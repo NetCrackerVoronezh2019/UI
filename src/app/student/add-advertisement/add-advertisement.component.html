@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <form [formGroup]="advService.getAdvForm()" class="signIn">
     <div class="container mt-5 ">
         <div class="row d-flex flex-column justify-content-center  align-items-center">
@@ -17,21 +18,18 @@
                       </select>
                 </div>
                 <div class="form-group">
-                    <label  for="exampleInputEmail1">Фото</label>
-                    <input  formControlName="imageUrl" type="text" class="form-control" id="Input1" aria-describedby="emailHelp" placeholder="Image Url">
+                    <label for="exampleInputFile">Фото</label>
+                     <input type="file" (change)="handleFileInput($event.target.files)" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
                 </div>
+                
                 <div class="form-group">
-                    <label for="example-date-input" class="col-xs-2 col-form-label">Дедлайн Дата</label>
+                    <label for="example-date-input" class="col-xs-2 col-form-label">Дедлайн</label>
                      <input formControlName='deadlineDate' class="form-control" type="date"  id="example-date-input">
                 </div>
                 <div class="form-group">
                     <label for="example-date-input" class="col-xs-2 col-form-label">Цена (РУБ.)</label>
                     <input formControlName='budget' class="form-control" type="text"  id="example-number-input">
                 </div>          
-				<div class="form-group">
-                    <label for="example-date-input" class="col-xs-2 col-form-label">Дедлайн Время</label>
-                     <input formControlName='deadlineTime' value="23:59" class="form-control" type="time" id="example-time-input">
-                </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Описание</label>
                     <textarea formControlName='description' type="password" class="form-control" id="Input2" rows="5" aria-describedby="emailHelp" placeholder="Описание"></textarea>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SignInService} from './Services/signIn.Service'
 import { Router} from '@angular/router';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-sign-in',
@@ -27,6 +28,7 @@ export class SignInComponent implements OnInit {
           {
           console.log(data.email);
           localStorage.setItem('token', data.token);
+          interval(0.25*60000).subscribe(()=>console.log("message"))
           this.router.navigate(['/']);
           },
             (error:any) => 

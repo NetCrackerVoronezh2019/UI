@@ -1,19 +1,2 @@
-<nav class="navbar navbarx navbar-dark bg-dark">
-  <div class="navbar-blocks">
-      <div class="navbar-menu">
-          <a *ngIf="isLogin && !isAdmin" mat-raised-button class="mr-2" routerLink="/user/addnewAdvertisement"><i class="fas fa-plus-circle"></i> Добавить Объявление</a>
-          <a  *ngIf="isAdmin" mat-raised-button class="mr-2" routerLink="/admin/changeprop">Пользователи</a>  
-          <a  *ngIf="isAdmin" mat-raised-button class="mr-2" routerLink="/admin/rolecontrol">Роли</a>  
-          <a  *ngIf="isAdmin" mat-raised-button routerLink="/admin/subjectcontrol">Предметы</a>  
-      </div>
-        <div class="navbar-auth" *ngIf="!isLogin">
-            <a mat-raised-button class="mr-4" routerLink="/signin">Войти</a>
-            <a mat-raised-button routerLink="/registration">Регистрация</a>
-        </div>
-        <div class="navbar-auth" *ngIf="isLogin">
-            <a mat-raised-button class="mr-4" (click)="Logout()">Выход</a>
-            <p class="userInfo">{{UserInfo.userName}}</p>
-        </div>
-  </div>
-</nav>
+<app-navbar></app-navbar>
 <div class="walpaper"></div>
