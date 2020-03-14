@@ -8,20 +8,11 @@ export class WebSocketService
 {
     constructor(private http: HttpClient) {}
 
-    private serverUrl = 'ws://localhost:9080/socket/websocket'
-    private stompClient:Client;
 
-    initializeWebSocketConnection(userName:String){
-      const websocket: WebSocket = new WebSocket(this.serverUrl);
-      this.stompClient = Webstomp.over(websocket);
-      this.stompClient.connect({ login: null, passcode: null }, () => {
-            this.stompClient.subscribe("/notification/" + userName, (message) => {
-              console.log(JSON.parse(message.body));
-            });
-        });
+    getMessageNotificationCount()
+    {
+        return this.http.get("http://localhost:9080/student/getmessagenotificationcount");
     }
 
-    closeWebSocketConection() {
-      this.stompClient.disconnect();
-    }
+    
 }

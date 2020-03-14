@@ -14,13 +14,6 @@ export class AppComponent implements OnInit {
   constructor(private service:AppService) { }
 
   ngOnInit() {
-  /*  interval(1*60000).subscribe(()=>this.service.sendOnlineRequest()
-    .subscribe(
-      (data)=>console.log(data),
-      (error)=>console.log(error)
-    )
-    );
-    */
   }
 
 }

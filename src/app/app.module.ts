@@ -30,6 +30,9 @@ import { SubjectControlComponent } from './admin/subject-control/subject-control
 import { DialogsListComponent } from './ConversationComponents/dialogsList/dialogsList.component';
 import { DialogComponent } from './ConversationComponents/dialog/dialog.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UpdateAdvertisementComponent } from './student/update-advertisement/update-advertisement.component';
+import {MatBadgeModule} from '@angular/material/badge' 
+import { MatIconModule } from '@angular/material'
 
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
@@ -44,6 +47,7 @@ const appRoutes: Routes =[
   {path:'admin/subjectcontrol', component:SubjectControlComponent,canActivate:[AuthGuard]},
   {path: 'dialogsList',component:DialogsListComponent},
   {path: 'dialog/:dialogId', component:DialogComponent},
+  {path: 'updateadv/207', component:UpdateAdvertisementComponent}
 ];
 
 @NgModule({
@@ -62,18 +66,21 @@ const appRoutes: Routes =[
     SubjectControlComponent,
     DialogsListComponent,
     DialogComponent,
-    NavbarComponent
+    NavbarComponent,
+    UpdateAdvertisementComponent
   ],
   imports: [
     MatInputModule,
+    MatBadgeModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
     MatTableModule,
+    MatIconModule,
     MatButtonModule,
-    HttpClientModule,
+    HttpClientModule, 
     RouterModule.forRoot(appRoutes)
   ],
   providers: [{
