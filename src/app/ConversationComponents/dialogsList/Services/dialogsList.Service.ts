@@ -15,11 +15,11 @@ export class DialogsListService
 
 
     getUser() {
-      return this.http.get('http://localhost:9080/student/getUser/',
+      return this.http.get('http://localhost:9080/user/getUser/',
                           {params:new HttpParams()});
       }
     getUserDialogs() {
-        return this.http.get('http://localhost:9080/student/getUserDialogs/',
+        return this.http.get('http://localhost:9080/user/getUserDialogs/',
                             {params:new HttpParams()});
       }
 
@@ -32,6 +32,6 @@ export class DialogsListService
                        name: this.dialogCreationForm.value.dialogName
                    };
         this.dialogCreationForm.value.dialogName = "";
-        return this.http.post('http://localhost:9080/student/dialogCreate/',body);
+        return this.http.post('http://localhost:9080/user/dialogCreate/',body);
     }
 }

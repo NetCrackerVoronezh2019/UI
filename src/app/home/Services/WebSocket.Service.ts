@@ -11,7 +11,7 @@ export class WebSocketService
 
     getMessageNotificationCount()
     {
-        return this.http.get("http://localhost:9080/student/getmessagenotificationcount");
+        return this.http.get("http://localhost:9080/user/getmessagenotificationcount");
     }
 
     

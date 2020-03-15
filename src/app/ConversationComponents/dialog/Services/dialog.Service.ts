@@ -20,17 +20,17 @@ export class DialogService
 
 
     getDialogMembers(dialogId:string) {
-        return this.http.get('http://localhost:9080/student/getDialogMembers/',
+        return this.http.get('http://localhost:9080/user/getDialogMembers/',
                             {params:new HttpParams().set('dialogId',dialogId)});
       }
 
       getDialogMessages(dialogId:string) {
-        return this.http.get('http://localhost:9080/student/getDialogMessages/',
+        return this.http.get('http://localhost:9080/user/getDialogMessages/',
                               {params:new HttpParams().set('dialogId',dialogId)});
       }
 
       getDialogInfo(dialogId:string) {
-        return this.http.get('http://localhost:9080/student/getDialog/',
+        return this.http.get('http://localhost:9080/user/getDialog/',
                               {params:new HttpParams().set('dialogId',dialogId)});
       }
 
@@ -42,21 +42,21 @@ export class DialogService
         }
 
         getUser() {
-          return this.http.get('http://localhost:9080/student/getUser/',
+          return this.http.get('http://localhost:9080/user/getUser/',
                               {params:new HttpParams()});
           }
 
           deleteDialog(dialogId:string) {
-            return this.http.delete('http://localhost:9080/student/deleteDialog/',
+            return this.http.delete('http://localhost:9080/user/deleteDialog/',
                               {params:new HttpParams().set('dialogId',dialogId)})
           }
 
           liveDialog(dialogId:string) {
-            return this.http.delete('http://localhost:9080/student/liveDialog/',
+            return this.http.delete('http://localhost:9080/user/liveDialog/',
                               {params:new HttpParams().set('dialogId',dialogId)})
           }
 
           addUserInDialog(dialogId:string) {
-            return this.http.get('http://localhost:9080/student/addUserInDialog/',{params:new HttpParams().set('dialogId',dialogId).set('userName', this.addUserForm.value.userName)})
+            return this.http.get('http://localhost:9080/user/addUserInDialog/',{params:new HttpParams().set('dialogId',dialogId).set('userName', this.addUserForm.value.userName)})
           }
 }
