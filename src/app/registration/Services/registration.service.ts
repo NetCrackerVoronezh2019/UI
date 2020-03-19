@@ -11,6 +11,7 @@ export class RegistrationService
                 "userName":["",[Validators.required,Validators.minLength(5),Validators.maxLength(15)]],
                 "userSurname":["",[Validators.required,Validators.minLength(5),Validators.maxLength(15)]],
                 "userEmail": ["",[Validators.required,Validators.email]],
+                "userImg":[""],
 				"Passwords":this.fb.group({
 					            "password":["",[Validators.required,Validators.minLength(0),Validators.maxLength(15)]],
 								"confirmPassword":["",[Validators.required,Validators.minLength(0),Validators.maxLength(15)]]
@@ -42,14 +43,18 @@ export class RegistrationService
                         lastname: this.myForm.value.userSurname,
                         email:this.myForm.value.userEmail,
                         password:this.myForm.value.Passwords.password,
-                        role:role
+                        role:role,
+                        content:this.myForm.value.userImg.value
                     };
 
         console.log(body);
-        this.http.post('http://localhost:9080/registration',body)
-				  .subscribe(
-                    data => console.log(data),
-					error => console.log(error)
-                );
+        
+       return  this.http.post('http://localhost:9080/registration',body);
+				 
     }
+
+    
+
+
+    
 }

@@ -1,0 +1,19 @@
+
+<div class="my-advs">
+    <p class="title mt-4">Мои объявления</p>
+    <div class="adv-status">
+        <form [formGroup]="service.getMyAdvForm()"> 
+            <mat-button-toggle-group (click)="getAdvByStatus()" formControlName="advStatus" name="fontStyle" class="advs" aria-label="Font Style">
+                <mat-button-toggle  class="prop-column" value="ACTIVE">Активные</mat-button-toggle>
+                <mat-button-toggle class="prop-column" value="INPROCESS">В процессе</mat-button-toggle>
+                <mat-button-toggle  class="prop-column" value="COMPLETED">Закрытые</mat-button-toggle>
+            </mat-button-toggle-group>
+        </form>
+    </div>
+    <div class="all-adv m-5">
+        <p *ngFor="let advx of advs; let i = index">
+           <app-advertisement-card [(adv)]="advx"></app-advertisement-card>
+        <p>
+       </div>
+</div>
+  

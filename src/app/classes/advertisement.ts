@@ -9,6 +9,5 @@ export class Advertisement
     name:String;
 	dateOfPublishing:String;
     deadline:String;
-    imageUrl:String;
     constructor() {}
 }

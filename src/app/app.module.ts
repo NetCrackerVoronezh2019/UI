@@ -32,8 +32,9 @@ import { DialogComponent } from './ConversationComponents/dialog/dialog.componen
 import { NavbarComponent } from './navbar/navbar.component';
 import { UpdateAdvertisementComponent } from './student/update-advertisement/update-advertisement.component';
 import {MatBadgeModule} from '@angular/material/badge' 
-import { MatIconModule } from '@angular/material'
-
+import { MatIconModule } from '@angular/material';
+import { MyAdvertisementsComponent } from './student/my-advertisements/my-advertisements.component'
+import {MatButtonToggleModule} from '@angular/material/button-toggle'
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
   { path: 'adv/:id', component:AdvertisementComponent},
@@ -47,7 +48,8 @@ const appRoutes: Routes =[
   {path:'admin/subjectcontrol', component:SubjectControlComponent,canActivate:[AuthGuard]},
   {path: 'dialogsList',component:DialogsListComponent},
   {path: 'dialog/:dialogId', component:DialogComponent},
-  {path: 'updateadv/207', component:UpdateAdvertisementComponent}
+  {path: 'updateadv/207', component:UpdateAdvertisementComponent},
+  {path:'myadvertisements', component:MyAdvertisementsComponent}
 ];
 
 @NgModule({
@@ -67,7 +69,8 @@ const appRoutes: Routes =[
     DialogsListComponent,
     DialogComponent,
     NavbarComponent,
-    UpdateAdvertisementComponent
+    UpdateAdvertisementComponent,
+    MyAdvertisementsComponent
   ],
   imports: [
     MatInputModule,
@@ -80,6 +83,7 @@ const appRoutes: Routes =[
     MatTableModule,
     MatIconModule,
     MatButtonModule,
+    MatButtonToggleModule,
     HttpClientModule, 
     RouterModule.forRoot(appRoutes)
   ],

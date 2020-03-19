@@ -22,12 +22,21 @@ export class AddAdvertisementComponent implements OnInit {
   }
 
   handleFileInput(file: FileList) {
+    let reader = new FileReader();
     let uploadfile = file.item(0);
-    this.advService.getAdvForm().get("image").setValue({
-      value:uploadfile
-    })
+
+    reader.readAsDataURL(uploadfile);
+      reader.onload = () => {
+        console.log(reader.result);
+        this.advService.getAdvForm().get("image").setValue({
+          filename: uploadfile.name,
+          filetype: uploadfile.type,
+          value: reader.result
+        })
+      };
+    }
     
-  }
+  
 
   onSubmit()
   {

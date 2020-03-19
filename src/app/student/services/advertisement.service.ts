@@ -51,18 +51,13 @@ export class AdvertisementService
             let body={
 				advertisementName:this.advertisementForm.value.advertisementName,
                 section:this.advertisementForm.value.advertisementSection,
-                deadline:this.advertisementForm.value.deadlineDate,
+                deadline:this.advertisementForm.value.deadlineDate+" 00:00",
                 description:this.advertisementForm.value.description,
                 budget:this.advertisementForm.value.budget,
-                image:this.advertisementForm.value.image
+                content:this.advertisementForm.value.image.value
             };
             console.log(body);
-            
-            const formdata: FormData = new FormData();
-            formdata.append('file', body.image.value);
-            formdata.append("advertisement",JSON.stringify(body));
-            console.log(formdata);
-            return this.http.post('http://localhost:9080/addadvertisement',formdata);
+            return this.http.post('http://localhost:9080/addadvertisement',body);
             
         }
 
