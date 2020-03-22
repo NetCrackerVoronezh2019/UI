@@ -5,10 +5,11 @@ import {Injectable} from '@angular/core';
 
 export class ActivateService
 {
+     baseUrl:String='http://localhost:9080';
     constructor(private http:HttpClient){}
 
     sendActivateCode(code:String)
     {
-           return this.http.get('http://localhost:9080/activate/'+code);	
+           return this.http.get(this.baseUrl+'/activate/'+code);	
     }
 }

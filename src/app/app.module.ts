@@ -35,6 +35,9 @@ import {MatBadgeModule} from '@angular/material/badge'
 import { MatIconModule } from '@angular/material';
 import { MyAdvertisementsComponent } from './student/my-advertisements/my-advertisements.component'
 import {MatButtonToggleModule} from '@angular/material/button-toggle'
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AdvertisementFilterComponent } from './allusers/advertisement-filter/advertisement-filter.component'
+
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
   { path: 'adv/:id', component:AdvertisementComponent},
@@ -70,7 +73,8 @@ const appRoutes: Routes =[
     DialogComponent,
     NavbarComponent,
     UpdateAdvertisementComponent,
-    MyAdvertisementsComponent
+    MyAdvertisementsComponent,
+    AdvertisementFilterComponent
   ],
   imports: [
     MatInputModule,
@@ -79,6 +83,7 @@ const appRoutes: Routes =[
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    MatCheckboxModule,
     BrowserAnimationsModule,
     MatTableModule,
     MatIconModule,

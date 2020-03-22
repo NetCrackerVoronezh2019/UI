@@ -11,6 +11,8 @@ import {AdvertisementService} from '../services/advertisement.service';
 export class AllAdvertisementsComponent implements OnInit {
 
   advs:Advertisement[];
+  checked = false;
+  indeterminate = false;
   constructor(private service:AdvertisementService) { }
 
   ngOnInit() {

@@ -5,6 +5,7 @@ import { HttpClient} from '@angular/common/http';
 export class AuthService
 {
 
+    baseUrl:String='http://localhost:9080';
     constructor(private http:HttpClient){}
 
     getlicense()
@@ -14,12 +15,12 @@ export class AuthService
 
     getRole()
     {
-        return this.http.get('http://localhost:9080/getrole');  
+        return this.http.get(this.baseUrl+'/getRole');  
     }
 
     isLogin()
     {
-        return this.http.get('http://localhost:9080/islogin');  
+        return this.http.get(this.baseUrl+'/isLogin');  
     }
 
 }

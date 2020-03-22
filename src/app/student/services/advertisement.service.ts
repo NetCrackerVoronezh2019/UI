@@ -6,6 +6,7 @@ import {Advertisement} from '../../classes/advertisement'
 @Injectable()
 export class AdvertisementService
 {
+    baseUrl:String='http://localhost:9080';
     constructor(private fb:FormBuilder,private http: HttpClient) {}
      advertisementForm=this.fb.group(
         {  
@@ -36,7 +37,7 @@ export class AdvertisementService
         getExistsAdvertisement(id)
         {
             console.log("send request");
-            this.http.get('http://localhost:9080/advertisement/'+id)
+            this.http.get(this.baseUrl+'/advertisement/'+id)
             .subscribe(
                 (adv:Advertisement)=>{
                     console.log(adv);
@@ -57,7 +58,7 @@ export class AdvertisementService
                 content:this.advertisementForm.value.image.value
             };
             console.log(body);
-            return this.http.post('http://localhost:9080/addadvertisement',body);
+            return this.http.post(this.baseUrl+'/addAdvertisement',body);
             
         }
 
@@ -70,6 +71,6 @@ export class AdvertisementService
 
         getSubjects()
         {
-            return this.http.get("http://localhost:1122/allsubjects");
+            return this.http.get(this.baseUrl+"/getAllSubjects");
         }
 }

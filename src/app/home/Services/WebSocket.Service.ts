@@ -6,12 +6,13 @@ import { Client} from 'webstomp-client';
 @Injectable()
 export class WebSocketService
 {
+    baseUrl:String='http://localhost:9080';
     constructor(private http: HttpClient) {}
 
 
     getMessageNotificationCount()
     {
-        return this.http.get("http://localhost:9080/user/getmessagenotificationcount");
+        return this.http.get(this.baseUrl+"/user/getMessageNotificationCount");
     }
 
     
