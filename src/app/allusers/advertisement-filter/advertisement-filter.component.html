@@ -1,0 +1,10 @@
+<div class="filter">
+    <div>
+    <section class="example-section" (click)="refresh()">
+        <mat-checkbox class="example-margin"  [(ngModel)]="sub.checked"
+        *ngFor="let sub of filters.subjects; let i = index" class="advs mr-2" >
+            {{sub.translateName}}
+        </mat-checkbox>
+    </section>
+    </div>
+</div>
