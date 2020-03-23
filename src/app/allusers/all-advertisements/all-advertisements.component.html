@@ -1,7 +1,5 @@
 
 <div class="adv-page">
-<div class="adv-tittle"> All Advertisements </div>
-<app-advertisement-filter></app-advertisement-filter>
 <div class="all-adv">
  <p *ngFor="let advx of advs; let i = index" class="advs">
     <app-advertisement-card [(adv)]="advx"></app-advertisement-card>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import {Advertisement} from '../../classes/advertisement';
 import {AdvertisementService} from '../services/advertisement.service';
 
@@ -10,12 +10,12 @@ import {AdvertisementService} from '../services/advertisement.service';
 })
 export class AllAdvertisementsComponent implements OnInit {
 
-  advs:Advertisement[];
-  checked = false;
-  indeterminate = false;
+  @Input() advs:Advertisement[];
+
   constructor(private service:AdvertisementService) { }
 
   ngOnInit() {
+    /*
     this.service.getAllAdvertisements()
     .subscribe(
       (data:Advertisement[])=>{
@@ -23,7 +23,8 @@ export class AllAdvertisementsComponent implements OnInit {
 		  console.log(this.advs);
 	  },
       error=>console.log(error)
-	  )
+    )
+    */
   }
 
 }

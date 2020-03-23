@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FilterService} from './Services/filterService.service'
 import{Filters} from '../../classes/filters'
+import{Advertisement} from '../../classes/advertisement'
 
 @Component({
   selector: 'app-advertisement-filter',
@@ -12,13 +13,17 @@ export class AdvertisementFilterComponent implements OnInit {
 
   constructor(private service:FilterService) { }
 
+  isLoaded=false;
   filters:Filters
+  advs:Advertisement[];
   
-  checked = false;
-  indeterminate = false;
-
   ngOnInit() {
     this.getAllFilters();
+    this.service.getAllAdvertisements()
+    .subscribe(
+      (data:Advertisement[])=>{this.advs=data; this.isLoaded=true},
+      (error)=>console.log(error)
+    )
     
   }
 
@@ -42,6 +47,20 @@ export class AdvertisementFilterComponent implements OnInit {
   }
   refresh()
   {
-    console.log(this.filters);
+    this.service.sendFilterResults(this.filters)
+    .subscribe(
+      (data:Advertisement[])=>this.advs=data,
+      (error)=>console.log(error)
+    )
+  }
+
+
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
   }
 }

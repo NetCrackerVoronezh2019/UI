@@ -19,6 +19,62 @@
   .filter
   {
     display:flex;
+    background-color:#FCFCFC;
     flex-direction:column;
     justify-content:center;
   }
+
+  .price
+  {
+    display:inline-flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+
+  }
+  .search_bar
+ {
+   height:60px;
+   background-color: #353b48;
+   display:flex;
+   padding:10px;
+   margin:10px auto;
+   align-items:center;
+   justify-content:space-between;
+   border-radius:30px;
+ }
+
+ .search_input
+ {
+  border:0;
+  width:0;
+  transition: width 0.4s linear;
+  line-height:40px;
+  background: transparent;
+ }
+
+ .search_icon
+ {
+  width:40px;
+  height:40px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:50%;
+ }
+
+
+.search_bar> .search_input{
+    padding: 0 10px;
+    width: 450px;
+    caret-color:red;
+    transition: width 0.4s linear;
+    color:white;
+    font-size:1.5rem;
+    }
+
+    .search_bar> .search_icon{
+    background: white;
+    color: #e74c3c;
+    }

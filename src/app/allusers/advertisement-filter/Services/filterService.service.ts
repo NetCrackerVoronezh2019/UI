@@ -1,5 +1,6 @@
 
 import { HttpClient} from '@angular/common/http';
+import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/forms';
 import {Injectable} from '@angular/core';
 import {Filters} from '../../../classes/filters'
 
@@ -7,7 +8,22 @@ import {Filters} from '../../../classes/filters'
 export class FilterService
 {
     baseUrl:String='http://localhost:9080';
-    constructor(private http:HttpClient){}
+    constructor(private http:HttpClient,private fb:FormBuilder){}
+
+    filterForm=this.fb.group(
+        {  
+            "minPrice": [""],
+            "maxPrice":[""],
+            "searchRow":[""]
+        } 
+    );
+
+
+    getFilterForm()
+    {
+        return this.filterForm;
+    }
+
 
     getAllFilters()
     {
@@ -16,6 +32,16 @@ export class FilterService
 
     sendFilterResults(filters:Filters)
     {
-        return this.http.post(this.baseUrl+"/getAdvertisementsAfterFiltering",filters);
+        filters.minPrice=this.filterForm.value.minPrice;
+        filters.maxPrice=this.filterForm.value.maxPrice;
+        filters.searchRow=this.filterForm.value.searchRow;
+        console.log(filters);
+        return this.http.post('http://localhost:1122'+"/filterAdvertisements",filters);
     }
+
+    getAllAdvertisements()
+    {
+        return this.http.get(this.baseUrl+'/allAdvertisements');
+    }
+
 }
