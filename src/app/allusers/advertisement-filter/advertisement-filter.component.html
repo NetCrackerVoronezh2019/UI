@@ -7,7 +7,7 @@
     </form>
     <div>
     <section class="example-section">
-        <mat-checkbox class="example-margin"  [(ngModel)]="sub.checked"
+        <mat-checkbox class="example-margin"  [(ngModel)]="sub.isChecked"
         *ngFor="let sub of filters.subjects; let i = index" class="advs mr-2" >
             {{sub.translateName}}
         </mat-checkbox>

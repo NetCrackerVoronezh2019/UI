@@ -35,8 +35,7 @@ export class FilterService
         filters.minPrice=this.filterForm.value.minPrice;
         filters.maxPrice=this.filterForm.value.maxPrice;
         filters.searchRow=this.filterForm.value.searchRow;
-        console.log(filters);
-        return this.http.post('http://localhost:1122'+"/filterAdvertisements",filters);
+        return this.http.post(this.baseUrl+"/filterAdvertisements",filters);
     }
 
     getAllAdvertisements()

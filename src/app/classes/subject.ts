@@ -4,7 +4,7 @@ export class Subject
     private name:String;
     private translateName:String;
     private url:String
-    public checked:boolean;
+    public isChecked:boolean;
 
     constructor(){
     }

@@ -43,7 +43,7 @@ export class AdvertisementFilterComponent implements OnInit {
   setAllSubjectsChecked()
   {
     for(let i=0;i<this.filters.subjects.length;i++)
-        this.filters.subjects[i].checked=true;
+        this.filters.subjects[i].isChecked=true;
   }
   refresh()
   {
