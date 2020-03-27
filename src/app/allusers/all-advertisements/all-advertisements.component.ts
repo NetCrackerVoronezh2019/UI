@@ -1,18 +1,18 @@
 import { Component, OnInit,Input } from '@angular/core';
 import {Advertisement} from '../../classes/advertisement';
-import {AdvertisementService} from '../services/advertisement.service';
+import {AdvertisementService1} from '../services/advertisement.service';
 
 @Component({
   selector: 'app-all-advertisements',
   templateUrl: './all-advertisements.component.html',
   styleUrls: ['./all-advertisements.component.scss'],
-  providers:[AdvertisementService]
+  providers:[AdvertisementService1]
 })
 export class AllAdvertisementsComponent implements OnInit {
 
   @Input() advs:Advertisement[];
 
-  constructor(private service:AdvertisementService) { }
+  constructor(private service:AdvertisementService1) { }
 
   ngOnInit() {
     /*

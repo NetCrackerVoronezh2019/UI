@@ -2,27 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import{Advertisement} from '../../classes/advertisement';
 import { ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs'
-import {AdvertisementService} from '../services/advertisement.service';
+import {AdvertisementService1} from '../services/advertisement.service';
+import {AdvertisementService} from '../../student/services/advertisement.service'
 import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-advertisement',
   templateUrl: './advertisement.component.html',
   styleUrls: ['./advertisement.component.scss'],
-  providers:[AdvertisementService]
+  providers:[AdvertisementService1,AdvertisementService]
 })
 export class AdvertisementComponent implements OnInit {
 
+  id:Number;
   adv:Advertisement;
-  id:String;
+  isUserAdv:boolean=false;
   isLoading=false;
   subscription:Subscription;
-  constructor(private service:AdvertisementService,private activateRoute: ActivatedRoute) { }
+  constructor(private service:AdvertisementService1, private service2:AdvertisementService,private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
+      
       this.subscription=this.activateRoute.params.subscribe(params=>{
         this.id=params['id'];
         this.getAdvById(this.id);
+        this.isMyAdv(this.id)
       } 
     );
 }
@@ -33,7 +37,18 @@ export class AdvertisementComponent implements OnInit {
     .subscribe(
       (data:Advertisement)=>{this.adv=data; console.log(this.adv); this.isLoading=true;},
       error=>console.log(error)
-      
     )
   }
+
+  isMyAdv(id:Number)
+  {
+    this.service.isMyAdvertisement(id)
+    .subscribe(
+      (data)=>this.isUserAdv=true,
+      (error)=>console.log(error)
+    )
+  }
+
+  
+  
 }

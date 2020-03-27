@@ -8,13 +8,16 @@ import {Filters} from '../../../classes/filters'
 export class FilterService
 {
     baseUrl:String='http://localhost:9080';
-    constructor(private http:HttpClient,private fb:FormBuilder){}
+    constructor(private http:HttpClient,private fb:FormBuilder){
+
+    }
 
     filterForm=this.fb.group(
         {  
             "minPrice": [""],
             "maxPrice":[""],
-            "searchRow":[""]
+            "searchRow":[""],
+            "type":[""]
         } 
     );
 
@@ -35,6 +38,8 @@ export class FilterService
         filters.minPrice=this.filterForm.value.minPrice;
         filters.maxPrice=this.filterForm.value.maxPrice;
         filters.searchRow=this.filterForm.value.searchRow;
+        filters.type=this.filterForm.value.type
+        console.log(filters);
         return this.http.post(this.baseUrl+"/filterAdvertisements",filters);
     }
 

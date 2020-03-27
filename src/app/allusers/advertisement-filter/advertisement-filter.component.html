@@ -1,8 +1,17 @@
 <div class="filter">
     <form [formGroup]="service.getFilterForm()">
-        <div class="search_bar col-5">
-            <input type="text" formControlName="searchRow" class="search_input" placeholder="Поиск"/>
-            <span class="search_icon"><i class="fas fa-search"></i></span>                   
+     <div class="myrow pt-4">
+            <div class=" col-3 choose_bar d-flex justify-content-end">
+                <mat-button-toggle-group  formControlName="type" name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle value="ORDER">Я Фрилансер</mat-button-toggle>
+                    <mat-button-toggle  value="FREELANCE">Я Заказчик</mat-button-toggle>
+                </mat-button-toggle-group>    
+            </div>
+            <div class="search_bar col-6">
+                <input type="text" formControlName="searchRow" class="search_input" placeholder="Поиск"/>
+                <span class="search_icon"><i class="fas fa-search"></i></span>                   
+            </div>
+            <div class="col-3"></div>
         </div>
     </form>
     <div>

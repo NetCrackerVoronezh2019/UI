@@ -7,7 +7,7 @@ export class Advertisement
     budget:String;
     authorId:Number;
     name:String;
-	dateOfPublishing:String;
+	dateOfPublication:String;
     deadline:String;
     constructor() {}
 }

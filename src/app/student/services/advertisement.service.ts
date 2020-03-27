@@ -27,7 +27,7 @@ export class AdvertisementService
                     advertisementSection:adv.section,
                     budget:adv.budget,
                     description:adv.description,
-                    deadlineDate:adv.deadline,
+                    deadlineDate:adv.dateOfPublication.split('T')[0],
                     image:null
                  },{onlySelf:true});
 
@@ -47,18 +47,33 @@ export class AdvertisementService
             )
         }
 
+        updateData(id:Number)
+        {
+            let body={
+                advertisementId:id,
+				advertisementName:this.advertisementForm.value.advertisementName,
+                section:this.advertisementForm.value.advertisementSection,
+                deadline:this.advertisementForm.value.deadlineDate+"T00:00:00",
+                description:this.advertisementForm.value.description,
+                budget:this.advertisementForm.value.budget,
+                content:null
+            };
+            console.log(body);
+            return this.http.post("http://localhost:1122/"+'updateAdvertisementInformation',body);
+        }
         sendData()
         {
             let body={
+                
 				advertisementName:this.advertisementForm.value.advertisementName,
                 section:this.advertisementForm.value.advertisementSection,
-                deadline:this.advertisementForm.value.deadlineDate+" 00:00",
+                deadline:this.advertisementForm.value.deadlineDate+"T00:00:00",
                 description:this.advertisementForm.value.description,
                 budget:this.advertisementForm.value.budget,
                 content:this.advertisementForm.value.image.value
             };
             console.log(body);
-            return this.http.post(this.baseUrl+'/addAdvertisement',body);
+            return this.http.post(this.baseUrl+'/user/addAdvertisement',body);
             
         }
 

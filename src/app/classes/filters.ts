@@ -6,6 +6,7 @@ export class Filters
     public minPrice:Number;
     public maxPrice:Number;
     public searchRow:String;
+    public type:String;
 
     constructor(){}
 }
