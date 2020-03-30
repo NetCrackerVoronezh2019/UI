@@ -16,7 +16,8 @@ export class NavbarComponent implements OnInit {
 
   
   private isLogin=false;
-  private isAdmin=false;
+  private isAdmin=false
+  private notificationsClick=false;
   private UserInfo:any;
   private OnlineSubscription:any;
   private serverUrl = 'ws://localhost:9080/socket/websocket'
@@ -97,5 +98,15 @@ export class NavbarComponent implements OnInit {
   {
     if(this.OnlineSubscription!=undefined)
       this.OnlineSubscription.unsubscribe();
+  }
+
+  getNot()
+  {
+    this.notificationsClick=true;
+  }
+
+  getNot2()
+  {
+    this.notificationsClick=false;
   }
 }

@@ -5,8 +5,7 @@
         <form [formGroup]="service.getMyAdvForm()"> 
             <mat-button-toggle-group (click)="getAdvByStatus()" formControlName="advStatus" name="fontStyle" class="advs" aria-label="Font Style">
                 <mat-button-toggle  class="prop-column" value="ACTIVE">Активные</mat-button-toggle>
-                <mat-button-toggle class="prop-column" value="INPROCESS">В процессе</mat-button-toggle>
-                <mat-button-toggle  class="prop-column" value="COMPLETED">Закрытые</mat-button-toggle>
+                <mat-button-toggle class="prop-column" value="ARCHIVED">Архивированные</mat-button-toggle>
             </mat-button-toggle-group>
         </form>
     </div>

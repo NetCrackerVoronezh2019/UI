@@ -35,7 +35,7 @@ export class AdvertisementComponent implements OnInit {
   {
     this.service.getAdvertisementById(id)
     .subscribe(
-      (data:Advertisement)=>{this.adv=data; console.log(this.adv); this.isLoading=true;},
+      (data:Advertisement)=>{this.adv=data; this.isLoading=true;},
       error=>console.log(error)
     )
   }
@@ -49,6 +49,13 @@ export class AdvertisementComponent implements OnInit {
     )
   }
 
-  
+  sendNotification()
+  {
+    this.service.sendNotification(this.adv)
+    .subscribe(
+      (data)=>console.log(data),
+      error=>console.log(error)
+      )
+  }  
   
 }

@@ -36,7 +36,8 @@ import { MatIconModule } from '@angular/material';
 import { MyAdvertisementsComponent } from './student/my-advertisements/my-advertisements.component'
 import {MatButtonToggleModule} from '@angular/material/button-toggle'
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { AdvertisementFilterComponent } from './allusers/advertisement-filter/advertisement-filter.component'
+import { AdvertisementFilterComponent } from './allusers/advertisement-filter/advertisement-filter.component';
+import { NotificationsComponent } from './allusers/notifications/notifications.component'
 
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
@@ -74,7 +75,8 @@ const appRoutes: Routes =[
     NavbarComponent,
     UpdateAdvertisementComponent,
     MyAdvertisementsComponent,
-    AdvertisementFilterComponent
+    AdvertisementFilterComponent,
+    NotificationsComponent
   ],
   imports: [
     MatInputModule,

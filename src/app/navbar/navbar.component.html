@@ -13,7 +13,9 @@
           </div>
           <div class="navbar-auth" *ngIf="isLogin">
             <p class="mr-4 notification">
+                <mat-icon (click)="getNot()" class="userInfo cursor mr-4" data-toggle="modal" data-target="#notificationModal"  matBadge=1 matBadgeColor="warn">notifications</mat-icon>
                 <mat-icon class="userInfo cursor" routerLink="/dialogsList" matBadge={{count}} matBadgeColor="warn">mail</mat-icon>
+    
             </p>
              <a *ngIf="!isAdmin" mat-raised-button class="mr-2" routerLink="/myadvertisements" >Мои объявления</a>
               <a mat-raised-button class="mr-2" (click)="Logout()">Выход</a>
@@ -21,4 +23,21 @@
           </div>
     </div>
   </nav>
+  </div>
+
+
+<div  class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Уведомления</h5>
+          <button type="button" (click)="getNot2()" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div *ngIf="notificationsClick" class="modal-body">
+            <app-notifications></app-notifications>
+        </div>
+      </div>
+    </div>
   </div>

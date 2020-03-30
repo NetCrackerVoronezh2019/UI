@@ -6,6 +6,11 @@
                     <div class="container">
                         <div class="row">                  
                             <div  class="col-12 advertisement-tittle">
+                                <div class="prop d-flex justify-content-end w-100 edit">
+                                    <p (click)="sendNotification()">
+                                        <i class="far fa-handshake"></i>
+                                    </p>
+                                </div>
                                 <div *ngIf="isUserAdv" class="prop d-flex justify-content-end w-100 edit">
                                     <p data-toggle="modal" class="mr-4" data-target="#exampleModalCenter" >
                                         <i class="fas fa-edit"></i>
