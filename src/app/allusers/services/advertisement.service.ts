@@ -56,4 +56,9 @@ export class AdvertisementService1
     {
         return this.http.post('http://localhost:1122/notificationResponse',x)
     }
+
+    canSendRequest(id:Number)
+    {
+        return this.http.get(this.baseUrl+"/canSendRequest/"+id);
+    }
 }

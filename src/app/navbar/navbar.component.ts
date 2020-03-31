@@ -62,7 +62,6 @@ export class NavbarComponent implements OnInit {
            this.UserInfo=data;
            if(this.UserInfo.roleName=="ROLE_ADMIN")
               this.isAdmin=true;
-           console.log(this.UserInfo);
            this.initializeWebSocketConnection(this.UserInfo.userName);
           this.setOnline();
          }

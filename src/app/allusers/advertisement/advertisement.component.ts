@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import{Advertisement} from '../../classes/advertisement';
+import {UserAdvertisementInfo} from '../../classes/userNotificationInfo'
 import { ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs'
 import {AdvertisementService1} from '../services/advertisement.service';
@@ -16,9 +17,12 @@ export class AdvertisementComponent implements OnInit {
 
   id:Number;
   adv:Advertisement;
-  isUserAdv:boolean=false;
+  isUserAdv:Boolean=false;
   isLoading=false;
   subscription:Subscription;
+  can:Boolean=false;
+  message:String='Вы точно хотите взять этот заказ ?'
+  buttonHidden:Boolean=true;
   constructor(private service:AdvertisementService1, private service2:AdvertisementService,private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -26,7 +30,8 @@ export class AdvertisementComponent implements OnInit {
       this.subscription=this.activateRoute.params.subscribe(params=>{
         this.id=params['id'];
         this.getAdvById(this.id);
-        this.isMyAdv(this.id)
+        this.isMyAdv(this.id);
+        this.canSendRequest();
       } 
     );
 }
@@ -44,7 +49,7 @@ export class AdvertisementComponent implements OnInit {
   {
     this.service.isMyAdvertisement(id)
     .subscribe(
-      (data)=>this.isUserAdv=true,
+      (data:Boolean)=>{this.isUserAdv=data},
       (error)=>console.log(error)
     )
   }
@@ -53,9 +58,18 @@ export class AdvertisementComponent implements OnInit {
   {
     this.service.sendNotification(this.adv)
     .subscribe(
-      (data)=>console.log(data),
-      error=>console.log(error)
+      (data)=>{this.message="Всё прошло успешно !", this.canSendRequest(); this.buttonHidden=false},
+      error=>{this.message="Ошибка при отправке"; this.buttonHidden=false}
       )
   }  
+
+  canSendRequest()
+  {
+    this.service.canSendRequest(this.id)
+    .subscribe(
+      (data:Boolean)=>this.can=data,
+      error=>console.log(error)
+    )
+  }
   
 }

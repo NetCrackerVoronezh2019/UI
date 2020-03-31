@@ -1,4 +1,4 @@
-<div class="filter">
+<div *ngIf="isLoaded" class="filter">
     <form [formGroup]="service.getFilterForm()">
      <div class="myrow pt-4">
             <div class=" col-3 choose_bar d-flex justify-content-end">

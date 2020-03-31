@@ -6,9 +6,12 @@
                     <div class="container">
                         <div class="row">                  
                             <div  class="col-12 advertisement-tittle">
-                                <div class="prop d-flex justify-content-end w-100 edit">
-                                    <p (click)="sendNotification()">
-                                        <i class="far fa-handshake"></i>
+                                <div class="prop d-flex justify-content-between w-100 edit">
+                                    <p *ngIf="!isUserAdv" class="userName">
+                                        {{adv.authorUsername}}
+                                    </p>
+                                    <p *ngIf="!isUserAdv && can" data-toggle="modal" data-target="#RequestModel1">
+                                        <i class="far fa-handshake h2"></i>
                                     </p>
                                 </div>
                                 <div *ngIf="isUserAdv" class="prop d-flex justify-content-end w-100 edit">
@@ -58,8 +61,25 @@
           </button>
         </div>
         <div class="modal-body">
-          <app-update-advertisement [(id)]="id"></app-update-advertisement>
-          
+          <app-update-advertisement [(id)]="id"></app-update-advertisement>    
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+ 
+  
+  
+  <div class="modal fade" id="RequestModel1" tabindex="-1" role="dialog" aria-labelledby="RequestModal1Label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h3> {{message}} </h3>
+        </div>
+        <div *ngIf="buttonHidden" class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+          <button type="button" (click)="sendNotification()" class="btn btn-primary">Отправить</button>
         </div>
       </div>
     </div>

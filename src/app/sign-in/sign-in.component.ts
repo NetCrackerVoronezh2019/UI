@@ -23,21 +23,18 @@ export class SignInComponent implements OnInit {
   {
     alert("отправка данных");
     this.signInService.sendData()
-          .subscribe(
-            (data:any) => 
+      .subscribe(
+        (data:any) => 
           {
-          console.log(data.email);
           localStorage.setItem('token', data.token);
           interval(0.25*60000).subscribe(()=>console.log("message"))
           this.router.navigate(['/']);
           },
-            (error:any) => 
+        (error:any) => 
           {
-            console.log(error.headers.get('ErrorMessage'));
             this.hasError=true;
-            console.log(error);
           }
-         );
+      );
   }
 
 }

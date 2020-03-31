@@ -37,7 +37,8 @@ import { MyAdvertisementsComponent } from './student/my-advertisements/my-advert
 import {MatButtonToggleModule} from '@angular/material/button-toggle'
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AdvertisementFilterComponent } from './allusers/advertisement-filter/advertisement-filter.component';
-import { NotificationsComponent } from './allusers/notifications/notifications.component'
+import { NotificationsComponent } from './allusers/notifications/notifications.component';
+import { MyOrdersComponent } from './allusers/my-orders/my-orders.component'
 
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
@@ -52,7 +53,7 @@ const appRoutes: Routes =[
   {path:'admin/subjectcontrol', component:SubjectControlComponent,canActivate:[AuthGuard]},
   {path: 'dialogsList',component:DialogsListComponent},
   {path: 'dialog/:dialogId', component:DialogComponent},
-  {path: 'updateadv/207', component:UpdateAdvertisementComponent},
+  {path: 'myorders', component:MyOrdersComponent},
   {path:'myadvertisements', component:MyAdvertisementsComponent}
 ];
 
@@ -76,7 +77,8 @@ const appRoutes: Routes =[
     UpdateAdvertisementComponent,
     MyAdvertisementsComponent,
     AdvertisementFilterComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    MyOrdersComponent
   ],
   imports: [
     MatInputModule,
