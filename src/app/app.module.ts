@@ -23,6 +23,7 @@ import { AddAdvertisementComponent } from './student/add-advertisement/add-adver
 import {AdvertisementComponent} from './allusers/advertisement/advertisement.component';
 import { AllAdvertisementsComponent } from './allusers/all-advertisements/all-advertisements.component';
 import { AdvertisementCardComponent } from './allusers/advertisement-card/advertisement-card.component';
+import { DialogCardComponent } from './ConversationComponents/dialogCard/dialog-card.component';
 import { RoleControlComponent } from './admin/role-control/role-control.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {SignInComponent} from './sign-in/sign-in.component'
@@ -31,10 +32,17 @@ import { DialogsListComponent } from './ConversationComponents/dialogsList/dialo
 import { DialogComponent } from './ConversationComponents/dialog/dialog.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UpdateAdvertisementComponent } from './student/update-advertisement/update-advertisement.component';
-import {MatBadgeModule} from '@angular/material/badge' 
+import {MatBadgeModule} from '@angular/material/badge'
 import { MatIconModule } from '@angular/material';
 import { MyAdvertisementsComponent } from './student/my-advertisements/my-advertisements.component'
-import {MatButtonToggleModule} from '@angular/material/button-toggle'
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { GroupComponent } from './UserAndGroupComponents/group/group.component';
+import { UserPageComponent } from './UserAndGroupComponents/user-page/user-page.component'
+import { MessageCardComponent} from "./ConversationComponents/messageCard/messageCard.component"
+import { DialogMemberCardComponent } from "./ConversationComponents/dialogMemberCard/dialogMemberCard.component"
+import {GroupCardComponent } from "./UserAndGroupComponents/group-card/group-card.component"
+import {GroupListComponent} from "./UserAndGroupComponents/group-list/group-list.component"
+import {UserCardComponent} from "./UserAndGroupComponents/userCard/userCard.component"
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
   { path: 'adv/:id', component:AdvertisementComponent},
@@ -48,8 +56,11 @@ const appRoutes: Routes =[
   {path:'admin/subjectcontrol', component:SubjectControlComponent,canActivate:[AuthGuard]},
   {path: 'dialogsList',component:DialogsListComponent},
   {path: 'dialog/:dialogId', component:DialogComponent},
+  {path: 'userPage/:userId', component:UserPageComponent},
+  {path: 'groupPage/:groupId', component:GroupComponent},
   {path: 'updateadv/207', component:UpdateAdvertisementComponent},
-  {path:'myadvertisements', component:MyAdvertisementsComponent}
+  {path:'myadvertisements', component:MyAdvertisementsComponent},
+  {path: "groupList", component:GroupListComponent}
 ];
 
 @NgModule({
@@ -68,9 +79,17 @@ const appRoutes: Routes =[
     SubjectControlComponent,
     DialogsListComponent,
     DialogComponent,
+    DialogCardComponent,
     NavbarComponent,
     UpdateAdvertisementComponent,
-    MyAdvertisementsComponent
+    MyAdvertisementsComponent,
+    GroupComponent,
+    UserPageComponent,
+    MessageCardComponent,
+    DialogMemberCardComponent,
+    GroupCardComponent,
+    GroupListComponent,
+    UserCardComponent
   ],
   imports: [
     MatInputModule,
@@ -84,7 +103,7 @@ const appRoutes: Routes =[
     MatIconModule,
     MatButtonModule,
     MatButtonToggleModule,
-    HttpClientModule, 
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [{

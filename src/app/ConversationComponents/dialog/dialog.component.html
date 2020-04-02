@@ -1,19 +1,19 @@
 <body>
   <app-navbar></app-navbar>
- <div id="header">
-   <h1><mark>{{dialog?.name}}</mark></h1>
- </div>
  <div id="sidebar">
-   <button class="btn btn-info btn-primary-spacing" (click)="openUserAddForm()">Add user</button>
-   <button class="btn btn-dark btn-primary-spacing" (click)="liveDialog()">Live dialog</button>
+   <p><mark>{{dialog?.name}}</mark></p>
+   <a mat-raised-button class="ml-2" (click)="openUserAddForm()"><i class="fas fa-plus-circle"></i>Добавить пользователя</a>
+   <p></p>
+   <a mat-raised-button class="ml-2" (click)="liveDialog()"><i class="fas fa-minus-circle"></i>Покинуть диалог</a>
    <div *ngIf="dialog?.creatorId == user?.userId">
-     <button class="btn btn-danger btn-primary-spacing" (click)="deleteDialog()">Delete dialog</button>
+     <p></p>
+     <a mat-raised-button class="ml-2" (click)="deleteDialog()"><i class="fas fa-minus-circle"></i>Удалить диалог</a>
    </div>
-   <mark>Members:</mark>
+   <p></p>
+   Участники:
+   <p></p>
    <div *ngFor ='let user of dialogMembers'>
-     <div class="alert alert-warning">
-       {{user.name}}
-     </div>
+     <app-dialog-member-card [(us)]="user"></app-dialog-member-card>
    </div>
  </div>
  <div id="Sending">
@@ -27,26 +27,22 @@
    </form>
  </div>
  <div id="content" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-   <div class="container">
        <ul *ngFor ='let message of messages'>
          <div *ngIf="message.sender.userId == user.userId; then thisUserMessage else enatherUserMessage"></div>
               <ng-template #thisUserMessage>
-                <div class="alert alert-info">
-                  <h3>{{message.sender.name}}</h3>
-                  {{message.text}}
+                <div align="right">
+                  <app-message-card [(message)]="message" routerLink="/dialog/{{dialog.dialogId}}"></app-message-card>
                 </div>
               </ng-template>
               <ng-template #enatherUserMessage>
-                <div class="alert alert-primary">
-                  <h3>{{message.sender.name}}</h3>
-                  {{message.text}}
+                <div align="left">
+                  <app-message-card [(message)]="message" routerLink="/dialog/{{dialog.dialogId}}"></app-message-card>
                 </div>
             </ng-template>
        </ul>
-   </div>
  </div>
- <div id="addUserForm" *ngIf="addUserVisible">
-   <div class="container">
+ <div class="blog-card" *ngIf="addUserVisible">
+   <div class="inner-part">
      <form [formGroup]="dgService.getAddUserForm()" class="mt-5">
        <h1>Add user</h1>
          <div class="form-group">

@@ -33,7 +33,22 @@ margin-top: 5px;
   width: 30%;
   height: 35%;
   display:flex;
-  cursor: pointer;
+   align-items: center;
+   margin-bottom:30px;
+  justify-content: center;
+  border-radius: 25px;
+  background: white;
+  box-shadow:0px 4px 8px 0px rgba(5,5,5,0.5);
+  background-color:#B0C4DE !important;
+}
+
+.blog-card1{
+  position: absolute;
+  left:10vw;
+  top:10vh;
+  height: 24vh;
+  width: 20vw;
+  display:flex;
    align-items: center;
    margin-bottom:30px;
   justify-content: center;
@@ -46,7 +61,6 @@ margin-top: 5px;
 .inner-part{
   width:95%;
   height:95%;
-  padding: 0 5px;
   transition-delay: .3s;
   align-items:center;
 }

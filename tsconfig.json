@@ -17,12 +17,10 @@
     "lib": [
       "es2018",
       "dom"
-    ]
-  },
-  "compilerOptions": {
-    "baseUrl": "./src",
+    ],
     "paths": {
-      "@ConversationClasses/*": ["app/ConversationComponents/classes/*"]
+      "@ConversationClasses/*": ["src/app/ConversationComponents/classes/*"],
+      "@UserAndGroupClasses/*": ["src/app/UserAndGroupComponents/classes/*"]
     }
   },
   "angularCompilerOptions": {

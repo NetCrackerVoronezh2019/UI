@@ -1,0 +1,22 @@
+<body>
+  <app-navbar></app-navbar>
+  <div align="center">
+      <div *ngIf="true" class="blog-card" align = left>
+        <div class="inner-part">
+          <label class="img">
+            <img  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
+          </label>
+          <div class="content ">
+            <div class="title">{{group?.name}}</div>
+          </div>
+        </div>
+        <div class="buttons">
+          <button mat-raised-button class="ml-2" (click)="openGroupForm()" *ngIf="creator"><i class="fas fa-cog"></i> Настройки</button>
+          <button mat-raised-button class="ml-2" routerLink="/dialog/{{group.dialogId}}"><i class="fas fa-user-circle"></i> Участники</button>
+          <button mat-raised-button class="ml-2" routerLink="/dialog/{{group.dialogId}}" *ngIf="subscriber"><i class="fas fa-comments"></i> Чат</button>
+          <button mat-raised-button class="ml-2" (click)="openGroupForm()" *ngIf="!subscriber"><i class="fas fa-check"></i> Вступить</button>
+          <button mat-raised-button class="ml-2" (click)="openGroupForm()" *ngIf="subscriber"><i class="fas fa-ban"></i> Покинуть</button>
+        </div>
+      </div>
+    </div>
+</body>

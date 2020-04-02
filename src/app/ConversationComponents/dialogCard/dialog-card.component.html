@@ -1,0 +1,16 @@
+
+<div *ngIf="true" class="blog-card" routerLink="/dialog/{{dg.dialogId}}">
+    <div class="inner-part">
+      <label class="img">
+        <img  src='https://www.egalochkina.ru/wp-content/uploads/2018/03/dialog-sokrata.jpg'/>
+      </label>
+      <div class="content ">
+        <div class="title">{{dg.name}}</div>
+        <span>Дата создния: {{dg.creationDate}}</span>
+        <span>Дата последнего сообщения: {{dg.lastMessageDate}}</span>
+      </div>
+      <div class="mr-4 notification">
+          <mat-icon class="userInfo cursor" matBadge={{dg.countNotification}} matBadgeColor="warn"></mat-icon>
+      </div>
+    </div>
+  </div>

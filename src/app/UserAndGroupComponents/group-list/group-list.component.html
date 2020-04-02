@@ -1,0 +1,47 @@
+ <body>
+  <app-navbar></app-navbar>
+  <div id="sidebar">
+        <a mat-raised-button class="ml-2" (click)="openGroupForm()" *ngIf="!searchPanelVisible"><i class="fas fa-plus-circle"></i> Создать группу</a>
+        <p></p>
+        <a mat-raised-button class="ml-2" (click)="openSearchPanel()"><i class="fas fa-search"></i> Поиск</a>
+  </div>
+  <div id="content">
+    <div class="container">
+        <ul *ngFor ='let group of groups'>
+          <app-group-card [(group)]="group"></app-group-card>
+        </ul>
+    </div>
+  </div>
+  <div class="blog-card" *ngIf="creationGroupVisible">
+    <div class="inner-part">
+      <form [formGroup]="groupService.getGroupCreationForm()" class="mt-5">
+        <h1>Create Group</h1>
+          <div class="form-group">
+            <label for="">Group name</label>
+            <input id="Name" type="text" class="form-control" formControlName="groupName" autocomplete="off" placeholder="Group name" [(ngModel)]="newMessage">
+            <div *ngIf="groupService.getGroupCreationForm().controls['groupName'].invalid && groupService.getGroupCreationForm().controls['groupName'].touched" >
+              <small class="form-text text-muted" *ngIf="groupService.getGroupCreationForm().controls['groupName'].errors.minlength">name is too short</small>
+              <small  class="form-text text-muted" *ngIf="groupService.getGroupCreationForm().controls['groupx`Name'].errors.maxlength">name is too long</small>
+            </div>
+          </div>
+      </form>
+      <button class="btn btn-light btn-primary-spacing" (click)="createGroup()">Create</button>
+      <button class="btn btn-dark btn-primary-spacing" (click)="closeGroupForm()">Cancel</button>
+    </div>
+  </div>
+  <div *ngIf="searchPanelVisible" class="blog-card1">
+    <form [formGroup]="groupService.getGroupSearchPanel()" class="mt-5">
+      <h1>Search Group</h1>
+        <div class="form-group container" >
+          <label for="">Group name</label>
+          <input id="groupName" type="text" class="form-control" formControlName="searchName" autocomplete="off" placeholder="Group name" [(ngModel)]="newMessage">
+          <div *ngIf="groupService.getGroupSearchPanel().controls['searchName'].invalid && groupService.getGroupSearchPanel().controls['searchName'].touched" >
+            <small class="form-text text-muted" *ngIf="groupService.getGroupSearchPanel().controls['searchName'].errors.minlength">name is too short</small>
+            <small  class="form-text text-muted" *ngIf="groupService.getGroupSearchPanel().controls['searchName'].errors.maxlength">name is too long</small>
+          </div>
+        </div>
+        <button class="btn btn-light btn-primary-spacing" (click)="search()">Search</button>
+        <button class="btn btn-dark btn-primary-spacing" (click)="closeSearchPanel()">Cancel</button>
+    </form>
+  </div>
+ </body>

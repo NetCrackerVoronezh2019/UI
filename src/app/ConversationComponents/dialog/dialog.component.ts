@@ -28,12 +28,6 @@ export class DialogComponent implements OnInit {
   textbox:string = "";
 
   constructor(public dgService:DialogService,private route: ActivatedRoute,private location: Router) {
-    this.dgService.getUser().subscribe(
-      (data:User) => {
-        this.user=data;
-      },
-      error => console.log(error)
-    );
   }
 
   initializeWebSocketConnection(){
@@ -44,6 +38,9 @@ export class DialogComponent implements OnInit {
       this.stompClient.connect({ login: null, passcode: null }, () => {
           this.stompClient.subscribe("/dialog/" + this.dialogId, (message) => {
             this.messages.push(JSON.parse(message.body));
+            this.dgService.deleteNotifications(this.dialogId).subscribe((data) => {
+              console.log(data);
+            });
           });
       });
 
@@ -57,6 +54,9 @@ export class DialogComponent implements OnInit {
         this.user=data;
       this.route.params.subscribe(params => {
         this.dialogId=params['dialogId'];
+        this.dgService.deleteNotifications(this.dialogId).subscribe((data) => {
+          console.log(data);
+        });
         this.dgService.getDialogInfo(this.dialogId).subscribe((data:Dialog) =>{
         this.dialog = data;
       });

@@ -1,21 +1,17 @@
  <body>
   <app-navbar></app-navbar>
-  <div id="header"><h1><mark>Your dialogs</mark></h1></div>
   <div id="sidebar">
-      <button class="btn btn-info btn-primary-spacing" (click)="openDialogform()">Create new dialog</button>
+        <a mat-raised-button class="ml-2" (click)="openDialogform()"><i class="fas fa-plus-circle"></i> Создать диалог</a>
   </div>
   <div id="content">
     <div class="container">
         <ul *ngFor ='let dialog of dialogs'>
-          <div class="alert alert-success" routerLink="/dialog/{{dialog.dialogId}}">
-          <h1>{{dialog.name}}</h1>
-          Creation date: {{dialog.creationDate}}
-          </div>
+          <app-dialog-card [(dg)]="dialog"></app-dialog-card>
         </ul>
     </div>
   </div>
-  <div id=CreationDialogForm *ngIf="creationDialogVisible">
-    <div class="container">
+  <div class="blog-card" *ngIf="creationDialogVisible">
+    <div class="inner-part">
       <form [formGroup]="dgService.getDialogCreationForm()" class="mt-5">
         <h1>Create Dialog</h1>
           <div class="form-group">

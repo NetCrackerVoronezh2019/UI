@@ -18,6 +18,9 @@ export class DialogService
             }
           )
 
+    deleteNotifications(dialogId:string) {
+      return this.http.delete('http://localhost:9080/user/cleanNotifications/',{params:new HttpParams().set('dialogId',dialogId)})
+    }
 
     getDialogMembers(dialogId:string) {
         return this.http.get('http://localhost:9080/user/getDialogMembers/',
