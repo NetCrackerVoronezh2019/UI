@@ -18,8 +18,6 @@ export class NotificationsComponent implements OnInit {
     console.log(this.notifications);
   }
 
-
-
   getMyAllNotifications()
   {
     this.service.getMyNotifications()

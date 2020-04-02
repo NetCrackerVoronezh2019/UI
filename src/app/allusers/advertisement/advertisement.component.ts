@@ -5,7 +5,8 @@ import { ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs'
 import {AdvertisementService1} from '../services/advertisement.service';
 import {AdvertisementService} from '../../student/services/advertisement.service'
-import { ThrowStmt } from '@angular/compiler';
+import * as Webstomp from 'webstomp-client';
+import { Client} from 'webstomp-client';
 
 @Component({
   selector: 'app-advertisement',
@@ -15,6 +16,8 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class AdvertisementComponent implements OnInit {
 
+  private serverUrl = 'ws://localhost:9080/socket/websocket'
+  private stompClient:Client;
   id:Number;
   adv:Advertisement;
   isUserAdv:Boolean=false;
@@ -34,7 +37,15 @@ export class AdvertisementComponent implements OnInit {
         this.canSendRequest();
       } 
     );
+
+    this.initializeWebSocketConnection();
 }
+
+initializeWebSocketConnection(){
+  const websocket: WebSocket = new WebSocket(this.serverUrl);
+  this.stompClient = Webstomp.over(websocket);
+}
+
 
   getAdvById(id)
   {
@@ -62,6 +73,20 @@ export class AdvertisementComponent implements OnInit {
       error=>{this.message="Ошибка при отправке"; this.buttonHidden=false}
       )
   }  
+
+  sendNotificationSocket()
+  {
+    this.stompClient.send("/sendNotification/" , JSON.stringify({
+            addresseeId:this.adv.authorId,
+            advertisementId:this.adv.advertisementId,
+            type:'TAKE_ADVERTISEMENT',
+            advertisementName:this.adv.advertisementName
+    }));
+    this.canSendRequest(); 
+    this.message="Всё прошло успешно !"
+    this.buttonHidden=false;
+  }
+  
 
   canSendRequest()
   {

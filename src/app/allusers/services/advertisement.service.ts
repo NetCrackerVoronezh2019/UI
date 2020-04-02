@@ -52,9 +52,15 @@ export class AdvertisementService1
     }
 
 
+    getMyNotificationsSize()
+    {
+        return this.http.get(this.baseUrl+"/user/getMyAllNotificationsSize");
+    }
+
+
     sendNotificationResponse(x:AdvNotification)
     {
-        return this.http.post('http://localhost:1122/notificationResponse',x)
+        return this.http.post(this.baseUrl+'/user/notificationResponse',x)
     }
 
     canSendRequest(id:Number)
