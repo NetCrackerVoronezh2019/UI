@@ -1,6 +1,6 @@
 import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Order} from 'app/classes/order';
+import {Order} from '@MainClasses/order';
 
 @Injectable()
 export class OrderService

@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@ConversationClasses/*": ["src/app/ConversationComponents/classes/*"],
-      "@UserAndGroupClasses/*": ["src/app/UserAndGroupComponents/classes/*"]
+      "@UserAndGroupClasses/*": ["src/app/UserAndGroupComponents/classes/*"],
+      "@MainClasses/*" : ["src/app/classes/*"]
     }
   },
   "angularCompilerOptions": {

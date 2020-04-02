@@ -1,8 +1,8 @@
 
 import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import { Advertisement } from 'app/classes/advertisement';
-import { AdvNotification } from 'app/classes/advNotification';
+import { Advertisement } from '@MainClasses/advertisement';
+import { AdvNotification } from '@MainClasses/advNotification';
 
 @Injectable()
 export class AdvertisementService1
@@ -18,7 +18,7 @@ export class AdvertisementService1
     getAdvertisementById(id)
     {
         return this.http.get(this.baseUrl+'/advertisement/'+id);
-        
+
     }
 
     isMyAdvertisement(id:Number)
@@ -33,7 +33,7 @@ export class AdvertisementService1
     sendNotification(adv:Advertisement)
     {
         console.log(adv);
-        
+
         let body={
             addresseeId:adv.authorId,
             advertisementId:adv.advertisementId,
