@@ -14,8 +14,14 @@
         <div class="buttons">
           <button mat-raised-button class="ml-2" (click)="openGroupForm()" *ngIf="yourPage"><i class="fas fa-cog"></i> Настройки</button>
           <button mat-raised-button class="ml-2"><i class="fas fa-user-circle"></i> Друзья</button>
-          <button mat-raised-button class="ml-2"><i class="fas fa-users"></i> Группы</button>
+          <button mat-raised-button class="ml-2" (click)="showGroups()"><i class="fas fa-users"></i> Группы</button>
           <button mat-raised-button class="ml-2" *ngIf="!yourPage"><i class="fas fa-comments"></i> Написать</button>
+        </div>
+      </div>
+      <div class="groups" *ngIf="groupsVisible">
+        <button mat-raised-button class="ml-2" (click)="closeGroups()"><i class="fas fa-minus-circle"></i>Закрыть</button>
+        <div *ngFor="let group of groups">
+          <app-mini-group-card [(gr)]="group"></app-mini-group-card>
         </div>
       </div>
     </div>

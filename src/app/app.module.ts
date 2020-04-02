@@ -47,6 +47,7 @@ import { DialogMemberCardComponent } from "./ConversationComponents/dialogMember
 import {GroupCardComponent } from "./UserAndGroupComponents/group-card/group-card.component"
 import {GroupListComponent} from "./UserAndGroupComponents/group-list/group-list.component"
 import {UserCardComponent} from "./UserAndGroupComponents/userCard/userCard.component"
+import {MiniGroupComponent} from "./UserAndGroupComponents/mini-group-card/mini-group-card.component"
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
   { path: 'adv/:id', component:AdvertisementComponent},
@@ -98,7 +99,8 @@ const appRoutes: Routes =[
     UserCardComponent,
     AdvertisementFilterComponent,
     NotificationsComponent,
-    MyOrdersComponent
+    MyOrdersComponent,
+    MiniGroupComponent
   ],
   imports: [
     MatInputModule,

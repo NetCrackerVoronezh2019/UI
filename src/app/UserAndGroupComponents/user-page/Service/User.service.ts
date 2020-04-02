@@ -13,4 +13,8 @@ export class UserService {
   getUser(userId) {
     return this.http.get('http://localhost:9080/userAndGroup/getUser',{params: new HttpParams().set('userId',userId)})
   }
+
+  getUserGroups(userId) {
+    return this.http.get('http://localhost:9080/groups/getUserGroups',{params: new HttpParams().set('userId',userId)})
+  }
 }

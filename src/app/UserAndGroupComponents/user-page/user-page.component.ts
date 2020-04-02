@@ -16,6 +16,8 @@ export class UserPageComponent implements OnInit {
   yourPage = false;
   user:User;
   you:User;
+  groups:Group[];
+  groupsVisible = false;
 
   constructor(private route: ActivatedRoute,private location: Router,private us: UserService) { }
 
@@ -37,4 +39,21 @@ export class UserPageComponent implements OnInit {
       });
     })
   }
+
+  showGroups() {
+    if (!this.groupsVisible) {
+      this.groupsVisible = true;
+      this.us.getUserGroups(this.userId).subscribe((data:Group[]) => {
+        this.groups = data;
+      })
+    }
+  }
+
+  closeGroups() {
+    if (this.groupsVisible) {
+      this.groupsVisible = false;
+      this.groups = null;
+    }
+  }
+
 }

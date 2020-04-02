@@ -6,11 +6,13 @@
 }
 
 .blog-card{
-  min-height: 400px;
-  min-width:800px;
-  max-width: 850px;
+  min-height: 70px;
+  max-height: 120px;
+  min-width:150px;
+  max-width: 230px;
   display:flex;
-   align-items: center;
+  cursor: pointer;
+   align-items: left;
    margin-bottom:30px;
   justify-content: center;
   border-radius: 25px;
@@ -25,17 +27,19 @@
   height:95%;
   padding: 0 5px;
   transition-delay: .3s;
+  align-items:center;
 }
 
 
 .inner-part .img{
   display:flex;
   align-items:center;
-  height:250px;
-  width: 250px;
+  height:70px;
+  width: 70px;
   overflow: hidden;
   border-radius: 20px;
   box-shadow: 2px 3px 15px rgba(252,56,56,.1);
+
 }
 
 .img img{
@@ -48,9 +52,11 @@
 }
 
 .content{
-  width:70%;
-  height:80%;
-  margin-left: 0px;
+  width:5px;
+  height:98%;
+  transition: .6s;
+  margin-top: 10px;
+  transition-delay: .3s;
 }
 
 .content span{
@@ -62,8 +68,8 @@
 }
 
 .content .title{
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
   color: #0d0925;
   margin-bottom:5px;
 }
@@ -75,38 +81,10 @@
   text-align: justify;
 }
 
-.buttons{
-  width: 20%;
-  height: 100%;
-}
-
-.buttons button{
-  margin-top: 10px;
-}
-
 .notification {
     padding: 0 10px 0px 10px;
     width:50px;
     height:98%;
     transition: .6s;
     margin-left: 10px;
-}
-
-.groups {
-  overflow: auto;
-  position: absolute;
-  top:10%;
-  left: 0%;
-  min-height: 100px;
-  min-width:300px;
-  max-width: 400px;
-  margin-bottom:10px;
-  border-radius: 25px;
-  background: white;
-  box-shadow:0px 4px 8px 0px rgba(5,5,5,0.5);
-}
-
-.groups button {
-  margin-bottom: 8px;
-  border-radius: 25px;
 }
