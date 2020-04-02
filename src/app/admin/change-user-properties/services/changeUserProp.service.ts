@@ -6,7 +6,7 @@ import {Injectable} from '@angular/core';
 
 export class ChangeUserProp
 {
-    baseUrl='http://localhost:9080/admin';
+    baseUrl:String='http://localhost:9080/admin';
     constructor(private fb:FormBuilder,private http:HttpClient){}
     EditForm=this.fb.group(
         {
@@ -42,7 +42,7 @@ export class ChangeUserProp
 
     getAllUsers()
     {
-        return this.http.get(this.baseUrl+'/getallusers');
+        return this.http.get(this.baseUrl+'/getAllUsers');
     }
   
     changeUserProperties()
@@ -58,7 +58,7 @@ export class ChangeUserProp
         }
 
         console.log(body);
-        return this.http.post(this.baseUrl+'/changeuser',body);
+        return this.http.post(this.baseUrl+'/changeUser',body);
     }
 
     deleteUser(data)
@@ -68,6 +68,6 @@ export class ChangeUserProp
         }
 
         console.log(body);
-        return this.http.post(this.baseUrl+'/deleteuser',body);
+        return this.http.post(this.baseUrl+'/deleteUser',body);
     }
 }

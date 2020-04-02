@@ -23,10 +23,7 @@
     align-items:center;
     font-size:33px;
 }
-.advertisement-img
-{
-    border:1px solid black;
-}
+
 .advertisement-tittle
 {
     
@@ -38,9 +35,15 @@
     box-shadow:0px 4px 8px 0px rgba(5,5,5,0.5);
 }
 
+.prop
+{
+    font-size:22px;
+    font-weight:500;   
+}
+
 .advertisement-des
 {
-    padding:30px;
+    padding:15px 30px 30px 30px;
     box-shadow:0px 4px 8px 0px rgba(5,5,5,0.5);
 	background-color:#F6F6F6;
 	
@@ -49,4 +52,20 @@
 img{
     width: 100%;
     object-fit: cover;
+}
+
+
+.edit 
+{
+    cursor:pointer;
+    font-weight:555;
+    font-size:1.8rem;
+}
+
+
+.userName
+{
+    font-size:16px;
+    font-weight:555;
+    cursor:pointer
 }

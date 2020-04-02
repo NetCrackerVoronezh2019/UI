@@ -1,0 +1,46 @@
+<div class="order-page">
+<div *ngIf="check">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Position Column -->
+        <ng-container matColumnDef="orderId">
+        <mat-header-cell *matHeaderCellDef>Номер заказа</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.orderId}} </mat-cell>
+        </ng-container>
+    
+        <!-- Weight Column -->
+        <ng-container matColumnDef="freelancerId">
+        <mat-header-cell *matHeaderCellDef> Фрилансер</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.freelancerId}} </mat-cell>
+        </ng-container>
+    
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="advertisementId">
+        <mat-header-cell *matHeaderCellDef>Номер объявления</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.advertisementId}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="advertisementName">
+            <mat-header-cell *matHeaderCellDef> Название объявления</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.advertisementName}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>Стутус заказа</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+            <mat-cell *matCellDef="let element">
+                <div style="font-size:25px; cursor:pointer"><i class="fas fa-edit"></i></div>
+            </mat-cell>
+          </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  </div>

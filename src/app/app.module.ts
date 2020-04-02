@@ -36,6 +36,10 @@ import {MatBadgeModule} from '@angular/material/badge'
 import { MatIconModule } from '@angular/material';
 import { MyAdvertisementsComponent } from './student/my-advertisements/my-advertisements.component'
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AdvertisementFilterComponent } from './allusers/advertisement-filter/advertisement-filter.component';
+import { NotificationsComponent } from './allusers/notifications/notifications.component';
+import { MyOrdersComponent } from './allusers/my-orders/my-orders.component'
 import { GroupComponent } from './UserAndGroupComponents/group/group.component';
 import { UserPageComponent } from './UserAndGroupComponents/user-page/user-page.component'
 import { MessageCardComponent} from "./ConversationComponents/messageCard/messageCard.component"
@@ -60,7 +64,9 @@ const appRoutes: Routes =[
   {path: 'groupPage/:groupId', component:GroupComponent},
   {path: 'updateadv/207', component:UpdateAdvertisementComponent},
   {path:'myadvertisements', component:MyAdvertisementsComponent},
-  {path: "groupList", component:GroupListComponent}
+  {path: "groupList", component:GroupListComponent},
+  {path: 'myorders', component:MyOrdersComponent},
+  {path:'myadvertisements', component:MyAdvertisementsComponent}
 ];
 
 @NgModule({
@@ -89,7 +95,10 @@ const appRoutes: Routes =[
     DialogMemberCardComponent,
     GroupCardComponent,
     GroupListComponent,
-    UserCardComponent
+    UserCardComponent,
+    AdvertisementFilterComponent,
+    NotificationsComponent,
+    MyOrdersComponent
   ],
   imports: [
     MatInputModule,
@@ -98,6 +107,7 @@ const appRoutes: Routes =[
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    MatCheckboxModule,
     BrowserAnimationsModule,
     MatTableModule,
     MatIconModule,

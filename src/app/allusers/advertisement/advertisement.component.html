@@ -4,15 +4,30 @@
             <div class="col-lg-8 col-md-12" >
                 <div class="advertisement">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-12 advertisement-tittle">
-                                {{adv.advertisementName}}
+                        <div class="row">                  
+                            <div  class="col-12 advertisement-tittle">
+                                <div class="prop d-flex justify-content-between w-100 edit">
+                                    <p *ngIf="!isUserAdv" class="userName">
+                                        {{adv.authorUsername}}
+                                    </p>
+                                    <p *ngIf="!isUserAdv && can" data-toggle="modal" data-target="#RequestModel1">
+                                        <i class="far fa-handshake h2"></i>
+                                    </p>
+                                </div>
+                                <div *ngIf="isUserAdv" class="prop d-flex justify-content-end w-100 edit">
+                                    <p data-toggle="modal" class="mr-4" data-target="#exampleModalCenter" >
+                                        <i class="fas fa-edit"></i>
+                                    </p>
+                                     <p>  
+                                        <i class="fas fa-camera"></i>
+                                    </p>
+                                   </div>
+                                {{adv.advertisementName}}                            
                             </div>
                             <div class="col-12 p-0 advertisement-img">
-                                <img src="{{adv.imageUrl}}"/>
-                               
+                                <img src='http://localhost:1234/getimg/{{adv.imageKey}}'/>           
                             </div>
-                            <div class="col-12  advertisement-des"> 
+                            <div class="col-12  advertisement-des">                     
                                 <p class="tittle">Описание<p>
                                 <p class="adv-des">
                                    {{adv.description}}
@@ -37,7 +52,35 @@
 </div>
 
 
-<div *ngIf="!isLoading" class="loading">
-    ...loading
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-update-advertisement [(id)]="id"></app-update-advertisement>    
+        </div>
+      </div>
     </div>
+  </div>
 
+
+ 
+  
+  
+  <div class="modal fade" id="RequestModel1" tabindex="-1" role="dialog" aria-labelledby="RequestModal1Label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h3> {{message}} </h3>
+        </div>
+        <div *ngIf="buttonHidden" class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+          <button type="button" (click)="sendNotification()" class="btn btn-primary">Отправить</button>
+        </div>
+      </div>
+    </div>
+  </div>

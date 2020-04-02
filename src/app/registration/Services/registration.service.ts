@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class RegistrationService
 {
+    baseUrl:String='http://localhost:9080';
     constructor(private fb:FormBuilder,private http: HttpClient) {}
         myForm=this.fb.group(
             {
@@ -49,7 +50,7 @@ export class RegistrationService
 
         console.log(body);
         
-       return  this.http.post('http://localhost:9080/registration',body);
+       return  this.http.post(this.baseUrl+'/registration',body);
 				 
     }
 

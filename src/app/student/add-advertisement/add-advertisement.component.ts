@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AdvertisementService} from '../services/advertisement.service';
+import { Router} from '@angular/router';
 import {Subject} from '../../classes/subject';
 @Component({
   selector: 'app-add-advertisement',
@@ -10,7 +11,7 @@ import {Subject} from '../../classes/subject';
 export class AddAdvertisementComponent implements OnInit {
 
   subjects:Subject[];
-  constructor(private advService:AdvertisementService) { }
+  constructor(private advService:AdvertisementService,private router:Router) { }
 
   ngOnInit() {
 	   this.advService.getSubjects()
@@ -42,7 +43,7 @@ export class AddAdvertisementComponent implements OnInit {
   {
     this.advService.sendData()
      .subscribe(
-      (data:any) => console.log(data),
+      (data:any) => this.router.navigate(['/']),
       (error:any) => console.log(error) 
    );
    

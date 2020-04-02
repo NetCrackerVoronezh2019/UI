@@ -1,12 +1,12 @@
-<app-navbar></app-navbar>
+
 <form [formGroup]="service.getAdvForm()" class="signIn">
     <div class="container mt-5 ">
         <div class="row d-flex flex-column justify-content-center  align-items-center">
-            <div class="col-md-6 col-sm-12 text-center text-uppercase  signin-label font-weight-bold">Новое Объявление</div>
+            <div class="col-md-6 col-sm-12 text-center text-uppercase  signin-label font-weight-bold">Редактировать Объявление</div>
 			<div class="sign-in-errors">
 				<p></p>
 			</div>
-            <div class="col-lg-4 col-md-10">
+            <div class="col-lg-10 col-md-12">
                 <div class="form-group">
                     <label  for="exampleInputEmail1">Название</label>
                     <input  formControlName="advertisementName" type="text" class="form-control" id="Input1" aria-describedby="emailHelp" placeholder="Название">
@@ -18,11 +18,6 @@
                       </select>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile">Фото</label>
-                     <input type="file" (change)="handleFileInput($event.target.files)" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-                </div>
-                
-                <div class="form-group">
                     <label for="example-date-input" class="col-xs-2 col-form-label">Дедлайн</label>
                      <input formControlName='deadlineDate' class="form-control" type="date"  id="example-date-input">
                 </div>
@@ -30,14 +25,17 @@
                     <label for="example-date-input" class="col-xs-2 col-form-label">Цена (РУБ.)</label>
                     <input formControlName='budget' class="form-control" type="text"  id="example-number-input">
                 </div>          
+                
+            </div>
+            <div class="col-lg-10 col-md-11">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Описание</label>
                     <textarea formControlName='description' type="password" class="form-control" id="Input2" rows="5" aria-describedby="emailHelp" placeholder="Описание"></textarea>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-4 d-flex justify-content-center">
-                <button type="button" (click)="onSubmit()" class="btn btn-success">Создать</button>
-            </div> 
+            <div class="col-6 m-2 d-flex justify-content-center">
+                <button type="button "  data-dismiss="modal" (click)="onSubmit()" class="btn btn-success">Cохранить изменения</button>
+              </div> 
         </div>
     </div>
 </form>

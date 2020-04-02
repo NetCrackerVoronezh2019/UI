@@ -7,6 +7,7 @@ import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/for
 export class RoleService
 {
 
+    baseUrl:String='http://localhost:9080/admin';
     constructor(private http:HttpClient,private fb:FormBuilder){}
 
     roleForm=this.fb.group(
@@ -20,7 +21,7 @@ export class RoleService
         return this.roleForm;
     }
     getRoles(){
-        return this.http.get('http://localhost:9080/admin/getallroles');
+        return this.http.get(this.baseUrl+'/getAllRoles');
     }
 
     sendRoleName()
@@ -29,7 +30,6 @@ export class RoleService
             roleName:this.roleForm.value.roleName
         }
 
-      return  this.http.post("http://localhost:9080/admin/setroles",body);
-
+      return  this.http.post(this.baseUrl+"/setRoles",body);
     }
 }

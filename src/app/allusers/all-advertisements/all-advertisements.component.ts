@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import {Advertisement} from '../../classes/advertisement';
-import {AdvertisementService} from '../services/advertisement.service';
+import {AdvertisementService1} from '../services/advertisement.service';
 
 @Component({
   selector: 'app-all-advertisements',
   templateUrl: './all-advertisements.component.html',
   styleUrls: ['./all-advertisements.component.scss'],
-  providers:[AdvertisementService]
+  providers:[AdvertisementService1]
 })
 export class AllAdvertisementsComponent implements OnInit {
 
-  advs:Advertisement[];
-  constructor(private service:AdvertisementService) { }
+  @Input() advs:Advertisement[];
+
+  constructor(private service:AdvertisementService1) { }
 
   ngOnInit() {
+    /*
     this.service.getAllAdvertisements()
     .subscribe(
       (data:Advertisement[])=>{
@@ -21,7 +23,8 @@ export class AllAdvertisementsComponent implements OnInit {
 		  console.log(this.advs);
 	  },
       error=>console.log(error)
-	  )
+    )
+    */
   }
 
 }

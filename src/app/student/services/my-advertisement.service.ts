@@ -6,14 +6,14 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class MyAdvService
 {
+    baseUrl:String='http://localhost:9080'
     constructor(private fb:FormBuilder,private http: HttpClient) {}
      myAdvForm=this.fb.group(
         {  
             "advStatus":[],
         })  
 
-
-
+        
     getMyAdvForm()
     {
         return this.myAdvForm;
@@ -26,8 +26,12 @@ export class MyAdvService
 
     getAdvertisementsByStatus()
     {
-        let status=this.myAdvForm.value.advStatus;
-        return this.http.get("http://localhost:1122/student/getadvertisement/34/"+status);
+        let body={
+            userId:null,
+            status:this.myAdvForm.value.advStatus
+        }
+
+        return this.http.post(this.baseUrl+"/student/getMyAdvertisements",body);
     }
 
 

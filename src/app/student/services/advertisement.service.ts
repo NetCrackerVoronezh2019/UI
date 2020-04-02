@@ -6,6 +6,7 @@ import {Advertisement} from '../../classes/advertisement'
 @Injectable()
 export class AdvertisementService
 {
+    baseUrl:String='http://localhost:9080';
     constructor(private fb:FormBuilder,private http: HttpClient) {}
      advertisementForm=this.fb.group(
         {  
@@ -26,7 +27,7 @@ export class AdvertisementService
                     advertisementSection:adv.section,
                     budget:adv.budget,
                     description:adv.description,
-                    deadlineDate:adv.deadline,
+                    deadlineDate:adv.dateOfPublication.split('T')[0],
                     image:null
                  },{onlySelf:true});
 
@@ -36,7 +37,7 @@ export class AdvertisementService
         getExistsAdvertisement(id)
         {
             console.log("send request");
-            this.http.get('http://localhost:9080/advertisement/'+id)
+            this.http.get(this.baseUrl+'/advertisement/'+id)
             .subscribe(
                 (adv:Advertisement)=>{
                     console.log(adv);
@@ -46,18 +47,33 @@ export class AdvertisementService
             )
         }
 
+        updateData(id:Number)
+        {
+            let body={
+                advertisementId:id,
+				advertisementName:this.advertisementForm.value.advertisementName,
+                section:this.advertisementForm.value.advertisementSection,
+                deadline:this.advertisementForm.value.deadlineDate+"T00:00:00",
+                description:this.advertisementForm.value.description,
+                budget:this.advertisementForm.value.budget,
+                content:null
+            };
+            console.log(body);
+            return this.http.post("http://localhost:1122/"+'updateAdvertisementInformation',body);
+        }
         sendData()
         {
             let body={
+                
 				advertisementName:this.advertisementForm.value.advertisementName,
                 section:this.advertisementForm.value.advertisementSection,
-                deadline:this.advertisementForm.value.deadlineDate+" 00:00",
+                deadline:this.advertisementForm.value.deadlineDate+"T00:00:00",
                 description:this.advertisementForm.value.description,
                 budget:this.advertisementForm.value.budget,
                 content:this.advertisementForm.value.image.value
             };
             console.log(body);
-            return this.http.post('http://localhost:9080/addadvertisement',body);
+            return this.http.post(this.baseUrl+'/user/addAdvertisement',body);
             
         }
 
@@ -70,6 +86,6 @@ export class AdvertisementService
 
         getSubjects()
         {
-            return this.http.get("http://localhost:1122/allsubjects");
+            return this.http.get(this.baseUrl+"/getAllSubjects");
         }
 }
