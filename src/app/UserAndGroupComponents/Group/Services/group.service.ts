@@ -7,7 +7,7 @@ export class GroupService {
   constructor(private http: HttpClient) { }
 
   subscribeGroup(groupId) {
-      return this.http.post('http://localhost:9080/userAndGroup/subscribe',{params: new HttpParams().set('groupId',groupId)})
+      return this.http.post('http://localhost:9080/userAndGroup/subscribe',{groupId: groupId})
   }
 
   getGroup(groupId) {
@@ -22,5 +22,8 @@ export class GroupService {
     return this.http.get('http://localhost:9080/userAndGroup/getGroupUsers',{params: new HttpParams().set('groupId',groupId)})
   }
 
+  leaveGroup(groupId) {
+    return this.http.delete('http://localhost:9080/userAndGroup/leaveGroup/',{params: new HttpParams().set('groupId',groupId)})
+  }
 
 }

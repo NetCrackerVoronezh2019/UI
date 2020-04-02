@@ -16,7 +16,8 @@ export class GroupComponent implements OnInit {
   user:User;
   creator = false;
   subscriber = false;
-  users:User[]
+  users:User[];
+  subscriversVisible = false;
 
   constructor(private route: ActivatedRoute,private location: Router,private gs: GroupService) { }
 
@@ -41,5 +42,30 @@ export class GroupComponent implements OnInit {
       })
     })
   }
+
+  showSubscribers() {
+    if (!this.subscriversVisible) {
+      this.subscriversVisible = true;
+    }
+  }
+
+
+    closeSubscribers() {
+      if (this.subscriversVisible) {
+        this.subscriversVisible = false;
+      }
+    }
+
+    leaveGroup() {
+      this.gs.leaveGroup(this.groupId).subscribe(data => {
+        this.subscriber = false;
+      })
+    }
+
+    subscribeGroup() {
+      this.gs.subscribeGroup(this.groupId).subscribe(data => {
+        this.subscriber = true;
+      })
+    }
 
 }
