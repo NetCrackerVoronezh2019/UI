@@ -5,6 +5,7 @@ import {AppService} from '../app.service'
 import {interval} from 'rxjs'
 import {AdvertisementService1} from '../allusers/services/advertisement.service'
 import * as Webstomp from 'webstomp-client';
+import {AdvNotification} from '../classes/advNotification'
 import { Client} from 'webstomp-client';
 
 @Component({
@@ -18,37 +19,44 @@ export class NavbarComponent implements OnInit {
   
   private isLogin=false;
   private isAdmin=false
-  private notificationsClick=false;
   private UserInfo:any;
   private OnlineSubscription:any;
   private serverUrl = 'ws://localhost:9080/socket/websocket'
-  private stompClient:Client;
+  private stompClient1:Client;
+  private stompClient2:Client;
   private count="";
   private countNot:String="0"
+  private notifications:AdvNotification[];
+
   constructor(private authService:AuthService, private appService:AppService,
     private wsService:WebSocketService,private advService:AdvertisementService1) { }
 
 
     initializeWebSocketConnection(userName:String,userId:Number){
-      const websocket: WebSocket = new WebSocket(this.serverUrl);
-      this.stompClient = Webstomp.over(websocket);
+      const websocket1: WebSocket = new WebSocket(this.serverUrl);
+      const websocket2: WebSocket = new WebSocket(this.serverUrl);
+      this.stompClient1 = Webstomp.over(websocket1);
+      this.stompClient2 = Webstomp.over(websocket2);
       
-      this.stompClient.connect({ login: null, passcode: null }, () => {
-            this.stompClient.subscribe("/notificationCount/" + userName, (message) => {
+      this.stompClient1.connect({ login: null, passcode: null }, () => {
+            this.stompClient1.subscribe("/notificationCount/" + userName, (message) => {
               this.count=JSON.parse(message.body);
             });
         });
 
-        this.stompClient.connect({ login: null, passcode: null }, () => {
-          this.stompClient.subscribe("/notification/"+userId, (message) => {
+        this.stompClient2.connect({ login: null, passcode: null }, () => {
+          this.stompClient2.subscribe("/notification/"+userId, (message) => {
             this.countNot=JSON.parse(message.body);
           });
+          
       });
+      
       
     }
 
     closeWebSocketConection() {
-      this.stompClient.disconnect();
+      this.stompClient1.disconnect();
+      this.stompClient2.disconnect();
     }
 
     getMessageNotificationCount()
@@ -119,13 +127,13 @@ export class NavbarComponent implements OnInit {
       this.OnlineSubscription.unsubscribe();
   }
 
-  getNot()
+  getMyAllNotifications()
   {
-    this.notificationsClick=true;
+    this.advService.getMyNotifications()
+    .subscribe(
+      (data:AdvNotification[])=>{this.notifications=data;},
+       error=>console.log(error)
+    )
   }
 
-  getNot2()
-  {
-    this.notificationsClick=false;
-  }
 }

@@ -13,7 +13,7 @@
           </div>
           <div class="navbar-auth" *ngIf="isLogin">
             <p class="mr-4 notification">
-                <mat-icon (click)="getNot()" class="userInfo cursor mr-4" data-toggle="modal" data-target="#notificationModal"  matBadge={{countNot}} matBadgeColor="warn">notifications</mat-icon>
+                <mat-icon (click)="getMyAllNotifications()" class="userInfo cursor mr-4" data-toggle="modal" data-target="#notificationModal"  matBadge={{countNot}} matBadgeColor="warn">notifications</mat-icon>
                 <mat-icon class="userInfo cursor" routerLink="/dialogsList" matBadge={{count}} matBadgeColor="warn">mail</mat-icon>
     
             </p>
@@ -36,8 +36,8 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div *ngIf="notificationsClick" class="modal-body">
-            <app-notifications></app-notifications>
+        <div class="modal-body">
+            <app-notifications  [(notifications)]="notifications"></app-notifications>
         </div>
       </div>
     </div>

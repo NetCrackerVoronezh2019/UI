@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdvertisementService} from '../services/advertisement.service';
 import { Router} from '@angular/router';
 import {Subject} from '../../classes/subject';
+
 @Component({
   selector: 'app-add-advertisement',
   templateUrl: './add-advertisement.component.html',

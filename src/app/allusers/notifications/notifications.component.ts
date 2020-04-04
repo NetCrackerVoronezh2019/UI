@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit,Input} from '@angular/core';
 import {AdvNotification} from '../../classes/advNotification'
 import {AdvertisementService1} from '../services/advertisement.service'
 
@@ -10,12 +10,11 @@ import {AdvertisementService1} from '../services/advertisement.service'
 })
 export class NotificationsComponent implements OnInit {
 
-  notifications:AdvNotification[];
+  @Input() notifications:AdvNotification[];
   constructor(private service:AdvertisementService1) { }
 
   ngOnInit() {
-    this.getMyAllNotifications();
-    console.log(this.notifications);
+  
   }
 
   getMyAllNotifications()

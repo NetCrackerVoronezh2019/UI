@@ -24,7 +24,7 @@ export class AdvertisementComponent implements OnInit {
   isLoading=false;
   subscription:Subscription;
   can:Boolean=false;
-  message:String='Вы точно хотите взять этот заказ ?'
+  message:String='Вы точно хотите получить этот заказ ?'
   buttonHidden:Boolean=true;
   constructor(private service:AdvertisementService1, private service2:AdvertisementService,private activateRoute: ActivatedRoute) { }
 
