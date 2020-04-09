@@ -9,6 +9,7 @@ export class AdvNotification{
 	private addresseeUsername:String;
     private message:String;
     public status:String;
+    public responseStatus:String
     private advertisementName:String;
     
     public constructor(){}

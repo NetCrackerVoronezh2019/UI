@@ -5,8 +5,6 @@ import { ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs'
 import {AdvertisementService1} from '../services/advertisement.service';
 import {AdvertisementService} from '../../student/services/advertisement.service'
-import * as Webstomp from 'webstomp-client';
-import { Client} from 'webstomp-client';
 
 @Component({
   selector: 'app-advertisement',
@@ -15,10 +13,8 @@ import { Client} from 'webstomp-client';
   providers:[AdvertisementService1,AdvertisementService]
 })
 export class AdvertisementComponent implements OnInit {
-
-  private serverUrl = 'ws://localhost:9080/socket/websocket'
-  private stompClient:Client;
   id:Number;
+  role:any;
   adv:Advertisement;
   isUserAdv:Boolean=false;
   isLoading=false;
@@ -33,19 +29,35 @@ export class AdvertisementComponent implements OnInit {
       this.subscription=this.activateRoute.params.subscribe(params=>{
         this.id=params['id'];
         this.getAdvById(this.id);
-        this.isMyAdv(this.id);
-        this.canSendRequest();
+        this.getRole();
       } 
     );
 
-    this.initializeWebSocketConnection();
 }
 
-initializeWebSocketConnection(){
-  const websocket: WebSocket = new WebSocket(this.serverUrl);
-  this.stompClient = Webstomp.over(websocket);
-}
-
+  changeMessage(){
+    if(this.role=="ROLE_TEACHER")
+      this.message='Вы точно хотите получить этот заказ ?';
+    else
+    {
+      this.message='Вы точно хотите получить этy услугу ?';
+    }
+  }
+  
+  getRole()
+  {
+    this.service.getRole()
+    .subscribe(
+      (data:any)=>
+      {
+        this.role=data.roleName;
+        this.isMyAdv(this.id);
+        this.canSendRequest();
+        this.changeMessage();
+      },
+      error=>{console.log(error)}
+    )
+  }
 
   getAdvById(id)
   {
@@ -67,26 +79,12 @@ initializeWebSocketConnection(){
 
   sendNotification()
   {
-    this.service.sendNotification(this.adv)
+    this.service.sendNotification(this.adv,this.role)
     .subscribe(
       (data)=>{this.message="Всё прошло успешно !", this.canSendRequest(); this.buttonHidden=false},
       error=>{this.message="Ошибка при отправке"; this.buttonHidden=false}
       )
   }  
-
-  sendNotificationSocket()
-  {
-    this.stompClient.send("/sendNotification/" , JSON.stringify({
-            addresseeId:this.adv.authorId,
-            advertisementId:this.adv.advertisementId,
-            type:'TAKE_ADVERTISEMENT',
-            advertisementName:this.adv.advertisementName
-    }));
-    this.canSendRequest(); 
-    this.message="Всё прошло успешно !"
-    this.buttonHidden=false;
-  }
-  
 
   canSendRequest()
   {

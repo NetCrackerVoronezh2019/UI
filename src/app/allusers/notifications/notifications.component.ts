@@ -28,7 +28,7 @@ export class NotificationsComponent implements OnInit {
 
   onAccept(x:AdvNotification)
   {
-    x.status="ACCEPTED";
+    x.responseStatus="ACCEPTED";
     console.log(x);
     this.service.sendNotificationResponse(x)
     .subscribe(
@@ -40,7 +40,7 @@ export class NotificationsComponent implements OnInit {
 
   onReject(x:AdvNotification)
   {
-    x.status="REJECTED";
+    x.responseStatus="REJECTED";
     console.log(x);
     this.service.sendNotificationResponse(x)
     .subscribe(

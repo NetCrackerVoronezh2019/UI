@@ -21,7 +21,7 @@ export class AdvertisementFilterComponent implements OnInit {
     this.getAllFilters();
     this.service.getAllAdvertisements()
     .subscribe(
-      (data:Advertisement[])=>{this.advs=data; this.isLoaded=true},
+      (data:Advertisement[])=>{this.advs=data; console.log(data); this.isLoaded=true},
       (error)=>console.log(error)
     )
     

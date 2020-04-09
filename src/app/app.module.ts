@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {Routes, RouterModule} from '@angular/router';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import {MatChipsModule} from '@angular/material/chips';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 import {SignInService} from './sign-in/Services/signIn.Service';
 import {WebSocketService} from './home/Services/WebSocket.Service';
 import { ActivatePageComponent } from './activate-page/activate-page.component';
@@ -111,9 +113,11 @@ const appRoutes: Routes =[
     FormsModule,
     MatCheckboxModule,
     BrowserAnimationsModule,
+    MatProgressSpinnerModule,
     MatTableModule,
     MatIconModule,
     MatButtonModule,
+    MatChipsModule,
     MatButtonToggleModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)

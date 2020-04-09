@@ -9,14 +9,19 @@ export class RegistrationService
     constructor(private fb:FormBuilder,private http: HttpClient) {}
         myForm=this.fb.group(
             {
-                "userName":["",[Validators.required,Validators.minLength(5),Validators.maxLength(15)]],
-                "userSurname":["",[Validators.required,Validators.minLength(5),Validators.maxLength(15)]],
+                "userName":["",[Validators.required,Validators.minLength(3),Validators.maxLength(15)]],
+                "userSurname":["",[Validators.required,Validators.minLength(3),Validators.maxLength(15)]],
                 "userEmail": ["",[Validators.required,Validators.email]],
                 "userImg":[""],
+                "education":[null],
+                "aboutMe":[""],
+                "gender":[""],
+                "birthDate":[""],
 				"Passwords":this.fb.group({
 					            "password":["",[Validators.required,Validators.minLength(0),Validators.maxLength(15)]],
 								"confirmPassword":["",[Validators.required,Validators.minLength(0),Validators.maxLength(15)]]
-								 },{validator:this.ConfirmPasswordValidator})
+                                 },{validator:this.ConfirmPasswordValidator}),
+                
             }
             
         );
@@ -37,7 +42,7 @@ export class RegistrationService
         return this.myForm;
     }
 
-    sendRegistrationInformation(role:any){
+    sendRegistrationInformation(role:any,allFiles){
          
         const body = {
                         firstname:this.myForm.value.userName, 
@@ -45,9 +50,12 @@ export class RegistrationService
                         email:this.myForm.value.userEmail,
                         password:this.myForm.value.Passwords.password,
                         role:role,
-                        content:this.myForm.value.userImg.value
+                        allFiles,
+                        birthDate:this.myForm.value.birthDate,
+                        gender:this.myForm.value.gender,
+                        aboutMe:this.myForm.value.aboutMe,
+                        education:this.myForm.value.education
                     };
-
         console.log(body);
         
        return  this.http.post(this.baseUrl+'/registration',body);

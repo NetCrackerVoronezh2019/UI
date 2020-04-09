@@ -5,7 +5,7 @@
         <a href="/adv/{{not.advertisementId}}"><<{{not.advertisementName}}>></a>
          
         </span>
-       <div class="notif-buttons" *ngIf="not.type=='TAKE_ADVERTISEMENT'">
+       <div class="notif-buttons" *ngIf="not.type=='TAKE_ADVERTISEMENT' || not.type=='RECEIVE_SERVICE'">
         <button type="button b" class="btn btn-success" (click)="onAccept(not)">Принять</button>
         <button type="button" class="btn btn-warning"(click)="onReject(not)">Отклонить</button>
       </div>

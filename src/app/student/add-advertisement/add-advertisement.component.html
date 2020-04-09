@@ -18,11 +18,6 @@
                       </select>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile">Фото</label>
-                     <input type="file" (change)="handleFileInput($event.target.files)" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-                </div>
-                
-                <div class="form-group">
                     <label for="example-date-input" class="col-xs-2 col-form-label">Дедлайн</label>
                      <input formControlName='deadlineDate' class="form-control" type="date"  id="example-date-input">
                 </div>
@@ -34,9 +29,38 @@
                     <label for="exampleInputEmail1">Описание</label>
                     <textarea formControlName='description' type="password" class="form-control" id="Input2" rows="5" aria-describedby="emailHelp" placeholder="Описание"></textarea>
                 </div>
+
+                <div class="form-group">
+                    <div class="example-2 mb-3">
+                        <div class="form-group">
+                          <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
+                          <label for="file" class="btn btn-tertiary js-labelFile">
+                            <i class="icon fa fa-check"></i>
+                            <span class="js-fileName"> Загрузить Фотографии</span>
+                          </label>
+                        </div>
+                       </div>
+                </div>
+                <div class="">
+                    <mat-form-field class="example-chip-list">
+                        <mat-chip-list #chipList aria-label="tag selection">
+                          <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                                   [removable]="removable" (removed)="remove(tag)">
+                            {{tag.name}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                          </mat-chip>
+                          <input placeholder="Теги"
+                                 [matChipInputFor]="chipList"
+                                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                 [matChipInputAddOnBlur]="addOnBlur"
+                                 (matChipInputTokenEnd)="add($event)">
+                        </mat-chip-list>
+                      </mat-form-field>
+                      
+                </div>
             </div>
             <div class="col-md-4 col-sm-4 d-flex justify-content-center">
-                <button type="button" (click)="onSubmit()" class="btn btn-success">Создать</button>
+                <button type="button" (click)="onSubmit()" class="btn btn-success mb-5">Создать</button>
             </div> 
         </div>
     </div>

@@ -12,11 +12,10 @@ import { Router} from '@angular/router';
   providers:[RegistrationService]
 })
 
-
-
 export class RegistrationComponent implements OnInit {
-
-   role="STUDENT";
+  role="STUDENT";
+  public allFiles:any[]=[];
+  sendData:Boolean=false;
   constructor(public regService:RegistrationService,private router:Router) {
   
   }
@@ -28,15 +27,18 @@ export class RegistrationComponent implements OnInit {
   {
     if(!this.regService.getRegForm().invalid)
     {
-      alert("send a data");
-      this.regService.sendRegistrationInformation(this.role)
+      this.sendData=true;
+      this.regService.sendRegistrationInformation(this.role,this.allFiles) 
       .subscribe(
           data => {
+            console.log(data)
             this.router.navigate(['/']);
           },
           error => console.log(error)
       );
-    }
+    
+    
+  }
     else
     {
       alert("dont send a data");
@@ -52,17 +54,18 @@ export class RegistrationComponent implements OnInit {
   }
 
   handleFileInput(file: FileList) {
-    let reader = new FileReader();
-    let uploadfile = file.item(0);
-
-    reader.readAsDataURL(uploadfile);
-      reader.onload = () => {
-        this.regService.getRegForm().get("userImg").setValue({
-          filename: uploadfile.name,
-          filetype: uploadfile.type,
-          value: reader.result
-        })
-      };
+    let reader;
+     for(let i=0;i<file.length;i++)
+     {
+       reader=new FileReader();
+       console.log(i);
+       reader.readAsDataURL(file.item(i));
+       reader.onload = () => {
+        this.allFiles.push(reader.result);
+      }; 
+     }
+      console.log(this.allFiles);
+     
   }
  
 }

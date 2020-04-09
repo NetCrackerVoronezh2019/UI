@@ -30,15 +30,28 @@ export class AdvertisementService1
         return this.http.post(this.baseUrl+"/isMyAdvertisement",body)
     }
 
-    sendNotification(adv:Advertisement)
+    sendNotification(adv:Advertisement,role)
     {
         console.log(adv);
-
-        let body={
-            addresseeId:adv.authorId,
-            advertisementId:adv.advertisementId,
-            type:'TAKE_ADVERTISEMENT',
-            advertisementName:adv.advertisementName
+        let body;
+        console.log(role)
+        if(role=="ROLE_TEACHER")
+        {
+             body={
+                addresseeId:adv.authorId,
+                advertisementId:adv.advertisementId,
+                type:'TAKE_ADVERTISEMENT',
+                advertisementName:adv.advertisementName
+            }
+        }
+        else
+        {
+            body={
+                addresseeId:adv.authorId,
+                advertisementId:adv.advertisementId,
+                type:'RECEIVE_SERVICE',
+                advertisementName:adv.advertisementName
+            }
         }
 
         console.log(body);
@@ -66,5 +79,15 @@ export class AdvertisementService1
     canSendRequest(id:Number)
     {
         return this.http.get(this.baseUrl+"/canSendRequest/"+id);
+    }
+
+    setAllNotificationasReaded()
+    {
+        console.log("gfgfdgfd");
+        return this.http.get(this.baseUrl+'/user/setNotificatiosAsReaded');
+    }
+    getRole()
+    {
+        return this.http.get(this.baseUrl+"/getRole");
     }
 }

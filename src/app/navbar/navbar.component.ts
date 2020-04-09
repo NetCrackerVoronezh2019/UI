@@ -131,7 +131,13 @@ export class NavbarComponent implements OnInit {
   {
     this.advService.getMyNotifications()
     .subscribe(
-      (data:AdvNotification[])=>{this.notifications=data;},
+      (data:AdvNotification[])=>
+      {
+        this.notifications=data;
+        this.advService.setAllNotificationasReaded()
+        .subscribe(data=>{},
+                  error=>console.log(error))
+      },
        error=>console.log(error)
     )
   }

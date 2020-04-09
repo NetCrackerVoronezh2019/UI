@@ -1,4 +1,4 @@
-<form [formGroup]="regService.getRegForm()" class="p-5 reg">
+<form *ngIf="!sendData" [formGroup]="regService.getRegForm()" class="p-5 reg">
     <div class="container">
         <div class="row d-flex flex-column justify-content-center  align-items-center">
             <div class="col-md-6 col-sm-12 text-center text-uppercase  registration-label font-weight-bold">Регистрация</div>
@@ -21,10 +21,21 @@
                 </div>
             </div>
             <div class="col-md-4 col-sm-12">
+                <label for="exampleInputEmail1">Пол</label>
                 <div class="form-group" >
-                    <label for="exampleInputFile">Фото</label>
-                    <input type="file" (change)="handleFileInput($event.target.files)" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" formControlName='gender' type="radio" name="gender" id="inlineRadio1" value="MALE" checked> 
+                        <label class="form-check-label" for="inlineRadio1">мужской</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" formControlName='gender' type="radio" name="gender" id="inlineRadio2" value="FEMALE">
+                        <label class="form-check-label" for="inlineRadio2">женский</label>
+                      </div>
                 </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <label for="example-date-input">Дата рождения</label>
+                <input class="form-control" formControlName="birthDate" type="date" value="" id="example-date-input">
             </div>
             <div class="col-md-4 col-sm-12">
                 <div class="form-group" >
@@ -54,6 +65,7 @@
                         <span *ngIf="regService.getRegForm().controls['Passwords'].controls['confirmPassword'].errors.confirm">не совпадают</span>    
                     </div>
                 </div>
+            </div>
                 <div class="check-buttons mb-3">
                     <div  role="TEACHER" [ngClass]="role=='TEACHER'?'check-button check-button-border':'check-button'" (click)="setRole($event)" >
                         Учитель
@@ -62,7 +74,31 @@
                        Студент
                     </div>
                 </div>
-            </div>   
+                <div *ngIf="role=='TEACHER'" class="additional-info">
+                    <div class="mb-3">
+                        <label  for="sel1">Уровень образования</label>
+                        <select formControlName="education" class="custom-select" id="sel1" placeholder="Выберите науный степень">  
+                            <option  value="SECONDARY_GENERAL_EDUCATION">Среднее общее образование</option>
+                            <option  value="SECONDARY_PROFESSIONAL_EDUCATION">Среднее професиональное образование</option>
+                            <option  value="HIGHER_EDUCATION">Высшее образование</option>    
+                          </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1 mb-3">Расскажите о себе</label>
+                        <textarea  formControlName="aboutMe" type="text" class="form-control" id="Input2" rows="5" aria-describedby="emailHelp" placeholder="О себе"></textarea>
+                    </div>
+                    <div class="example-2 mb-3">
+                        <label for="exampleInputEmail1">Документы и Сертификаты</label>
+                        <div class="form-group">
+                          <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
+                          <label for="file" class="btn btn-tertiary js-labelFile">
+                            <i class="icon fa fa-check"></i>
+                            <span class="js-fileName"> Загрузить файлы</span>
+                          </label>
+                        </div>
+                       </div>
+                </div>
+               
             </div>
             <div class="col-md-4 col-sm-4 d-flex justify-content-center mb-5">
                 <button type="button" class="btn btn-success" (click)="onSubmit()">Зарегестрироваться</button>
@@ -70,5 +106,10 @@
         </div>
     </div>
 </form>
+
+
+<div *ngIf='sendData' class="loading">
+    <mat-spinner></mat-spinner>
+</div>
 
 

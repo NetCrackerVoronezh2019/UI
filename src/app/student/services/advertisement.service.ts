@@ -2,6 +2,7 @@ import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/for
 import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Advertisement} from '../../classes/advertisement'
+import {Tag} from '../../classes/tag'
 
 @Injectable()
 export class AdvertisementService
@@ -61,16 +62,18 @@ export class AdvertisementService
             console.log(body);
             return this.http.post("http://localhost:1122/"+'updateAdvertisementInformation',body);
         }
-        sendData()
+        sendData(tags:Tag[],allFiles)
         {
             let body={
-                
 				advertisementName:this.advertisementForm.value.advertisementName,
                 section:this.advertisementForm.value.advertisementSection,
                 deadline:this.advertisementForm.value.deadlineDate+"T00:00:00",
                 description:this.advertisementForm.value.description,
                 budget:this.advertisementForm.value.budget,
-                content:this.advertisementForm.value.image.value
+                content:this.advertisementForm.value.image.value,
+                tags,
+                allFiles
+
             };
             console.log(body);
             return this.http.post(this.baseUrl+'/user/addAdvertisement',body);
