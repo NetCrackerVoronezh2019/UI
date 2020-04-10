@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -49,7 +50,8 @@ import { DialogMemberCardComponent } from "./ConversationComponents/dialogMember
 import {GroupCardComponent } from "./UserAndGroupComponents/group-card/group-card.component"
 import {GroupListComponent} from "./UserAndGroupComponents/group-list/group-list.component"
 import {UserCardComponent} from "./UserAndGroupComponents/userCard/userCard.component"
-import {MiniGroupComponent} from "./UserAndGroupComponents/mini-group-card/mini-group-card.component"
+import {MiniGroupComponent} from "./UserAndGroupComponents/mini-group-card/mini-group-card.component";
+import { EmailPageComponent } from './registration/email-page/email-page.component'
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
   { path: 'adv/:id', component:AdvertisementComponent},
@@ -69,7 +71,8 @@ const appRoutes: Routes =[
   {path:'myadvertisements', component:MyAdvertisementsComponent},
   {path: "groupList", component:GroupListComponent},
   {path: 'myorders', component:MyOrdersComponent},
-  {path:'myadvertisements', component:MyAdvertisementsComponent}
+  {path:'myadvertisements', component:MyAdvertisementsComponent},
+  {path:'email/:emailAdress',component:EmailPageComponent}
 ];
 
 @NgModule({
@@ -102,7 +105,8 @@ const appRoutes: Routes =[
     AdvertisementFilterComponent,
     NotificationsComponent,
     MyOrdersComponent,
-    MiniGroupComponent
+    MiniGroupComponent,
+    EmailPageComponent
   ],
   imports: [
     MatInputModule,
@@ -117,6 +121,7 @@ const appRoutes: Routes =[
     MatTableModule,
     MatIconModule,
     MatButtonModule,
+    MatExpansionModule,
     MatChipsModule,
     MatButtonToggleModule,
     HttpClientModule,

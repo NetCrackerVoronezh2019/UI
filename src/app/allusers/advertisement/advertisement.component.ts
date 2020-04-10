@@ -5,6 +5,7 @@ import { ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs'
 import {AdvertisementService1} from '../services/advertisement.service';
 import {AdvertisementService} from '../../student/services/advertisement.service'
+import { SendModel } from '../../classes/sendModel';
 
 @Component({
   selector: 'app-advertisement',
@@ -13,6 +14,7 @@ import {AdvertisementService} from '../../student/services/advertisement.service
   providers:[AdvertisementService1,AdvertisementService]
 })
 export class AdvertisementComponent implements OnInit {
+  img:any;
   id:Number;
   role:any;
   adv:Advertisement;
@@ -32,8 +34,9 @@ export class AdvertisementComponent implements OnInit {
         this.getRole();
       } 
     );
+  }
 
-}
+  
 
   changeMessage(){
     if(this.role=="ROLE_TEACHER")
@@ -63,7 +66,7 @@ export class AdvertisementComponent implements OnInit {
   {
     this.service.getAdvertisementById(id)
     .subscribe(
-      (data:Advertisement)=>{this.adv=data; this.isLoading=true;},
+      (data:Advertisement)=>{this.adv=data;this.isLoading=true;},
       error=>console.log(error)
     )
   }

@@ -54,7 +54,8 @@ export class RegistrationService
                         birthDate:this.myForm.value.birthDate,
                         gender:this.myForm.value.gender,
                         aboutMe:this.myForm.value.aboutMe,
-                        education:this.myForm.value.education
+                        education:null
+                        //education:this.myForm.value.education
                     };
         console.log(body);
         

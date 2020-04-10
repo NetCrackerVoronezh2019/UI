@@ -27,15 +27,11 @@
                             <div class="col-12 p-0 advertisement-img">
                               <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                  <li *ngFor="let key of adv.imageKeys; let i = index" data-target="#carouselExampleIndicators" data-slide-to="i" [class.active]="i == 0"></li>
                                 </ol>
                                 <div class="carousel-inner max-he">
-                                  <div class="carousel-item img-h active">
-                                    <img class="d-block img-h w-100 " src='http://localhost:1234/getimg/{{adv.imageKeys[0]}}' alt="Первый слайд">
-                                  </div>
-                                  <div class="carousel-item img-h">
-                                    <img class="d-block img-h w-100" src='http://localhost:1234/getimg/{{adv.imageKeys[1]}}' alt="Второй слайд">
+                                  <div *ngFor="let key of adv.imageKeys; let i = index" class="carousel-item img-h" [class.active]="i == 0">
+                                    <img   class="d-block img-h w-100 "  src='http://localhost:1234/getAdvImg/{{key}}'alt="слайд">     
                                   </div>
                                 </div>
                                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -58,8 +54,15 @@
                                 </p>
                                 <p>{{adv.deadline}}</p>
                                 <p class="tittle">
-                                    Цена - {{adv.budget}} руб.
+                                    Цена
                                 </p>
+                                <p>{{adv.budget}}</p>
+                                <div class="tegs">
+                                  <p class="tittle">Теги:</p>
+                                  <mat-chip-list>
+                                    <mat-chip *ngFor="let tag of adv.tags; let i = index">{{tag.name}}</mat-chip>
+                                  </mat-chip-list>                                  
+                                </div>
                             </div>
                         </div>
                     </div>

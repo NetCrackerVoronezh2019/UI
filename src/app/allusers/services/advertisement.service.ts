@@ -90,4 +90,9 @@ export class AdvertisementService1
     {
         return this.http.get(this.baseUrl+"/getRole");
     }
+
+    getBytesForImg(adv:Advertisement)
+    {
+        return this.http.get('http://localhost:1234/getimg/'+adv.imageKeys[0]);
+    }
 }

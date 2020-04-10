@@ -3,6 +3,7 @@ import { HttpClient} from '@angular/common/http';
 import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/forms';
 import {Injectable} from '@angular/core';
 import {Filters} from '../../../classes/filters'
+import {Tag} from '../../../classes/tag'
 
 @Injectable()
 export class FilterService
@@ -33,12 +34,14 @@ export class FilterService
         return this.http.get(this.baseUrl+"/getAllFilters");
     }
 
-    sendFilterResults(filters:Filters)
+    sendFilterResults(filters:Filters,tags:Tag[])
     {
         filters.minPrice=this.filterForm.value.minPrice;
         filters.maxPrice=this.filterForm.value.maxPrice;
         filters.searchRow=this.filterForm.value.searchRow;
         filters.type=this.filterForm.value.type
+        filters.tags=tags;
+
         console.log(filters);
         return this.http.post(this.baseUrl+"/filterAdvertisements",filters);
     }

@@ -16,6 +16,19 @@
     margin: 0 10px;
   }
 
+  .example-chip-list
+  {
+    width:100%;
+  }
+
+  .tags
+  {
+    padding: 0 20% 0 20%;
+  }
+  .colorx
+  {
+    background-color:#FCFCFC  !important;
+  }
   .filter
   {
     display:flex;
@@ -75,6 +88,9 @@
   border-radius:50%;
  }
 
+ .allfilters{
+   margin:20px 100px 0 100px;
+ }
 
 .search_bar> .search_input{
     padding: 0 10px;

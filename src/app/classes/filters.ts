@@ -1,4 +1,5 @@
-import{Subject} from './subject'
+import {Subject} from './subject'
+import {Tag} from './tag'
 
 export class Filters
 {
@@ -7,6 +8,7 @@ export class Filters
     public maxPrice:Number;
     public searchRow:String;
     public type:String;
+    public tags:Tag[]
 
     constructor(){}
 }

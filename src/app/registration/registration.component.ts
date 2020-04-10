@@ -32,7 +32,7 @@ export class RegistrationComponent implements OnInit {
       .subscribe(
           data => {
             console.log(data)
-            this.router.navigate(['/']);
+            this.router.navigate(['/email/'+this.regService.getRegForm().value.userEmail]);
           },
           error => console.log(error)
       );

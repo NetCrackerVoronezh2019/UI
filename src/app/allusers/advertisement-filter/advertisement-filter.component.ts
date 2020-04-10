@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FilterService} from './Services/filterService.service'
 import{Filters} from '../../classes/filters'
 import{Advertisement} from '../../classes/advertisement'
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {Tag} from '../../classes/tag';
 
 @Component({
   selector: 'app-advertisement-filter',
@@ -14,17 +17,43 @@ export class AdvertisementFilterComponent implements OnInit {
   constructor(private service:FilterService) { }
 
   isLoaded=false;
-  filters:Filters
+  filters:Filters;
+  panelOpenState = false;
   advs:Advertisement[];
+  tags: Tag[] = [];
   
+
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+ 
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+      this.tags.push({name: value.trim()});
+    }
+
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(tag: Tag): void {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
+  }
+
   ngOnInit() {
     this.getAllFilters();
     this.service.getAllAdvertisements()
     .subscribe(
       (data:Advertisement[])=>{this.advs=data; console.log(data); this.isLoaded=true},
       (error)=>console.log(error)
-    )
-    
+    )    
   }
 
 
@@ -47,11 +76,13 @@ export class AdvertisementFilterComponent implements OnInit {
   }
   refresh()
   {
-    this.service.sendFilterResults(this.filters)
+    console.log(this.tags);
+    this.service.sendFilterResults(this.filters,this.tags)
     .subscribe(
       (data:Advertisement[])=>this.advs=data,
       (error)=>console.log(error)
     )
+  
   }
 
 
