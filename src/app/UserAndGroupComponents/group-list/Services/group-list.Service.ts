@@ -9,12 +9,14 @@ export class GroupListService
 
     groupCreationForm=this.fb.group(
             {
+                "groupSection":[""],
                 "groupName":["",[Validators.required,Validators.minLength(5),Validators.maxLength(15)]]
             }
           )
     groupSearchPanel=this.fb.group(
             {
-                "searchName":["",[Validators.required,Validators.minLength(3),Validators.maxLength(15)]]
+                "groupSection":[""],
+                "searchName":["",[Validators.maxLength(15)]]
             }
         )
 
@@ -42,7 +44,8 @@ export class GroupListService
 
    CreateGroup(){
             const body = {
-                       name: this.groupCreationForm.value.groupName
+                       name: this.groupCreationForm.value.groupName,
+                       subjectName: this.groupCreationForm.value.groupSection
                   };
         return this.http.post('http://localhost:9080/userAndGroup/createGroup/',body);
 
@@ -50,6 +53,10 @@ export class GroupListService
 
     search() {
       const name =this.groupSearchPanel.value.searchName;
-      return this.http.get('http://localhost:9080/group/search',{params:new HttpParams().set('name',name)})
+      return this.http.get('http://localhost:9080/group/search',{params:new HttpParams().set('name',name).set("subjectName",this.groupSearchPanel.value.groupSection)})
+    }
+
+    getAllSubjects() {
+      return this.http.get('http://localhost:9080/groups/getAllSubjects')
     }
 }

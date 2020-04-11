@@ -12,13 +12,6 @@ body { margin: 0; }
  left: 10vw; /* Расстояние от левого края */
  bottom: 0; right: 0;
 }
-#CreationDialogForm {
-  background: #B0C4DE;
-  left: 30%;
-  top: 30%;
-  width: 30%;
-  height: 35%;
-}
 .btn-primary-spacing
 {
 margin-right: 5px;
@@ -46,7 +39,10 @@ margin-top: 5px;
   position: absolute;
   left:10vw;
   top:10vh;
-  height: 24vh;
+  min-height: 30vh;
+  max-height: 40vh;
+  min-width: 25vw;
+  max-width: 30vw;
   width: 20vw;
   display:flex;
    align-items: center;
