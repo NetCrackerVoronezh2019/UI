@@ -26,11 +26,7 @@ export class GroupListService
       return this.http.get('http://localhost:9080/userAndGroup/getThisUser',
                           {params:new HttpParams()});
       }
-    getUserGroups() {
-        return this.http.get('http://localhost:9080/userAndGroup/getGroup',
-                            {params:new HttpParams()});
-      }
-
+      
     getGroupCreationForm(): FormGroup  {
        return this.groupCreationForm;
       }

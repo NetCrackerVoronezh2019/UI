@@ -1,5 +1,60 @@
 <body>
   <app-navbar></app-navbar>
+  <div class="sidebar" *ngIf="settingsVisible">
+    <h3>Настройки группы</h3>
+    <form [formGroup]="gs.getGroupSettingsForm()">
+        <div class="form-group">
+          <label for="">Имя группы</label>
+          <input id="Name" type="text" class="form-control" formControlName="groupName" autocomplete="off" placeholder="Group name">
+          <div *ngIf="gs.getGroupSettingsForm().controls['groupName'].invalid && gs.getGroupSettingsForm().controls['groupName'].touched" >
+            <small  *ngIf="gs.getGroupSettingsForm().controls['groupName'].errors.minlength">name is too short</small>
+            <small  *ngIf="gs.getGroupSettingsForm().controls['groupName'].errors.maxlength">name is too long</small>
+          </div>
+          <label  for="sel1">Раздел</label>
+          <select formControlName="groupSection" class="custom-select" id="sel1" placeholder="Выберите Раздел">
+              <option *ngFor="let subject of subjects" value="{{subject.translateName}}">{{subject.name}}</option>
+          </select>
+        </div>
+    </form>
+    <button mat-raised-button class="ml-2" (click)="acceptSettings()"><i class="fas fa-check-circle"></i>Изменить</button>
+    <button mat-raised-button class="ml-2" (click)="closeSetings()"><i class="fas fa-minus-circle"></i>Закрыть</button>
+    <h4>Администраторы</h4>
+    <button *ngIf="!addAdmin && !removeAdmin" mat-raised-button class="ml-2" (click)="showAddAdmin()"><i class="fas fa-plus-circle"></i>Добавить</button>
+    <button *ngIf="!addAdmin && !removeAdmin && creator" mat-raised-button class="ml-2" (click)="showRemoveAdmin()"><i class="fas fa-minus-circle"></i>Удалить</button>
+    <button *ngIf="addAdmin || removeAdmin" mat-raised-button class="ml-2" (click)="closeAddRemoveAdmin()"><i class="fas fa-times"></i>Отмена</button>
+    <div *ngIf="!addAdmin && !removeAdmin">
+    <div *ngFor ='let user of admins' align="center">
+      <app-user-card [(us)]="user" routerLink="/userPage/{{user.userId}}"></app-user-card>
+    </div>
+  </div>
+  <div *ngIf="removeAdmin">
+  <div *ngFor ='let user of admins' align="center">
+    <app-user-card [(us)]="user" (click)="deleteAdmin(user)"></app-user-card>
+  </div>
+  </div>
+  <div *ngIf="addAdmin">
+    <form [formGroup]="gs.getUserSearchForm()">
+      <h5>Поиск</h5>
+      <label for="">Имя</label>
+      <input type="text" class="form-control" formControlName="firstName" autocomplete="off" placeholder="first name">
+      <div *ngIf="gs.getUserSearchForm().controls['firstName'].invalid && gs.getUserSearchForm().controls['firstName'].touched" >
+        <small  *ngIf="gs.getUserSearchForm().controls['firstName'].errors.minlength">name is too short</small>
+        <small  *ngIf="gs.getUserSearchForm().controls['firstName'].errors.maxlength">name is too long</small>
+      </div>
+      <label for="">Фамилия</label>
+      <input type="text" class="form-control" formControlName="lastName" autocomplete="off" placeholder="last name">
+      <div *ngIf="gs.getUserSearchForm().controls['lastName'].invalid && gs.getUserSearchForm().controls['lastName'].touched" >
+        <small  *ngIf="gs.getUserSearchForm().controls['lastName'].errors.minlength">name is too short</small>
+        <small  *ngIf="gs.getUserSearchForm().controls['lastName'].errors.maxlength">name is too long</small>
+      </div>
+    </form>
+    <button mat-raised-button class="ml-2" (click)="search()"><i class="fas fa-search"></i>Поиск</button>
+    <button mat-raised-button class="ml-2" (click)="cancelSearch()"><i class="fas fa-minus-circle"></i>Отмена</button>
+  <div *ngFor ='let user of users' align="center">
+    <app-user-card [(us)]="user" (click)="makeAdmin(user)"></app-user-card>
+  </div>
+</div>
+  </div>
   <div align="center">
       <div *ngIf="true" class="blog-card" align = left>
         <div class="inner-part">
@@ -8,10 +63,11 @@
           </label>
           <div class="content ">
             <div class="title">{{group?.name}}</div>
+            <label for="">{{group?.subjectName}}</label>
           </div>
         </div>
         <div class="buttons">
-          <button mat-raised-button class="ml-2" (click)="openGroupForm()" *ngIf="creator"><i class="fas fa-cog"></i> Настройки</button>
+          <button mat-raised-button class="ml-2" (click)="showSetings()" *ngIf="creator || admin"><i class="fas fa-cog"></i> Настройки</button>
           <button mat-raised-button class="ml-2" (click)="showSubscribers()"><i class="fas fa-user-circle"></i> Участники</button>
           <button mat-raised-button class="ml-2" routerLink="/dialog/{{group.dialogId}}" *ngIf="subscriber"><i class="fas fa-comments"></i> Чат</button>
           <button mat-raised-button class="ml-2" (click)="subscribeGroup()" *ngIf="!subscriber"><i class="fas fa-check"></i> Вступить</button>
@@ -22,7 +78,7 @@
     <div *ngIf="subscriversVisible" class="subscribers">
         <button mat-raised-button class="ml-2" (click)="closeSubscribers()"><i class="fas fa-minus-circle"></i>Закрыть</button>
       <div *ngFor ='let user of users' align="center">
-        <app-user-card [(us)]="user"></app-user-card>
-      </div>
+        <app-user-card [(us)]="user" routerLink="/userPage/{{user.userId}}"></app-user-card>
+    </div>
   </div>
 </body>

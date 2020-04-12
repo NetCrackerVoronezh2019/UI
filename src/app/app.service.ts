@@ -10,6 +10,6 @@ export class AppService
 
     sendOnlineRequest()
     {
-        return this.http.get("http://localhost:9080/isonline");
+        return this.http.get("http://localhost:9080/isOnline");
     }
 }

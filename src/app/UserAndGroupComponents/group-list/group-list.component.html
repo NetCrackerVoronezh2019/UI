@@ -18,7 +18,7 @@
         <h1>Create Group</h1>
           <div class="form-group">
             <label for="">Group name</label>
-            <input id="Name" type="text" class="form-control" formControlName="groupName" autocomplete="off" placeholder="Group name" [(ngModel)]="newMessage">
+            <input id="Name" type="text" class="form-control" formControlName="groupName" autocomplete="off" placeholder="Group name">
             <div *ngIf="groupService.getGroupCreationForm().controls['groupName'].invalid && groupService.getGroupCreationForm().controls['groupName'].touched" >
               <small class="form-text text-muted" *ngIf="groupService.getGroupCreationForm().controls['groupName'].errors.minlength">name is too short</small>
               <small  class="form-text text-muted" *ngIf="groupService.getGroupCreationForm().controls['groupx`Name'].errors.maxlength">name is too long</small>
@@ -38,7 +38,7 @@
       <h1>Search Group</h1>
         <div class="form-group container" >
           <label for="">Group name</label>
-          <input id="groupName" type="text" class="form-control" formControlName="searchName" autocomplete="off" placeholder="Group name" [(ngModel)]="newMessage">
+          <input id="groupName" type="text" class="form-control" formControlName="searchName" autocomplete="off" placeholder="Group name">
           <div *ngIf="groupService.getGroupSearchPanel().controls['searchName'].invalid && groupService.getGroupSearchPanel().controls['searchName'].touched" >
             <small class="form-text text-muted" *ngIf="groupService.getGroupSearchPanel().controls['searchName'].errors.minlength">name is too short</small>
             <small  class="form-text text-muted" *ngIf="groupService.getGroupSearchPanel().controls['searchName'].errors.maxlength">name is too long</small>
