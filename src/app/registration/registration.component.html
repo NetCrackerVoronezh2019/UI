@@ -97,6 +97,9 @@
                           </label>
                         </div>
                        </div>
+                       <div class="mb-2">
+                        <span  *ngFor="let not of allNames; let i = index" (click)="deleteImageFromList(i)" class="all-images" matBadge="x"  matBadgeOverlap="false" >{{not}}</span>
+                       </div>
                 </div>
                
             </div>

@@ -11,6 +11,8 @@ import {AdvertisementService1} from '../services/advertisement.service'
 export class NotificationsComponent implements OnInit {
 
   @Input() notifications:AdvNotification[];
+  public reiting:any;
+  public not:AdvNotification;
   constructor(private service:AdvertisementService1) { }
 
   ngOnInit() {
@@ -47,5 +49,22 @@ export class NotificationsComponent implements OnInit {
       (data)=>this.getMyAllNotifications(),
       error=>console.log(error)
     ) 
+  }
+
+  sendReiting()
+  {
+    this.service.sendReiting(this.reiting,this.not)
+    .subscribe(
+      (data)=>{console.log("change"); this.getMyAllNotifications()},
+      error=>console.log(error)
+    ) 
+  }
+
+  raitingClick(event,not:AdvNotification)
+  {
+    this.reiting=event.target.attributes.value.value;
+    this.not=not;
+    console.log(not);
+    
   }
 }

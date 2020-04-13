@@ -1,9 +1,10 @@
 export class AdvNotification{
 
-    private notificationId:Number;
-    private senderId:Number;
-	private advertisementId:Number;
-	private  addresseeId:Number;
+    public notificationId:Number;
+    public senderId:Number;
+	public advertisementId:Number;
+    public  addresseeId:Number;
+    public orderId:Number;
     private type:String;
     private senderUsername:String;
 	private addresseeUsername:String;

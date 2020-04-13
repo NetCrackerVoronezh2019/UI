@@ -9,7 +9,8 @@ export class Advertisement
     description:String;
     budget:String;
     authorId:Number;
-    authorUsername:String;
+    firstName:String;
+    surName:String;
     name:String;
 	dateOfPublication:String;
     deadline:String;

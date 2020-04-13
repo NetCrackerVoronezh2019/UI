@@ -95,4 +95,20 @@ export class AdvertisementService1
     {
         return this.http.get('http://localhost:1234/getimg/'+adv.imageKeys[0]);
     }
+
+
+    sendReiting(r:Number,not:AdvNotification)
+    {
+        console.log(not);
+        let body={
+            reiting:r,
+            freelancerId:not.senderId,
+            advertisementId:not.advertisementId,
+            orderId:not.orderId,
+            customerId:not.addresseeId
+        }       
+        
+        console.log(body);
+        return this.http.post(this.baseUrl+"/user/changeReiting",body);
+    }
 }

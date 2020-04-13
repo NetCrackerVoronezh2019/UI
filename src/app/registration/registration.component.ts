@@ -15,6 +15,7 @@ import { Router} from '@angular/router';
 export class RegistrationComponent implements OnInit {
   role="STUDENT";
   public allFiles:any[]=[];
+  public allNames:any[]=[]
   sendData:Boolean=false;
   constructor(public regService:RegistrationService,private router:Router) {
   
@@ -54,18 +55,24 @@ export class RegistrationComponent implements OnInit {
   }
 
   handleFileInput(file: FileList) {
+    
     let reader;
      for(let i=0;i<file.length;i++)
      {
+       this.allNames.push(file.item(i).name);
        reader=new FileReader();
-       console.log(i);
        reader.readAsDataURL(file.item(i));
        reader.onload = () => {
         this.allFiles.push(reader.result);
       }; 
      }
-      console.log(this.allFiles);
+      console.log(this.allNames);
      
+  }
+
+  deleteImageFromList(index)
+  {
+    console.log(index);
   }
  
 }

@@ -9,5 +9,20 @@
         <button type="button b" class="btn btn-success" (click)="onAccept(not)">Принять</button>
         <button type="button" class="btn btn-warning"(click)="onReject(not)">Отклонить</button>
       </div>
+      <div  *ngIf="not.type=='CHANGE_ORDER_STATUS_TO_COMPLETED'">
+        <div  class="rating-area">
+          <input (click)="raitingClick($event,not)"  type="radio" id="star-5" name="rating" value="5">
+          <label for="star-5" title="Оценка «5»"></label>	
+          <input (click)="raitingClick($event,not)"   type="radio" id="star-4" name="rating" value="4">
+          <label for="star-4" title="Оценка «4»"></label>    
+          <input (click)="raitingClick($event,not)"  type="radio" id="star-3" name="rating" value="3">
+          <label for="star-3" title="Оценка «3»"></label>  
+          <input (click)="raitingClick($event,not)"  type="radio" id="star-2" name="rating" value="2">
+          <label for="star-2" title="Оценка «2»"></label>    
+          <input (click)="raitingClick($event,not)"  type="radio" id="star-1" name="rating" value="1">
+          <label for="star-1" title="Оценка «1»"></label>
+        </div>     
+        <button type="button b" (click)="sendReiting() "class="btn btn-success" >Оценить</button>
+      </div>
    <div>
 </div>

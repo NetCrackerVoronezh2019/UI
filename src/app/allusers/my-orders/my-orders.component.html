@@ -27,20 +27,48 @@
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="status">
-            <mat-header-cell *matHeaderCellDef>Стутус заказа</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Стaтус заказа</mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
         </ng-container>
-
+        
         <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <div data-toggle="modal" (click)="edit(row)"data-target="#orderModal" style="font-size:25px; cursor:pointer"><i class="fas fa-edit"></i></div>
+          </mat-cell>
+        </ng-container>
 
-            <mat-cell *matCellDef="let element">
-                <div style="font-size:25px; cursor:pointer"><i class="fas fa-edit"></i></div>
-            </mat-cell>
-          </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
   </div>
+  </div>
+
+  <div  class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Заказ</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div *ngIf="!isEdited" [formGroup]="service.getEditForm()" class="form-group" >
+         <select formControlName="orderStatus" class="custom-select">
+            <option value="ACCEPTED">Принят</option>
+            <option value="INPROGRESS">В процессе</option>
+            <option value="СOMPLETED">Завершен</option>
+         </select>
+          </div>
+          <div *ngIf="isEdited">
+            Данные сохранены !
+          </div>
+        </div>
+        <div  class="modal-footer">
+          <button type="button" (click)="changeOrderStatus()" class="btn btn-primary">Отправить</button>
+        </div>
+      </div>
+    </div>
   </div>
