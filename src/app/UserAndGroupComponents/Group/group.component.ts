@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { Group } from '@UserAndGroupClasses/group'
 import { User } from '@UserAndGroupClasses/user'
+import { Post } from '@UserAndGroupClasses/post'
 import {GroupService} from './Services/group.service'
 import {Subject } from '@UserAndGroupClasses/subject'
 
@@ -26,6 +27,8 @@ export class GroupComponent implements OnInit {
   subjects:Subject[];
   addAdmin = false;
   removeAdmin = false;
+  posts:Post[];
+  createPostVisible = false;
 
   constructor(private route: ActivatedRoute,private location: Router,private gs: GroupService) {
   }
@@ -33,6 +36,7 @@ export class GroupComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.groupId=params['groupId'];
+      this.getGroupPosts();
       this.gs.getAdmins(this.groupId).subscribe((data:User[]) => {
         this.admins = data;
       })
@@ -191,4 +195,26 @@ export class GroupComponent implements OnInit {
       }
     }
 
+    getGroupPosts() {
+      this.gs.getGroupPosts(this.groupId).subscribe((data:Post[]) => {
+        this.posts = data;
+        console.log(data);
+      })
+    }
+
+    showCreatePost() {
+      this.gs.getPostCreateForm().reset();
+      this.createPostVisible = true;
+    }
+
+    closeCreatePost() {
+      this.createPostVisible = false;
+    }
+
+    sendPost() {
+      this.gs.sendPost(this.groupId).subscribe(data => {
+        this.getGroupPosts();
+        this.createPostVisible = false;
+      })
+    }
 }

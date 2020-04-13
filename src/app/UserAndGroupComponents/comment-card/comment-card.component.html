@@ -1,0 +1,30 @@
+
+<div *ngIf="!deleted" class="blog-card">
+    <div class="inner-part">
+      <label class="img">
+        <img  src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSaY9UGZkwA_Am-IgAiVJkD0VoluyIJXM8OOi57ioAp5gj5CAkM'/>
+      </label>
+      <div class="content" *ngIf="!commentSettingsVisible">
+        <div class="title">{{comment.sender.lastName}} {{comment.sender.firstName}}</div>
+        <h6>{{comment.date}}</h6>
+        <span>{{comment.text}}</span>
+      </div>
+      <div class="content" *ngIf="commentSettingsVisible">
+        <form [formGroup]="cs.getCommentSettingsForm()">
+            <div class="form-group">
+              <label for="">Текст</label>
+              <textarea id="Name" type="text" class="form-control" formControlName="text" autocomplete="off" placeholder="text"></textarea>
+              <div *ngIf="cs.getCommentSettingsForm().controls['text'].invalid && cs.getCommentSettingsForm().controls['text'].touched" >
+                <small  *ngIf="cs.getCommentSettingsForm().controls['text'].errors.minlength">text is too short</small>
+              </div>
+            </div>
+        </form>
+        <button mat-raised-button class="ml-2" (click)="sendCommentSettings()"><i class="fas fa-check-circle"></i>Отправить</button>
+        <button mat-raised-button class="ml-2" (click)="closeCommentSettings()"><i class="fas fa-times"></i>Отмена</button>
+      </div>
+      <div class="buttons">
+          <button *ngIf="(user?.userId == comment.sender.userId) && !commentSettingsVisible" mat-raised-button class="ml-2" (click)="showCommentSettings()"><i class="fa fa-cog"></i></button>
+          <button *ngIf="(admin || (user?.userId == comment.sender.userId)) && !commentSettingsVisible" mat-raised-button class="ml-2" (click)="deleteComment()"><i class="fa fa-trash"></i></button>
+      </div>
+    </div>
+  </div>

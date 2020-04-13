@@ -11,7 +11,7 @@ import {Routes, RouterModule} from '@angular/router';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import {MatChipsModule} from '@angular/material/chips';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {SignInService} from './sign-in/Services/signIn.Service';
 import {WebSocketService} from './home/Services/WebSocket.Service';
 import { ActivatePageComponent } from './activate-page/activate-page.component';
@@ -52,6 +52,8 @@ import {GroupListComponent} from "./UserAndGroupComponents/group-list/group-list
 import {UserCardComponent} from "./UserAndGroupComponents/userCard/userCard.component"
 import {MiniGroupComponent} from "./UserAndGroupComponents/mini-group-card/mini-group-card.component";
 import { EmailPageComponent } from './registration/email-page/email-page.component'
+import {PostCardComponent} from './UserAndGroupComponents/post-card/post-card.component'
+import {CommentCardComponent} from './UserAndGroupComponents/comment-card/comment-card.component'
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
   { path: 'adv/:id', component:AdvertisementComponent},
@@ -106,7 +108,9 @@ const appRoutes: Routes =[
     NotificationsComponent,
     MyOrdersComponent,
     MiniGroupComponent,
-    EmailPageComponent
+    EmailPageComponent,
+    PostCardComponent,
+    CommentCardComponent
   ],
   imports: [
     MatInputModule,

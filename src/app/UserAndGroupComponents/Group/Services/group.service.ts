@@ -21,6 +21,16 @@ export class GroupService {
         }
     )
 
+    postCreatForm=this.fb.group(
+      {
+        "text":["",[Validators.minLength(10)]]
+      }
+    )
+
+    getPostCreateForm() {
+      return this.postCreatForm
+    }
+
     getUserSearchForm() {
       return this.userSearchForm
     }
@@ -83,6 +93,18 @@ export class GroupService {
 
     deleteAdmin(groupId,userId) {
       return this.http.put('http://localhost:9080/groups/deleteAdmin',null,{params: new HttpParams().set('groupId',groupId).set('userId',userId)})
+    }
+
+    getGroupPosts(groupId) {
+      return this.http.get('http://localhost:9080/groups/getPosts',{params:new HttpParams().set('groupId',groupId)})
+    }
+
+    sendPost(groupId) {
+      const body = {
+        text: this.postCreatForm.value.text,
+        groupId:groupId
+      }
+      return this.http.post('http://localhost:9080/groups/makePost',body)
     }
 
 }
