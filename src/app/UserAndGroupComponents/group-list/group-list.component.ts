@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GroupListService} from './Services/group-list.service'
 import { Group } from '@UserAndGroupClasses/group'
 import { User } from '@UserAndGroupClasses/user'
+import {Subject } from '@UserAndGroupClasses/subject'
 
 @Component({
   selector: 'app-groups',
@@ -15,6 +16,7 @@ export class GroupListComponent implements OnInit {
   user:User;
   creationGroupVisible:boolean;
   searchPanelVisible:boolean;
+  subjects:Subject[];
 
   constructor(public groupService:GroupListService) {
       this.groupService.getUser().subscribe((data:User) => {
@@ -25,6 +27,10 @@ export class GroupListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.groupService.getAllSubjects().subscribe((data:Subject[]) => {
+      this.subjects = data;
+      console.log(this.subjects);
+    })
   }
 
   openGroupForm() {
@@ -58,8 +64,10 @@ export class GroupListComponent implements OnInit {
 
     createGroup() {
       if (this.groupService.getGroupCreationForm().invalid) {
-        alert("Invalid group name")
-      } else {
+        alert("Неподходящее имя")
+      } else if (this.groupService.getGroupCreationForm().value.groupSection == "") {
+          alert("Вы не выбрали раздел")
+      }else {
         this.groupService.CreateGroup().subscribe(
           data => {
             this.showGropList();

@@ -2,7 +2,8 @@ body { margin: 0; }
 #sidebar, #content { position: absolute; }
 #sidebar, #content { overflow: auto; padding: 10px; }
 #sidebar {
- width: 10vw;
+  min-width:220px;
+  max-width: 15vw;
  top: 10vh; /* Расстояние от верхнего края */
  bottom: 0; /* Расстояние снизу  */
  background: #708090;
@@ -11,13 +12,6 @@ body { margin: 0; }
  top: 10vh; /* Расстояние от верхнего края */
  left: 10vw; /* Расстояние от левого края */
  bottom: 0; right: 0;
-}
-#CreationDialogForm {
-  background: #B0C4DE;
-  left: 30%;
-  top: 30%;
-  width: 30%;
-  height: 35%;
 }
 .btn-primary-spacing
 {
@@ -28,7 +22,7 @@ margin-top: 5px;
 
 .blog-card{
   position: absolute;
-  left: 30%;
+  margin-left: 30%;
   top: 30%;
   width: 30%;
   height: 35%;
@@ -46,7 +40,10 @@ margin-top: 5px;
   position: absolute;
   left:10vw;
   top:10vh;
-  height: 24vh;
+  min-height: 30vh;
+  max-height: 40vh;
+  min-width: 25vw;
+  max-width: 30vw;
   width: 20vw;
   display:flex;
    align-items: center;

@@ -6,36 +6,58 @@
 }
 
 .blog-card{
-  min-height: 3vh;
-  max-height: 5vh;
-  min-width:200px;
-  max-width: 15vw;
+  overflow: hidden;
+  margin-left:30px;
+  margin-top: 5px;
+  min-width:400px;
+  max-width: 850px;
   display:flex;
-  cursor: pointer;
-   align-items: left;
    margin-bottom:30px;
-  justify-content: center;
   border-radius: 25px;
   background: white;
   box-shadow:0px 4px 8px 0px rgba(5,5,5,0.5);
-
+  flex-direction: column;
+  text-align:left;
 }
 
 .inner-part{
+  overflow: hidden;
   display: flex;
   width:95%;
-  height:95%;
-  padding: 0 5px;
-  transition-delay: .3s;
-  align-items:center;
 }
 
+.comment-part {
+  width:95%;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+}
+
+.buttons button{
+  height: 30px;
+}
+
+.comments-inner-part{
+  flex-direction:column;
+}
+
+.comments-inner-part button{
+  margin: 5px;
+}
 
 .inner-part .img{
   display:flex;
-  align-items:center;
+  flex-direction: column;
+  align-items: flex-start;
   height:40px;
   width: 40px;
+  margin: 10px;
   overflow: hidden;
   border-radius: 20px;
   box-shadow: 2px 3px 15px rgba(252,56,56,.1);
@@ -52,11 +74,20 @@
 }
 
 .content{
-  width:5px;
-  height:98%;
+  padding: 0 10px 0 20px;
+  width: 80%;
+  min-height: 10vh;
   transition: .6s;
   margin-left: 0px;
   transition-delay: .3s;
+}
+
+.content button{
+  margin: 10px;
+}
+
+.content textarea{
+  min-height: 10vh;
 }
 
 .content span{
@@ -79,30 +110,4 @@
   font-size: 17px;
   margin-bottom:5px;
   text-align: justify;
-}
-
-.content button{
-  display: inline-flex;
-  padding: 11px 16px;
-  border: none;
-  font-size: 12px;
-  text-transform: uppercase;
-  color: #fff0e6;
-  font-weight: 600;
-  letter-spacing: 1px;
-  border-radius: 50px;
-  cursor: pointer;
-  outline: none;
-  background: linear-gradient(147deg, #fe8a39  0%, #fd3838 74%);
-}
-.content button:hover{
-  background: linear-gradient(147deg, #fe791b 0%, #fd1c1c 74%);
-}
-
-.notification {
-    padding: 0 10px 0px 10px;
-    width:50px;
-    height:98%;
-    transition: .6s;
-    margin-left: 10px;
 }

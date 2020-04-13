@@ -6,14 +6,14 @@
 }
 
 .blog-card{
-  min-height: 20px;
-  max-height: 35px;
-  min-width:150px;
-  max-width: 180px;
+  min-height: 3vh;
+  max-height: 5vh;
+  min-width:200px;
+  max-width: 15vw;
   display:flex;
   cursor: pointer;
    align-items: left;
-   margin-bottom:30px;
+   margin:10px;
   justify-content: center;
   border-radius: 25px;
   background: white;
