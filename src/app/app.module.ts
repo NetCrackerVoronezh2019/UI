@@ -54,6 +54,8 @@ import {MiniGroupComponent} from "./UserAndGroupComponents/mini-group-card/mini-
 import { EmailPageComponent } from './registration/email-page/email-page.component'
 import {PostCardComponent} from './UserAndGroupComponents/post-card/post-card.component'
 import {CommentCardComponent} from './UserAndGroupComponents/comment-card/comment-card.component'
+import {FriendListComponent} from "./UserAndGroupComponents/friend-list/friend-list.component"
+import {FriendCardComponent} from './UserAndGroupComponents/friend-card/friend-card.component'
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
   { path: 'adv/:id', component:AdvertisementComponent},
@@ -74,7 +76,8 @@ const appRoutes: Routes =[
   {path: "groupList", component:GroupListComponent},
   {path: 'myorders', component:MyOrdersComponent},
   {path:'myadvertisements', component:MyAdvertisementsComponent},
-  {path:'email/:emailAdress',component:EmailPageComponent}
+  {path:'email/:emailAdress',component:EmailPageComponent},
+  {path: 'friends', component:FriendListComponent}
 ];
 
 @NgModule({
@@ -110,7 +113,9 @@ const appRoutes: Routes =[
     MiniGroupComponent,
     EmailPageComponent,
     PostCardComponent,
-    CommentCardComponent
+    CommentCardComponent,
+    FriendListComponent,
+    FriendCardComponent
   ],
   imports: [
     MatInputModule,

@@ -1,0 +1,72 @@
+body { margin: 0; }
+#sidebar, #content { position: absolute; }
+#sidebar, #content { overflow: auto; padding: 10px; }
+#sidebar {
+  min-width:220px;
+  max-width: 15vw;
+  display: flex;
+  flex-direction: column;
+ top: 10vh; /* Расстояние от верхнего края */
+ bottom: 0; /* Расстояние снизу  */
+ background: #708090;
+}
+
+#sidebar button{
+  margin: 5px;
+  overflow: hidden;
+}
+
+#content {
+ top: 10vh;
+ left: 220px;
+ bottom: 0; right: 0;
+}
+.btn-primary-spacing
+{
+margin-right: 5px;
+margin-bottom: 5px !important;
+margin-top: 5px;
+}
+
+
+.blog-card1{
+  position: absolute;
+  left:220px;
+  top:10vh;
+  min-height: 300px;
+  max-height: 500px;
+  min-width: 350px;
+  max-width: 600px;
+  width: 20vw;
+  display:flex;
+   align-items: center;
+   margin-bottom:30px;
+  justify-content: center;
+  border-radius: 25px;
+  background: white;
+  box-shadow:0px 4px 8px 0px rgba(5,5,5,0.5);
+  background-color:#B0C4DE !important;
+}
+
+.blog-card{
+  position: absolute;
+  margin-left: 30%;
+  top: 30%;
+  width: 30%;
+  height: 35%;
+  display:flex;
+   align-items: center;
+   margin-bottom:30px;
+  justify-content: center;
+  border-radius: 25px;
+  background: white;
+  box-shadow:0px 4px 8px 0px rgba(5,5,5,0.5);
+  background-color:#B0C4DE !important;
+}
+
+.inner-part{
+  width:95%;
+  height:95%;
+  transition-delay: .3s;
+  align-items:center;
+}

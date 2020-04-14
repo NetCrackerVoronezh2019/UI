@@ -1,0 +1,33 @@
+ <body>
+  <app-navbar></app-navbar>
+  <div id="sidebar">
+        <button mat-raised-button class="ml-2" (click)="openSearchPanel()"><i class="fas fa-search"></i> Поиск</button>
+        <button *ngIf="!searchPanelVisible" mat-raised-button class="ml-2" (click)="showFriends()"><i class="fa fa-users"></i> Друзья</button>
+        <button *ngIf="!searchPanelVisible" mat-raised-button class="ml-2" (click)="showIngoing()"><i class="fa fa-user-plus"></i> Входящие заявки</button>
+        <button *ngIf="!searchPanelVisible" mat-raised-button class="ml-2" (click)="showOutgoing()"><i class="fa fa-clock"></i> Исходящие заявки</button>
+  </div>
+  <div id="content" align="center">
+    <div *ngFor="let us of users">
+      <app-friend-card [(i_type)]="type" [(user)]="user" [(friend)]="us" [(outgoing)]="outgoing" [(friends)]="friends" [(ingoing)]="ingoing"></app-friend-card>
+    </div>
+  </div>
+  <div *ngIf="searchPanelVisible" class="blog-card1">
+    <form [formGroup]="fs.getUserSearchPanel()" class="mt-5">
+      <h1>Поиск пользователя</h1>
+        <div class="form-group container" >
+          <label for="">Имя</label>
+          <input id="firstName" type="text" class="form-control" formControlName="firstName" autocomplete="off" placeholder="Имя">
+          <div *ngIf="fs.getUserSearchPanel().controls['firstName'].invalid && fs.getUserSearchPanel().controls['firstName'].touched" >
+            <small  class="form-text text-muted" *ngIf="fs.getUserSearchPanel().controls['firstName'].errors.maxlength">name is too long</small>
+          </div>
+          <label for="">Фамилия</label>
+          <input id="lastName" type="text" class="form-control" formControlName="lastName" autocomplete="off" placeholder="Фамилия">
+          <div *ngIf="fs.getUserSearchPanel().controls['lastName'].invalid && fs.getUserSearchPanel().controls['lastName'].touched" >
+            <small  class="form-text text-muted" *ngIf="fs.getUserSearchPanel().controls['lastName'].errors.maxlength">name is too long</small>
+          </div>
+        </div>
+        <button class="btn btn-light btn-primary-spacing" (click)="search()">Search</button>
+        <button class="btn btn-dark btn-primary-spacing" (click)="closeSearchPanel()">Cancel</button>
+    </form>
+  </div>
+ </body>

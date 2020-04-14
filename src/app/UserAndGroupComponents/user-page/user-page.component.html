@@ -1,5 +1,12 @@
 <body>
   <app-navbar></app-navbar>
+  <div id="content">
+  <div *ngIf="friendsVisible" class="friends">
+      <button mat-raised-button class="ml-2" (click)="closeFriends()"><i class="fas fa-minus-circle"></i>Закрыть</button>
+    <div *ngFor ='let user of friends' align="center">
+      <app-user-card [(us)]="user"  routerLink="/userPage/{{user.userId}}"></app-user-card>
+    </div>
+  </div>
   <div align="center">
       <div *ngIf="true" class="blog-card" align = left>
         <div class="inner-part">
@@ -13,7 +20,7 @@
         </div>
         <div class="buttons">
           <button mat-raised-button class="ml-2" (click)="openGroupForm()" *ngIf="yourPage"><i class="fas fa-cog"></i> Настройки</button>
-          <button mat-raised-button class="ml-2"><i class="fas fa-user-circle"></i> Друзья</button>
+          <button mat-raised-button class="ml-2" (click)="openFriends()"><i class="fas fa-user-circle"></i> Друзья</button>
           <button mat-raised-button class="ml-2" (click)="showGroups()"><i class="fas fa-users"></i> Группы</button>
           <button mat-raised-button class="ml-2" *ngIf="!yourPage"><i class="fas fa-comments"></i> Написать</button>
         </div>
@@ -25,4 +32,5 @@
         </div>
       </div>
     </div>
+  </div>
 </body>

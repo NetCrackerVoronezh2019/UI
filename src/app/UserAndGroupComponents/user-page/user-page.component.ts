@@ -18,6 +18,8 @@ export class UserPageComponent implements OnInit {
   you:User;
   groups:Group[];
   groupsVisible = false;
+  friendsVisible = false;
+  friends:User[];
 
   constructor(private route: ActivatedRoute,private location: Router,private us: UserService) { }
 
@@ -26,7 +28,7 @@ export class UserPageComponent implements OnInit {
       this.userId=params['userId'];
       this.us.getThisUser().subscribe((data:User) =>{
         this.you = data;
-
+        this.friendsVisible = false;
         if (this.you.userId == +this.userId) {
           this.yourPage = true;
           this.user = this.you;
@@ -54,6 +56,17 @@ export class UserPageComponent implements OnInit {
       this.groupsVisible = false;
       this.groups = null;
     }
+  }
+
+  openFriends() {
+    this.us.getFriends(this.userId).subscribe((data:User[]) => {
+      this.friends = data;
+      this.friendsVisible = true;
+    })
+  }
+
+  closeFriends() {
+    this.friendsVisible = false;
   }
 
 }
