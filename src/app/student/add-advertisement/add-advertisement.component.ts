@@ -20,6 +20,7 @@ export class AddAdvertisementComponent implements OnInit {
 
   subjects:Subject[];
   allFiles:any[]=[];
+  allNames:any[]=[]
   tags: Tag[] = [];
   visible = true;
   selectable = true;
@@ -34,13 +35,11 @@ export class AddAdvertisementComponent implements OnInit {
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
-
-    // Add our fruit
+    
     if ((value || '').trim()) {
       this.tags.push({name: value.trim()});
     }
 
-    // Reset the input value
     if (input) {
       input.value = '';
     }
@@ -66,6 +65,7 @@ export class AddAdvertisementComponent implements OnInit {
   
      for(let i=0;i<file.length;i++)
      {
+        this.allNames.push(file.item(i).name);
         this.readFile(file.item(i));
      }
     console.log(this.allFiles);
@@ -91,7 +91,12 @@ export class AddAdvertisementComponent implements OnInit {
       (error:any) => console.log(error) 
    );
    
-   
+  }
+
+  deleteImageFromList(index)
+  {
+    this.allNames.splice(index,1);
+    this.allFiles.splice(index,1);
   }
 
 

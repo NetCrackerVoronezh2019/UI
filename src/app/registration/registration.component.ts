@@ -66,13 +66,13 @@ export class RegistrationComponent implements OnInit {
         this.allFiles.push(reader.result);
       }; 
      }
-      console.log(this.allNames);
      
   }
 
   deleteImageFromList(index)
   {
-    console.log(index);
+    this.allNames.splice(index,1);
+    this.allFiles.splice(index,1);
   }
  
 }

@@ -101,11 +101,8 @@ export class AdvertisementService1
     {
         console.log(not);
         let body={
-            reiting:r,
-            freelancerId:not.senderId,
-            advertisementId:not.advertisementId,
-            orderId:not.orderId,
-            customerId:not.addresseeId
+            rating:r,
+            notif:not
         }       
         
         console.log(body);

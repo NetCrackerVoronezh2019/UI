@@ -29,6 +29,11 @@ export class OrderService
 
     }
 
+
+    getMyId()
+    {
+        return this.http.get(this.baseUrl+"/getMyId");
+    }
     changeOrderStatus(order:Order)
     {
         let body={
