@@ -4,6 +4,7 @@ import { ActivatedRoute, Router} from '@angular/router';
 import { User } from '@ConversationClasses/User'
 import { Dialog } from '@ConversationClasses/dialog'
 import { Message } from '@ConversationClasses/message'
+import { Notification } from '@ConversationClasses/Notification'
 import * as Webstomp from 'webstomp-client';
 import { Client} from 'webstomp-client';
 import $ from 'jquery';
@@ -26,6 +27,7 @@ export class DialogComponent implements OnInit {
   dialog:Dialog;
   user:User;
   textbox:string = "";
+  notifications:Notification[];
 
   constructor(public dgService:DialogService,private route: ActivatedRoute,private location: Router) {
   }
@@ -33,14 +35,12 @@ export class DialogComponent implements OnInit {
   initializeWebSocketConnection(){
     this.dgService.getDialogMessages(this.dialogId).subscribe((data:Message[]) => {
       this.messages = data;
+      setInterval(() => {this.cleanNotifications();},10000);
       const websocket: WebSocket = new WebSocket(this.serverUrl);
       this.stompClient = Webstomp.over(websocket);
       this.stompClient.connect({ login: null, passcode: null }, () => {
           this.stompClient.subscribe("/dialog/" + this.dialogId, (message) => {
             this.messages.push(JSON.parse(message.body));
-            this.dgService.deleteNotifications(this.dialogId).subscribe((data) => {
-              console.log(data);
-            });
           });
       });
 
@@ -54,9 +54,9 @@ export class DialogComponent implements OnInit {
         this.user=data;
       this.route.params.subscribe(params => {
         this.dialogId=params['dialogId'];
-        this.dgService.deleteNotifications(this.dialogId).subscribe((data) => {
-          console.log(data);
-        });
+        this.dgService.getNotifications(this.dialogId).subscribe((data:Notification[]) => {
+          this.notifications = data;
+        })
         this.dgService.getDialogInfo(this.dialogId).subscribe((data:Dialog) =>{
         this.dialog = data;
       });
@@ -77,6 +77,14 @@ export class DialogComponent implements OnInit {
   },
   error => console.log(error)
 );
+  }
+
+  cleanNotifications() {
+    this.stompClient.send("/dialog/cleanNotifications", JSON.stringify({
+      "userId": this.user.userId,
+      "dialogId": this.dialog.dialogId
+    }))
+    this.notifications = [];
   }
 
   sendMessage(){
@@ -119,6 +127,12 @@ export class DialogComponent implements OnInit {
   invite() {
     this.dgService.addUserInDialog(this.dialogId).subscribe(data => console.log(1234));
     this.closeUserAddForm();
+  }
+
+  ngOnDestroy()
+  {
+    this.cleanNotifications()
+    this.stompClient.disconnect();
   }
 
 }

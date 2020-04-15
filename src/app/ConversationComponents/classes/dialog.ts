@@ -6,4 +6,5 @@ export class Dialog
   lastMessageDate:Date;
   creatorId:number;
   dialogId:number;
+  type:string;
 }

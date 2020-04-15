@@ -14,7 +14,7 @@ body { margin: 0; }
 }
 #content {
  top: 10%; /* Расстояние от верхнего края */
- left: 12%; /* Расстояние от левого края */
+ left: 220px; /* Расстояние от левого края */
  bottom: 25%; right: 0%;
 }
 #Sending {
@@ -23,6 +23,10 @@ body { margin: 0; }
   height: 25%;
   border-top: 10px solid #231F20;
     background: #B0C4DE;
+}
+
+#sidebar button{
+  margin: 5px;
 }
 #addUserForm {
   background: #B0C4DE;

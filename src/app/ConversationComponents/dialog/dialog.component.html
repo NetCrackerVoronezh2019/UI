@@ -2,16 +2,12 @@
   <app-navbar></app-navbar>
  <div id="sidebar">
    <p><mark>{{dialog?.name}}</mark></p>
-   <a mat-raised-button class="ml-2" (click)="openUserAddForm()"><i class="fas fa-plus-circle"></i>Добавить пользователя</a>
-   <p></p>
-   <a mat-raised-button class="ml-2" (click)="liveDialog()"><i class="fas fa-minus-circle"></i>Покинуть диалог</a>
+   <button mat-raised-button class="ml-2" *ngIf="dialog?.type=='public'" (click)="openUserAddForm()"><i class="fas fa-plus-circle"></i>Добавить пользователя</button>
+   <button mat-raised-button class="ml-2" *ngIf="dialog?.type=='public'" (click)="liveDialog()"><i class="fas fa-minus-circle"></i>Покинуть диалог</button>
    <div *ngIf="dialog?.creatorId == user?.userId">
-     <p></p>
-     <a mat-raised-button class="ml-2" (click)="deleteDialog()"><i class="fas fa-minus-circle"></i>Удалить диалог</a>
+     <button mat-raised-button class="ml-2" *ngIf="dialog?.type=='public'" (click)="deleteDialog()"><i class="fas fa-minus-circle"></i>Удалить диалог</button>
    </div>
-   <p></p>
    Участники:
-   <p></p>
    <div *ngFor ='let user of dialogMembers'>
      <app-dialog-member-card [(us)]="user"></app-dialog-member-card>
    </div>
@@ -31,12 +27,12 @@
          <div *ngIf="message.sender.userId == user.userId; then thisUserMessage else enatherUserMessage"></div>
               <ng-template #thisUserMessage>
                 <div align="right">
-                  <app-message-card [(message)]="message" routerLink="/dialog/{{dialog.dialogId}}"></app-message-card>
+                  <app-message-card [(message)]="message"></app-message-card>
                 </div>
               </ng-template>
               <ng-template #enatherUserMessage>
                 <div align="left">
-                  <app-message-card [(message)]="message" routerLink="/dialog/{{dialog.dialogId}}"></app-message-card>
+                  <app-message-card [(message)]="message"></app-message-card>
                 </div>
             </ng-template>
        </ul>

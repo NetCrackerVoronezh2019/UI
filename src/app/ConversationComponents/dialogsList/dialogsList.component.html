@@ -1,7 +1,35 @@
  <body>
   <app-navbar></app-navbar>
   <div id="sidebar">
-        <a mat-raised-button class="ml-2" (click)="openDialogform()"><i class="fas fa-plus-circle"></i> Создать диалог</a>
+        <button *ngIf="type == 'all' || type == 'public'" mat-raised-button class="ml-2" (click)="openDialogform()"><i class="fas fa-plus-circle"></i> Создать диалог</button>
+        <button *ngIf="type == 'private' && !userSearchPanelVisible" mat-raised-button class="ml-2" (click)="openUserSearchPanel()"><i class="fas fa-plus-circle"></i> Написать пользователю</button>
+        <button mat-raised-button class="ml-2" (click)="showDialogList()" ><i class="fa fa-comments"></i> Все диалоги</button>
+        <button mat-raised-button class="ml-2" (click)="showDialogListByType('public')" ><i class="fa fa-beer"></i> Общие диалоги</button>
+        <button mat-raised-button class="ml-2" (click)="showDialogListByType('private')"><i class="fa fa-user-circle"></i> Личные диалоги</button>
+        <button mat-raised-button class="ml-2" (click)="showDialogListByType('group')"><i class="fa fa-users"></i> Диалоги групп</button>
+        <button mat-raised-button class="ml-2" (click)="showDialogListByType('advertisement')"><i class="fa fa-handshake"></i> Диалоги объявлений</button>
+        <div *ngIf="type == 'private' && userSearchPanelVisible">
+          <form [formGroup]="dgService.getUserSearchForm()">
+            <h5>Поиск</h5>
+            <label for="">Имя</label>
+            <input type="text" class="form-control" formControlName="firstName" autocomplete="off" placeholder="first name">
+            <div *ngIf="dgService.getUserSearchForm().controls['firstName'].invalid && dgService.getUserSearchForm().controls['firstName'].touched" >
+              <small  *ngIf="dgService.getUserSearchForm().controls['firstName'].errors.minlength">name is too short</small>
+              <small  *ngIf="dgService.getUserSearchForm().controls['firstName'].errors.maxlength">name is too long</small>
+            </div>
+            <label for="">Фамилия</label>
+            <input type="text" class="form-control" formControlName="lastName" autocomplete="off" placeholder="last name">
+            <div *ngIf="dgService.getUserSearchForm().controls['lastName'].invalid && dgService.getUserSearchForm().controls['lastName'].touched" >
+              <small  *ngIf="dgService.getUserSearchForm().controls['lastName'].errors.minlength">name is too short</small>
+              <small  *ngIf="dgService.getUserSearchForm().controls['lastName'].errors.maxlength">name is too long</small>
+            </div>
+          </form>
+          <button mat-raised-button class="ml-2" (click)="search()"><i class="fas fa-search"></i>Поиск</button>
+          <button mat-raised-button class="ml-2" (click)="cancelSearch()"><i class="fas fa-minus-circle"></i>Отмена</button>
+        <div *ngFor ='let us of users' align="center">
+          <app-user-card [(us)]="us" *ngIf="user.userId != us.userId" (click)="startDialogWithUser(us.userId)"></app-user-card>
+        </div>
+       </div>
   </div>
   <div id="content">
     <div class="container">
