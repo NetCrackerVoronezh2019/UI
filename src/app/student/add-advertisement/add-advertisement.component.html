@@ -41,6 +41,11 @@
                         </div>
                        </div>
                 </div>
+                <div class="mb-2 all-images">
+                    <div class="mb-3" *ngFor="let not of allNames; let i = index" (click)="deleteImageFromList(i)">
+                        <span  matBadge="x"  matBadgeOverlap="false" >{{not}}</span>
+                    </div>
+               </div>
                 <div class="">
                     <mat-form-field class="example-chip-list">
                         <mat-chip-list #chipList aria-label="tag selection">

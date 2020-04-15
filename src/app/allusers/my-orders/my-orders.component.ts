@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Order} from '../../classes/order'
 import {OrderService} from '../services/order.service'
+
 @Component({
   selector: 'app-my-orders',
   templateUrl: './my-orders.component.html',
@@ -15,17 +16,21 @@ export class MyOrdersComponent implements OnInit {
   editOrder:Order;
   displayedColumns: string[] = ['orderId', 'freelancerId', 'advertisementId',
   'advertisementName','status','actions'];
-  isEdited:Boolean=false;
+  isEdited:Boolean=true;
   dataSource:Order[]=[];
   check:Boolean=false;
+  userId:Number;
   ngOnInit() {
     this.getMyOrders()
+    this.getMyId();
+
   }
 
   edit(row:Order)
   {
     this.isEdited=false;
     this.editOrder=row;
+    console.log(this.editOrder);
     this.service.setStatus(row.status);
   }
   getMyOrders()
@@ -37,7 +42,14 @@ export class MyOrdersComponent implements OnInit {
     )
   }
 
-
+  getMyId()
+  {
+    this.service.getMyId()
+      .subscribe(
+        (data:Number)=>{this.userId=data,console.log(this.userId)},
+        (error)=>console.log(error)
+      )
+  }
   changeOrderStatus()
   {
     this.service.changeOrderStatus(this.editOrder)

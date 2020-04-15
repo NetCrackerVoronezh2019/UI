@@ -1,13 +1,11 @@
 <div class="notifications">
   <div  class="notification"  *ngFor="let not of notifications; let i = index">
        <span>{{not.senderUsername}} &nbsp;</span><span>{{not.message}}</span> 
-       <span>
-        <a href="/adv/{{not.advertisementId}}"><<{{not.advertisementName}}>></a>
-         
-        </span>
-       <div class="notif-buttons" *ngIf="not.type=='TAKE_ADVERTISEMENT' || not.type=='RECEIVE_SERVICE'">
-        <button type="button b" class="btn btn-success" (click)="onAccept(not)">Принять</button>
-        <button type="button" class="btn btn-warning"(click)="onReject(not)">Отклонить</button>
+       
+       <div class="notif-buttons">
+        <button *ngIf="not.type=='TAKE_ADVERTISEMENT' || not.type=='RECEIVE_SERVICE'" type="button b" class="btn btn-success" (click)="onAccept(not)">Принять</button>
+        <button type="button" *ngIf="not.type=='TAKE_ADVERTISEMENT' || not.type=='RECEIVE_SERVICE'" class="btn btn-warning"(click)="onReject(not)">Отклонить</button>
+        <button  type="button" class="btn btn-success" ><a href="/adv/{{not.advertisementId}}">Подробнее о заказе</a></button>
       </div>
       <div  *ngIf="not.type=='CHANGE_ORDER_STATUS_TO_COMPLETED'">
         <div  class="rating-area">
