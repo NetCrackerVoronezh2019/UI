@@ -5,6 +5,8 @@ export class Order
     public freelancerId:Number;
     public advertisementId:Number;
     public status:String;
+    public nextStatus:String;
+    public starsForWork:String;
 
     public constructor(){}
 }

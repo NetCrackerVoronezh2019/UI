@@ -13,12 +13,16 @@
           <label class="img">
             <img  src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSaY9UGZkwA_Am-IgAiVJkD0VoluyIJXM8OOi57ioAp5gj5CAkM'/>
           </label>
+          
           <div class="content " align="center">
             <div class="title">{{user?.lastName}} {{user?.firstName}} {{user?.middleName}}</div>
               <span *ngIf="!(user?.birthday == underfined)">Дата рождения: {{user?.birthday}}</span>
           </div>
+        
         </div>
         <div class="buttons">
+          <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
+          <button (click)="update()">Update</button>
           <button mat-raised-button class="ml-2" (click)="openGroupForm()" *ngIf="yourPage"><i class="fas fa-cog"></i> Настройки</button>
           <button mat-raised-button class="ml-2" (click)="openFriends()"><i class="fas fa-user-circle"></i> Друзья</button>
           <button mat-raised-button class="ml-2" (click)="showGroups()"><i class="fas fa-users"></i> Группы</button>

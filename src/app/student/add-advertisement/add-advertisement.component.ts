@@ -22,6 +22,7 @@ export class AddAdvertisementComponent implements OnInit {
   allFiles:any[]=[];
   allNames:any[]=[]
   tags: Tag[] = [];
+  sendData:Boolean=false;
   visible = true;
   selectable = true;
   removable = true;
@@ -85,6 +86,7 @@ export class AddAdvertisementComponent implements OnInit {
 
   onSubmit()
   {
+    this.sendData=true;
     this.advService.sendData(this.tags,this.allFiles)
      .subscribe(
       (data:any) => this.router.navigate(['/']),

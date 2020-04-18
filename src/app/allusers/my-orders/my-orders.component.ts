@@ -13,26 +13,29 @@ export class MyOrdersComponent implements OnInit {
   constructor(private service:OrderService) { }
 
 
-  editOrder:Order;
+  editOrder:Order=new Order();
   displayedColumns: string[] = ['orderId', 'freelancerId', 'advertisementId',
   'advertisementName','status','actions'];
   isEdited:Boolean=true;
   dataSource:Order[]=[];
   check:Boolean=false;
   userId:Number;
+  nextStatus:any;
   ngOnInit() {
     this.getMyOrders()
     this.getMyId();
+    
 
   }
 
-  edit(row:Order)
+  
+  change(row:Order)
   {
     this.isEdited=false;
     this.editOrder=row;
-    console.log(this.editOrder);
     this.service.setStatus(row.status);
   }
+
   getMyOrders()
   {
     this.service.getMyOrders()
@@ -50,9 +53,11 @@ export class MyOrdersComponent implements OnInit {
         (error)=>console.log(error)
       )
   }
-  changeOrderStatus()
+
+  changeOrderStatus(row)
   {
-    this.service.changeOrderStatus(this.editOrder)
+    console.log(row);
+    this.service.changeOrderStatus(row)
     .subscribe(
       (data)=>{this.getMyOrders(),this.isEdited=true},
       (error)=>console.log(error)

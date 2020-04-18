@@ -5,7 +5,7 @@
        <div class="notif-buttons">
         <button *ngIf="not.type=='TAKE_ADVERTISEMENT' || not.type=='RECEIVE_SERVICE'" type="button b" class="btn btn-success" (click)="onAccept(not)">Принять</button>
         <button type="button" *ngIf="not.type=='TAKE_ADVERTISEMENT' || not.type=='RECEIVE_SERVICE'" class="btn btn-warning"(click)="onReject(not)">Отклонить</button>
-        <button  type="button" class="btn btn-success" ><a href="/adv/{{not.advertisementId}}">Подробнее о заказе</a></button>
+        <button  type="button" class="btn btn-success" ><a href="/adv/{{not.advertisementId}}" class="ft">O заказе</a></button>
       </div>
       <div  *ngIf="not.type=='CHANGE_ORDER_STATUS_TO_COMPLETED'">
         <div  class="rating-area">

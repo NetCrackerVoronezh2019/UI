@@ -31,7 +31,7 @@ export class MyAdvService
             status:this.myAdvForm.value.advStatus
         }
 
-        return this.http.post(this.baseUrl+"/student/getMyAdvertisements",body);
+        return this.http.post(this.baseUrl+"/user/getMyAdvertisements",body);
     }
 
 

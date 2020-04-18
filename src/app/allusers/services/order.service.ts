@@ -2,6 +2,7 @@ import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {Order} from '@MainClasses/order';
+import { Advertisement } from '../../classes/advertisement';
 
 @Injectable()
 export class OrderService
@@ -15,6 +16,8 @@ export class OrderService
         }
         
     );
+
+   
 
     getEditForm()
     {
@@ -36,16 +39,12 @@ export class OrderService
     }
     changeOrderStatus(order:Order)
     {
-        let body={
-            orderId:order.orderId,
-            orderStatus:this.EditOrderForm.value.orderStatus,
-            customerId:order.customerId,
-            freelancerId:order.freelancerId,
-            
-            
-        }
 
-        console.log(body);
+        let body=
+        {
+            orderId:order.orderId,
+            customerId:order.customerId
+        }
         return this.http.post(this.baseUrl+"/user/changeOrderStatus",body);
     }
 

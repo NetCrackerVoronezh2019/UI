@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div *ngIf="isLoading" class="adv-page">
     <div class="container-fluid">
         <div class="row">
@@ -13,6 +14,10 @@
                                     <p *ngIf="!isUserAdv && can" data-toggle="modal" data-target="#RequestModel1">
                                         <i class="far fa-handshake h2"></i>
                                     </p>
+                                    <div *ngIf="order">
+                                      <p  class="order-status m-0">статус заказа - {{order.status}}</p>
+                                      <button *ngIf="order.nextStatus!=undefined"  (click)="changeStatus()" class="btn btn-success order-status m-0">{{order.nextStatus}}</button>
+                                    </div>
                                 </div>
                                 <div *ngIf="isUserAdv" class="prop d-flex justify-content-end w-100 edit">
                                     <p data-toggle="modal" class="mr-4" data-target="#exampleModalCenter" >
@@ -31,7 +36,7 @@
                                 </ol>
                                 <div class="carousel-inner max-he">
                                   <div *ngFor="let key of adv.imageKeys; let i = index" class="carousel-item img-h" [class.active]="i == 0">
-                                    <img   class="d-block img-h w-100 "  src='http://localhost:1234/getAdvImg/{{key}}'alt="слайд">     
+                                    <img   class="d-block img-h w-100 "  src='http://localhost:123k4/getAdvImg/{{key}}'alt="слайд">     
                                   </div>
                                 </div>
                                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

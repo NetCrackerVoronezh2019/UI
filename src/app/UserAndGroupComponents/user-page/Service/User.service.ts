@@ -21,4 +21,13 @@ export class UserService {
   getFriends(userId) {
     return this.http.get('http://localhost:9080/user/friends',{params: new HttpParams().set('userId',userId)})
   }
+
+  updateImage(content)
+  {
+    let body={
+      content:content
+    }
+
+    return this.http.post("http://localhost:9080/user/updateUserImage",body);
+  }
 }

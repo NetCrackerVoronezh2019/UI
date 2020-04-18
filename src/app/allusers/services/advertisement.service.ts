@@ -10,6 +10,16 @@ export class AdvertisementService1
     baseUrl:String='http://localhost:9080';
     constructor(private http:HttpClient){}
 
+    myOrder(id)
+    {
+        let body={
+            advertisementId:id,
+            userId:130
+        }
+
+        return this.http.post('http://localhost:1122/haveIOrder',body);
+    }
+
     getAllAdvertisements()
     {
         return this.http.get(this.baseUrl+'/allAdvertisements');
@@ -23,6 +33,7 @@ export class AdvertisementService1
 
     isMyAdvertisement(id:Number)
     {
+        console.log("advId"+id)
         let body={
             userId:null,
             advertisementId:id

@@ -20,6 +20,7 @@ export class UserPageComponent implements OnInit {
   groupsVisible = false;
   friendsVisible = false;
   friends:User[];
+  image:any;
 
   constructor(private route: ActivatedRoute,private location: Router,private us: UserService) { }
 
@@ -69,4 +70,24 @@ export class UserPageComponent implements OnInit {
     this.friendsVisible = false;
   }
 
-}
+  update()
+  {
+    this.us.updateImage(this.image)
+      .subscribe(
+        (data)=>console.log(data),
+        error=>console.log(error)
+      )
+  }
+
+  handleFileInput(file: FileList) {
+
+       let reader;
+       reader=new FileReader();
+       reader.readAsDataURL(file.item(0));
+       reader.onload = () => {
+       this.image=reader.result;
+       console.log(this.image);
+      }; 
+     }
+
+  }

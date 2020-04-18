@@ -55,7 +55,8 @@ import { EmailPageComponent } from './registration/email-page/email-page.compone
 import {PostCardComponent} from './UserAndGroupComponents/post-card/post-card.component'
 import {CommentCardComponent} from './UserAndGroupComponents/comment-card/comment-card.component'
 import {FriendListComponent} from "./UserAndGroupComponents/friend-list/friend-list.component"
-import {FriendCardComponent} from './UserAndGroupComponents/friend-card/friend-card.component'
+import {FriendCardComponent} from './UserAndGroupComponents/friend-card/friend-card.component';
+import { Userpage2Component } from './userpage2/userpage2.component'
 const appRoutes: Routes =[
   { path: 'registration', component:RegistrationComponent},
   { path: 'adv/:id', component:AdvertisementComponent},
@@ -71,13 +72,13 @@ const appRoutes: Routes =[
   {path: 'dialog/:dialogId', component:DialogComponent},
   {path: 'userPage/:userId', component:UserPageComponent},
   {path: 'groupPage/:groupId', component:GroupComponent},
-  {path: 'updateadv/207', component:UpdateAdvertisementComponent},
   {path:'myadvertisements', component:MyAdvertisementsComponent},
   {path: "groupList", component:GroupListComponent},
   {path: 'myorders', component:MyOrdersComponent},
   {path:'myadvertisements', component:MyAdvertisementsComponent},
   {path:'email/:emailAdress',component:EmailPageComponent},
-  {path: 'friends', component:FriendListComponent}
+  {path: 'friends', component:FriendListComponent},
+  {path: 'userprofile2/:id',component:Userpage2Component}
 ];
 
 @NgModule({
@@ -115,7 +116,8 @@ const appRoutes: Routes =[
     PostCardComponent,
     CommentCardComponent,
     FriendListComponent,
-    FriendCardComponent
+    FriendCardComponent,
+    Userpage2Component
   ],
   imports: [
     MatInputModule,

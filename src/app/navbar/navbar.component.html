@@ -20,7 +20,7 @@
             <a *ngIf="!isAdmin" mat-raised-button class="mr-2" routerLink="/myorders" >Мои заказы</a>
              <a *ngIf="!isAdmin" mat-raised-button class="mr-2" routerLink="/myadvertisements" >Мои объявления</a>
               <a mat-raised-button class="mr-2" (click)="Logout()">Выход</a>
-               <a mat-raised-button class="mr-2" (click)="Logout()">Личный Кабинет</a>
+               <a mat-raised-button class="mr-2"  routerLink="/userPage/{{UserInfo.userId}}">Личный Кабинет</a>
           </div>
     </div>
   </nav>
