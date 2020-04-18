@@ -18,6 +18,18 @@ export class DialogService
             }
           )
 
+
+    userSearchForm=this.fb.group(
+        {
+            "firstName":["",[Validators.maxLength(15)]],
+            "lastName":["",[Validators.maxLength(15)]]
+          }
+      )
+
+      getUserSearchForm() {
+        return this.userSearchForm
+      }
+
     getDialogMembers(dialogId:string) {
         return this.http.get('http://localhost:9080/user/getDialogMembers/',
                             {params:new HttpParams().set('dialogId',dialogId)});
@@ -55,11 +67,20 @@ export class DialogService
                               {params:new HttpParams().set('dialogId',dialogId)})
           }
 
-          addUserInDialog(dialogId:string) {
-            return this.http.get('http://localhost:9080/user/addUserInDialog/',{params:new HttpParams().set('dialogId',dialogId).set('userName', this.addUserForm.value.userName)})
+          addUserInDialog(dialogId:string,userId) {
+            return this.http.get('http://localhost:9080/user/addUserInDialog/',{params:new HttpParams().set('dialogId',dialogId).set('userId', userId)})
           }
 
           getNotifications(dialogId) {
             return this.http.get('http://localhost:9080/dialog/getNotification',{params:new HttpParams().set('dialogId',dialogId)})
+          }
+
+          getFriends() {
+            return this.http.get('http://localhost:9080/thisUser/friends')
+          }
+
+          search() {
+            return this.http.get('http://localhost:9080/users/search',{params: new HttpParams().set("firstName",this.userSearchForm.value.firstName)
+                                                                                                        .set("lastName",this.userSearchForm.value.lastName)})
           }
 }

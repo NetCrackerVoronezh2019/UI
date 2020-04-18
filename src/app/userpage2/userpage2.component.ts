@@ -7,6 +7,9 @@ import {Order} from '../classes/order'
 import {Advertisement} from '../classes/advertisement'
 import * as fileSaver from 'file-saver';
 import {GetFile} from '../classes/getFile'
+import { Router } from '@angular/router';
+import { Group } from '@UserAndGroupClasses/group'
+import { User as UserAndGroupsUser } from '@UserAndGroupClasses/user'
 
 @Component({
   selector: 'app-userpage2',
@@ -28,7 +31,10 @@ export class Userpage2Component implements OnInit {
   public allNames:any[]=[]
   displayedColumns: string[] = ['orderId', 'freelancerId', 'advertisementId',
   'advertisementName','status','rating'];
-  constructor(private service:UserPageService,private activateRoute: ActivatedRoute) { }
+  friendStatus = "";
+  friends:UserAndGroupsUser[];
+  groups:Group[];
+  constructor(private service:UserPageService,private activateRoute: ActivatedRoute,private router: Router) { }
 
   ngOnInit() {
     this.subscription=this.activateRoute.params.subscribe(params=>{
@@ -36,6 +42,71 @@ export class Userpage2Component implements OnInit {
       this.getUserData(this.id);
       this.getMyId();
     } )
+  }
+
+  getFriendStatus() {
+    this.service.getYourFriends().subscribe((data:User[]) => {
+      data.forEach(element => {
+        if (element.userId == this.id) {
+          this.friendStatus = 'friend'
+        }
+      });
+      if (this.friendStatus == "") {
+        this.service.getYourOutgoing().subscribe((data:User[]) => {
+          data.forEach(element => {
+            if (element.userId == this.id) {
+              this.friendStatus = 'outgoing'
+            }
+          });
+          if (this.friendStatus == "") {
+            this.service.getYourIngoing().subscribe((data:User[]) => {
+              data.forEach(element => {
+                if (element.userId == this.id) {
+                  this.friendStatus = 'ingoing'
+                }
+              });
+              if (this.friendStatus == "") {
+                this.friendStatus = "none"
+              }
+            })
+          }
+        })
+      }
+    })
+  }
+
+  addFriend() {
+    this.service.addFriend(this.id).subscribe(data => {
+      if (this.friendStatus == "none") {
+        this.friendStatus = "outgoing";
+      } else if (this.friendStatus == "ingoing") {
+        this.friendStatus = "friend";
+      }
+    })
+  }
+
+  removeFriend() {
+    this.service.removeFriend(this.id).subscribe(data => {
+      if (this.friendStatus == "friend") {
+        this.friendStatus = "ingoing";
+      } else if (this.friendStatus == "outgoing") {
+        this.friendStatus = "none";
+      }
+    })
+  }
+
+  checkFriendsEvent() {
+    this.service.getFriends(this.id).subscribe((data:UserAndGroupsUser[]) => {
+      this.friends = data;
+      console.log(data);
+    })
+  }
+
+  checkGroupsEvent() {
+    this.service.getUserGroups(this.id).subscribe((data:Group[]) => {
+      this.groups = data;
+      console.log(data);
+    })
   }
 
   download(key:String)
@@ -50,11 +121,11 @@ export class Userpage2Component implements OnInit {
       .subscribe(
         (response) => {
           let blob:any = new Blob([response.blob()], { type:fileType});
-          
+
           fileSaver.saveAs(blob,name);
         },
          error => console.log('Error downloading the file')
-      )        
+      )
   }
 
 
@@ -103,26 +174,37 @@ export class Userpage2Component implements OnInit {
   {
     this.service.getMyId()
         .subscribe(
-          (data:Number)=>this.myId=data,
+          (data:Number)=> {
+            this.myId=data
+            if (this.myId != this.id) {
+              this.getFriendStatus();
+            }
+          },
           error=>console.log(error)
-        )    
+        )
   }
 
   handleFileInput(file: FileList) {
-    
+
     let reader;
        this.allNames.push(file.item(0).name);
        reader=new FileReader();
        reader.readAsDataURL(file.item(0));
        reader.onload = () => {
         this.allFiles.push(reader.result);
-      }; 
+      };
   }
 
   deleteImageFromList(index)
   {
     this.allNames.splice(index,1);
     this.allFiles.splice(index,1);
+  }
+
+  startDialogWithUser() {
+    this.service.startDialogWithUser(this.id).subscribe((data:number) => {
+      this.router.navigate(['dialog/' + data]);
+    })
   }
 
 }

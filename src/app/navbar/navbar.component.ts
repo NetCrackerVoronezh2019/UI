@@ -24,8 +24,10 @@ export class NavbarComponent implements OnInit {
   private serverUrl = 'ws://localhost:9080/socket/websocket'
   private stompClient1:Client;
   private stompClient2:Client;
+  private stompClient3:Client;
   private count="";
   private countNot:String="0"
+  private friendsNot=""
   private notifications:AdvNotification[];
 
   constructor(private authService:AuthService, private appService:AppService,
@@ -35,8 +37,10 @@ export class NavbarComponent implements OnInit {
     initializeWebSocketConnection(userId:Number){
       const websocket1: WebSocket = new WebSocket(this.serverUrl);
       const websocket2: WebSocket = new WebSocket(this.serverUrl);
+      const websocket3: WebSocket = new WebSocket(this.serverUrl);
       this.stompClient1 = Webstomp.over(websocket1);
       this.stompClient2 = Webstomp.over(websocket2);
+      this.stompClient3 = Webstomp.over(websocket3);
 
       this.stompClient1.connect({ login: null, passcode: null }, () => {
             this.stompClient1.subscribe("/notificationCount/" + userId, (message) => {
@@ -50,6 +54,13 @@ export class NavbarComponent implements OnInit {
           });
 
       });
+
+      this.stompClient3.connect({ login: null, passcode: null }, () => {
+        this.stompClient3.subscribe("/friends/"+userId, (message) => {
+          this.friendsNot=JSON.parse(message.body);
+        });
+
+    });
 
 
     }
@@ -69,6 +80,12 @@ export class NavbarComponent implements OnInit {
       )
     }
 
+    getFriendsNotifications() {
+      this.wsService.getFriendsNotificationCount().subscribe((data:string) => {
+        this.friendsNot = data;
+      })
+    }
+
   ngOnInit() {
      this.authService.isLogin().
      subscribe(
@@ -83,6 +100,7 @@ export class NavbarComponent implements OnInit {
            this.initializeWebSocketConnection(this.UserInfo.userId);
            this.setOnline();
            this.getMyNotificationsSize();
+           this.getFriendsNotifications();
          }
        },
        err=>{}

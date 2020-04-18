@@ -3,9 +3,9 @@
     <div class="navbar-blocks">
         <div class="navbar-menu">
             <a *ngIf="isLogin && !isAdmin" mat-raised-button class="ml-2" routerLink="/user/addnewAdvertisement"><i class="fas fa-plus-circle"></i> Добавить Объявление</a>
-            <a  *ngIf="isAdmin" mat-raised-button class="mr-2" routerLink="/admin/changeprop">Пользователи</a>  
-            <a  *ngIf="isAdmin" mat-raised-button class="mr-2" routerLink="/admin/rolecontrol">Роли</a>  
-            <a  *ngIf="isAdmin" mat-raised-button routerLink="/admin/subjectcontrol">Предметы</a>  
+            <a  *ngIf="isAdmin" mat-raised-button class="mr-2" routerLink="/admin/changeprop">Пользователи</a>
+            <a  *ngIf="isAdmin" mat-raised-button class="mr-2" routerLink="/admin/rolecontrol">Роли</a>
+            <a  *ngIf="isAdmin" mat-raised-button routerLink="/admin/subjectcontrol">Предметы</a>
         </div>
           <div class="navbar-auth" *ngIf="!isLogin">
               <a mat-raised-button class="mr-4" routerLink="/signin">Войти</a>
@@ -14,8 +14,8 @@
           <div class="navbar-auth" *ngIf="isLogin">
             <p class="mr-4 notification">
                 <mat-icon (click)="getMyAllNotifications()" class="userInfo cursor mr-4" data-toggle="modal" data-target="#notificationModal"  matBadge={{countNot}} matBadgeColor="warn">notifications</mat-icon>
-                <mat-icon class="userInfo cursor" routerLink="/dialogsList" matBadge={{count}} matBadgeColor="warn">mail</mat-icon>
-    
+                <mat-icon class="userInfo cursor mr-4" routerLink="/dialogsList" matBadge={{count}} matBadgeColor="warn">mail</mat-icon>
+                <mat-icon class="userInfo cursor" routerLink="/friends" matBadge={{friendsNot}} matBadgeColor="warn">people</mat-icon>
             </p>
             <a *ngIf="!isAdmin" mat-raised-button class="mr-2" routerLink="/myorders" >Мои заказы</a>
              <a *ngIf="!isAdmin" mat-raised-button class="mr-2" routerLink="/myadvertisements" >Мои объявления</a>
@@ -42,6 +42,3 @@
       </div>
     </div>
   </div>
-
-
- 

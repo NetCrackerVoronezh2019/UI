@@ -12,12 +12,24 @@
 
                         <div class="space space-4"></div>
 
-                        <a *ngIf="myId!=id" href="#" class="btn btn-sm btn-block btn-success">
-                            <i class="ace-icon fa fa-plus-circle bigger-120"></i>
-                            <span class="bigger-110">Добавить в друзья</span>
+                        <a *ngIf="friendStatus == 'none'" (click)="addFriend()" class="btn btn-sm btn-block btn-success">
+                            <i class="ace-icon fa fa-user-plus bigger-120"></i>
+                            <span class="bigger-110"> Добавить в друзья</span>
+                        </a>
+                        <a *ngIf="friendStatus == 'ingoing'" (click)="addFriend()" class="btn btn-sm btn-block btn-info">
+                            <i class="ace-icon fa fa-user-plus bigger-120"></i>
+                            <span class="bigger-110"> Подтвердить заявку</span>
+                        </a>
+                        <a *ngIf="friendStatus == 'outgoing'" (click)="removeFriend()" class="btn btn-sm btn-block btn-secondary">
+                            <i class="ace-icon fa fa-user-times bigger-120"></i>
+                            <span class="bigger-110"> Отменить заявку</span>
+                        </a>
+                        <a *ngIf="friendStatus == 'friend'" (click)="removeFriend()" class="btn btn-sm btn-block btn-danger">
+                            <i class="ace-icon fa fa-user-times bigger-120"></i>
+                            <span class="bigger-110"> Удалить из друзей</span>
                         </a>
 
-                        <a  *ngIf="myId!=id" href="#" class="btn btn-sm btn-block btn-primary">
+                        <a  *ngIf="myId!=id" class="btn btn-sm btn-block btn-primary" (click)="startDialogWithUser()">
                             <i class="ace-icon fa fa-envelope-o bigger-110"></i>
                             <span class="bigger-110">Написать</span>
                         </a>
@@ -38,7 +50,7 @@
                             </span>
 
                         </h4>
-	                  
+
                         <div class="profile-user-info">
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> Email </div>
@@ -72,7 +84,7 @@
                             <div class="profile-info-row">
                                 <div class="profile-info-name">Последний раз был в сети</div>
 
-                               
+
                             </div>
 
                             <div class="profile-info-row">
@@ -83,13 +95,13 @@
                                 </div>
                             </div>
 
-                            
+
                         </div>
 
                         <div class="hr hr-8 dotted"></div>
 
                         <div class="profile-user-info">
-                        
+
                         </div>
                     </div>
                 </div>
@@ -121,19 +133,19 @@
                                 <div class="widget-main" class="d-flex flex-direction-column">
                                     <span *ngFor="let doc of user.documentKeys; let i = index" class="mr-2">
                                         <div (click)="download(doc)" ><i class="fas fa-file fontFile"></i></div>
-                                        <div class="fontFileName">{{doc.split('_')[1]}}</div> 
-                                    </span>    
+                                        <div class="fontFileName">{{doc.split('_')[1]}}</div>
+                                    </span>
                                 </div>
                             </div>
 
-                            
+
                             <div class="all-tables mt-3">
                                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
                                     <mat-button-toggle *ngIf="user.roleName=='ROLE_TEACHER'" (click)="checkOrderEvent()" value="ORDER">Заказы</mat-button-toggle>
                                     <mat-button-toggle (click)="checkAdvEvent()" value="ADVERTISEMENT">Объявления</mat-button-toggle>
                                     <mat-button-toggle (click)="checkFriendsEvent()" value="FRIENDS">Друзья</mat-button-toggle>
                                     <mat-button-toggle (click)="checkGroupsEvent()" value="GROUPS">Группы</mat-button-toggle>
-                                  </mat-button-toggle-group>                                  
+                                  </mat-button-toggle-group>
                             </div>
                             <div *ngIf="checkOrder && user.roleName=='ROLE_TEACHER'" class="order-page">
                                 <div>
@@ -143,26 +155,26 @@
                                         <mat-header-cell *matHeaderCellDef>Номер заказа</mat-header-cell>
                                         <mat-cell *matCellDef="let element"> {{element.orderId}} </mat-cell>
                                         </ng-container>
-                                    
-                                       
+
+
                                         <ng-container matColumnDef="freelancerId">
                                         <mat-header-cell *matHeaderCellDef> Фрилансер</mat-header-cell>
                                         <mat-cell *matCellDef="let element"> {{element.freelancerId}} </mat-cell>
                                         </ng-container>
-                                    
-                                       
+
+
                                         <ng-container matColumnDef="advertisementId">
                                         <mat-header-cell *matHeaderCellDef>Номер объявления</mat-header-cell>
                                         <mat-cell *matCellDef="let element"> {{element.advertisementId}} </mat-cell>
                                         </ng-container>
-                                
-                                        
+
+
                                         <ng-container matColumnDef="advertisementName">
                                             <mat-header-cell *matHeaderCellDef> Название объявления</mat-header-cell>
                                             <mat-cell *matCellDef="let element"> {{element.advertisementName}} </mat-cell>
                                         </ng-container>
-                                
-                                    
+
+
                                         <ng-container matColumnDef="status">
                                             <mat-header-cell *matHeaderCellDef>Стaтус заказа</mat-header-cell>
                                             <mat-cell *matCellDef="let element"> {{element.status}}</mat-cell>
@@ -175,9 +187,9 @@
                                                 <p *ngIf="element.starsForWork=='0'">Не оценено </p>
                                             </mat-cell>
                                         </ng-container>
-                                        
-                                
-                                
+
+
+
                                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                                         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                                     </mat-table>

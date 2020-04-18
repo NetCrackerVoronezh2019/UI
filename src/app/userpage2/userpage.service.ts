@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/forms';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Http, ResponseContentType} from '@angular/http';
@@ -24,13 +24,13 @@ export class UserPageService
 
     getAllAdvertisements(id:Number)
     {
-        return this.http.get('http://localhost:1122/myAdvertisements/'+id)   
+        return this.http.get('http://localhost:1122/myAdvertisements/'+id)
     }
 
 
     getMyId()
     {
-        return this.http.get('http://localhost:9080/getMyId');       
+        return this.http.get('http://localhost:9080/getMyId');
     }
 
     updateImage(content)
@@ -38,13 +38,45 @@ export class UserPageService
       let body={
         content:content
       }
-  
-      
+
+
       return this.http.post("http://localhost:9080/user/updateUserImage",body);
     }
 
 
     downloadFile(key:String): Observable<any>{
         return this.http2.get('http://localhost:1234/getCertFile/'+key, {responseType: ResponseContentType.Blob});
+    }
+
+    startDialogWithUser(userId) {
+        return this.http.post('http://localhost:9080/users/startDialog',null,{params:new HttpParams().set("userId",userId)})
+    }
+
+    getYourFriends() {
+      return this.http.get('http://localhost:9080/thisUser/friends')
+    }
+
+    getYourOutgoing() {
+      return this.http.get('http://localhost:9080/thisUser/outgoingFriends')
+    }
+
+    getYourIngoing() {
+      return this.http.get('http://localhost:9080/thisUser/ingoingFriends')
+    }
+
+    addFriend(userId) {
+      return this.http.put('http://localhost:9080/friend/add',null,{params: new HttpParams().set('ingoingId',userId)})
+    }
+
+    removeFriend(userId) {
+      return this.http.put('http://localhost:9080/friend/remove',null,{params: new HttpParams().set('ingoingId',userId)})
+    }
+
+    getUserGroups(userId) {
+      return this.http.get('http://localhost:9080/groups/getUserGroups',{params: new HttpParams().set('userId',userId)})
+    }
+
+    getFriends(userId) {
+      return this.http.get('http://localhost:9080/user/friends',{params: new HttpParams().set('userId',userId)})
     }
 }

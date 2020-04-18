@@ -10,7 +10,6 @@ import { Notification } from '@ConversationClasses/Notification'
 export class MessageCardComponent implements OnInit {
 
   @Input() message:Message;
-  background = 'white'
   constructor() { }
 
   ngOnInit() {
