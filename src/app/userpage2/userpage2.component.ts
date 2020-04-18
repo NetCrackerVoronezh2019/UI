@@ -7,15 +7,11 @@ import {Order} from '../classes/order'
 import {Advertisement} from '../classes/advertisement'
 import * as fileSaver from 'file-saver';
 import {GetFile} from '../classes/getFile'
-<<<<<<< .mine
 import {File} from '../classes/file'
 import { DomSanitizer } from "@angular/platform-browser";
-
-=======
 import { Router } from '@angular/router';
 import { Group } from '@UserAndGroupClasses/group'
 import { User as UserAndGroupsUser } from '@UserAndGroupClasses/user'
->>>>>>> .theirs
 
 
 
