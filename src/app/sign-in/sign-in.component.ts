@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SignInService} from './Services/signIn.Service'
 import { Router} from '@angular/router';
 import { interval } from 'rxjs';
+import * as fileSaver from 'file-saver';
 
 @Component({
   selector: 'app-sign-in',
@@ -36,5 +37,20 @@ export class SignInComponent implements OnInit {
           }
       );
   }
+
+  download()
+  {
+    this.signInService.downloadFile()
+      .subscribe(
+        (response) => {
+          let blob:any = new Blob([response.blob()], { type: 'application/pdf; charset=utf-8' });
+          fileSaver.saveAs(response, 'employees.pdf')
+        },
+         error => console.log('Error downloading the file')
+      )
+  }
+
+
+  
 
 }

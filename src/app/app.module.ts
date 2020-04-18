@@ -20,6 +20,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import {AuthService} from './auth/auth.service';
 import {AuthGuard} from './auth/auth.guard';
+import {HttpModule} from '@angular/http';
 import { HomeComponent } from './home/home.component';
 import {MatButtonModule} from '@angular/material/button';
 import { AddAdvertisementComponent } from './student/add-advertisement/add-advertisement.component';
@@ -135,6 +136,7 @@ const appRoutes: Routes =[
     MatExpansionModule,
     MatChipsModule,
     MatButtonToggleModule,
+    HttpModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],

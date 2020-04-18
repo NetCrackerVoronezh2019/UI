@@ -36,8 +36,9 @@
                                 <i class="fas fa-mobile-alt c-orange mr-1"></i>
                                 online
                             </span>
-                        </h4>
 
+                        </h4>
+	                  
                         <div class="profile-user-info">
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> Email </div>
@@ -71,10 +72,7 @@
                             <div class="profile-info-row">
                                 <div class="profile-info-name">Последний раз был в сети</div>
 
-                                <div class="profile-info-value">
-                                    <span>{{user.lastTimeWasONLINE.split('T')[0]}} 
-                                        в {{user.lastTimeWasONLINE.split('T')[1].split('.')[0]}}</span>
-                                </div>
+                               
                             </div>
 
                             <div class="profile-info-row">
@@ -113,7 +111,23 @@
                                     <p> {{user.aboutMe}}</p>
                                 </div>
                             </div>
-                            <div class="all-tables">
+
+                            <h4 class="widget-title smaller mb-3">
+                                <i class="ace-icon fa fa-check-square-o bigger-110"></i>
+                                Сертификаты и Документы
+                            </h4>
+
+                            <div *ngIf="user.roleName=='ROLE_TEACHER'" class="widget-body">
+                                <div class="widget-main" class="d-flex flex-direction-column">
+                                    <span *ngFor="let doc of user.documentKeys; let i = index" class="mr-2">
+                                        <div (click)="download(doc)" ><i class="fas fa-file fontFile"></i></div>
+                                        <div class="fontFileName">{{doc.split('_')[1]}}</div> 
+                                    </span>    
+                                </div>
+                            </div>
+
+                            
+                            <div class="all-tables mt-3">
                                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
                                     <mat-button-toggle *ngIf="user.roleName=='ROLE_TEACHER'" (click)="checkOrderEvent()" value="ORDER">Заказы</mat-button-toggle>
                                     <mat-button-toggle (click)="checkAdvEvent()" value="ADVERTISEMENT">Объявления</mat-button-toggle>

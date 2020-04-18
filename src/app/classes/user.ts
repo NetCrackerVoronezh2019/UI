@@ -13,4 +13,5 @@ export class User
     public roleName:String;
     public isOnline:Boolean;
     public userImageKey:String;
+    public documentKeys:String[];
 }

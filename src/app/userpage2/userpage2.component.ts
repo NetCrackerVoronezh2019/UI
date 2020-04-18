@@ -5,6 +5,8 @@ import {Subscription} from 'rxjs'
 import { ActivatedRoute} from '@angular/router';
 import {Order} from '../classes/order'
 import {Advertisement} from '../classes/advertisement'
+import * as fileSaver from 'file-saver';
+import {GetFile} from '../classes/getFile'
 
 @Component({
   selector: 'app-userpage2',
@@ -34,6 +36,25 @@ export class Userpage2Component implements OnInit {
       this.getUserData(this.id);
       this.getMyId();
     } )
+  }
+
+  download(key:String)
+  {
+    let name:String=key.split('_')[1];
+    let fileType:any;
+    if(name.split('.')[1]=='pdf')
+    fileType='application/pdf; charset=utf-8';
+    else
+      fileType='image/jpg; charset=utf-8';
+    this.service.downloadFile(key)
+      .subscribe(
+        (response) => {
+          let blob:any = new Blob([response.blob()], { type:fileType});
+          
+          fileSaver.saveAs(blob,name);
+        },
+         error => console.log('Error downloading the file')
+      )        
   }
 
 

@@ -1,13 +1,15 @@
 import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Http, ResponseContentType} from '@angular/http';
 
 
 @Injectable()
 
 export class UserPageService
 {
-    constructor(private fb:FormBuilder,private http: HttpClient) {}
+    constructor(private fb:FormBuilder,private http: HttpClient,private http2: Http) {}
 
     getUserData(id:Number)
     {
@@ -37,6 +39,12 @@ export class UserPageService
         content:content
       }
   
+      
       return this.http.post("http://localhost:9080/user/updateUserImage",body);
+    }
+
+
+    downloadFile(key:String): Observable<any>{
+        return this.http2.get('http://localhost:1234/getCertFile/'+key, {responseType: ResponseContentType.Blob});
     }
 }

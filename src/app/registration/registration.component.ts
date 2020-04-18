@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators,FormBuilder} from '@angular/forms';
 import {RegistrationService} from './Services/registration.service';
 import {MatInputModule} from '@angular/material/input';
 import { Router} from '@angular/router';
+import {File} from '../classes/file' 
 
 
 @Component({
@@ -14,7 +15,7 @@ import { Router} from '@angular/router';
 
 export class RegistrationComponent implements OnInit {
   role="STUDENT";
-  public allFiles:any[]=[];
+  public allFiles:File[]=[];
   public allNames:any[]=[]
   sendData:Boolean=false;
   constructor(public regService:RegistrationService,private router:Router) {
@@ -55,19 +56,32 @@ export class RegistrationComponent implements OnInit {
   }
 
   handleFileInput(file: FileList) {
-    
-    let reader;
      for(let i=0;i<file.length;i++)
      {
+       let newfile:File=new File(); 
+       newfile.contentType=file.item(i).type;
+       newfile.name=file.item(i).name;
        this.allNames.push(file.item(i).name);
-       reader=new FileReader();
-       reader.readAsDataURL(file.item(i));
-       reader.onload = () => {
-        this.allFiles.push(reader.result);
-      }; 
+        this.readFile(file.item(i),newfile);
      }
      
+     console.log(this.allFiles);
   }
+
+  readFile(file,newfile:File)
+   {
+     let reader;
+     reader=new FileReader();
+     reader.readAsDataURL(file);
+     reader.onload = () => {
+        newfile.content=reader.result;
+        this.allFiles.push(newfile);
+     }; 
+   }
+
+
+   
+   
 
   deleteImageFromList(index)
   {

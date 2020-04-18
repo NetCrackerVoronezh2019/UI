@@ -90,7 +90,7 @@
                     <div class="example-2 mb-3">
                         <label for="exampleInputEmail1">Документы и Сертификаты</label>
                         <div class="form-group">
-                          <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
+                          <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*, application/pdf" class="input-file"/>
                           <label for="file" class="btn btn-tertiary js-labelFile">
                             <i class="icon fa fa-check"></i>
                             <span class="js-fileName"> Загрузить файлы</span>
