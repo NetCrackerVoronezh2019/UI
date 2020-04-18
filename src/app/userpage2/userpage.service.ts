@@ -3,6 +3,7 @@ import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Http, ResponseContentType} from '@angular/http';
+import {File} from '../classes/file' 
 
 
 @Injectable()
@@ -33,18 +34,20 @@ export class UserPageService
         return this.http.get('http://localhost:9080/getMyId');       
     }
 
-    updateImage(content)
-    {
-      let body={
-        content:content
-      }
-  
-      
-      return this.http.post("http://localhost:9080/user/updateUserImage",body);
+    updateImage(file:File)
+    {      
+    
+        console.log(file);
+      return this.http.post("http://localhost:9080/user/updateUserImage",file);
     }
 
 
     downloadFile(key:String): Observable<any>{
         return this.http2.get('http://localhost:1234/getCertFile/'+key, {responseType: ResponseContentType.Blob});
+    }
+
+    downloadProfileImage(key:String): Observable<any>{
+
+        return this.http2.get('http://localhost:1234/getuserimg/'+key, {responseType: ResponseContentType.Blob});
     }
 }

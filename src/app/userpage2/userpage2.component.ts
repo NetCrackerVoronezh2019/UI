@@ -7,6 +7,10 @@ import {Order} from '../classes/order'
 import {Advertisement} from '../classes/advertisement'
 import * as fileSaver from 'file-saver';
 import {GetFile} from '../classes/getFile'
+import {File} from '../classes/file' 
+import { DomSanitizer } from "@angular/platform-browser";
+
+
 
 @Component({
   selector: 'app-userpage2',
@@ -24,11 +28,13 @@ export class Userpage2Component implements OnInit {
   subscription:Subscription;
   dataSource:Order[]=[];
   advs:Advertisement[]=[];
-  public allFiles:any[]=[];
+  public allFiles:File[]=[];
   public allNames:any[]=[]
+  profileImage:any;
+  loading=false;
   displayedColumns: string[] = ['orderId', 'freelancerId', 'advertisementId',
   'advertisementName','status','rating'];
-  constructor(private service:UserPageService,private activateRoute: ActivatedRoute) { }
+  constructor(private service:UserPageService,private activateRoute: ActivatedRoute,private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.subscription=this.activateRoute.params.subscribe(params=>{
@@ -57,6 +63,22 @@ export class Userpage2Component implements OnInit {
       )        
   }
 
+  downloadProfileImage(key:String)
+  {
+    
+    this.service.downloadProfileImage(key)
+      .subscribe(
+        (response) => {
+          let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+          this.profileImage=URL.createObjectURL(blob)
+          this.profileImage=this.sanitizer.bypassSecurityTrustUrl(this.profileImage);
+        
+          this.loading=true;
+        },
+         error => console.log('Error')
+      )
+              
+  }
 
   checkOrderEvent()
   {
@@ -94,7 +116,7 @@ export class Userpage2Component implements OnInit {
   {
     this.service.getUserData(id)
         .subscribe(
-          (data:User)=>{this.user=data,console.log(this.user)},
+          (data:User)=>{this.user=data,console.log(this.user), this.downloadProfileImage(this.user.userImageKey)},
           (error)=>console.log(error)
         )
   }
@@ -110,13 +132,19 @@ export class Userpage2Component implements OnInit {
 
   handleFileInput(file: FileList) {
     
-    let reader;
+
+       let reader;
+       let newfile:File=new File(); 
        this.allNames.push(file.item(0).name);
+       newfile.contentType=file.item(0).type;
+       newfile.name=file.item(0).name;
        reader=new FileReader();
        reader.readAsDataURL(file.item(0));
        reader.onload = () => {
-        this.allFiles.push(reader.result);
+        newfile.content=reader.result
+        this.allFiles.push(newfile);
       }; 
+      console.log(this.allFiles);
   }
 
   deleteImageFromList(index)
