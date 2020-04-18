@@ -8,7 +8,7 @@ import {Advertisement} from '../classes/advertisement'
 import * as fileSaver from 'file-saver';
 import {GetFile} from '../classes/getFile'
 <<<<<<< .mine
-import {File} from '../classes/file' 
+import {File} from '../classes/file'
 import { DomSanitizer } from "@angular/platform-browser";
 
 =======
@@ -43,17 +43,11 @@ export class Userpage2Component implements OnInit {
   loading=false;
   displayedColumns: string[] = ['orderId', 'freelancerId', 'advertisementId',
   'advertisementName','status','rating'];
-<<<<<<< .mine
-  constructor(private service:UserPageService,private activateRoute: ActivatedRoute,private sanitizer: DomSanitizer) { }
-
-
-
-=======
   friendStatus = "";
   friends:UserAndGroupsUser[];
   groups:Group[];
-  constructor(private service:UserPageService,private activateRoute: ActivatedRoute,private router: Router) { }
->>>>>>> .theirs
+  constructor(private service:UserPageService,private activateRoute: ActivatedRoute,private router: Router,private sanitizer: DomSanitizer) { }
+
 
   ngOnInit() {
     this.subscription=this.activateRoute.params.subscribe(params=>{
@@ -156,19 +150,19 @@ export class Userpage2Component implements OnInit {
 
   downloadProfileImage(key:String)
   {
-    
+
     this.service.downloadProfileImage(key)
       .subscribe(
         (response) => {
           let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
           this.profileImage=URL.createObjectURL(blob)
           this.profileImage=this.sanitizer.bypassSecurityTrustUrl(this.profileImage);
-        
+
           this.loading=true;
         },
          error => console.log('Error')
       )
-              
+
   }
 
   checkOrderEvent()
@@ -234,7 +228,7 @@ export class Userpage2Component implements OnInit {
 
 
        let reader;
-       let newfile:File=new File(); 
+       let newfile:File=new File();
        this.allNames.push(file.item(0).name);
        newfile.contentType=file.item(0).type;
        newfile.name=file.item(0).name;
