@@ -6,8 +6,12 @@
             <div id="home" class="tab-pane in active">
                 <div class="row">
                     <div class="col-xs-12 col-sm-3 center">
-                        <span  class="profile-picture">
-                            <img class="prof" alt=" Avatar" id="avatar2" src="https://images.pexels.com/photos/373899/pexels-photo-373899.jpeg">
+                        <span  *ngIf="user.imageKey!=undefined && loading" class="profile-picture">
+                            <img class="prof" alt=" Avatar" id="avatar2" [src]="profileImage">
+                        </span>
+
+                        <span  *ngIf="!loading"class="profile-picture">
+                            <img class="prof" alt=" Avatar" id="avatar2" src="https://borodast.com/uploads/images/pages/c82a9dad9c9ebf9a908b9c5942f84fda90c24164.jpeg">
                         </span>
 
                         <div class="space space-4"></div>
