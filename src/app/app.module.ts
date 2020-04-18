@@ -45,7 +45,6 @@ import { AdvertisementFilterComponent } from './allusers/advertisement-filter/ad
 import { NotificationsComponent } from './allusers/notifications/notifications.component';
 import { MyOrdersComponent } from './allusers/my-orders/my-orders.component'
 import { GroupComponent } from './UserAndGroupComponents/group/group.component';
-import { UserPageComponent } from './UserAndGroupComponents/user-page/user-page.component'
 import { MessageCardComponent} from "./ConversationComponents/messageCard/messageCard.component"
 import { DialogMemberCardComponent } from "./ConversationComponents/dialogMemberCard/dialogMemberCard.component"
 import {GroupCardComponent } from "./UserAndGroupComponents/group-card/group-card.component"
@@ -71,7 +70,6 @@ const appRoutes: Routes =[
   {path:'admin/subjectcontrol', component:SubjectControlComponent,canActivate:[AuthGuard]},
   {path: 'dialogsList',component:DialogsListComponent},
   {path: 'dialog/:dialogId', component:DialogComponent},
-  {path: 'userPage/:userId', component:UserPageComponent},
   {path: 'groupPage/:groupId', component:GroupComponent},
   {path:'myadvertisements', component:MyAdvertisementsComponent},
   {path: "groupList", component:GroupListComponent},
@@ -79,7 +77,7 @@ const appRoutes: Routes =[
   {path:'myadvertisements', component:MyAdvertisementsComponent},
   {path:'email/:emailAdress',component:EmailPageComponent},
   {path: 'friends', component:FriendListComponent},
-  {path: 'userprofile2/:id',component:Userpage2Component}
+  {path: 'userPage/:id',component:Userpage2Component}
 ];
 
 @NgModule({
@@ -103,7 +101,6 @@ const appRoutes: Routes =[
     UpdateAdvertisementComponent,
     MyAdvertisementsComponent,
     GroupComponent,
-    UserPageComponent,
     MessageCardComponent,
     DialogMemberCardComponent,
     GroupCardComponent,

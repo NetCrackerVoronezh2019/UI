@@ -202,7 +202,27 @@
                                         <p>
                                        </div>
                                     </div>
-                                  </div>
+                                    <ul *ngIf="checkFriends" id='friend-list'>
+                                      <div *ngFor="let us of friends">
+                                          <li class='friend' routerLink="/userPage/{{us.userId}}">
+                                            <img src='https://i.imgur.com/0I4lkh9.jpg' />
+                                            <div class='name'>
+                                              {{us.lastName}} {{us.firstName}}
+                                            </div>
+                                          </li>
+                                      </div>
+                                    </ul>
+                                    <ul *ngIf="checkGroups" id='group-list'>
+                                      <div *ngFor="let gr of groups">
+                                          <li class='group' routerLink="/groupPage/{{gr.groupId}}">
+                                            <img src='https://mentoringgroup.com/files/images/puzzle-team.jpg' />
+                                            <div class='name'>
+                                              {{gr.name}}
+                                            </div>
+                                          </li>
+                                      </div>
+                                    </ul>
+                          </div>
                     </div>
                 </div>
             </div>

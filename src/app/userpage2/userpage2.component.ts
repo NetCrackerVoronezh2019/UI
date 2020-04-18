@@ -24,6 +24,8 @@ export class Userpage2Component implements OnInit {
   myId:Number;
   checkOrder=false;
   checkAdv=false;
+  checkFriends = false;
+  checkGroups = false;
   subscription:Subscription;
   dataSource:Order[]=[];
   advs:Advertisement[]=[];
@@ -96,13 +98,20 @@ export class Userpage2Component implements OnInit {
   }
 
   checkFriendsEvent() {
+    this.checkAdv = false;
+    this.checkOrder = false;
+    this.checkGroups = false;
+    this.checkFriends = true;
     this.service.getFriends(this.id).subscribe((data:UserAndGroupsUser[]) => {
       this.friends = data;
-      console.log(data);
     })
   }
 
   checkGroupsEvent() {
+    this.checkAdv = false;
+    this.checkOrder = false;
+    this.checkGroups = true;
+    this.checkFriends = false;
     this.service.getUserGroups(this.id).subscribe((data:Group[]) => {
       this.groups = data;
       console.log(data);
@@ -133,6 +142,8 @@ export class Userpage2Component implements OnInit {
   {
     this.checkOrder=true;
     this.checkAdv=false;
+    this.checkGroups = false;
+    this.checkFriends = false;
     this.service.getOrders(this.id)
       .subscribe(
         (data:Order[])=>{this.dataSource=data,console.log(data)},
@@ -154,6 +165,8 @@ export class Userpage2Component implements OnInit {
   {
     this.checkAdv=true;
     this.checkOrder=false;
+    this.checkGroups = false;
+    this.checkFriends = false;
     this.service.getAllAdvertisements(this.id)
         .subscribe(
           (data:Advertisement[])=>this.advs=data,
