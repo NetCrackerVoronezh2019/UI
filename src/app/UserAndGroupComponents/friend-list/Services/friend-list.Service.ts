@@ -41,4 +41,8 @@ export class FriendListService
       return this.http.get('http://localhost:9080/users/search',{params: new HttpParams().set("firstName",this.userSearchPanel.value.firstName)
                                                                                                   .set("lastName",this.userSearchPanel.value.lastName)})
     }
+
+    deleteNotifications() {
+      return this.http.delete('http://localhost:9080/user/cleanNotifications')
+    }
 }

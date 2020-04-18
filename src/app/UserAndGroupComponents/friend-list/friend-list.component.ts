@@ -36,6 +36,7 @@ export class FriendListComponent implements OnInit {
     this.fs.getOutgoing().subscribe((data:User[]) => {
       this.outgoing = data;
     })
+    this.fs.deleteNotifications().subscribe(data => console.log(data))
   }
 
   openSearchPanel() {

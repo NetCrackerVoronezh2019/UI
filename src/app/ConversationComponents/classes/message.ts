@@ -7,5 +7,6 @@ export class Message
   dialog:number;
   date:Date;
   isModified:boolean;
+  isNoRead:boolean;
   messageId:number;
 }

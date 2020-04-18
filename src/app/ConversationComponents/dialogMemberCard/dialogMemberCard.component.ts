@@ -1,5 +1,5 @@
 import { Component, Input,OnInit } from '@angular/core';
-import { User } from '@ConversationClasses/User'
+import { User } from '@UserAndGroupClasses/user'
 
 @Component({
   selector: 'app-dialog-member-card',
