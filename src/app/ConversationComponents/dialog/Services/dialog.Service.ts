@@ -18,10 +18,6 @@ export class DialogService
             }
           )
 
-    deleteNotifications(dialogId:string) {
-      return this.http.delete('http://localhost:9080/user/cleanNotifications/',{params:new HttpParams().set('dialogId',dialogId)})
-    }
-
     getDialogMembers(dialogId:string) {
         return this.http.get('http://localhost:9080/user/getDialogMembers/',
                             {params:new HttpParams().set('dialogId',dialogId)});
@@ -61,5 +57,9 @@ export class DialogService
 
           addUserInDialog(dialogId:string) {
             return this.http.get('http://localhost:9080/user/addUserInDialog/',{params:new HttpParams().set('dialogId',dialogId).set('userName', this.addUserForm.value.userName)})
+          }
+
+          getNotifications(dialogId) {
+            return this.http.get('http://localhost:9080/dialog/getNotification',{params:new HttpParams().set('dialogId',dialogId)})
           }
 }

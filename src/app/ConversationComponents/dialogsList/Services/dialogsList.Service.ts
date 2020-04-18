@@ -13,10 +13,19 @@ export class DialogsListService
             }
           )
 
+    userSearchForm=this.fb.group(
+        {
+            "firstName":["",[Validators.maxLength(15)]],
+            "lastName":["",[Validators.maxLength(15)]]
+          }
+      )
+
+      getUserSearchForm() {
+        return this.userSearchForm
+      }
 
     getUser() {
-      return this.http.get('http://localhost:9080/user/getUser/',
-                          {params:new HttpParams()});
+      return this.http.get('http://localhost:9080/userAndGroup/getThisUser')
       }
     getUserDialogs() {
         return this.http.get('http://localhost:9080/user/getUserDialogs/',
@@ -34,4 +43,24 @@ export class DialogsListService
         this.dialogCreationForm.value.dialogName = "";
         return this.http.post('http://localhost:9080/user/dialogCreate/',body);
     }
+
+    getUserDialogsByType(type) {
+        return this.http.get('http://localhost:9080/user/getUserDialogs/',
+                            {params:new HttpParams().set("type",type)});
+      }
+
+
+    startDialogWithUser(userId) {
+        return this.http.post('http://localhost:9080/users/startDialog',null,{params:new HttpParams().set("userId",userId)})
+    }
+
+    getFriends() {
+      return this.http.get('http://localhost:9080/thisUser/friends')
+    }
+
+    search() {
+      return this.http.get('http://localhost:9080/users/search',{params: new HttpParams().set("firstName",this.userSearchForm.value.firstName)
+                                                                                                  .set("lastName",this.userSearchForm.value.lastName)})
+    }
+
 }

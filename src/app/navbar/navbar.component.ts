@@ -16,7 +16,7 @@ import { Client} from 'webstomp-client';
 })
 export class NavbarComponent implements OnInit {
 
-  
+
   private isLogin=false;
   private isAdmin=false
   private UserInfo:any;
@@ -32,14 +32,14 @@ export class NavbarComponent implements OnInit {
     private wsService:WebSocketService,private advService:AdvertisementService1) { }
 
 
-    initializeWebSocketConnection(userName:String,userId:Number){
+    initializeWebSocketConnection(userId:Number){
       const websocket1: WebSocket = new WebSocket(this.serverUrl);
       const websocket2: WebSocket = new WebSocket(this.serverUrl);
       this.stompClient1 = Webstomp.over(websocket1);
       this.stompClient2 = Webstomp.over(websocket2);
-      
+
       this.stompClient1.connect({ login: null, passcode: null }, () => {
-            this.stompClient1.subscribe("/notificationCount/" + userName, (message) => {
+            this.stompClient1.subscribe("/notificationCount/" + userId, (message) => {
               this.count=JSON.parse(message.body);
             });
         });
@@ -48,10 +48,10 @@ export class NavbarComponent implements OnInit {
           this.stompClient2.subscribe("/notification/"+userId, (message) => {
             this.countNot=JSON.parse(message.body);
           });
-          
+
       });
-      
-      
+
+
     }
 
     closeWebSocketConection() {
@@ -80,7 +80,7 @@ export class NavbarComponent implements OnInit {
            this.UserInfo=data;
            if(this.UserInfo.roleName=="ROLE_ADMIN")
               this.isAdmin=true;
-           this.initializeWebSocketConnection(this.UserInfo.userName,this.UserInfo.userId);
+           this.initializeWebSocketConnection(this.UserInfo.userId);
            this.setOnline();
            this.getMyNotificationsSize();
          }
@@ -111,7 +111,7 @@ export class NavbarComponent implements OnInit {
   {
 
    if(this.isLogin)
-   { 
+   {
       this.OnlineSubscription=interval(1*60000).subscribe(()=>{this.appService.sendOnlineRequest()
         .subscribe(
             (data)=>console.log(data),

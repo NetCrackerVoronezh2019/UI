@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogsListService} from './Services/dialogsList.service'
-import { User } from '@ConversationClasses/User'
+import { User } from '@UserAndGroupClasses/user'
 import { Dialog } from '@ConversationClasses/dialog'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialogs',
@@ -11,12 +12,15 @@ import { Dialog } from '@ConversationClasses/dialog'
 })
 export class DialogsListComponent implements OnInit {
 
-  constructor(public dgService:DialogsListService) { }
+  constructor(public dgService:DialogsListService, private router: Router) { }
 
   user:User;
   dialogs:Dialog[];
   creationDialogVisible:boolean = false;
   newDialogName:string = "";
+  type = "all";
+  userSearchPanelVisible = false;
+  users:User[];
 
   ngOnInit() {
       this.creationDialogVisible=false;
@@ -35,6 +39,7 @@ export class DialogsListComponent implements OnInit {
       (data:Dialog[]) => {
         console.log(data);
         this.dialogs=data;
+        this.type = 'all';
       },
       error => console.log(error)
     );
@@ -63,6 +68,40 @@ export class DialogsListComponent implements OnInit {
       this.creationDialogVisible = false;
     }
     this.newDialogName = "";
+  }
+
+  showDialogListByType(type) {
+    this.dgService.getUserDialogsByType(type).subscribe(
+      (data:Dialog[]) => {
+        console.log(data);
+        this.dialogs=data;
+        this.type = type;
+      },
+      error => console.log(error)
+    );
+  }
+
+  startDialogWithUser(userId) {
+    this.dgService.startDialogWithUser(userId).subscribe((data:number) => {
+      this.router.navigate(['dialog/' + data]);
+    })
+  }
+
+  openUserSearchPanel() {
+    this.dgService.getFriends().subscribe((data:User[]) => {
+      this.users = data;
+      this.userSearchPanelVisible = true;
+    })
+  }
+
+  search() {
+    this.dgService.search().subscribe((data:User[]) => {
+      this.users = data;
+    })
+  }
+
+  cancelSearch() {
+    this.userSearchPanelVisible = false;
   }
 
 }
