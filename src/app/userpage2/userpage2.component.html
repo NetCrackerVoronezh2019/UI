@@ -6,14 +6,15 @@
             <div id="home" class="tab-pane in active">
                 <div class="row">
                     <div class="col-xs-12 col-sm-3 center">
-                        <span  *ngIf="user.imageKey!=undefined && loading" class="profile-picture">
+                        <span  *ngIf="user.userImageKey!=undefined && loading" class="profile-picture">
                             <img class="prof" alt=" Avatar" id="avatar2" [src]="profileImage">
                         </span>
 
-                        <span  *ngIf="!loading"class="profile-picture">
+                        <span  *ngIf="user.userImageKey==undefined && !loading"class="profile-picture">
                             <img class="prof" alt=" Avatar" id="avatar2" src="https://borodast.com/uploads/images/pages/c82a9dad9c9ebf9a908b9c5942f84fda90c24164.jpeg">
                         </span>
 
+                  
                         <div class="space space-4"></div>
 
                         <a *ngIf="friendStatus == 'none'" (click)="addFriend()" class="btn btn-sm btn-block btn-success">
@@ -145,58 +146,15 @@
 
                             <div class="all-tables mt-3">
                                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                                    <mat-button-toggle *ngIf="user.roleName=='ROLE_TEACHER'" (click)="checkOrderEvent()" value="ORDER">Заказы</mat-button-toggle>
+                                    <mat-button-toggle *ngIf="user.roleName=='ROLE_TEACHER'" (click)="checkFeedBackEvent()" value="ORDER">Отзывы</mat-button-toggle>
                                     <mat-button-toggle (click)="checkAdvEvent()" value="ADVERTISEMENT">Объявления</mat-button-toggle>
                                     <mat-button-toggle (click)="checkFriendsEvent()" value="FRIENDS">Друзья</mat-button-toggle>
                                     <mat-button-toggle (click)="checkGroupsEvent()" value="GROUPS">Группы</mat-button-toggle>
                                   </mat-button-toggle-group>
                             </div>
-                            <div *ngIf="checkOrder && user.roleName=='ROLE_TEACHER'" class="order-page">
+                            <div *ngIf="checkFeedBack && user.roleName=='ROLE_TEACHER'" class="order-page">
                                 <div>
-                                    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-                                        <ng-container matColumnDef="orderId">
-                                        <mat-header-cell *matHeaderCellDef>Номер заказа</mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{element.orderId}} </mat-cell>
-                                        </ng-container>
-
-
-                                        <ng-container matColumnDef="freelancerId">
-                                        <mat-header-cell *matHeaderCellDef> Фрилансер</mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{element.freelancerId}} </mat-cell>
-                                        </ng-container>
-
-
-                                        <ng-container matColumnDef="advertisementId">
-                                        <mat-header-cell *matHeaderCellDef>Номер объявления</mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{element.advertisementId}} </mat-cell>
-                                        </ng-container>
-
-
-                                        <ng-container matColumnDef="advertisementName">
-                                            <mat-header-cell *matHeaderCellDef> Название объявления</mat-header-cell>
-                                            <mat-cell *matCellDef="let element"> {{element.advertisementName}} </mat-cell>
-                                        </ng-container>
-
-
-                                        <ng-container matColumnDef="status">
-                                            <mat-header-cell *matHeaderCellDef>Стaтус заказа</mat-header-cell>
-                                            <mat-cell *matCellDef="let element"> {{element.status}}</mat-cell>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="rating">
-                                            <mat-header-cell *matHeaderCellDef>Оценка</mat-header-cell>
-                                            <mat-cell *matCellDef="let element">
-                                                <p *ngIf="element.starsForWork!='0'"> {{element.starsForWork}}</p>
-                                                <p *ngIf="element.starsForWork=='0'">Не оценено </p>
-                                            </mat-cell>
-                                        </ng-container>
-
-
-
-                                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                                    </mat-table>
+                                    XNXX
                                   </div>
                                   </div>
                                   <div *ngIf="checkAdv">

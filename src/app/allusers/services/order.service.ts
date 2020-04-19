@@ -7,7 +7,8 @@ import { Advertisement } from '../../classes/advertisement';
 @Injectable()
 export class OrderService
 {
-    baseUrl:String='http://localhost:9080';
+   
+     baseUrl:String='http://localhost:9080';
     constructor(private fb:FormBuilder,private http:HttpClient){}
 
     EditOrderForm=this.fb.group(
@@ -17,8 +18,27 @@ export class OrderService
         
     );
 
-   
 
+    orderForm=this.fb.group(
+        {
+            "comment":[""],
+        }
+        
+    );
+
+
+    updateOrderForm()
+    {
+        this.orderForm.setValue({
+           comment:""
+         },{onlySelf:true});
+
+    }
+
+    getOrderForm()
+    {
+        return this.orderForm;
+    }
     getEditForm()
     {
         return this.EditOrderForm;
@@ -37,6 +57,10 @@ export class OrderService
     {
         return this.http.get(this.baseUrl+"/getMyId");
     }
+
+    getMyRole(){
+        return this.http.get(this.baseUrl+"/getRole");
+    }
     changeOrderStatus(order:Order)
     {
 
@@ -51,5 +75,16 @@ export class OrderService
     getMyOrders()
     {
         return this.http.get(this.baseUrl+"/user/getMyOrders");
+    }
+
+    sendFeedBack(rating:any,order:Order)
+    {
+        let body={
+            order:order,
+            rating:rating,
+            comment:this.orderForm.value.comment
+        }
+        console.log(body);
+        return this.http.post(this.baseUrl+'/user/changeReiting',body);
     }
 }

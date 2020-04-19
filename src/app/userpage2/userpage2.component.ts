@@ -26,7 +26,7 @@ export class Userpage2Component implements OnInit {
   private user:User
   id:Number;
   myId:Number;
-  checkOrder=false;
+  checkFeedBack=false;
   checkAdv=false;
   checkFriends = false;
   checkGroups = false;
@@ -106,7 +106,7 @@ export class Userpage2Component implements OnInit {
 
   checkFriendsEvent() {
     this.checkAdv = false;
-    this.checkOrder = false;
+    this.checkFeedBack = false;
     this.checkGroups = false;
     this.checkFriends = true;
     this.service.getFriends(this.id).subscribe((data:UserAndGroupsUser[]) => {
@@ -116,7 +116,7 @@ export class Userpage2Component implements OnInit {
 
   checkGroupsEvent() {
     this.checkAdv = false;
-    this.checkOrder = false;
+    this.checkFeedBack = false;
     this.checkGroups = true;
     this.checkFriends = false;
     this.service.getUserGroups(this.id).subscribe((data:Group[]) => {
@@ -153,17 +153,17 @@ export class Userpage2Component implements OnInit {
           let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
           this.profileImage=URL.createObjectURL(blob)
           this.profileImage=this.sanitizer.bypassSecurityTrustUrl(this.profileImage);
-
           this.loading=true;
+          console.log(this.loading);
         },
          error => console.log('Error')
       )
 
   }
 
-  checkOrderEvent()
+  checkFeedBackEvent()
   {
-    this.checkOrder=true;
+    this.checkFeedBack=true;
     this.checkAdv=false;
     this.checkGroups = false;
     this.checkFriends = false;
@@ -187,7 +187,7 @@ export class Userpage2Component implements OnInit {
   checkAdvEvent()
   {
     this.checkAdv=true;
-    this.checkOrder=false;
+    this.checkFeedBack = false;
     this.checkGroups = false;
     this.checkFriends = false;
     this.service.getAllAdvertisements(this.id)
@@ -221,8 +221,6 @@ export class Userpage2Component implements OnInit {
   }
 
   handleFileInput(file: FileList) {
-
-
        let reader;
        let newfile:File=new File();
        this.allNames.push(file.item(0).name);

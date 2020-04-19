@@ -7,6 +7,8 @@ export class Order
     public status:String;
     public nextStatus:String;
     public starsForWork:String;
-
+    public freelancerFIO:String;
+    public customerFIO:String;
+    public comment:String;
     public constructor(){}
 }
