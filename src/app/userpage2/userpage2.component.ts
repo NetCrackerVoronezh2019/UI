@@ -208,7 +208,7 @@ export class Userpage2Component implements OnInit {
   }
 
   initVariagles() {
-    this.checkOrder = false;
+    this.checkFeedBack = false;
     this.checkAdv = false;
     this.checkFriends = false;
     this.checkGroups = false;
