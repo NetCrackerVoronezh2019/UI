@@ -49,6 +49,7 @@ export class Userpage2Component implements OnInit {
     this.subscription=this.activateRoute.params.subscribe(params=>{
       this.id=params['id'];
       this.getUserData(this.id);
+      this.initVariagles()
       this.getMyId();
     } )
   }
@@ -204,6 +205,14 @@ export class Userpage2Component implements OnInit {
           (data:User)=>{this.user=data,console.log(this.user), this.downloadProfileImage(this.user.userImageKey)},
           (error)=>console.log(error)
         )
+  }
+
+  initVariagles() {
+    this.checkOrder = false;
+    this.checkAdv = false;
+    this.checkFriends = false;
+    this.checkGroups = false;
+    this.friendStatus = ""
   }
 
   getMyId()
