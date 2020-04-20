@@ -9,7 +9,7 @@
                             <div  class="col-12 advertisement-tittle">
                                 <div class="prop d-flex justify-content-between w-100 edit">
                                     <div *ngIf="!isUserAdv" class="userName">
-                                      {{adv.firstName}} {{adv.surName}} 
+                                      <a href="userPage/{{adv.authorId}}">{{adv.firstName}} {{adv.surName}}</a> 
                                     </div>
                                     <p *ngIf="!isUserAdv && can" data-toggle="modal" data-target="#RequestModel1">
                                         <i class="far fa-handshake h2"></i>

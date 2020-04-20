@@ -7,6 +7,7 @@ export class AdvNotification{
     public orderId:Number;
     private type:String;
     private senderUsername:String;
+    public senderFio:String;
 	private addresseeUsername:String;
     private message:String;
     public status:String;

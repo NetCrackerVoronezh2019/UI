@@ -11,13 +11,13 @@
         <!-- Weight Column -->
         <ng-container matColumnDef="freelancer">
         <mat-header-cell *matHeaderCellDef> Заказчик</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.customerFIO}} </mat-cell>
+        <mat-cell *matCellDef="let element"> <a href="/userPage/{{element.customerId}}">{{element.customerFIO}}</a></mat-cell>
         </ng-container>
     
         <!-- Symbol Column -->
         <ng-container matColumnDef="advertisementName">
             <mat-header-cell *matHeaderCellDef> Название объявления</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.advertisementName}} </mat-cell>
+            <mat-cell *matCellDef="let element"> <a href='adv/{{element.advertisementId}}'>{{element.advertisementName}}</a></mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
@@ -32,6 +32,17 @@
             <mat-header-cell *matHeaderCellDef>Изменить Стaтус</mat-header-cell>
             <mat-cell *matCellDef="let row">
               <button *ngIf="row.nextStatus!=undefined" (click)="changeOrderStatus(row)" class="btn btn-success">{{row.nextStatus}}</button>
+            </mat-cell>
+          </span>
+        </ng-container>
+
+        <ng-container matColumnDef="feedBack">
+          <span>        
+            <mat-header-cell *matHeaderCellDef>Отзыв</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="t" >
+              <button *ngIf="row.starsForWork!='0' && row.status=='СOMPLETED'" (click)="showFeedBackClick(row)" class="btn btn-success"  data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-backdrop="static" data-keyboard="false" >Смотреть отзыв</button>
+              <p *ngIf="row.status != 'СOMPLETED'" class="p1">Работа не завершена</p>
+              <p *ngIf="row.status == 'СOMPLETED' && row.starsForWork=='0'" class="p1"> - </p>
             </mat-cell>
           </span>
         </ng-container>
@@ -53,13 +64,13 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="customer">
         <mat-header-cell *matHeaderCellDef>Фрилансер </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.freelancerFIO}} </mat-cell>
+        <mat-cell *matCellDef="let element"> <a href='userPage/{{element.freelancerId}}'>{{element.freelancerFIO}}</a></mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="advertisementName">
             <mat-header-cell *matHeaderCellDef> Название объявления</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.advertisementName}} </mat-cell>
+            <mat-cell *matCellDef="let element"> <a href='adv/{{element.advertisementId}}'>{{element.advertisementName}}</a> </mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
@@ -75,7 +86,8 @@
             <mat-cell *matCellDef="let row" class="t" >
               <button *ngIf="row.starsForWork=='0' && row.status=='СOMPLETED'" (click)="ratingClick(row)" class="btn btn-success" data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-keyboard="false" >Оценить работу</button>
               <button *ngIf="row.starsForWork!='0' && row.status=='СOMPLETED'" (click)="showFeedBackClick(row)" class="btn btn-success"  data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-backdrop="static" data-keyboard="false" >Смотреть отзыв</button>
-              <p *ngIf="row.status != 'СOMPLETED'" class="p1">Работа не завершена</p>
+              <p *ngIf="row.status != 'СOMPLETED' " class="p1">Работа не завершена</p>
+             
             </mat-cell>
           </span>
         </ng-container>
@@ -84,12 +96,6 @@
     </mat-table>
   </div>
   </div>
-
-
-
-
-      
-
 
 <div class="modal fade" id="ratingModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-centered" role="document">

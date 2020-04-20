@@ -15,9 +15,9 @@ export class MyOrdersComponent implements OnInit {
 
   editOrder:Order=new Order();
   displayedColumns: string[] = ['orderId', 'freelancer', 
-  'advertisementName','status','actions'];
+  'advertisementName','status','actions','feedBack'];
   displayedColumns2: string[] = ['orderId', 'customer',
-  'advertisementName','status','actions'];
+  'advertisementName','status','actions',];
   isEdited:Boolean=true;
   dataSource:Order[]=[];
   check:Boolean=false;

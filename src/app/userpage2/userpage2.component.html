@@ -10,7 +10,7 @@
                             <img class="prof" alt=" Avatar" id="avatar2" [src]="profileImage">
                         </span>
 
-                        <span  *ngIf="user.userImageKey==undefined && !loading"class="profile-picture">
+                        <span  *ngIf="user.userImageKey==undefined || !loading"class="profile-picture">
                             <img class="prof" alt=" Avatar" id="avatar2" src="https://borodast.com/uploads/images/pages/c82a9dad9c9ebf9a908b9c5942f84fda90c24164.jpeg">
                         </span>
 
@@ -187,7 +187,7 @@
                           </div>
                     </div>
                 </div>
-            </div>
+           </div>
 </div>
 
 
