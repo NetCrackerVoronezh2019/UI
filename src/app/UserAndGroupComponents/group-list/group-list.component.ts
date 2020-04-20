@@ -17,6 +17,8 @@ export class GroupListComponent implements OnInit {
   creationGroupVisible:boolean;
   searchPanelVisible:boolean;
   subjects:Subject[];
+  avatar:any;
+  fileName:any;
 
   constructor(public groupService:GroupListService) {
       this.groupService.getUser().subscribe((data:User) => {
@@ -68,7 +70,7 @@ export class GroupListComponent implements OnInit {
       } else if (this.groupService.getGroupCreationForm().value.groupSection == "") {
           alert("Вы не выбрали раздел")
       }else {
-        this.groupService.CreateGroup().subscribe(
+        this.groupService.CreateGroup(this.avatar).subscribe(
           data => {
             this.showGropList();
           },
@@ -89,5 +91,22 @@ export class GroupListComponent implements OnInit {
         )
       }
     }
+
+    handleFileInput(file: FileList) {
+
+    this.fileName = file.item(0).name;
+    this.readFile(file.item(0));
+    }
+
+      readFile(file)
+      {
+        let reader;
+        reader=new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+        this.avatar = reader.result;
+        console.log(this.avatar);
+        };
+      }
 
 }

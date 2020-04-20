@@ -219,7 +219,8 @@
                                     <ul *ngIf="checkGroups" id='group-list'>
                                       <div *ngFor="let gr of groups">
                                           <li class='group' routerLink="/groupPage/{{gr.groupId}}">
-                                            <img src='https://mentoringgroup.com/files/images/puzzle-team.jpg' />
+                                            <img *ngIf="gr.image==null"  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
+                                            <img *ngIf="gr.image!=null"  src='http://localhost:1234/getAdvImg/{{gr.image}}'/>
                                             <div class='name'>
                                               {{gr.name}}
                                             </div>

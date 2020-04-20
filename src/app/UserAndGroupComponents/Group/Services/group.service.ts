@@ -99,12 +99,21 @@ export class GroupService {
       return this.http.get('http://localhost:9080/groups/getPosts',{params:new HttpParams().set('groupId',groupId)})
     }
 
-    sendPost(groupId) {
+    sendPost(groupId,allFiles) {
       const body = {
         text: this.postCreatForm.value.text,
-        groupId:groupId
+        groupId:groupId,
+        images:allFiles
       }
       return this.http.post('http://localhost:9080/groups/makePost',body)
+    }
+
+    setAvatar(groupId,image) {
+      const body = {
+        groupId: groupId,
+        image:image
+      }
+      return this.http.put('http://localhost:9080/group/setAvatar',body)
     }
 
 }

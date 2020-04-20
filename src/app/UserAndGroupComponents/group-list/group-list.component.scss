@@ -25,7 +25,7 @@ margin-top: 5px;
   margin-left: 30%;
   top: 30%;
   width: 30%;
-  height: 35%;
+min-height: 300px;
   display:flex;
    align-items: center;
    margin-bottom:30px;
@@ -60,4 +60,8 @@ margin-top: 5px;
   height:95%;
   transition-delay: .3s;
   align-items:center;
+}
+
+input {
+  margin-top: 20px;
 }

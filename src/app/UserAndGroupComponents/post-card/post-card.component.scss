@@ -24,6 +24,7 @@
   overflow: hidden;
   display: flex;
   width:95%;
+  display: flex;
 }
 
 .comment-part {
@@ -75,7 +76,7 @@
 
 .content{
   padding: 0 10px 0 20px;
-  width: 80%;
+  width: 100%;
   min-height: 10vh;
   transition: .6s;
   margin-left: 0px;
@@ -96,6 +97,15 @@
   margin-bottom: 5px;
   font-size: 15px;
   font-weight: 500
+}
+
+.content .imag{
+  max-width: 100%;
+  margin-top: 20px;
+}
+
+.imag img{
+  width: 100%;
 }
 
 .content .title{

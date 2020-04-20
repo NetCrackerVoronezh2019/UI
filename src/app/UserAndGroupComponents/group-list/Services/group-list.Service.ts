@@ -26,7 +26,7 @@ export class GroupListService
       return this.http.get('http://localhost:9080/userAndGroup/getThisUser',
                           {params:new HttpParams()});
       }
-      
+
     getGroupCreationForm(): FormGroup  {
        return this.groupCreationForm;
       }
@@ -38,10 +38,11 @@ export class GroupListService
       return this.http.get('http://localhost:9080/groups/getThisUserGroups',{params:new HttpParams()})
     }
 
-   CreateGroup(){
+   CreateGroup(avatar){
             const body = {
                        name: this.groupCreationForm.value.groupName,
-                       subjectName: this.groupCreationForm.value.groupSection
+                       subjectName: this.groupCreationForm.value.groupSection,
+                       image:avatar
                   };
         return this.http.post('http://localhost:9080/userAndGroup/createGroup/',body);
 

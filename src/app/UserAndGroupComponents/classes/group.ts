@@ -5,4 +5,5 @@ export class Group
   subjectName:string;
   creatorId:number;
   dialogId:number;
+  image:string;
 }

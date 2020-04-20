@@ -2,7 +2,8 @@
 <div *ngIf="true" class="blog-card" routerLink="/groupPage/{{gr.groupId}}">
     <div class="inner-part">
       <label class="img">
-        <img  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
+        <img *ngIf="group.image==null"  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
+        <img *ngIf="group.image!=null"  src='http://localhost:1234/getAdvImg/{{group.image}}'/>
       </label>
       <div class="content " align="center">
         <div class="title"  >{{gr.name}}</div>

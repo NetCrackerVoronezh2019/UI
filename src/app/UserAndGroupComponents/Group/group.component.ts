@@ -29,6 +29,10 @@ export class GroupComponent implements OnInit {
   removeAdmin = false;
   posts:Post[];
   createPostVisible = false;
+  avatar:any;
+  fileName:any;
+  allFiles:any[]=[];
+  allNames:any[]=[];
 
   constructor(private route: ActivatedRoute,private location: Router,private gs: GroupService) {
   }
@@ -203,6 +207,8 @@ export class GroupComponent implements OnInit {
     }
 
     showCreatePost() {
+      this.allFiles =[];
+      this.allNames =[];
       this.gs.getPostCreateForm().reset();
       this.createPostVisible = true;
     }
@@ -212,9 +218,52 @@ export class GroupComponent implements OnInit {
     }
 
     sendPost() {
-      this.gs.sendPost(this.groupId).subscribe(data => {
+      this.gs.sendPost(this.groupId,this.allFiles).subscribe(data => {
         this.getGroupPosts();
         this.createPostVisible = false;
       })
     }
+
+    handleFileInput(file: FileList) {
+
+    this.fileName = file.item(0).name;
+    this.readFile(file.item(0));
+    }
+
+      readFile(file)
+      {
+        let reader;
+        reader=new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+        this.avatar = reader.result;
+        console.log(this.avatar);
+        };
+      }
+
+      setAvatar() {
+        this.gs.setAvatar(this.groupId,this.avatar).subscribe(data => {
+
+        })
+      }
+
+      handlePostFileInput(file: FileList) {
+         for(let i=0;i<file.length;i++)
+         {
+            this.allNames.push(file.item(i).name);
+            this.readPostFile(file.item(i));
+         }
+        console.log(this.allFiles);
+
+        }
+
+        readPostFile(file)
+        {
+          let reader;
+          reader=new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+          this.allFiles.push(reader.result);
+          };
+        }
 }

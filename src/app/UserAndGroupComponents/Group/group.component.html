@@ -4,7 +4,8 @@
       <div *ngIf="true" class="blog-card">
         <div class="inner-part">
           <label class="img">
-            <img  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
+            <img *ngIf="group?.image==null"  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
+            <img *ngIf="group?.image!=null"  src='http://localhost:1234/getAdvImg/{{group.image}}'/>
           </label>
           <div class="content ">
             <div class="title">{{group?.name}}</div>
@@ -22,6 +23,9 @@
           <button mat-raised-button class="ml-2" *ngIf="admin && !createPostVisible" (click)="showCreatePost()"><i class="fas fa-plus-circle"></i>Написать пост</button>
           <form *ngIf="createPostVisible" [formGroup]="gs.getPostCreateForm()">
               <div class="form-group">
+                <input type="file" name="file" id="file"  (change)="handlePostFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
+                <label for="file" class="btn btn-tertiary js-labelFile">
+                </label>
                 <label for="">Текст</label>
                 <textarea id="Name" type="text" class="form-control" formControlName="text" autocomplete="off" placeholder="text"></textarea>
                 <div *ngIf="gs.getPostCreateForm().controls['text'].invalid && gs.getPostCreateForm().controls['text'].touched" >
@@ -61,6 +65,10 @@
       </form>
       <button mat-raised-button class="ml-2" (click)="acceptSettings()"><i class="fas fa-check-circle"></i>Изменить</button>
       <button mat-raised-button class="ml-2" (click)="closeSetings()"><i class="fas fa-minus-circle"></i>Закрыть</button>
+      <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
+      <label for="file" class="btn btn-tertiary js-labelFile">
+        <button class="js-fileName" *ngIf="avatar!=undefined" (click)="setAvatar()"><i class="icon fa fa-check"></i> Изменить Аватар</button>
+      </label>
       <h4>Администраторы</h4>
       <button *ngIf="!addAdmin && !removeAdmin" mat-raised-button class="ml-2" (click)="showAddAdmin()"><i class="fas fa-plus-circle"></i>Добавить</button>
       <button *ngIf="!addAdmin && !removeAdmin && creator" mat-raised-button class="ml-2" (click)="showRemoveAdmin()"><i class="fas fa-minus-circle"></i>Удалить</button>
