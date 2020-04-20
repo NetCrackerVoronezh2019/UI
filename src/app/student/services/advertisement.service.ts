@@ -70,7 +70,7 @@ export class AdvertisementService
                 deadline:this.advertisementForm.value.deadlineDate+"T00:00:00",
                 description:this.advertisementForm.value.description,
                 budget:this.advertisementForm.value.budget,
-                content:this.advertisementForm.value.image.value,
+              //  content:this.advertisementForm.value.image.value,
                 tags,
                 allFiles
 
