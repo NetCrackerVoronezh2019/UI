@@ -21,6 +21,8 @@ export class DialogsListComponent implements OnInit {
   type = "all";
   userSearchPanelVisible = false;
   users:User[];
+  avatar:any;
+  fileName:any;
 
   ngOnInit() {
       this.creationDialogVisible=false;
@@ -59,7 +61,7 @@ export class DialogsListComponent implements OnInit {
     if (this.dgService.getDialogCreationForm().invalid) {
       alert("Invalid dialog name")
     } else {
-      this.dgService.CreateDialog().subscribe(
+      this.dgService.CreateDialog(this.avatar).subscribe(
         data => {
           this.showDialogList();
         },
@@ -103,5 +105,22 @@ export class DialogsListComponent implements OnInit {
   cancelSearch() {
     this.userSearchPanelVisible = false;
   }
+
+  handleFileInput(file: FileList) {
+
+  this.fileName = file.item(0).name;
+  this.readFile(file.item(0));
+  }
+
+    readFile(file)
+    {
+      let reader;
+      reader=new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+      this.avatar = reader.result;
+      console.log(this.avatar);
+      };
+    }
 
 }

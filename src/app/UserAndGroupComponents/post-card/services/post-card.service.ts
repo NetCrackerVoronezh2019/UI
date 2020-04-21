@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl} from '@angular/forms';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { User } from '@UserAndGroupClasses/user'
+import {Http, ResponseContentType} from '@angular/http';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class PostService {
 
-  constructor(private http: HttpClient, private fb:FormBuilder) { }
+  constructor(private http: HttpClient, private fb:FormBuilder, private http2: Http) { }
 
   commentCreatForm=this.fb.group(
     {
@@ -51,6 +53,10 @@ export class PostService {
 
   deletePost(postId) {
     return this.http.delete('http://localhost:9080/posts/delete',{params: new HttpParams().set('postId',postId)})
+  }
+
+  downloadGroupImage(key:String): Observable<any>{
+      return this.http2.get('http://localhost:1234/getGroupImg/'+key, {responseType: ResponseContentType.Blob});
   }
 
 }

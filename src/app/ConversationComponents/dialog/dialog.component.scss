@@ -17,12 +17,53 @@ body { margin: 0; }
  left: 220px; /* Расстояние от левого края */
  bottom: 25%; right: 0%;
 }
+
+.dialog {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dialog img {
+  width: 45px;
+  height: 45px;
+  border-radius: 30px;
+  border: 2px solid #AAA;
+  object-fit: cover;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.dialog .name {
+  font-size: 18px;
+}
+
 #Sending {
   top:75%;
   width:100%;
   height: 25%;
+  display: flex;
   border-top: 10px solid #231F20;
     background: #B0C4DE;
+    align-items: center;
+}
+
+#Sending form{
+  margin-left: 30vw;
+  min-width: 600px;
+  max-width: 900px;
+}
+
+.all-images
+{
+margin-bottom:5px;
+display:flex;
+flex-direction:column;
+width:100%;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+
 }
 
 #sidebar button{
@@ -65,3 +106,10 @@ margin-top: 5px;
   transition-delay: .3s;
   align-items:center;
 }
+
+.example-2 .btn-tertiary{color:#555;padding:0;line-height:40px;width:300px;margin:auto;display:block;border:2px solid #555}
+.example-2 .btn-tertiary:hover,.example-2 .btn-tertiary:focus{color:#888;border-color:#888}
+.example-2 .input-file{width:.1px;height:.1px;opacity:0;overflow:hidden;position:absolute;z-index:-1}
+.example-2 .input-file + .js-labelFile{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 10px;cursor:pointer}
+.example-2 .input-file + .js-labelFile .icon:before{content:"\f093"}
+.example-2 .input-file + .js-labelFile.has-file .icon:before{content:"\f00c";color:#5AAC7B}

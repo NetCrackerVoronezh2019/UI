@@ -5,7 +5,7 @@
         <div class="inner-part">
           <label class="img">
             <img *ngIf="group?.image==null"  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
-            <img *ngIf="group?.image!=null"  src='http://localhost:1234/getAdvImg/{{group.image}}'/>
+            <img *ngIf="group?.image!=null && loading"  [src]="groupImage"/>
           </label>
           <div class="content ">
             <div class="title">{{group?.name}}</div>
@@ -36,7 +36,7 @@
           <button mat-raised-button class="ml-2" *ngIf="admin && createPostVisible" (click)="sendPost()"><i class="fas fa-check-circle"></i>Отправить</button>
           <button mat-raised-button class="ml-2" *ngIf="admin && createPostVisible" (click)="closeCreatePost()"><i class="fas fa-times"></i>Отмена</button>
           <div *ngFor="let post of posts">
-              <app-post-card [(post)]="post" [(group)]="group" [(user)]="user" [(admin)]="admin"></app-post-card>
+              <app-post-card [(post)]="post" [(groupName)]="group.name" [(groupImage)]="groupImage" [(user)]="user" [(admin)]="admin"></app-post-card>
           </div>
         </div>
       </div>

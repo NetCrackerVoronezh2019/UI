@@ -3,7 +3,7 @@
     <div class="inner-part">
       <label class="img">
         <img *ngIf="group.image==null"  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
-        <img *ngIf="group.image!=null"  src='http://localhost:1234/getAdvImg/{{group.image}}'/>
+        <img *ngIf="group.image!=null && loading"  [src]="groupImage"/>
       </label>
       <div class="content ">
         <div class="title">{{group.name}}</div>

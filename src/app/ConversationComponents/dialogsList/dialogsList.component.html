@@ -50,6 +50,9 @@
               <small  class="form-text text-muted" *ngIf="dgService.getDialogCreationForm().controls['dialogName'].errors.maxlength">name is too long</small>
             </div>
           </div>
+          <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
+          <label for="file" class="btn btn-tertiary js-labelFile">
+          </label>
       </form>
       <button class="btn btn-light btn-primary-spacing" (click)="createDialog()">Create</button>
       <button class="btn btn-dark btn-primary-spacing" (click)="closeDialogForm()">Cancel</button>

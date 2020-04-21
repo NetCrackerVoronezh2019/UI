@@ -7,4 +7,5 @@ export class Dialog
   creatorId:number;
   dialogId:number;
   type:string;
+  image:string;
 }

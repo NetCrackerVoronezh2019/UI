@@ -8,6 +8,7 @@ import { Notification } from '@ConversationClasses/Notification'
 import * as Webstomp from 'webstomp-client';
 import { Client} from 'webstomp-client';
 import $ from 'jquery';
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-dialog',
@@ -28,8 +29,15 @@ export class DialogComponent implements OnInit {
   user:User;
   textbox:string = "";
   users:User[];
+  dialogImage:any;
+  loading = false;
+  settingsVisible = false;
+  avatar:any;
+  fileName:any;
+  allFiles:any[]=[];
+  allNames:any[]=[]
 
-  constructor(public dgService:DialogService,private route: ActivatedRoute,private location: Router) {
+  constructor(public dgService:DialogService,private route: ActivatedRoute,private location: Router, private sanitizer: DomSanitizer) {
   }
 
   initializeWebSocketConnection(){
@@ -62,6 +70,9 @@ export class DialogComponent implements OnInit {
         this.dialogId=params['dialogId'];
         this.dgService.getDialogInfo(this.dialogId).subscribe((data:Dialog) =>{
         this.dialog = data;
+        if (this.dialog.image!=null) {
+          this.downloadProfileImage(this.dialog.image);
+        }
       this.dgService.getDialogMembers(this.dialogId).subscribe((data:User[]) => {
         this.dialogMembers = data;
         data.forEach(user => {
@@ -88,7 +99,7 @@ export class DialogComponent implements OnInit {
       "dialogId": this.dialog.dialogId
     }))
     let i = 0;
-    while (this.messages[this.messages.length -1 -i].isNoRead == true) {
+    while (i < this.messages.length && this.messages[this.messages.length -1 -i].isNoRead == true) {
       this.messages[this.messages.length -1 -i].isNoRead = false;
       i++;
     }
@@ -99,12 +110,11 @@ export class DialogComponent implements OnInit {
     if (this.dgService.getMessageForm().invalid) {
       alert("message is empty")
     } else {
-      this.stompClient.send("/sendMessage/" , JSON.stringify({
-        "text": this.dgService.getMessageForm().value.text,
-        "sender": this.user,
-        "dialog": this.dialog.dialogId
-      }));
+      this.dgService.sendMessage(this.user,this.dialogId,this.allFiles).subscribe(data => {
+      })
       this.textbox = "";
+      this.allNames.splice(0,this.allFiles.length);
+      this.allFiles.splice(0,this.allFiles.length);
     }
   }
 
@@ -147,5 +157,85 @@ export class DialogComponent implements OnInit {
       this.users = data;
     })
   }
+
+  downloadProfileImage(key:String)
+  {
+
+    this.dgService.downloadDialogFile(key)
+      .subscribe(
+        (response) => {
+          let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+          this.dialogImage=URL.createObjectURL(blob)
+          this.dialogImage=this.sanitizer.bypassSecurityTrustUrl(this.dialogImage);
+          this.loading = true;
+        },
+         error => console.log('Error')
+      )
+
+  }
+
+  showSettings() {
+    this.settingsVisible = true;
+    this.dgService.getDialogSettingsForm().reset({name: this.dialog.name})
+  }
+
+  closeSetings() {
+    this.settingsVisible = false;
+  }
+
+  acceptSettings() {
+    this.dgService.submitSettings(this.dialogId).subscribe(data => {
+      this.dialog.name = this.dgService.getDialogSettingsForm().value.name;
+      this.settingsVisible = false;
+    })
+  }
+
+  handleFileInput(file: FileList) {
+
+  this.fileName = file.item(0).name;
+  this.readFile(file.item(0));
+  }
+
+    readFile(file)
+    {
+      let reader;
+      reader=new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+      this.avatar = reader.result;
+      };
+    }
+
+    setAvatar() {
+      this.dgService.submitAvatar(this.dialogId,this.avatar).subscribe(data => {
+        this.dialogImage = this.avatar;
+      })
+    }
+
+    handleFileMessageInput(file: FileList) {
+
+       for(let i=0;i<file.length;i++)
+       {
+          this.allNames.push(file.item(i).name);
+          this.readMessageFile(file.item(i));
+       }
+
+      }
+
+      readMessageFile(file)
+      {
+        let reader;
+        reader=new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+        this.allFiles.push(reader.result);
+        };
+      }
+
+      deleteImageFromList(index)
+      {
+        this.allNames.splice(index,1);
+        this.allFiles.splice(index,1);
+      }
 
 }

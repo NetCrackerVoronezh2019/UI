@@ -4,6 +4,7 @@ import { Group } from '@UserAndGroupClasses/group'
 import { Comment } from '@UserAndGroupClasses/comment'
 import { User } from '@UserAndGroupClasses/user'
 import {PostService} from './services/post-card.service'
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-post-card',
@@ -14,7 +15,8 @@ import {PostService} from './services/post-card.service'
 export class PostCardComponent implements OnInit {
 
   @Input() post:Post;
-  @Input() group:Group;
+  @Input() groupName:any;
+  @Input() groupImage:any;
   @Input() admin:boolean;
   @Input() user:User;
   comments:Comment[];
@@ -22,9 +24,11 @@ export class PostCardComponent implements OnInit {
   createCommentVisible = false;
   postSettingsVisible = false;
   deleted = false;
-  constructor(private ps:PostService) { }
+  postImages:any[] = [] ;
+  constructor(private ps:PostService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.downloadPostImages(this.post.images);
   }
 
 
@@ -81,6 +85,22 @@ export class PostCardComponent implements OnInit {
       this.ps.deletePost(this.post.postId).subscribe(data => {
         this.deleted = true;
       })
+    }
+  }
+
+  downloadPostImages(keys:String[])
+  {
+    for (let key of keys) {
+    this.ps.downloadGroupImage(key)
+      .subscribe(
+        (response) => {
+          let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+          let postImage:any = URL.createObjectURL(blob)
+          postImage = this.sanitizer.bypassSecurityTrustUrl(postImage);
+          this.postImages.push(postImage);
+        },
+         error => console.log('Error')
+      )
     }
   }
 

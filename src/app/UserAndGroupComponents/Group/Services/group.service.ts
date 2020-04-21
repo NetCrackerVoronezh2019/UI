@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl} from '@angular/forms';
 import { HttpClient, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Http, ResponseContentType} from '@angular/http';
 
 @Injectable()
 export class GroupService {
 
-  constructor(private http: HttpClient, private fb:FormBuilder) { }
+  constructor(private http: HttpClient, private fb:FormBuilder, private http2: Http) { }
 
   groupSettingsForm=this.fb.group(
           {
@@ -114,6 +116,10 @@ export class GroupService {
         image:image
       }
       return this.http.put('http://localhost:9080/group/setAvatar',body)
+    }
+
+    downloadGroupImage(key:String): Observable<any>{
+        return this.http2.get('http://localhost:1234/getGroupImg/'+key, {responseType: ResponseContentType.Blob});
     }
 
 }

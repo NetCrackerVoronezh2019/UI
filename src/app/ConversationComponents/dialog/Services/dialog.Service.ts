@@ -1,11 +1,13 @@
 import { FormGroup, FormControl,Validators, FormBuilder, AbstractControl} from '@angular/forms';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Observable} from 'rxjs';
+import {Http, ResponseContentType} from '@angular/http';
 
 @Injectable()
 export class DialogService
 {
-    constructor(private http: HttpClient, private fb:FormBuilder) {}
+    constructor(private http: HttpClient, private fb:FormBuilder,  private http2: Http) {}
 
     messageForm=this.fb.group(
             {
@@ -25,6 +27,17 @@ export class DialogService
             "lastName":["",[Validators.maxLength(15)]]
           }
       )
+
+      dialogSettingsForm=this.fb.group(
+              {
+                  "name":["",[Validators.required,Validators.minLength(5),Validators.maxLength(15)]]
+              }
+            )
+
+      getDialogSettingsForm() {
+        return this.dialogSettingsForm;
+      }
+
 
       getUserSearchForm() {
         return this.userSearchForm
@@ -83,4 +96,34 @@ export class DialogService
             return this.http.get('http://localhost:9080/users/search',{params: new HttpParams().set("firstName",this.userSearchForm.value.firstName)
                                                                                                         .set("lastName",this.userSearchForm.value.lastName)})
           }
+
+          downloadDialogFile(key:String): Observable<any>{
+              return this.http2.get('http://localhost:1234/getDialogFile/'+key, {responseType: ResponseContentType.Blob});
+          }
+
+        submitSettings(dialogId) {
+          const body = {
+            dialogId: dialogId,
+            name: this.dialogSettingsForm.value.name
+          }
+          return this.http.put('http://localhost:9080/dialog/settings',body)
+        }
+
+        submitAvatar(dialogId,avatar) {
+          const body = {
+            dialogId: dialogId,
+            image : avatar
+          }
+          return this.http.put('http://localhost:9080/dialog/setAvatar',body)
+        }
+
+        sendMessage(user,dialogId,files) {
+          const body = {
+            text: this.messageForm.value.text,
+            sender: user,
+            dialog: dialogId,
+            files : files
+          }
+          return this.http.post('http://localhost:9080/sendMessage/',body)
+        }
 }

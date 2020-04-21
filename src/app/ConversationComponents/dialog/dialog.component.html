@@ -1,18 +1,44 @@
 <body>
   <app-navbar></app-navbar>
  <div id="sidebar">
-   <p><mark>{{dialog?.name}}</mark></p>
-   <div *ngIf="!userSearchPanelVisible">
+   <li class='dialog'>
+     <img *ngIf="dialog?.image==null" src='https://www.egalochkina.ru/wp-content/uploads/2018/03/dialog-sokrata.jpg'/>
+     <img *ngIf="dialog?.image!=null && loading"  [src]="dialogImage"/>
+     <div class='name'>
+       {{dialog?.name}}
+     </div>
+   </li>
+   <div *ngIf="!userSearchPanelVisible && !settingsVisible">
    <button mat-raised-button class="ml-2" *ngIf="dialog?.type=='public'" (click)="openUserAddForm()"><i class="fas fa-plus-circle"></i>Добавить пользователя</button>
    <button mat-raised-button class="ml-2" *ngIf="dialog?.type=='public'" (click)="liveDialog()"><i class="fas fa-minus-circle"></i>Покинуть диалог</button>
    <div *ngIf="dialog?.creatorId == user?.userId">
      <button mat-raised-button class="ml-2" *ngIf="dialog?.type=='public'" (click)="deleteDialog()"><i class="fas fa-minus-circle"></i>Удалить диалог</button>
+     <button mat-raised-button class="ml-2" *ngIf="dialog?.type=='public'" (click)="showSettings()"><i class="fas fa-minus-circle"></i>Настройки</button>
    </div>
    Участники:
    <div *ngFor ='let user of dialogMembers'>
      <app-dialog-member-card [(us)]="user"></app-dialog-member-card>
    </div>
    </div>
+   <div *ngIf="settingsVisible">
+     <h3>Настройки чата</h3>
+     <form [formGroup]="dgService.getDialogSettingsForm()">
+         <div class="form-group">
+           <label for="">Имя чата</label>
+           <input id="Name" type="text" class="form-control" formControlName="name" autocomplete="off" placeholder="Dialog name">
+           <div *ngIf="dgService.getDialogSettingsForm().controls['name'].invalid && dgService.getDialogSettingsForm().controls['name'].touched" >
+             <small  *ngIf="dgService.getDialogSettingsForm().controls['name'].errors.minlength">name is too short</small>
+             <small  *ngIf="dgService.getDialogSettingsForm().controls['name'].errors.maxlength">name is too long</small>
+           </div>
+         </div>
+     </form>
+     <button mat-raised-button class="ml-2" (click)="acceptSettings()"><i class="fas fa-check-circle"></i>Изменить</button>
+     <button mat-raised-button class="ml-2" (click)="closeSetings()"><i class="fas fa-minus-circle"></i>Закрыть</button>
+     <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
+     <label for="file" class="btn btn-tertiary js-labelFile">
+       <button class="js-fileName" *ngIf="avatar!=undefined" (click)="setAvatar()"><i class="icon fa fa-check"></i> Изменить Аватар</button>
+     </label>
+     </div>
    <div *ngIf="userSearchPanelVisible">
      <form [formGroup]="dgService.getUserSearchForm()">
        <h5>Поиск</h5>
@@ -45,6 +71,22 @@
        </div>
     </div>
    </form>
+   <div class="form-group">
+     <div class="example-2 mb-3">
+         <div class="form-group">
+           <input type="file" name="file" id="file"  (change)="handleFileMessageInput($event.target.files)"  multiple accept="image/*, application/pdf" class="input-file"/>
+           <label for="file" class="btn btn-tertiary js-labelFile">
+             <i class="icon fa fa-check"></i>
+             <span class="js-fileName"> Загрузить Файлы</span>
+           </label>
+         </div>
+        </div>
+   </div>
+   <div class="mb-2 all-images">
+       <div class="mb-3" *ngFor="let not of allNames; let i = index" (click)="deleteImageFromList(i)">
+           <span  matBadge="x"  matBadgeOverlap="false" >{{not}}</span>
+       </div>
+  </div>
  </div>
  <div id="content" #scrollMe [scrollTop]="scrollMe.scrollHeight">
        <ul *ngFor ='let message of messages'>

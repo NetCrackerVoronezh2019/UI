@@ -5,6 +5,7 @@ import { User } from '@UserAndGroupClasses/user'
 import { Post } from '@UserAndGroupClasses/post'
 import {GroupService} from './Services/group.service'
 import {Subject } from '@UserAndGroupClasses/subject'
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-group',
@@ -33,19 +34,22 @@ export class GroupComponent implements OnInit {
   fileName:any;
   allFiles:any[]=[];
   allNames:any[]=[];
+  groupImage:any;
+  loading = false;
 
-  constructor(private route: ActivatedRoute,private location: Router,private gs: GroupService) {
+  constructor(private route: ActivatedRoute,private location: Router,private gs: GroupService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.groupId=params['groupId'];
-      this.getGroupPosts();
       this.gs.getAdmins(this.groupId).subscribe((data:User[]) => {
         this.admins = data;
       })
       this.gs.getGroup(this.groupId).subscribe((data:Group) => {
         this.group = data;
+        this.getGroupPosts();
+        this.downloadProfileImage(this.group.image)
         this.gs.getUserGroups().subscribe((data:Group[]) => {
           this.thisusergroups = data;
           this.thisusergroups.forEach(element => {
@@ -66,6 +70,23 @@ export class GroupComponent implements OnInit {
       })
     })
   }
+
+  downloadProfileImage(key:String)
+  {
+
+    this.gs.downloadGroupImage(key)
+      .subscribe(
+        (response) => {
+          let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+          this.groupImage=URL.createObjectURL(blob)
+          this.groupImage=this.sanitizer.bypassSecurityTrustUrl(this.groupImage);
+          this.loading = true;
+        },
+         error => console.log('Error')
+      )
+
+  }
+
 
   showSubscribers() {
     if (!this.subscriversVisible) {
@@ -243,7 +264,7 @@ export class GroupComponent implements OnInit {
 
       setAvatar() {
         this.gs.setAvatar(this.groupId,this.avatar).subscribe(data => {
-
+            this.downloadProfileImage(this.group.image);
         })
       }
 

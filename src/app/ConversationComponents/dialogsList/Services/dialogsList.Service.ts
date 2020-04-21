@@ -36,9 +36,10 @@ export class DialogsListService
        return this.dialogCreationForm;
       }
 
-   CreateDialog(){
+   CreateDialog(avatar){
      const body = {
-                       name: this.dialogCreationForm.value.dialogName
+                       name: this.dialogCreationForm.value.dialogName,
+                       image: avatar
                    };
         this.dialogCreationForm.value.dialogName = "";
         return this.http.post('http://localhost:9080/user/dialogCreate/',body);

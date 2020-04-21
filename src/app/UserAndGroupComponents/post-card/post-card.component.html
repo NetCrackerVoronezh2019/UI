@@ -2,15 +2,15 @@
 <div *ngIf="!deleted" class="blog-card">
     <div class="inner-part">
       <label class="img">
-        <img *ngIf="group?.image==null"  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
-        <img *ngIf="group?.image!=null"  src='http://localhost:1234/getAdvImg/{{group.image}}'/>
+        <img *ngIf="groupImage==null"  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
+        <img *ngIf="groupImage!=null"  [src]='groupImage'/>
       </label>
       <div class="content" *ngIf="!postSettingsVisible">
-        <div class="title">{{group?.name}}</div>
+        <div class="title">{{groupName}}</div>
         <h6>{{post.date}}</h6>
         <span>{{post.text}}</span>
-        <div class="imag" *ngFor="let img of post.images">
-          <img src='http://localhost:1234/getAdvImg/{{img}}'/>
+        <div class="imag" *ngFor="let img of postImages">
+          <img [src]="img"/>
         </div>
       </div>
       <div class="content" *ngIf="postSettingsVisible">

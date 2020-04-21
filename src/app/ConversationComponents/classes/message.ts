@@ -9,4 +9,5 @@ export class Message
   isModified:boolean;
   isNoRead:boolean;
   messageId:number;
+  files:string[];
 }
