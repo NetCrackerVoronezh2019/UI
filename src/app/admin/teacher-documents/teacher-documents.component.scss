@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .key-label
+  {
+    cursor: pointer;
+  }
+
+  .icon
+  {
+    font-size:23px;
+    cursor:pointer;
+  }
+
+  .checkBlock
+  {
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+
+  a
+  {
+    text-decoration:none;
+    color:black !important;
+  }

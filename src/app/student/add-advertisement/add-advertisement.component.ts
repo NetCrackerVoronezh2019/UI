@@ -5,6 +5,7 @@ import {Subject} from '../../classes/subject';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Tag} from '../../classes/tag';
+import {File} from '../../classes/file' 
 
 
 @Component({
@@ -19,7 +20,7 @@ import {Tag} from '../../classes/tag';
 export class AddAdvertisementComponent implements OnInit {
 
   subjects:Subject[];
-  allFiles:any[]=[];
+  allFiles:File[]=[];
   allNames:any[]=[]
   tags: Tag[] = [];
   sendData:Boolean=false;
@@ -62,26 +63,31 @@ export class AddAdvertisementComponent implements OnInit {
    
   }
 
-  handleFileInput(file: FileList) {
   
-     for(let i=0;i<file.length;i++)
-     {
-        this.allNames.push(file.item(i).name);
-        this.readFile(file.item(i));
-     }
-    console.log(this.allFiles);
-     
+  handleFileInput(file: FileList) {
+    for(let i=0;i<file.length;i++)
+    {
+      let newfile:File=new File(); 
+      newfile.contentType=file.item(i).type;
+      newfile.name=file.item(i).name;
+      this.allNames.push(file.item(i).name);
+       this.readFile(file.item(i),newfile);
     }
     
-    readFile(file)
-    {
-      let reader;
-      reader=new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-      this.allFiles.push(reader.result);
-      }; 
-    }
+    console.log(this.allFiles);
+ }
+
+ readFile(file,newfile:File)
+  {
+    let reader;
+    reader=new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+       newfile.content=reader.result;
+       this.allFiles.push(newfile);
+    }; 
+  }
+  
   
 
   onSubmit()

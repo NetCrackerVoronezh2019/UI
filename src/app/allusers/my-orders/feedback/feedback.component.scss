@@ -1,43 +1,14 @@
-.notifications
+
+  
+.order-page
 {
-    display:flex;
-    flex-direction:column;
-    padding:12px;
-
+    padding:50px;
 }
 
-.notification
+
+  th
 {
-
-    margin-bottom:5px;
-    font:15px;
-    font-weight:555;
-}
-
-.ft {
-	font-size:15px;
-}
-
-a {
-	color:white !important;
-	text-decoration: none
-  }
-
-.notif-buttons
-{
-
-    display:flex;
-    padding:10px;
-    width:100%;
-}
-
-.nbut{
-	max-width:30px;
-}
-.b
-{
-
-    margin:30px;
+    text-align:center;
 }
 
 
@@ -58,6 +29,14 @@ a {
 	line-height: 33px;
 	color: lightgrey;
 	text-shadow: 1px 1px #bbb;
+}
+
+.button-area
+{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  margin-top:10px;
 }
 .rating-area:not(:checked) > label:before {
 	content: '★';
@@ -82,8 +61,3 @@ a {
 	position: relative;
 }
 
-
-.advHref{
-	color:black !important;
-	text-decoration:none;
-}

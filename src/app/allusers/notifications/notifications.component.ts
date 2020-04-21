@@ -1,7 +1,7 @@
 import { Component, OnInit,Input} from '@angular/core';
 import {AdvNotification} from '../../classes/advNotification'
 import {AdvertisementService1} from '../services/advertisement.service'
-
+import { Router} from '@angular/router';
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
@@ -13,7 +13,7 @@ export class NotificationsComponent implements OnInit {
   @Input() notifications:AdvNotification[];
   public reiting:any;
   public not:AdvNotification;
-  constructor(private service:AdvertisementService1) { }
+  constructor(private service:AdvertisementService1, private router:Router) { }
 
   ngOnInit() {
   
@@ -32,6 +32,7 @@ export class NotificationsComponent implements OnInit {
   {
     x.responseStatus="ACCEPTED";
     console.log(x);
+    this.router.navigate(['/myorders/']);
     this.service.sendNotificationResponse(x)
     .subscribe(
       (data)=>this.getMyAllNotifications(),

@@ -1,6 +1,6 @@
-<app-navbar></app-navbar>
+
 <div class="order-page">
-<div *ngIf="check">
+<div *ngIf="myRole=='ROLE_TEACHER'" >
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <!-- Position Column -->
         <ng-container matColumnDef="orderId">
@@ -9,21 +9,15 @@
         </ng-container>
     
         <!-- Weight Column -->
-        <ng-container matColumnDef="freelancerId">
-        <mat-header-cell *matHeaderCellDef> Фрилансер</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.freelancerId}} </mat-cell>
+        <ng-container matColumnDef="freelancer">
+        <mat-header-cell *matHeaderCellDef> Заказчик</mat-header-cell>
+        <mat-cell *matCellDef="let element"> <a href="/userPage/{{element.customerId}}">{{element.customerFIO}}</a></mat-cell>
         </ng-container>
     
         <!-- Symbol Column -->
-        <ng-container matColumnDef="advertisementId">
-        <mat-header-cell *matHeaderCellDef>Номер объявления</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.advertisementId}} </mat-cell>
-        </ng-container>
-
-        <!-- Symbol Column -->
         <ng-container matColumnDef="advertisementName">
             <mat-header-cell *matHeaderCellDef> Название объявления</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.advertisementName}} </mat-cell>
+            <mat-cell *matCellDef="let element"> <a href='adv/{{element.advertisementId}}'>{{element.advertisementName}}</a></mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
@@ -42,10 +36,113 @@
           </span>
         </ng-container>
 
+        <ng-container matColumnDef="feedBack">
+          <span>        
+            <mat-header-cell *matHeaderCellDef>Отзыв</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="t" >
+              <button *ngIf="row.starsForWork!='0' && row.status=='СOMPLETED'" (click)="showFeedBackClick(row)" class="btn btn-success"  data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-backdrop="static" data-keyboard="false" >Смотреть отзыв</button>
+              <p *ngIf="row.status != 'СOMPLETED'" class="p1">Работа не завершена</p>
+              <p *ngIf="row.status == 'СOMPLETED' && row.starsForWork=='0'" class="p1"> - </p>
+            </mat-cell>
+          </span>
+        </ng-container>
+
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
   </div>
+
+  <div *ngIf="myRole=='ROLE_STUDENT'">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Position Column -->
+        <ng-container matColumnDef="orderId">
+        <mat-header-cell *matHeaderCellDef>Номер заказа</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.orderId}} </mat-cell>
+        </ng-container>
+        
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="customer">
+        <mat-header-cell *matHeaderCellDef>Фрилансер </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <a href='userPage/{{element.freelancerId}}'>{{element.freelancerFIO}}</a></mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="advertisementName">
+            <mat-header-cell *matHeaderCellDef> Название объявления</mat-header-cell>
+            <mat-cell *matCellDef="let element"> <a href='adv/{{element.advertisementId}}'>{{element.advertisementName}}</a> </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>Стaтус заказа</mat-header-cell>
+            <mat-cell  *matCellDef="let element"> {{element.status}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="actions">
+          <span>
+            
+            <mat-header-cell *matHeaderCellDef>Отзыв</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="t" >
+              <button *ngIf="row.starsForWork=='0' && row.status=='СOMPLETED'" (click)="ratingClick(row)" class="btn btn-success" data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-keyboard="false" >Оценить работу</button>
+              <button *ngIf="row.starsForWork!='0' && row.status=='СOMPLETED'" (click)="showFeedBackClick(row)" class="btn btn-success"  data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-backdrop="static" data-keyboard="false" >Смотреть отзыв</button>
+              <p *ngIf="row.status != 'СOMPLETED' " class="p1">Работа не завершена</p>
+             
+            </mat-cell>
+          </span>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+    </mat-table>
   </div>
+  </div>
+
+<div class="modal fade" id="ratingModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Оцените работу</h5>
+        <button type="button" class="close" (click)=closeModel() data-dismiss="modal" aria-label="Close" >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div *ngIf="EditFeedBack==true">
+        <div *ngIf="!sended">
+          <div  class="rating-area">           
+              <input (click)="raitingClick($event,not)"  type="radio" id="star-5" name="rating" value="5">
+              <label for="star-5" title="Оценка «5»"></label>	
+              <input (click)="raitingClick($event,not)"   type="radio" id="star-4" name="rating" value="4">
+              <label for="star-4" title="Оценка «4»"></label>    
+              <input (click)="raitingClick($event,not)"  type="radio" id="star-3" name="rating" value="3">
+              <label for="star-3" title="Оценка «3»"></label>  
+              <input (click)="raitingClick($event,not)"  type="radio" id="star-2" name="rating" value="2">
+              <label for="star-2" title="Оценка «2»"></label>    
+              <input (click)="raitingClick($event,not)"  type="radio" id="star-1" name="rating" value="1">
+              <label for="star-1" title="Оценка «1»"></label>
+            </div>
+            <form class="form-group" [formGroup]="service.getOrderForm()">
+              <textarea  formControlName="comment" type="text" class="form-control" id="Input2" rows="4" aria-describedby="emailHelp" placeholder="Оставьте комментарий"></textarea>
+            </form>     
+            <div class="button-area">
+              <button type="button b" (click)="sendFeedBack() "class="btn btn-success" >Оценить</button>
+            </div>
+          </div>
+          <div *ngIf="sended">
+            <h1>{{message}}</h1>
+          </div>
+        </div>
+        <div *ngIf="showFeedBack">
+          <div>Оценка - {{editOrder.starsForWork}}</div>
+          <div>Отзыв - {{editOrder.comment}}</div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 

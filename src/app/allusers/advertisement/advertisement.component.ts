@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs'
 import {AdvertisementService1} from '../services/advertisement.service';
 import {AdvertisementService} from '../../student/services/advertisement.service'
 import {Order} from '../../classes/order'
+import * as fileSaver from 'file-saver';
 import {OrderService} from '../services/order.service'
 
 @Component({
@@ -120,6 +121,25 @@ export class AdvertisementComponent implements OnInit {
       (data:Boolean)=>this.can=data,
       error=>console.log(error)
     )
+  }
+
+  download(key:String)
+  {
+    let name:String=key.split('_')[1];
+    let fileType:any;
+    if(name.split('.')[1]=='pdf')
+    fileType='application/pdf; charset=utf-8';
+    else
+      fileType='image/jpg; charset=utf-8';
+    this.service.downloadFile(key)
+      .subscribe(
+        (response) => {
+          let blob:any = new Blob([response.blob()], { type:fileType});
+
+          fileSaver.saveAs(blob,name);
+        },
+         error => console.log('Error downloading the file')
+      )
   }
   
 }

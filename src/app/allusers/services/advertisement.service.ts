@@ -3,12 +3,16 @@ import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import { Advertisement } from '@MainClasses/advertisement';
 import { AdvNotification } from '@MainClasses/advNotification';
+import {Http, ResponseContentType} from '@angular/http';
+import {Observable} from 'rxjs';
+import {File} from '../../classes/file'
+
 
 @Injectable()
 export class AdvertisementService1
 {
     baseUrl:String='http://localhost:9080';
-    constructor(private http:HttpClient){}
+    constructor(private http:HttpClient,private http2: Http){}
 
     myOrder(id)
     {
@@ -94,7 +98,6 @@ export class AdvertisementService1
 
     setAllNotificationasReaded()
     {
-        console.log("gfgfdgfd");
         return this.http.get(this.baseUrl+'/user/setNotificatiosAsReaded');
     }
     getRole()
@@ -105,6 +108,11 @@ export class AdvertisementService1
     getBytesForImg(adv:Advertisement)
     {
         return this.http.get('http://localhost:1234/getimg/'+adv.imageKeys[0]);
+    }
+
+
+    downloadFile(key:String): Observable<any>{
+        return this.http2.get('http://localhost:1234/getAdvImg/'+key, {responseType: ResponseContentType.Blob});
     }
 
 
