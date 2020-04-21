@@ -52,7 +52,7 @@
                                   </mat-chip-list>
                                   <div class="tittle mt-3">Прикрепленные файлы <i class="fas fa-paperclip"></i></div>
                                   <div class="attachments mt-3">                                   
-                                    <span *ngFor="let doc of adv.attachmentsKeys; let i = index" class="mr-2">
+                                    <span *ngFor="let doc of adv.attachments; let i = index" class="mr-2">
                                       <div (click)="download(doc)" ><i class="fas fa-file fontFile"></i></div>
                                       <div class="fontFileName">{{doc.split('_')[1]}}</div>
                                     </span> 

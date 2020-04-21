@@ -57,11 +57,12 @@ import {CommentCardComponent} from './UserAndGroupComponents/comment-card/commen
 import {FriendListComponent} from "./UserAndGroupComponents/friend-list/friend-list.component"
 import {FriendCardComponent} from './UserAndGroupComponents/friend-card/friend-card.component';
 import { Userpage2Component } from './userpage2/userpage2.component';
-import { FeedbackComponent } from './allusers/my-orders/feedback/feedback.component'
+import { FeedbackComponent } from './allusers/my-orders/feedback/feedback.component';
+import { TeacherDocumentsComponent } from './admin/teacher-documents/teacher-documents.component'
 const appRoutes: Routes =[
-  { path: 'registration', component:RegistrationComponent},
-  { path: 'adv/:id', component:AdvertisementComponent},
-  { path: 'alladv', component:AllAdvertisementsComponent},
+  {path: 'registration', component:RegistrationComponent},
+  {path: 'adv/:id', component:AdvertisementComponent},
+  {path: 'alladv', component:AllAdvertisementsComponent},
   {path:'',component:HomeComponent},
   {path: 'signin',component:SignInComponent},
   {path:'activate/:activateCode',component:ActivatePageComponent},
@@ -78,7 +79,8 @@ const appRoutes: Routes =[
   {path:'myadvertisements', component:MyAdvertisementsComponent},
   {path:'email/:emailAdress',component:EmailPageComponent},
   {path: 'friends', component:FriendListComponent},
-  {path: 'userPage/:id',component:Userpage2Component}
+  {path: 'userPage/:id',component:Userpage2Component},
+  {path:"allDocuments",component:TeacherDocumentsComponent}
 ];
 
 @NgModule({
@@ -117,7 +119,8 @@ const appRoutes: Routes =[
     FriendListComponent,
     FriendCardComponent,
     Userpage2Component,
-    FeedbackComponent
+    FeedbackComponent,
+    TeacherDocumentsComponent
   ],
   imports: [
     MatInputModule,
