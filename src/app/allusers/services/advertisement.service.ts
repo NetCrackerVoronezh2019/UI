@@ -18,10 +18,10 @@ export class AdvertisementService1
     {
         let body={
             advertisementId:id,
-            userId:130
+            userId:168
         }
 
-        return this.http.post('http://localhost:1122/haveIOrder',body);
+        return this.http.post(this.baseUrl+'/user/isMyOrder',body);
     }
 
     getAllAdvertisements()
@@ -127,4 +127,6 @@ export class AdvertisementService1
         console.log(body);
         return this.http.post(this.baseUrl+"/user/changeReiting",body);
     }
+
+    
 }

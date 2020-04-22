@@ -68,6 +68,7 @@ export class NavbarComponent implements OnInit {
     closeWebSocketConection() {
       this.stompClient1.disconnect();
       this.stompClient2.disconnect();
+      this.stompClient3.disconnect();
     }
 
     getMessageNotificationCount()

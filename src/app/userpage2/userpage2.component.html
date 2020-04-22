@@ -53,6 +53,9 @@
                                 <i class="fas fa-mobile-alt c-orange mr-1"></i>
                                 online
                             </span>
+                            <span  class="lastOnline" *ngIf="!user.isOnline">
+                                Последний раз был в сети {{user.lastTimeWasONLINE.split('T')[1].split('.')[0]}}
+                            </span>
 
                         </h4>
 
@@ -86,12 +89,7 @@
                                     <span>{{user.reiting}}</span>
                                 </div>
                             </div>
-                            <div class="profile-info-row">
-                                <div class="profile-info-name">Последний раз был в сети</div>
-
-
-                            </div>
-
+                           
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> Роль </div>
 
@@ -129,7 +127,7 @@
                                 </div>
                             </div>
 
-                            <h4 class="widget-title smaller mb-3">
+                            <h4 *ngIf="user.roleName=='ROLE_TEACHER'" class="widget-title smaller mb-3">
                                 <i class="ace-icon fa fa-check-square-o bigger-110"></i>
                                 Сертификаты и Документы
                             </h4>

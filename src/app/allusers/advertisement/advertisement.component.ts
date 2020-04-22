@@ -7,6 +7,7 @@ import {AdvertisementService} from '../../student/services/advertisement.service
 import {Order} from '../../classes/order'
 import * as fileSaver from 'file-saver';
 import {OrderService} from '../services/order.service'
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-advertisement',
@@ -24,11 +25,13 @@ export class AdvertisementComponent implements OnInit {
   subscription:Subscription;
   can:Boolean=false;
   order:Order;
+  coverImage:any;
   message:String='Вы точно хотите получить этот заказ ?'
   buttonHidden:Boolean=true;
   constructor(private service:AdvertisementService1, private service2:AdvertisementService,
     private activateRoute: ActivatedRoute,
-    private orderService:OrderService) { }
+    private orderService:OrderService,
+    private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
       
@@ -45,7 +48,7 @@ export class AdvertisementComponent implements OnInit {
   {
     this.service.myOrder(this.id)
         .subscribe(
-          (data:Order)=>{this.order=data,console.log(data)},
+          (data:Order)=>{this.order=data,console.log("isMyOrder"); console.log(data)},
           (error)=>console.log(error)
         )
   }
@@ -91,7 +94,10 @@ export class AdvertisementComponent implements OnInit {
     console.log("user"+id);
     this.service.getAdvertisementById(id)
     .subscribe(
-      (data:Advertisement)=>{this.adv=data;this.isLoading=true;},
+      (data:Advertisement)=>{
+        this.adv=data;this.isLoading=true;
+        this.downloadCoverImage(this.adv.coverImageKey)
+      },
       error=>console.log(error)
     )
   }
@@ -142,4 +148,20 @@ export class AdvertisementComponent implements OnInit {
       )
   }
   
+  downloadCoverImage(key:String)
+  {
+
+    this.service.downloadFile(key)
+      .subscribe(
+        (response) => {
+          let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+          this.coverImage=URL.createObjectURL(blob)
+          this.coverImage=this.sanitizer.bypassSecurityTrustUrl(this.coverImage);
+          //this.loading=true;
+        //  console.log(this.loading);
+        },
+         error => console.log('Error')
+      )
+
+  }
 }

@@ -62,7 +62,7 @@ export class AdvertisementService
             console.log(body);
             return this.http.post("http://localhost:1122/"+'updateAdvertisementInformation',body);
         }
-        sendData(tags:Tag[],allFiles)
+        sendData(tags:Tag[],allFiles,coverImage)
         {
             let body={
 				advertisementName:this.advertisementForm.value.advertisementName,
@@ -70,12 +70,12 @@ export class AdvertisementService
                 deadline:this.advertisementForm.value.deadlineDate+"T00:00:00",
                 description:this.advertisementForm.value.description,
                 budget:this.advertisementForm.value.budget,
-              //  content:this.advertisementForm.value.image.value,
+                coverImage,
                 tags,
                 allFiles
 
             };
-            console.log(body);
+          
             return this.http.post(this.baseUrl+'/user/addAdvertisement',body);
 
         }

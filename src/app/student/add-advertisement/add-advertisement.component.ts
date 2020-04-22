@@ -22,6 +22,8 @@ export class AddAdvertisementComponent implements OnInit {
   subjects:Subject[];
   allFiles:File[]=[];
   allNames:any[]=[]
+  coverName:any;
+  coverFile:File=new File();
   tags: Tag[] = [];
   sendData:Boolean=false;
   visible = true;
@@ -65,6 +67,8 @@ export class AddAdvertisementComponent implements OnInit {
 
   
   handleFileInput(file: FileList) {
+    console.log("files");
+    console.log(file);
     for(let i=0;i<file.length;i++)
     {
       let newfile:File=new File(); 
@@ -76,6 +80,25 @@ export class AddAdvertisementComponent implements OnInit {
     
     console.log(this.allFiles);
  }
+
+
+ handleCoverFileInput(file: FileList) {
+  
+   console.log("coverFile");
+    this.coverFile.contentType=file.item(0).type;
+    this.coverFile.name=file.item(0).name;
+    this.coverName=file.item(0).name;
+    let coverReader;
+    coverReader=new FileReader();
+    coverReader.readAsDataURL(file.item(0));
+    coverReader.onload = () => {
+       this.coverFile.content=coverReader.result;
+    }; 
+     
+  
+
+  console.log(this.allFiles);
+}
 
  readFile(file,newfile:File)
   {
@@ -93,11 +116,13 @@ export class AddAdvertisementComponent implements OnInit {
   onSubmit()
   {
     this.sendData=true;
-    this.advService.sendData(this.tags,this.allFiles)
-     .subscribe(
-      (data:any) => this.router.navigate(['/']),
-      (error:any) => console.log(error) 
-   );
+    this.advService.sendData(this.tags,this.allFiles,this.coverFile)
+      .subscribe(
+        (data:any) => this.router.navigate(['/']),
+        (error:any) => console.log(error) 
+      );
+   
+   
    
   }
 
@@ -105,6 +130,12 @@ export class AddAdvertisementComponent implements OnInit {
   {
     this.allNames.splice(index,1);
     this.allFiles.splice(index,1);
+  }
+
+  deleteCoverImage()
+  {
+    this.coverName=undefined;
+    this.coverFile=new File();
   }
 
 

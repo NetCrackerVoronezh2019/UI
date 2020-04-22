@@ -16,6 +16,7 @@ export class Advertisement
     deadline:String;
     type:String;
     tags:Tag[];
+    coverImageKey:String;
     attachments:String[];
     constructor() {}
 }
