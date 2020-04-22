@@ -7,6 +7,11 @@
       <div class="content ">
         <div class="title">{{message.sender.name}}</div>
         <span>{{message.text}}</span>
+        <div class="widget-main" class="d-flex flex-direction-column">
+            <span *ngFor="let doc of message.files; let i = index" class="mr-2">
+                <button (click)="download(doc,message.names[i])" > <i class="fas fa-file fontFile"> {{message.names[i]}}</i></button>
+            </span>
+        </div>
         </div>
     </div>
   </div>

@@ -73,6 +73,7 @@ export class DialogsListComponent implements OnInit {
   }
 
   showDialogListByType(type) {
+    console.log(type)
     this.dgService.getUserDialogsByType(type).subscribe(
       (data:Dialog[]) => {
         console.log(data);

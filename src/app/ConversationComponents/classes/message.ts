@@ -10,4 +10,5 @@ export class Message
   isNoRead:boolean;
   messageId:number;
   files:string[];
+  names:string[];
 }
