@@ -19,5 +19,8 @@ export class WebSocketService
       return this.http.get(this.baseUrl+"/user/friendsNotifications")
     }
 
+    getGroupNotificationsCount() {
+      return this.http.get(this.baseUrl+"/groups/notificationsCount")
+    }
 
 }

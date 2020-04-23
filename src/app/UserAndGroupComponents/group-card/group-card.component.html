@@ -9,5 +9,8 @@
         <div class="title">{{group.name}}</div>
         <label for="">{{group.subjectName}}</label>
       </div>
+      <div class="mr-4 notification">
+          <mat-icon class="userInfo cursor" *ngIf="group.countNot>0" matBadge={{group.countNot}} matBadgeColor="warn"></mat-icon>
+      </div>
     </div>
   </div>

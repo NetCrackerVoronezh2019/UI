@@ -25,9 +25,11 @@ export class NavbarComponent implements OnInit {
   private stompClient1:Client;
   private stompClient2:Client;
   private stompClient3:Client;
+  private stompClient4:Client;
   private count="";
   private countNot:String="0"
   private friendsNot=""
+  private groupsNot=""
   private notifications:AdvNotification[];
 
   constructor(private authService:AuthService, private appService:AppService,
@@ -38,9 +40,11 @@ export class NavbarComponent implements OnInit {
       const websocket1: WebSocket = new WebSocket(this.serverUrl);
       const websocket2: WebSocket = new WebSocket(this.serverUrl);
       const websocket3: WebSocket = new WebSocket(this.serverUrl);
+      const websocket4: WebSocket = new WebSocket(this.serverUrl);
       this.stompClient1 = Webstomp.over(websocket1);
       this.stompClient2 = Webstomp.over(websocket2);
       this.stompClient3 = Webstomp.over(websocket3);
+      this.stompClient4 = Webstomp.over(websocket4);
 
       this.stompClient1.connect({ login: null, passcode: null }, () => {
             this.stompClient1.subscribe("/notificationCount/" + userId, (message) => {
@@ -59,7 +63,12 @@ export class NavbarComponent implements OnInit {
         this.stompClient3.subscribe("/friends/"+userId, (message) => {
           this.friendsNot=JSON.parse(message.body);
         });
+      });
 
+      this.stompClient4.connect({ login: null, passcode: null }, () => {
+        this.stompClient4.subscribe("/groupsNot/"+userId, (message) => {
+        this.groupsNot=JSON.parse(message.body);
+      });
     });
 
 
@@ -69,6 +78,7 @@ export class NavbarComponent implements OnInit {
       this.stompClient1.disconnect();
       this.stompClient2.disconnect();
       this.stompClient3.disconnect();
+      this.stompClient4.disconnect();
     }
 
     getMessageNotificationCount()
@@ -87,6 +97,12 @@ export class NavbarComponent implements OnInit {
       })
     }
 
+    getGroupNotifications() {
+      this.wsService.getGroupNotificationsCount().subscribe((data:string) => {
+        this.groupsNot = data;
+      });
+    }
+
   ngOnInit() {
      this.authService.isLogin().
      subscribe(
@@ -102,6 +118,7 @@ export class NavbarComponent implements OnInit {
            this.setOnline();
            this.getMyNotificationsSize();
            this.getFriendsNotifications();
+           this.getGroupNotifications();
          }
        },
        err=>{}

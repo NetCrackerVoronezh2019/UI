@@ -122,4 +122,15 @@ export class GroupService {
         return this.http2.get('http://localhost:1234/getGroupImg/'+key, {responseType: ResponseContentType.Blob});
     }
 
+    notificationOn(groupId) {
+      return this.http.put('http://localhost:9080/group/notificationsOn',null,{params: new HttpParams().set("groupId",groupId)})
+    }
+
+    notificationOff(groupId) {
+      return this.http.put('http://localhost:9080/group/notificationsOff',null,{params: new HttpParams().set("groupId",groupId)})
+    }
+
+    cleanNotifications(groupId) {
+      return this.http.delete('http://localhost:9080/group/cleanNotifications',{params: new HttpParams().set('groupId',groupId)})
+    }
 }
