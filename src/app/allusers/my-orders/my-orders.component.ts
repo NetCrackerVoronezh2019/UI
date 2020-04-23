@@ -61,7 +61,7 @@ export class MyOrdersComponent implements OnInit {
  {
    this.service.sendFeedBack(this.reiting,this.editOrder)
        .subscribe(
-         data=>{this.message='Спасибо !'; this.sended=true},
+         data=>{this.message='Спасибо !'; this.sended=true,this.getMyOrders()},
          error=>{this.message='Ошибка';this.sended=true;console.log(error)}
        )
  }

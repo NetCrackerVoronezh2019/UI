@@ -1,4 +1,4 @@
-
+<app-navbar></app-navbar>
 <div class="order-page">
 <div *ngIf="myRole=='ROLE_TEACHER'" >
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -11,13 +11,13 @@
         <!-- Weight Column -->
         <ng-container matColumnDef="freelancer">
         <mat-header-cell *matHeaderCellDef> Заказчик</mat-header-cell>
-        <mat-cell *matCellDef="let element"> <a href="/userPage/{{element.customerId}}">{{element.customerFIO}}</a></mat-cell>
+        <mat-cell *matCellDef="let element"> <a routerLink="../userPage/{{element.customerId}}">{{element.customerFIO}}</a></mat-cell>
         </ng-container>
     
         <!-- Symbol Column -->
         <ng-container matColumnDef="advertisementName">
             <mat-header-cell *matHeaderCellDef> Название объявления</mat-header-cell>
-            <mat-cell *matCellDef="let element"> <a href='adv/{{element.advertisementId}}'>{{element.advertisementName}}</a></mat-cell>
+            <mat-cell *matCellDef="let element"> <a routerLink='../adv/{{element.advertisementId}}'>{{element.advertisementName}}</a></mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
@@ -64,13 +64,13 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="customer">
         <mat-header-cell *matHeaderCellDef>Фрилансер </mat-header-cell>
-        <mat-cell *matCellDef="let element"> <a href='userPage/{{element.freelancerId}}'>{{element.freelancerFIO}}</a></mat-cell>
+        <mat-cell *matCellDef="let element"> <a routerLink='../userPage/{{element.freelancerId}}'>{{element.freelancerFIO}}</a></mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="advertisementName">
             <mat-header-cell *matHeaderCellDef> Название объявления</mat-header-cell>
-            <mat-cell *matCellDef="let element"> <a href='adv/{{element.advertisementId}}'>{{element.advertisementName}}</a> </mat-cell>
+            <mat-cell *matCellDef="let element"> <a routerLink='../adv/{{element.advertisementId}}'>{{element.advertisementName}}</a> </mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
@@ -97,11 +97,10 @@
   </div>
   </div>
 
-<div class="modal fade" id="ratingModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+<div class="modal" id="ratingModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Оцените работу</h5>
         <button type="button" class="close" (click)=closeModel() data-dismiss="modal" aria-label="Close" >
           <span aria-hidden="true">&times;</span>
         </button>

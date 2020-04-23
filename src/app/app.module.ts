@@ -80,7 +80,7 @@ const appRoutes: Routes =[
   {path:'email/:emailAdress',component:EmailPageComponent},
   {path: 'friends', component:FriendListComponent},
   {path: 'userPage/:id',component:Userpage2Component},
-  {path:"allDocuments",component:TeacherDocumentsComponent}
+  {path:"admin/allDocuments",component:TeacherDocumentsComponent}
 ];
 
 @NgModule({

@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table'
 import {DocumentService} from './document.service';
 import * as fileSaver from 'file-saver';
 
+
 @Component({
   selector: 'app-teacher-documents',
   templateUrl: './teacher-documents.component.html',
@@ -18,6 +19,7 @@ export class TeacherDocumentsComponent implements OnInit {
   dataSource:MatTableDataSource<any>;
   message:String;
   check="valid";
+  sended=false;
   userDocumentLive:UserDocument;
 
   ngOnInit() {
@@ -35,6 +37,7 @@ export class TeacherDocumentsComponent implements OnInit {
   getValid()
   {
     this.check="valid"
+    console.log("getvalid");
     this.service.getAllValidDocuments()
         .subscribe(
           (data:UserDocument[])=>this.dataSource=new MatTableDataSource(data),
@@ -47,6 +50,7 @@ export class TeacherDocumentsComponent implements OnInit {
   {
 
     this.check="unValid";
+    console.log("getunvalid");
     this.service.getAllUnValidDocuments()
         .subscribe(
           (data:UserDocument[])=>this.dataSource=new MatTableDataSource(data),
@@ -57,12 +61,14 @@ export class TeacherDocumentsComponent implements OnInit {
 
   checkIconEvent(row:UserDocument)
   {
+    this.sended=false;
     this.message="Документ является действительным ?";
     this.userDocumentLive=row;
   }
 
   banIconEvent(row:UserDocument)
   {
+    this.sended=false;
     this.message="Документ не является действительным ?";
     this.userDocumentLive=row;
   }
@@ -73,11 +79,14 @@ export class TeacherDocumentsComponent implements OnInit {
     this.service.changeDocumentValidaton(this.userDocumentLive)
     .subscribe(
       data=>{
+        this.sended=true;
         this.message="Всё прошло успешно"
         if(this.check=="valid")
+        {
           this.getValid();
+        }
         else
-          this.getUnValid;
+          this.getUnValid();
       },
       error=>{this.message="Ошибка"; console.log(error)}
     )

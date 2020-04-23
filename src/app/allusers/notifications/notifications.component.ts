@@ -32,7 +32,7 @@ export class NotificationsComponent implements OnInit {
   {
     x.responseStatus="ACCEPTED";
     console.log(x);
-    this.router.navigate(['/myorders/']);
+   // this.router.navigate(['/myorders/']);
     this.service.sendNotificationResponse(x)
     .subscribe(
       (data)=>this.getMyAllNotifications(),

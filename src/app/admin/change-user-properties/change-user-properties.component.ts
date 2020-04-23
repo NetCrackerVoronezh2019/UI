@@ -13,6 +13,7 @@ export class ChangeUserPropertiesComponent implements OnInit {
   allUsers:any;
   list:MatTableDataSource<any>;
   changingUser:any;
+  clicked=false;
 
   displayedColumns: string[] = ['userId', 'firstname', 'lastname', 'email','isActivate','isDeleted','role','actions'];
   constructor(private service:ChangeUserProp) {
@@ -26,10 +27,16 @@ export class ChangeUserPropertiesComponent implements OnInit {
   ngOnInit() {
     this.getAllUsers();
   }
+
+  showModel()
+  {
+    this.clicked=true;
+  }
   
   openEditForm(row)
   {
     this.service.setDefaultValuesForEditForm(row);	  
+    this.clicked=true;
   }
   
   deleteUser(row)
@@ -43,11 +50,13 @@ export class ChangeUserPropertiesComponent implements OnInit {
 
   Edit()
   {
+    
     this.service.changeUserProperties()
     .subscribe(
       data=>{
 			  this.allUsers=data; 
-			  this.getAllUsers();
+        this.getAllUsers();
+        
 		  },
       error=>console.log(error)
     )

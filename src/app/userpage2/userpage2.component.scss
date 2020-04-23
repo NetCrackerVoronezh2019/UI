@@ -13,6 +13,21 @@
     color:orange
 }
 
+a{
+    text-decoration:none;
+    color:white !important;
+}
+.feedBacks
+{
+    display:flex;
+    flex-direction:column;
+    margin-top:11px;
+}
+
+.feedback-block
+{
+    margin-bottom:11px;
+}
 
 .lastOnline{
     font-size:13px;
@@ -234,13 +249,7 @@ table {
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .15)
 }
 
-.dd-empty,
-.dd-handle,
-.dd-placeholder,
-.dd2-content {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box
-}
+
 
 .profile-activity {
     padding: 10px 4px;

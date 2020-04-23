@@ -16,5 +16,10 @@ table {
   mat-button-toggle-group {
     margin-left: 12px;
   }
+
+
+  .modal-backdrop {
+    z-index: -1;
+  }
   
   

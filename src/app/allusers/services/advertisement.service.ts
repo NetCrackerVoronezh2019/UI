@@ -7,7 +7,6 @@ import {Http, ResponseContentType} from '@angular/http';
 import {Observable} from 'rxjs';
 import {File} from '../../classes/file'
 
-
 @Injectable()
 export class AdvertisementService1
 {

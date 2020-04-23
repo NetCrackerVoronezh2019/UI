@@ -31,6 +31,10 @@
 	text-shadow: 1px 1px #bbb;
 }
 
+.modal-backdrop {
+	z-index: -100 !important;
+  }
+
 a{
 	color:black !important;
 	text-decoration:none;
