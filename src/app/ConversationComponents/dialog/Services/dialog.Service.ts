@@ -117,12 +117,13 @@ export class DialogService
           return this.http.put('http://localhost:9080/dialog/setAvatar',body)
         }
 
-        sendMessage(user,dialogId,files) {
+        sendMessage(user,dialogId,files,names) {
           const body = {
             text: this.messageForm.value.text,
             sender: user,
             dialog: dialogId,
-            files : files
+            files : files,
+            names: names
           }
           return this.http.post('http://localhost:9080/sendMessage/',body)
         }

@@ -11,7 +11,7 @@
         <span>Дата последнего сообщения: {{dg.lastMessageDate}}</span>
       </div>
       <div class="mr-4 notification">
-          <mat-icon class="userInfo cursor" matBadge={{dg.countNotification}} matBadgeColor="warn"></mat-icon>
+          <mat-icon class="userInfo cursor" *ngIf="dg.countNotification>0" matBadge={{dg.countNotification}} matBadgeColor="warn"></mat-icon>
       </div>
     </div>
   </div>

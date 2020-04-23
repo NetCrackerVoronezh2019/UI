@@ -36,6 +36,7 @@ export class GroupComponent implements OnInit {
   allNames:any[]=[];
   groupImage:any;
   loading = false;
+  isNotificationsOn = false;
 
   constructor(private route: ActivatedRoute,private location: Router,private gs: GroupService, private sanitizer: DomSanitizer) {
   }
@@ -43,6 +44,7 @@ export class GroupComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.groupId=params['groupId'];
+      this.gs.cleanNotifications(this.groupId).subscribe();
       this.gs.getAdmins(this.groupId).subscribe((data:User[]) => {
         this.admins = data;
       })
@@ -55,6 +57,7 @@ export class GroupComponent implements OnInit {
           this.thisusergroups.forEach(element => {
               if (element.groupId == this.group.groupId) {
                 this.subscriber = true;
+                this.isNotificationsOn = element.notificationsOn;
               }
         })
         this.gs.getThisUser().subscribe((data:User) =>{
@@ -286,5 +289,17 @@ export class GroupComponent implements OnInit {
           reader.onload = () => {
           this.allFiles.push(reader.result);
           };
+        }
+
+        notificationOn() {
+          this.gs.notificationOn(this.groupId).subscribe((data => {
+            this.isNotificationsOn = true;
+          }))
+        }
+
+        notificationOff() {
+          this.gs.notificationOff(this.groupId).subscribe((data => {
+            this.isNotificationsOn = false;
+          }))
         }
 }

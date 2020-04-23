@@ -6,4 +6,6 @@ export class Group
   creatorId:number;
   dialogId:number;
   image:string;
+  notificationsOn:boolean;
+  countNot:number;
 }

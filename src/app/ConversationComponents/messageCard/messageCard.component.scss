@@ -82,23 +82,6 @@
   text-align: justify;
 }
 
-.content button{
-  display: inline-flex;
-  padding: 11px 16px;
-  border: none;
-  font-size: 12px;
-  text-transform: uppercase;
-  color: #fff0e6;
-  font-weight: 600;
-  letter-spacing: 1px;
-  border-radius: 50px;
-  cursor: pointer;
-  outline: none;
-  background: linear-gradient(147deg, #fe8a39  0%, #fd3838 74%);
-}
-.content button:hover{
-  background: linear-gradient(147deg, #fe791b 0%, #fd1c1c 74%);
-}
 
 .notification {
     padding: 0 10px 0px 10px;

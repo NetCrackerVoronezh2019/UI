@@ -43,6 +43,7 @@ export class DialogComponent implements OnInit {
   initializeWebSocketConnection(){
     this.dgService.getDialogMessages(this.dialogId).subscribe((data:Message[]) => {
       this.messages = data;
+      console.log(this.messages);
       for (let i = 0;i < this.dialog.countNotification;i++) {
             this.messages[this.messages.length -1 -i].isNoRead = true
         }
@@ -110,8 +111,7 @@ export class DialogComponent implements OnInit {
     if (this.dgService.getMessageForm().invalid) {
       alert("message is empty")
     } else {
-      this.dgService.sendMessage(this.user,this.dialogId,this.allFiles).subscribe(data => {
-      })
+      this.dgService.sendMessage(this.user,this.dialogId,this.allFiles, this.allNames).subscribe();
       this.textbox = "";
       this.allNames.splice(0,this.allFiles.length);
       this.allFiles.splice(0,this.allFiles.length);
