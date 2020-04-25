@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit {
   private countNot:String="0"
   private friendsNot=""
   private groupsNot=""
+  notificationsClick=false;
   private notifications:AdvNotification[];
 
   constructor(private authService:AuthService, private appService:AppService,
@@ -170,6 +171,9 @@ export class NavbarComponent implements OnInit {
       (data:AdvNotification[])=>
       {
         this.notifications=data;
+        console.log("notifications");
+        console.log(this.notifications);
+        this.notificationsClick=true;
         this.advService.setAllNotificationasReaded()
         .subscribe(data=>{},
                   error=>console.log(error))

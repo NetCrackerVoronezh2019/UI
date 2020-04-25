@@ -21,7 +21,7 @@
     
       <ng-container matColumnDef="userFIO">
         <th mat-header-cell *matHeaderCellDef>Пользователь</th>
-        <td mat-cell *matCellDef="let element"> <a href="/userPage/{{element.user.userId}}">{{element.user.firstname}} {{element.user.lastname}}</a></td>
+        <td mat-cell *matCellDef="let element"> <a routerLink="/userPage/{{element.user.userId}}">{{element.user.firstname}} {{element.user.lastname}}</a></td>
       </ng-container>
     
       <ng-container matColumnDef="document">

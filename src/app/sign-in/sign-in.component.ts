@@ -33,6 +33,8 @@ export class SignInComponent implements OnInit {
           },
         (error:any) => 
           {
+            this.errorMessage=error.error.errorMessage;
+            console.log(error)
             this.hasError=true;
           }
       );

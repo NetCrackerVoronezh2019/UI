@@ -1,16 +1,96 @@
-
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800");
   
 .order-page
 {
-    padding:50px;
+	padding:50px;
+	display:flex;
+	min-width:100vw;
+	height:100vh;
+	align-items:center;
+	background-color:#FAFAFA;
+	flex-direction:column;
 }
 
-
-  th
+.link-block
 {
-    text-align:center;
+	display:flex;
+	flex-direction:row;
+	flex-wrap:nowrap;
+	border-radius: 4px;
+	margin:0;
+	background-color: #fff;
+	border: 1px solid rgba(118,118,118,0.3);
+	box-shadow: 0 3px 6px 1px rgba(154,154,154,0.4);
+	max-width:50vw;
+	transition-property:height;
+	transition: all 0.35s ease-in-out;
+	min-height:200px;
+	
 }
 
+
+
+div{
+	font-family:fira-sans;
+}
+
+.title
+{
+	font-size:15px;
+	font-weight:600;
+	font-family:fira-sans;
+}
+
+.link-block:hover
+{
+	box-shadow: 0 3px 6px 1px rgba(154,154,154,0.4);
+}
+
+
+
+.link-block-img {
+	min-height:100%;
+	max-height:200px;
+}
+
+img{
+	margin:0;
+	padding:0;
+	min-height:100%;
+	max-width:30%;
+	object-fit: cover;
+	border: 1px solid rgba(118,118,118,0.1);
+	border-radius: 7px 7px 4px 4px;
+}
+
+.content
+{
+	min-height:100%;
+	width:70%;
+	transition-property:height;
+	margin:0px;
+	transition: all 0.35s ease-in-out;
+	padding:15px;
+}
+
+a{
+	color:black !important;
+	text-decoration:none;
+}
+.button-area
+{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  margin-top:10px;
+}
+.rating-area:not(:checked) > label:before {
+	content: '★';
+}
+.rating-area > input:checked ~ label {
+	color: gold;
+	text-shadow: 1px 1px #c60;
+}
 
 .rating-area {
 	overflow: hidden;
@@ -31,28 +111,6 @@
 	text-shadow: 1px 1px #bbb;
 }
 
-.modal-backdrop {
-	z-index: -100 !important;
-  }
-
-a{
-	color:black !important;
-	text-decoration:none;
-}
-.button-area
-{
-  width:100%;
-  display:flex;
-  justify-content:center;
-  margin-top:10px;
-}
-.rating-area:not(:checked) > label:before {
-	content: '★';
-}
-.rating-area > input:checked ~ label {
-	color: gold;
-	text-shadow: 1px 1px #c60;
-}
 .rating-area:not(:checked) > label:hover,
 .rating-area:not(:checked) > label:hover ~ label {
 	color: gold;
@@ -88,6 +146,4 @@ table {
     width: 100%;
   }
   
-  
-
   

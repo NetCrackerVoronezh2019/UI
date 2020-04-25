@@ -42,6 +42,8 @@ export class Userpage2Component implements OnInit {
   public allNames:any[]=[]
   public notifications:AdvNotification[]=[];
   profileImage:any;
+  profileImageUploaded=false;
+  profileImageUploadMessage;
   loading=false;
   loadingError=false;
   displayedColumns: string[] = ['orderId', 'freelancerId', 'advertisementId',
@@ -67,7 +69,7 @@ export class Userpage2Component implements OnInit {
   
   onAccept(x:AdvNotification)
   {
-    x.responseStatus="ACCEPTED";
+    x.notification.responseStatus="ACCEPTED";
     console.log(x);
    // this.router.navigate(['/myorders/']);
     this.advService.sendNotificationResponse(x)
@@ -80,7 +82,7 @@ export class Userpage2Component implements OnInit {
 
   onReject(x:AdvNotification)
   {
-    x.responseStatus="REJECTED";
+    x.notification.responseStatus="REJECTED";
     console.log(x);
     this.advService.sendNotificationResponse(x)
     .subscribe(
@@ -268,14 +270,21 @@ export class Userpage2Component implements OnInit {
   }
 
   
+  close()
+  {
+    this.profileImageUploaded=false;
 
+  }
 
   upload()
   {
     this.service.updateImage(this.allFiles[0])
       .subscribe(
-        (data)=>this.getUserData(this.id),
-        error=>console.log(error)
+        (data)=>{
+         this.getUserData(this.id),this.profileImageUploaded=true; 
+          this.profileImageUploadMessage="Всё прошло успешно !",
+        this.allNames=[]},
+        error=>{console.log(error),this.profileImageUploaded=true; this.profileImageUploadMessage="Oшибка :("}
       )
   }
 

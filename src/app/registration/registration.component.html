@@ -45,6 +45,7 @@
                         *ngIf="regService.getRegForm().controls['userEmail'].invalid && regService.getRegForm().controls['userEmail'].touched">  
                         <span *ngIf="regService.getRegForm().controls['userEmail'].errors.email"> Некоректный  Email</span>    
                     </div>
+                    <span>{{checkEmailMessage}}</span>
                 </div>
             </div> 
             <div class="col-md-4 col-sm-12">
@@ -105,9 +106,10 @@
                 </div>
                
             </div>
-            <div class="col-md-4 col-sm-4 d-flex justify-content-center mb-5">
-                <button type="button" class="btn btn-success" (click)="onSubmit()">Зарегестрироваться</button>
-            </div> 
+            <div class="col-md-4 col-sm-4 d-flex justify-content-center mb-2">
+                <button type="button" class="btn btn-success" (click)="onSubmit()">Зарегестрироваться</button> 
+            </div>
+            <p *ngIf="!isValid" style="color:red;">Некоторые поля заполнены неправильно !</p> 
         </div>
     </div>
 </form>
@@ -116,5 +118,8 @@
 <div *ngIf='sendData' class="loading">
     <mat-spinner></mat-spinner>
 </div>
+
+
+
 
 

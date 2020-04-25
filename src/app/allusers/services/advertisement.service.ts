@@ -87,7 +87,7 @@ export class AdvertisementService1
 
     sendNotificationResponse(x:AdvNotification)
     {
-        return this.http.post(this.baseUrl+'/user/notificationResponse',x)
+        return this.http.post(this.baseUrl+'/user/notificationResponse',x.notification)
     }
 
     canSendRequest(id:Number)

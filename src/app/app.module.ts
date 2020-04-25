@@ -58,7 +58,8 @@ import {FriendListComponent} from "./UserAndGroupComponents/friend-list/friend-l
 import {FriendCardComponent} from './UserAndGroupComponents/friend-card/friend-card.component';
 import { Userpage2Component } from './userpage2/userpage2.component';
 import { FeedbackComponent } from './allusers/my-orders/feedback/feedback.component';
-import { TeacherDocumentsComponent } from './admin/teacher-documents/teacher-documents.component'
+import { TeacherDocumentsComponent } from './admin/teacher-documents/teacher-documents.component';
+
 const appRoutes: Routes =[
   {path: 'registration', component:RegistrationComponent},
   {path: 'adv/:id', component:AdvertisementComponent},
@@ -120,7 +121,7 @@ const appRoutes: Routes =[
     FriendCardComponent,
     Userpage2Component,
     FeedbackComponent,
-    TeacherDocumentsComponent
+    TeacherDocumentsComponent,
   ],
   imports: [
     MatInputModule,

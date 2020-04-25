@@ -80,7 +80,7 @@ export class OrderService
     sendFeedBack(rating:any,order:Order)
     {
         let body={
-            order:order,
+            orderId:order.orderId,
             rating:rating,
             comment:this.orderForm.value.comment
         }

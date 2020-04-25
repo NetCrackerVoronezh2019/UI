@@ -11,8 +11,8 @@
                             <img class="prof" alt=" Avatar" id="avatar2" [src]="profileImage">
                         </span>
 
-                        <span  *ngIf="user.userImageKey==undefined || loadingError"class="profile-picture">
-                            <img class="prof" alt=" Avatar" id="avatar2" src="https://borodast.com/uploads/images/pages/c82a9dad9c9ebf9a908b9c5942f84fda90c24164.jpeg">
+                        <span  *ngIf="user.userImageKey==undefined"class="profile-picture">
+                            <img class="prof" alt=" Avatar" id="avatar2" src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg">
                         </span>
                         
                         <div class="space space-4"></div>
@@ -227,11 +227,12 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle">Обновить фото профиля</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" (click)="close()" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="example-2 m-3">
+        <div *ngIf="profileImageUploaded" class="example-2 m-3">{{profileImageUploadMessage}}</div>
+        <div *ngIf="!profileImageUploaded" class="example-2 m-3">
             <div class="form-group">
               <label>Вы можете загрузить изображение в формате JPG, JPEG или PNG.</label>
               <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
@@ -246,7 +247,7 @@
                 <span  matBadge="x"  matBadgeOverlap="false" >{{not}}</span>
             </div>
        </div>
-        <div class="modal-footer none-border">
+        <div  *ngIf="!profileImageUploaded" class="modal-footer none-border">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
           <button type="button" (click)="upload()" class="btn btn-primary">Обновить</button>
         </div>

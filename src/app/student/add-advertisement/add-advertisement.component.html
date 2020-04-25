@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <div class="example-2 mb-3">
                         <div class="form-group">
-                          <input type="file" name="file" id="file2"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
+                          <input type="file" name="file" id="file2"  (change)="handleFileInput($event.target.files)" multiple accept="image/*, .pdf, .txt, .docx" class="input-file"/>
                           <label for="file2" class="btn btn-tertiary js-labelFile">
                             <i class="fas fa-paperclip"></i>
                             <span class="js-fileName">  Прикрепить файлы</span>

@@ -1,101 +1,24 @@
 <app-navbar></app-navbar>
 <div class="order-page">
-<div *ngIf="myRole=='ROLE_TEACHER'" >
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <!-- Position Column -->
-        <ng-container matColumnDef="orderId">
-        <mat-header-cell *matHeaderCellDef>Номер заказа</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.orderId}} </mat-cell>
-        </ng-container>
-    
-        <!-- Weight Column -->
-        <ng-container matColumnDef="freelancer">
-        <mat-header-cell *matHeaderCellDef> Заказчик</mat-header-cell>
-        <mat-cell *matCellDef="let element"> <a routerLink="../userPage/{{element.customerId}}">{{element.customerFIO}}</a></mat-cell>
-        </ng-container>
-    
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="advertisementName">
-            <mat-header-cell *matHeaderCellDef> Название объявления</mat-header-cell>
-            <mat-cell *matCellDef="let element"> <a routerLink='../adv/{{element.advertisementId}}'>{{element.advertisementName}}</a></mat-cell>
-        </ng-container>
-
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="status">
-            <mat-header-cell *matHeaderCellDef>Стaтус заказа</mat-header-cell>
-            <mat-cell  *matCellDef="let element"> {{element.status}} </mat-cell>
-        </ng-container>
-        
-        <ng-container matColumnDef="actions">
-          <span>
-            
-            <mat-header-cell *matHeaderCellDef>Изменить Стaтус</mat-header-cell>
-            <mat-cell *matCellDef="let row">
-              <button *ngIf="row.nextStatus!=undefined" (click)="changeOrderStatus(row)" class="btn btn-success">{{row.nextStatus}}</button>
-            </mat-cell>
-          </span>
-        </ng-container>
-
-        <ng-container matColumnDef="feedBack">
-          <span>        
-            <mat-header-cell *matHeaderCellDef>Отзыв</mat-header-cell>
-            <mat-cell *matCellDef="let row" class="t" >
-              <button *ngIf="row.starsForWork!='0' && row.status=='СOMPLETED'" (click)="showFeedBackClick(row)" class="btn btn-success"  data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-backdrop="static" data-keyboard="false" >Смотреть отзыв</button>
-              <p *ngIf="row.status != 'СOMPLETED'" class="p1">Работа не завершена</p>
-              <p *ngIf="row.status == 'СOMPLETED' && row.starsForWork=='0'" class="p1"> - </p>
-            </mat-cell>
-          </span>
-        </ng-container>
-
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+  <div *ngFor="let order of dataSource; let i = index" class="link-block mb-3">
+         <img class="link-block-img" src="https://lab2biz.pro/fon.png"/>
+         <div class="content">
+              <div><span class="title">Название заказа - </span>{{order.advertisement.advertisementName}}</div>
+             <div><span class="title">Заказчик -</span> Armen Tovmasyan</div>
+             <div><span class="title">Cтатус заказа - </span>{{order.status}}</div>
+             <div><span class="title">Дата принятия заказа - </span>24.04.2020</div>
+             <div><span class="title">Дедлайн до - </span>{{order.advertisement.deadline.split('T')[0]}}</div>
+             <button *ngIf="myRole=='ROLE_TEACHER' && order.nextStatus!=undefined" (click)="changeOrderStatus(order)" class="btn btn-success mt-3" >{{order.nextStatus}}</button>
+             <button *ngIf="myRole=='ROLE_STUDENT' && order.starsForWork=='0' && order.status=='СOMPLETED'" (click)="ratingClick(order)" class="btn btn-success" data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-keyboard="false" >Оценить работу</button>
+              <button *ngIf="order.starsForWork!='0' && order.status=='СOMPLETED'" (click)="showFeedBackClick(order)" class="btn btn-success"  data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-backdrop="static" data-keyboard="false" >Смотреть отзыв</button>
+          <br>
+         </div>
   </div>
+</div>
 
-  <div *ngIf="myRole=='ROLE_STUDENT'">
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <!-- Position Column -->
-        <ng-container matColumnDef="orderId">
-        <mat-header-cell *matHeaderCellDef>Номер заказа</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.orderId}} </mat-cell>
-        </ng-container>
-        
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="customer">
-        <mat-header-cell *matHeaderCellDef>Фрилансер </mat-header-cell>
-        <mat-cell *matCellDef="let element"> <a routerLink='../userPage/{{element.freelancerId}}'>{{element.freelancerFIO}}</a></mat-cell>
-        </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="advertisementName">
-            <mat-header-cell *matHeaderCellDef> Название объявления</mat-header-cell>
-            <mat-cell *matCellDef="let element"> <a routerLink='../adv/{{element.advertisementId}}'>{{element.advertisementName}}</a> </mat-cell>
-        </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="status">
-            <mat-header-cell *matHeaderCellDef>Стaтус заказа</mat-header-cell>
-            <mat-cell  *matCellDef="let element"> {{element.status}} </mat-cell>
-        </ng-container>
-        
-        <ng-container matColumnDef="actions">
-          <span>
-            
-            <mat-header-cell *matHeaderCellDef>Отзыв</mat-header-cell>
-            <mat-cell *matCellDef="let row" class="t" >
-              <button *ngIf="row.starsForWork=='0' && row.status=='СOMPLETED'" (click)="ratingClick(row)" class="btn btn-success" data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-keyboard="false" >Оценить работу</button>
-              <button *ngIf="row.starsForWork!='0' && row.status=='СOMPLETED'" (click)="showFeedBackClick(row)" class="btn btn-success"  data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-backdrop="static" data-keyboard="false" >Смотреть отзыв</button>
-              <p *ngIf="row.status != 'СOMPLETED' " class="p1">Работа не завершена</p>
-             
-            </mat-cell>
-          </span>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
-    </mat-table>
-  </div>
-  </div>
+
 
 <div class="modal" id="ratingModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -138,6 +61,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 
 

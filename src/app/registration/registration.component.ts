@@ -18,6 +18,8 @@ export class RegistrationComponent implements OnInit {
   public allFiles:File[]=[];
   public allNames:any[]=[]
   sendData:Boolean=false;
+  isValid=true;
+  checkEmailMessage;
   constructor(public regService:RegistrationService,private router:Router) {
   
   }
@@ -26,27 +28,42 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit()
-  {
-    if(!this.regService.getRegForm().invalid)
-    {
-      this.sendData=true;
-      this.regService.sendRegistrationInformation(this.role,this.allFiles) 
-      .subscribe(
-          data => {
-            console.log(data)
-            this.router.navigate(['/email/'+this.regService.getRegForm().value.userEmail]);
-          },
-          error => console.log(error)
-      );
-    
-    
-  }
-    else
-    {
-      alert("dont send a data");
-    }
+  {   
+      
+      this.checkEmailMessage='';
+      this.regService.checkEmail()
+        .subscribe(
+          (data:Boolean)=>{
+            if(data==false && !this.regService.getRegForm().invalid)
+            {
+              this.sendData=true;
+              this.isValid=true;
+              this.regService.sendRegistrationInformation(this.role,this.allFiles) 
+              .subscribe(
+                  data => {
+                    console.log(data)
+                    this.router.navigate(['/email/'+this.regService.getRegForm().value.userEmail]);
+                  },
+                  error => console.log(error)
+              );
+            }
+            else
+            {
+              if(data==true)
+              {
+                this.checkEmailMessage="Email уже существует";
+              }
+              this.isValid=false;
 
+              console.log("isValid" + this.isValid)
+            }
+          },
+          error=>this.isValid=false
+        )
   }
+   
+
+  
 
   setRole(someobject)
   {
