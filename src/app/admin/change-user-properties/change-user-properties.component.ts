@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ChangeUserProp} from '../change-user-properties/services/changeUserProp.service'
 import {MatTableDataSource} from '@angular/material/table';
-
+import {User} from '../../classes/user'
 @Component({
   selector: 'app-change-user-properties',
   templateUrl: './change-user-properties2.component.html',
@@ -10,7 +10,7 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class ChangeUserPropertiesComponent implements OnInit {
 
-  allUsers:any;
+  allUsers:User[];
   list:MatTableDataSource<any>;
   changingUser:any;
   clicked=false;
@@ -53,7 +53,7 @@ export class ChangeUserPropertiesComponent implements OnInit {
     
     this.service.changeUserProperties()
     .subscribe(
-      data=>{
+      (data:User[])=>{
 			  this.allUsers=data; 
         this.getAllUsers();
         
@@ -67,7 +67,7 @@ export class ChangeUserPropertiesComponent implements OnInit {
   {
     this.service.getAllUsers()
     .subscribe(
-      data=>{
+      (data:User[])=>{
 		  this.allUsers=data;
 		  console.log(data);
 		  this.list=new MatTableDataSource(this.allUsers);

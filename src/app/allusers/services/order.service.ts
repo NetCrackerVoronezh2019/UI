@@ -61,6 +61,12 @@ export class OrderService
     getMyRole(){
         return this.http.get(this.baseUrl+"/getRole");
     }
+
+    getOrder(id)
+    {
+        return this.http.get('http://localhost:1122/getOrder/'+id);
+    }
+
     changeOrderStatus(order:Order)
     {
 

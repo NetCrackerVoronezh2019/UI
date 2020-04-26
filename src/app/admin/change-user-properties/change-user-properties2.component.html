@@ -1,81 +1,40 @@
 
   
  <app-navbar></app-navbar>
- <div class="container mt-4">
- <mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
-  <table mat-table [dataSource]="list" class="mat-elevation-z8">
-    
-    <ng-container matColumnDef="userId">
-      <th mat-header-cell *matHeaderCellDef> Id  </th>
-      <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="firstname">
-      <th mat-header-cell *matHeaderCellDef> Имя </th>
-      <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="lastname">
-      <th mat-header-cell *matHeaderCellDef> Фамилия </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Почта </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
 
-    <ng-container matColumnDef="isActivate">
-      <th mat-header-cell *matHeaderCellDef> Активность </th>
-      <td mat-cell *matCellDef="let element"> {{element.IsActivate}} </td>
-    </ng-container>
+  <div class="user-control p-4">
+    <div *ngFor="let user of allUsers; let i = index" class="card m-3">
+        <div class="part1"> 
+            <img src="https://images.pexels.com/photos/464509/man-portrait-guy-person-464509.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;h=627&amp;w=1200" class="avatar" />
+            <div class="name"> {{user.firstname}} {{user.lastname}}</div>
+            <div>{{user.role.roleName}}</div>
+        </div>
+        <div class="part2">
+           <div class="tools">
+            <i (click)="openEditForm(user)" data-toggle="modal" data-target="#exampleModal" class="fas fa-cog" style="font-size:22px; cursor:pointer;"></i>
+           </div>
+           <div class="data mt-3">
+               <div><span>Почта - </span>{{user.email}}</div>
+               <div><span>Дата рождения - </span>{{user.birthDate.split('T')[0]}}</div>
+               <div><span> Пол- </span>{{user.gender}}</div>
+               <div><span> Статус - </span>Активный</div>
+            </div>
+        </div>
+    </div>      
 
-    <ng-container matColumnDef="isDeleted">
-      <th mat-header-cell *matHeaderCellDef> Заблокированный </th>modal-backdrop fade show
-      <td mat-cell *matCellDef="let element"> {{element.isDeleted}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef> Роль </th>
-      <td mat-cell *matCellDef="let element"> {{element.role.roleName}} </td>
-    </ng-container>
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let row">
-        <button class="btn mr-3" (click)="openEditForm(row)" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-user-edit"></i></button>
-          <button class="btn" (click)="deleteUser(row)" ><i class="fas fa-user-slash"></i></button>   
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <div  class="modal fade bd-example-modal-lg"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false">
-    <div  class="modal-dialog modal-lg">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
       <div  class="modal-content">
         <form [formGroup]="service.getEditForm()" class="mt-5">
           <div class="container">
               <div class="row d-flex flex-column justify-content-center  align-items-center">
                 <div class="form-group" >
-                  <label for="exampleInputEmail1">Имя</label>
-                  <input type="text" formControlName="userFirstname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Имя">
+                  <label for="exampleInputEmail1">Активировать</label>
+                 <select  formControlName="userIsActivate" class="custom-select">
+                   <option value="true">Да</option>
+                   <option value="false">Нет</option>
+                </select>
                 </div>
-                <div class="form-group" >
-                  <label for="exampleInputEmail1">Фамилия</label>
-                  <input type="text" formControlName="userLastname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Фамилия">
-              </div>
-              <div class="form-group" >
-                <label for="exampleInputEmail1">Email</label>
-                <input type="text" formControlName="userEmail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
-            </div>
-            <div class="form-group" >
-              <label for="exampleInputEmail1">Активность</label>
-             <select  formControlName="userIsActivate" class="custom-select">
-				       <option value="true">Да</option>
-				       <option value="false">Нет</option>
-            </select>
-            </div>
             <div class="form-group" >
               <label for="exampleInputEmail1">Заблокировать</label>
              <select  formControlName="userIsDeleted" class="custom-select">
@@ -85,7 +44,7 @@
             </div>
             <div class="form-group" >
               <label for="exampleInputEmail1">Роль</label>
-           <select  formControlName="userRole" class="custom-select">
+              <select  formControlName="userRole" class="custom-select">
               <option selected value="ROLE_ADMIN">Администратор</option>
               <option value="ROLE_TEACHER">Преподователь</option>
               <option value="ROLE_STUDENT">Студент</option>

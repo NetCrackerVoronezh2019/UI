@@ -1,73 +1,9 @@
 <app-navbar></app-navbar>
 <div class="order-page">
   <div *ngFor="let order of dataSource; let i = index" class="link-block mb-3">
-         <img class="link-block-img" src="https://lab2biz.pro/fon.png"/>
-         <div class="content">
-              <div><span class="title">Название заказа - </span>{{order.advertisement.advertisementName}}</div>
-             <div><span class="title">Заказчик -</span> Armen Tovmasyan</div>
-             <div><span class="title">Cтатус заказа - </span>{{order.status}}</div>
-             <div><span class="title">Дата принятия заказа - </span>24.04.2020</div>
-             <div><span class="title">Дедлайн до - </span>{{order.advertisement.deadline.split('T')[0]}}</div>
-             <button *ngIf="myRole=='ROLE_TEACHER' && order.nextStatus!=undefined" (click)="changeOrderStatus(order)" class="btn btn-success mt-3" >{{order.nextStatus}}</button>
-             <button *ngIf="myRole=='ROLE_STUDENT' && order.starsForWork=='0' && order.status=='СOMPLETED'" (click)="ratingClick(order)" class="btn btn-success" data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-keyboard="false" >Оценить работу</button>
-              <button *ngIf="order.starsForWork!='0' && order.status=='СOMPLETED'" (click)="showFeedBackClick(order)" class="btn btn-success"  data-toggle="modal" data-target="#ratingModel" data-backdrop="static" data-backdrop="static" data-keyboard="false" >Смотреть отзыв</button>
-          <br>
-         </div>
-  </div>
-</div>
-
-
-
-
-
-<div class="modal" id="ratingModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" (click)=closeModel() data-dismiss="modal" aria-label="Close" >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div *ngIf="EditFeedBack==true">
-        <div *ngIf="!sended">
-          <div  class="rating-area">           
-              <input (click)="raitingClick($event,not)"  type="radio" id="star-5" name="rating" value="5">
-              <label for="star-5" title="Оценка «5»"></label>	
-              <input (click)="raitingClick($event,not)"   type="radio" id="star-4" name="rating" value="4">
-              <label for="star-4" title="Оценка «4»"></label>    
-              <input (click)="raitingClick($event,not)"  type="radio" id="star-3" name="rating" value="3">
-              <label for="star-3" title="Оценка «3»"></label>  
-              <input (click)="raitingClick($event,not)"  type="radio" id="star-2" name="rating" value="2">
-              <label for="star-2" title="Оценка «2»"></label>    
-              <input (click)="raitingClick($event,not)"  type="radio" id="star-1" name="rating" value="1">
-              <label for="star-1" title="Оценка «1»"></label>
-            </div>
-            <form class="form-group" [formGroup]="service.getOrderForm()">
-              <textarea  formControlName="comment" type="text" class="form-control" id="Input2" rows="4" aria-describedby="emailHelp" placeholder="Оставьте комментарий"></textarea>
-            </form>     
-            <div class="button-area">
-              <button type="button b" (click)="sendFeedBack() "class="btn btn-success" >Оценить</button>
-            </div>
-          </div>
-          <div *ngIf="sended">
-            <h1>{{message}}</h1>
-          </div>
-        </div>
-        <div *ngIf="showFeedBack">
-          <div>Оценка - {{editOrder.starsForWork}}</div>
-          <div>Отзыв - {{editOrder.comment}}</div>
-        </div>
+      <app-order-item [(myRole)]="myRole" [(order)]="order"></app-order-item> 
     </div>
-  </div>
-</div>
-
-
-
-
-
-
-
+</div>    
 
 
 

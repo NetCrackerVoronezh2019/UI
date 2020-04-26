@@ -12,19 +12,13 @@ export class MyOrdersComponent implements OnInit {
 
   constructor(private service:OrderService) { }
 
-
-  editOrder:Order=new Order();
-  displayedColumns: string[] = ['orderId', 'freelancer', 
-  'advertisementName','status','actions','feedBack'];
-  displayedColumns2: string[] = ['orderId', 'customer',
-  'advertisementName','status','actions',];
-  isEdited:Boolean=true;
   dataSource:Order[]=[];
   check:Boolean=false;
   userId:Number;
   nextStatus:any;
   myRole:any;
   reiting:any;
+  ok=false;
   showFeedBack=false;
   EditFeedBack=false;
   message;
@@ -36,7 +30,10 @@ export class MyOrdersComponent implements OnInit {
   }
 
 
-
+  feed()
+  {
+    this.ok=!this.ok;
+  }
  getMyRole()
  {
    this.service.getMyRole()
@@ -57,12 +54,14 @@ export class MyOrdersComponent implements OnInit {
    this.reiting=event.target.attributes.value.value;
  }
 
- sendFeedBack()
+ sendFeedBack(order:Order)
  {
-   this.service.sendFeedBack(this.reiting,this.editOrder)
+   console.log(this.ratingClick);
+   console.log(order);
+   this.service.sendFeedBack(this.reiting,order)
        .subscribe(
-         data=>{this.message='Спасибо !'; this.sended=true,this.getMyOrders()},
-         error=>{this.message='Ошибка';this.sended=true;console.log(error)}
+         data=>{this.message='Спасибо !'; this.sended=true,this.getMyOrders(),this.ok=false},
+         error=>{this.message='Ошибка';this.sended=true;console.log(error),this.ok=false;}
        )
  }
 
@@ -77,21 +76,20 @@ export class MyOrdersComponent implements OnInit {
  }
   change(row:Order)
   {
-    this.isEdited=false;
-    this.editOrder=row;
+    
     this.service.setStatus(row.status);
   }
 
   ratingClick(row:Order)
   {
-    this.editOrder=row;
+   
     this.EditFeedBack=true;
     console.log(this.EditFeedBack)
   }
 
   showFeedBackClick(row:Order)
   {
-    this.editOrder=row;
+    
     this.showFeedBack=true;
 
   }
@@ -119,7 +117,7 @@ export class MyOrdersComponent implements OnInit {
     console.log(row);
     this.service.changeOrderStatus(row)
     .subscribe(
-      (data)=>{this.getMyOrders(),this.isEdited=true},
+      (data)=>{this.getMyOrders()},
       (error)=>console.log(error)
     )    
   }

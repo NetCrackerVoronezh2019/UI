@@ -59,6 +59,8 @@ import {FriendCardComponent} from './UserAndGroupComponents/friend-card/friend-c
 import { Userpage2Component } from './userpage2/userpage2.component';
 import { FeedbackComponent } from './allusers/my-orders/feedback/feedback.component';
 import { TeacherDocumentsComponent } from './admin/teacher-documents/teacher-documents.component';
+import { UserControllComponent } from './admin/user-controll/user-controll.component';
+import { OrderItemComponent } from './allusers/order-item/order-item.component';
 
 const appRoutes: Routes =[
   {path: 'registration', component:RegistrationComponent},
@@ -81,7 +83,8 @@ const appRoutes: Routes =[
   {path:'email/:emailAdress',component:EmailPageComponent},
   {path: 'friends', component:FriendListComponent},
   {path: 'userPage/:id',component:Userpage2Component},
-  {path:"admin/allDocuments",component:TeacherDocumentsComponent}
+  {path:"admin/allDocuments",component:TeacherDocumentsComponent},
+  {path:"userControl",component:UserControllComponent}
 ];
 
 @NgModule({
@@ -122,6 +125,8 @@ const appRoutes: Routes =[
     Userpage2Component,
     FeedbackComponent,
     TeacherDocumentsComponent,
+    UserControllComponent,
+    OrderItemComponent,
   ],
   imports: [
     MatInputModule,
