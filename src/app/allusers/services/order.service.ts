@@ -78,9 +78,13 @@ export class OrderService
         return this.http.post(this.baseUrl+"/user/changeOrderStatus",body);
     }
 
-    getMyOrders()
+    getMyOrders(state)
     {
-        return this.http.get(this.baseUrl+"/user/getMyOrders");
+        let body={
+            status:state
+        }
+
+        return this.http.post(this.baseUrl+"/user/getUserOrdersByOrderStatus",body);
     }
 
     sendFeedBack(rating:any,order:Order)

@@ -1,67 +1,13 @@
   
  <app-navbar></app-navbar>
 <div class="container mt-5">
-  <div class="checkBlock">
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" value="{{check}}">
-      <mat-button-toggle  (click)="getValid()" value="valid">Действительные</mat-button-toggle>
-      <mat-button-toggle (click)="getUnValid()" value="unValid">Недействительные</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
-    <mat-form-field>
-      <mat-label>Фильтр</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Фильтр">
-    </mat-form-field>
-    
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    
-      <ng-container matColumnDef="userId">
-        <th mat-header-cell *matHeaderCellDef>Id</th>
-        <td mat-cell *matCellDef="let element"> {{element.user.userId}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="userFIO">
-        <th mat-header-cell *matHeaderCellDef>Пользователь</th>
-        <td mat-cell *matCellDef="let element"> <a routerLink="/userPage/{{element.user.userId}}">{{element.user.firstname}} {{element.user.lastname}}</a></td>
-      </ng-container>
-    
-      <ng-container matColumnDef="document">
-        <th mat-header-cell *matHeaderCellDef>Документ</th>
-        <td mat-cell *matCellDef="let element">
-         <span class="key-label" (click)='download(element.documentKey)'> {{element.documentKey.split('_')[1]}}</span> 
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>
-        <span *ngIf="check=='valid'">  Недействительный </span>
-        <span *ngIf="check=='unValid'">  Действительный </span>
-        </th>
-        <td mat-cell *matCellDef="let row">
-         <span  *ngIf="check=='valid'" (click)="banIconEvent(row)" data-toggle="modal" data-target="#actionModel"> <i class="fas fa-ban icon"></i> </span>
-         <span  *ngIf="check=='unValid'" (click)="checkIconEvent(row)" data-toggle="modal" data-target="#actionModel"> <i class="far fa-check-circle icon"></i> </span>
-        </td>
-      </ng-container>  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
-    
-
-  <div class="modal fade" id="actionModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-        <h4> {{message}}</h4>
-        </div>
-        <div *ngIf="!sended" class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
-          <button type="button" (click)="submit()" class="btn btn-primary">Да</button>
-        </div>
-      </div>
+    <div class="checkBlock">
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style" value="{{check}}">
+        <mat-button-toggle  (click)="getValid()" value="valid">Действительные</mat-button-toggle>
+        <mat-button-toggle (click)="getUnValid()" value="unValid">Недействительные</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div *ngFor="let user of users; let i = index">
+      <app-user-document-item [(user)]="user"></app-user-document-item>
     </div>
   </div>

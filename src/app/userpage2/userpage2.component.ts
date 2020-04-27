@@ -110,7 +110,7 @@ export class Userpage2Component implements OnInit {
     this.checkRequests=false;
     this.service.getFeedBack(this.id)
       .subscribe(
-        (data:Order[])=>{this.feed=data,this.getFB=true},
+        (data:Order[])=>{this.feed=data,this.getFB=true,console.log(this.feed)},
         error=>console.log(error)
       )
   }

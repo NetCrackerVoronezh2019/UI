@@ -3,7 +3,42 @@
 	height:100vh;
 }
 
+
+.but
+{
+    font-size:28px; padding:15px; background-color:#e64927; color:white;
+}
+
 .activate-font
 {
-	font-size:55px
+	font-size:55px;
 }
+
+.check-button
+{
+    width:50%;
+    padding:7px 0;
+    background-color:white;
+    display:inline-flex;
+    justify-content:center;
+
+    &:hover
+    {
+        cursor:pointer;
+    }
+}
+
+.check-button-border
+{
+    border:2px solid #e64927;
+}
+
+.check-buttons
+{
+  display:flex;
+  width:44vw;
+  justify-content:center;
+  align-items:center; 
+}
+
+

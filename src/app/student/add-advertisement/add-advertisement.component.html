@@ -64,7 +64,7 @@
                         <span  matBadge="x"  matBadgeOverlap="false" >{{not}}</span>
                     </div>
                </div>
-                <div class="">
+                <div>
                     <mat-form-field class="example-chip-list">
                         <mat-chip-list #chipList aria-label="tag selection">
                           <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
@@ -72,7 +72,7 @@
                             {{tag.name}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                           </mat-chip>
-                          <input placeholder="Теги"
+                          <input class="tagss" placeholder="Теги"
                                  [matChipInputFor]="chipList"
                                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                  [matChipInputAddOnBlur]="addOnBlur"

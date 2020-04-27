@@ -130,12 +130,12 @@ a {
 }
 
 .notification_wrap .dropdown .notify_item:last-child{
-	border-bottom: 0px;
+	border-bottom: 0;
 }
 
 .all{
 	display:flex;
-	justify-content:end;
+	justify-content:flex-end;
 	width:100%;
 	padding-bottom:5px;
 	border-bottom: 2.2px solid #dbdaff;

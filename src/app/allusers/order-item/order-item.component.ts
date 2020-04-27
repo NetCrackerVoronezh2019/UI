@@ -13,10 +13,21 @@ export class OrderItemComponent implements OnInit {
   @Input() myRole:String;
   public ok=false;
   reiting:any;
+  rating1:any[]=[];
+  rating2:any[]=[];
   constructor(private service:OrderService) { }
 
   ngOnInit() {
-    console.log(this.myRole)
+    if(this.order.starsForWork!=0)
+        {
+
+          for(let i=0;i<this.order.starsForWork;i++)
+            this.rating1.push(1);
+
+            for(let i=5;i>this.order.starsForWork;i--)
+            this.rating2.push(1);
+
+        }
   }
 
   raitingClick(event)
@@ -30,7 +41,21 @@ export class OrderItemComponent implements OnInit {
   {
     this.service.getOrder(this.order.orderId)
     .subscribe(
-      (data:Order)=>this.order=data,
+      (data:Order)=>
+      {this.order=data
+        this.rating1=[]
+        this.rating2=[]
+        if(this.order.starsForWork!=0)
+        {
+
+          for(let i=0;i<this.order.starsForWork;i++)
+            this.rating1.push(1);
+
+            for(let i=5;i>this.order.starsForWork;i--)
+            this.rating2.push(1);
+
+        }
+      },
       error=>console.log(error)
     )
   }

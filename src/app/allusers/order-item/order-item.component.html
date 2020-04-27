@@ -10,7 +10,12 @@
       <div><span class="title">Дата принятия заказа - </span>24.04.2020</div>
       <div><span class="title">Дедлайн до - </span>{{order.advertisement.deadline.split('T')[0]}}</div>
       <div *ngIf="order.starsForWork!='0' && order.status=='СOMPLETED'" >
-        <div> <span class="title">Оценка - </span>{{order.starsForWork}} </div>
+        <div> <span class="title">Оценка - </span>
+          <span class="rating-result">
+            <span *ngFor="let o of rating1; let i = index" class="active"></span>	
+            <span *ngFor="let o of rating2; let i = index"></span>	    
+          </span>
+        </div>
         <div> <span class="title">Комментарий - </span>{{order.comment}} </div>
       </div>
       <button *ngIf="myRole=='ROLE_TEACHER' && order.nextStatus!=undefined" (click)="changeOrderStatus(order)" class="btn btn-success mt-3" >{{order.nextStatus}}</button>

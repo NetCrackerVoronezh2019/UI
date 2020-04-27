@@ -22,7 +22,7 @@ export class SignInComponent implements OnInit {
 
   onSubmit()
   {
-    alert("отправка данных");
+    
     this.signInService.sendData()
       .subscribe(
         (data:any) => 

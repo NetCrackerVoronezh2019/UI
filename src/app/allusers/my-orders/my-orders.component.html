@@ -1,6 +1,17 @@
 <app-navbar></app-navbar>
 <div class="order-page">
-  <div *ngFor="let order of dataSource; let i = index" class="link-block mb-3">
+  <div class="check-buttons mb-3">
+      <div state='ACCEPTED' [ngClass]="state=='ACCEPTED'?'check-button check-button-border':'check-button'" (click)="setStatus($event)" >
+          Принятые
+      </div>
+      <div  state='INPROGRESS' [ngClass]="state=='INPROGRESS'?'check-button check-button-border':'check-button'" (click)="setStatus($event)">
+        В Процессе
+      </div>
+      <div  state='СOMPLETED' [ngClass]="state=='СOMPLETED'?'check-button check-button-border':'check-button'" (click)="setStatus($event)">
+        Завершенные
+    </div>
+  </div>
+   <div *ngFor="let order of dataSource; let i = index" class="link-block mb-3">
       <app-order-item [(myRole)]="myRole" [(order)]="order"></app-order-item> 
     </div>
 </div>    

@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="user-page" *ngIf="loading || loadingError">
+<div class="user-page">
 <div id="user-profile-2" class="user-profile">
     <div class="tabbable">
         <div class="tab-content no-border padding-24">
@@ -7,8 +7,8 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-3 center">
                         
-                        <span  *ngIf="user.userImageKey!=undefined && loading" class="profile-picture">
-                            <img class="prof" alt=" Avatar" id="avatar2" [src]="profileImage">
+                        <span  *ngIf="user.userImageKey!=undefined" class="profile-picture">
+                            <img class="prof" alt=" Avatar" style="min-width:150px;" id="avatar2" [src]="profileImage">
                         </span>
 
                         <span  *ngIf="user.userImageKey==undefined"class="profile-picture">
@@ -115,7 +115,7 @@
                     <div class="col-xs-12 col-sm-6">
                         <div class="widget-box transparent"> 
                             
-                            <div class="all-tables m-3">
+                            <div class="m-3">
                                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
                                     <mat-button-toggle *ngIf="user.roleName=='ROLE_TEACHER'" (click)="getFeedBack()" value="ORDER">Отзывы</mat-button-toggle>
                                     <mat-button-toggle (click)="checkAdvEvent()" value="ADVERTISEMENT">Объявления</mat-button-toggle>
@@ -180,12 +180,10 @@
                             </div>
 
                             <div *ngIf="checkFeedBack && user.roleName=='ROLE_TEACHER'" class="feedBacks">
-                                <div *ngFor="let f of feed; let i = index" class="feedback-block">
-                                    <div><b>Пользователь {{i+1}}</b></div>
-                                    <div>Оценки - {{f.starsForWork}}</div>
-                                    <div>Комментарий - {{f.comment}}</div>
-                                </div>
-                            </div>
+                                 <div *ngFor="let order of feed; let i = index">
+                                     <app-user-feed-back [(order)]="order"></app-user-feed-back>
+                                 </div>
+                             </div>
                             
                                   <div *ngIf="checkAdv">
                                     <div class="all-adv">

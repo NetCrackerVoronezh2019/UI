@@ -11,6 +11,7 @@ import {Routes, RouterModule} from '@angular/router';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import {MatChipsModule} from '@angular/material/chips';
+
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {SignInService} from './sign-in/Services/signIn.Service';
 import {WebSocketService} from './home/Services/WebSocket.Service';
@@ -61,6 +62,8 @@ import { FeedbackComponent } from './allusers/my-orders/feedback/feedback.compon
 import { TeacherDocumentsComponent } from './admin/teacher-documents/teacher-documents.component';
 import { UserControllComponent } from './admin/user-controll/user-controll.component';
 import { OrderItemComponent } from './allusers/order-item/order-item.component';
+import { UserDocumentItemComponent } from './admin/user-document-item/user-document-item.component';
+import { UserFeedBackComponent } from './userpage2/user-feed-back/user-feed-back.component';
 
 const appRoutes: Routes =[
   {path: 'registration', component:RegistrationComponent},
@@ -127,6 +130,8 @@ const appRoutes: Routes =[
     TeacherDocumentsComponent,
     UserControllComponent,
     OrderItemComponent,
+    UserDocumentItemComponent,
+    UserFeedBackComponent,
   ],
   imports: [
     MatInputModule,
