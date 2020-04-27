@@ -45,7 +45,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AdvertisementFilterComponent } from './allusers/advertisement-filter/advertisement-filter.component';
 import { NotificationsComponent } from './allusers/notifications/notifications.component';
 import { MyOrdersComponent } from './allusers/my-orders/my-orders.component'
-import { GroupComponent } from './UserAndGroupComponents/group/group.component';
+import { GroupPageComponent } from './UserAndGroupComponents/group-page/group-page.component';
 import { MessageCardComponent} from "./ConversationComponents/messageCard/messageCard.component"
 import { DialogMemberCardComponent } from "./ConversationComponents/dialogMemberCard/dialogMemberCard.component"
 import {GroupCardComponent } from "./UserAndGroupComponents/group-card/group-card.component"
@@ -78,7 +78,7 @@ const appRoutes: Routes =[
   {path:'admin/subjectcontrol', component:SubjectControlComponent,canActivate:[AuthGuard]},
   {path: 'dialogsList',component:DialogsListComponent},
   {path: 'dialog/:dialogId', component:DialogComponent},
-  {path: 'groupPage/:groupId', component:GroupComponent},
+  {path: 'groupPage/:groupId', component:GroupPageComponent},
   {path:'myadvertisements', component:MyAdvertisementsComponent},
   {path: "groupList", component:GroupListComponent},
   {path: 'myorders', component:MyOrdersComponent},
@@ -110,7 +110,6 @@ const appRoutes: Routes =[
     NavbarComponent,
     UpdateAdvertisementComponent,
     MyAdvertisementsComponent,
-    GroupComponent,
     MessageCardComponent,
     DialogMemberCardComponent,
     GroupCardComponent,
@@ -132,6 +131,7 @@ const appRoutes: Routes =[
     OrderItemComponent,
     UserDocumentItemComponent,
     UserFeedBackComponent,
+    GroupPageComponent
   ],
   imports: [
     MatInputModule,

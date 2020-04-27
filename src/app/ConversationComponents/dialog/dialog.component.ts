@@ -35,7 +35,8 @@ export class DialogComponent implements OnInit {
   avatar:any;
   fileName:any;
   allFiles:any[]=[];
-  allNames:any[]=[]
+  allNames:any[]=[];
+  fullImage:any = null;
 
   constructor(public dgService:DialogService,private route: ActivatedRoute,private location: Router, private sanitizer: DomSanitizer) {
   }
@@ -236,6 +237,14 @@ export class DialogComponent implements OnInit {
       {
         this.allNames.splice(index,1);
         this.allFiles.splice(index,1);
+      }
+
+      openImage(image:any) {
+        this.fullImage = image;
+      }
+
+      closeImage() {
+        this.fullImage = null;
       }
 
 }

@@ -1,0 +1,208 @@
+  <app-navbar></app-navbar>
+  <div id="user-page">
+  <div id="user-profile-2" class="user-profile">
+      <div class="tabbable">
+          <div class="tab-content no-border padding-24">
+              <div id="home" class="tab-pane in active">
+                  <div class="row">
+                      <div class="col-xs-12 col-sm-3 center">
+                          <span  *ngIf="group?.image!=undefined && loading" class="profile-picture">
+                              <img class="prof" alt=" Avatar" id="avatar2" [src]="groupImage">
+                          </span>
+
+                          <span  *ngIf="group?.image==undefined || !loading"class="profile-picture">
+                              <img class="prof" alt=" Avatar" id="avatar2" src="https://mentoringgroup.com/files/images/puzzle-team.jpg">
+                          </span>
+
+
+
+                      </div><!-- /.col -->
+
+                      <div class="col-xs-12 col-sm-9">
+                          <h4 class="blue">
+                              <span class="middle mr-3">{{group?.name}}</span>
+                          </h4>
+                          <div class="profile-info-name"> Тематика </div>
+                          <div class="profile-info-value">
+                            <span>{{group?.subjectName}}</span>
+                          </div>
+                          <button  class="btn btn-sm btn-block btn-info" (click)="showSetings()" *ngIf="admin">
+                            <i class="fas fa-cog"></i>
+                            <span class="bigger-110">Настройки</span>
+                          </button>
+                          <button  class="btn btn-sm btn-block btn-secondary" routerLink="/dialog/{{group.dialogId}}" *ngIf="subscriber">
+                            <i class="fas fa-comments"></i>
+                            <span class="bigger-110">Чат</span>
+                          </button>
+                          <button  class="btn btn-sm btn-block btn-success" (click)="subscribeGroup()" *ngIf="!subscriber">
+                            <i class="fas fa-check"></i>
+                            <span class="bigger-110">Вступить</span>
+                          </button>
+                          <button  class="btn btn-sm btn-block btn-danger" (click)="leaveGroup()" *ngIf="subscriber">
+                            <i class="fas fa-ban"></i>
+                            <span class="bigger-110">Покинуть</span>
+                          </button>
+                          <button  class="btn btn-sm btn-block btn-success" (click)="notificationOn()" *ngIf="subscriber && !isNotificationsOn">
+                            <i class="fas fa-check"></i>
+                            <span class="bigger-110">Включить уведомления</span>
+                          </button>
+                          <button class="btn btn-sm btn-block btn-danger" (click)="notificationOff()" *ngIf="subscriber && isNotificationsOn">
+                            <i class="fas fa-ban"></i>
+                            <span class="bigger-110"> Выключить уведомления</span>
+                          </button>
+
+                          <button *ngIf="myId==id" data-toggle="modal" data-target="#uploadModel" class="btn btn-sm btn-block btn-primary">
+                              <i class="ace-icon fa fa-envelope-o bigger-110"></i>
+                              <span class="bigger-110">Обновить фотографию</span>
+                          </button>
+                      </div>
+
+
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="row mt-4">
+                      <div class="col-xs-12 col-sm-3">
+                          <div class="widget-box transparent">
+
+                              <div class="all-tables mt-3">
+                                  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                                      <mat-button-toggle (click)="showSubscribers()" value="Subscribers">Участники</mat-button-toggle>
+                                    </mat-button-toggle-group>
+                              </div>
+                                      </div>
+                                      <ul *ngIf="subscriversVisible" id='friend-list'>
+                                        <div *ngFor="let us of users">
+                                            <app-user-card [(us)]="user" routerLink="/userPage/{{user.userId}}"></app-user-card>
+                                        </div>
+                                      </ul>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                              <div class="post-part">
+                                <button class="ml-2 btn btn-sm btn-block btn-info" *ngIf="admin && !createPostVisible" (click)="showCreatePost()"><i class="fas fa-plus-circle"></i>Написать пост</button>
+                                <form *ngIf="createPostVisible" [formGroup]="gs.getPostCreateForm()">
+                                    <div class="form-group">
+                                      <div class="form-group">
+                                        <div class="example-2 mb-3">
+                                            <div class="form-group">
+                                              <input type="file" name="file" id="file"  (change)="handlePostFileInput($event.target.files)"  multiple accept="image/*" class="input-file"/>
+                                              <label for="file" class="btn btn-tertiary js-labelFile">
+                                                <i class="icon fa fa-check"></i>
+                                                <span class="js-fileName"> Загрузить Фотографии</span>
+                                              </label>
+                                            </div>
+                                           </div>
+                                      </div>
+                                      <div class="mb-2 all-images">
+                                          <div class="mb-3" *ngFor="let not of allNames; let i = index" (click)="deleteImageFromList(i)">
+                                              <span  matBadge="x"  matBadgeOverlap="false" >{{not}}</span>
+                                          </div>
+                                     </div>
+                                      <label for="">Текст</label>
+                                      <textarea id="Name" type="text" class="form-control" formControlName="text" autocomplete="off" placeholder="text"></textarea>
+                                      <div *ngIf="gs.getPostCreateForm().controls['text'].invalid && gs.getPostCreateForm().controls['text'].touched" >
+                                        <small  *ngIf="gs.getGroupSettingsForm().controls['groupName'].errors.minlength">text is too short</small>
+                                      </div>
+                                    </div>
+                                </form>
+                                <button type="button" class="btn btn-primary ml-2" *ngIf="admin && createPostVisible" (click)="sendPost()"><i class="fas fa-check-circle"></i>Отправить</button>
+                                <button type="button" class="btn btn-secondary ml-2" *ngIf="admin && createPostVisible" (click)="closeCreatePost()"><i class="fas fa-times"></i>Отмена</button>
+                                <div *ngFor="let post of posts">
+                                    <app-post-card [(post)]="post" [(groupName)]="group.name" [(groupImage)]="groupImage" [(user)]="user" [(admin)]="admin"></app-post-card>
+                                </div>
+                              </div>
+                            </div>
+                      </div>
+                  </div>
+             </div>
+  </div>
+
+
+  <div class="modal fade" id="uploadModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Обновить фото профиля</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="example-2 m-3">
+              <div class="form-group">
+                <label>Вы можете загрузить изображение в формате JPG, JPEG или PNG.</label>
+                <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
+                <label for="file" class="btn btn-tertiary js-labelFile">
+                  <i class="icon fa fa-check"></i>
+                  <span class="js-fileName">Выбрать файл</span>
+                </label>
+              </div>
+          </div>
+          <div class="mb-2 all-images">
+              <div class="mb-3" *ngIf="fileName!=null">
+                  <span  matBadgeOverlap="false" >{{fileName}}</span>
+              </div>
+         </div>
+          <div class="modal-footer none-border">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+            <button type="button" (click)="setAvatar()" class="btn btn-primary" data-dismiss="modal">Обновить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="sidebar" *ngIf="settingsVisible">
+      <h3>Настройки группы</h3>
+      <form [formGroup]="gs.getGroupSettingsForm()">
+          <div class="form-group">
+            <label for="">Имя группы</label>
+            <input id="Name" type="text" class="form-control" formControlName="groupName" autocomplete="off" placeholder="Group name">
+            <div *ngIf="gs.getGroupSettingsForm().controls['groupName'].invalid && gs.getGroupSettingsForm().controls['groupName'].touched" >
+              <small  *ngIf="gs.getGroupSettingsForm().controls['groupName'].errors.minlength">name is too short</small>
+              <small  *ngIf="gs.getGroupSettingsForm().controls['groupName'].errors.maxlength">name is too long</small>
+            </div>
+            <label  for="sel1">Раздел</label>
+            <select formControlName="groupSection" class="custom-select" id="sel1" placeholder="Выберите Раздел">
+                <option *ngFor="let subject of subjects" value="{{subject.translateName}}">{{subject.name}}</option>
+            </select>
+          </div>
+      </form>
+      <button mat-raised-button class="ml-2" (click)="acceptSettings()"><i class="fas fa-check-circle"></i>Изменить</button>
+      <button mat-raised-button class="ml-2" (click)="closeSetings()"><i class="fas fa-minus-circle"></i>Закрыть</button>
+      <h4>Администраторы</h4>
+      <button *ngIf="!addAdmin && !removeAdmin" mat-raised-button class="ml-2" (click)="showAddAdmin()"><i class="fas fa-plus-circle"></i>Добавить</button>
+      <button *ngIf="!addAdmin && !removeAdmin && creator" mat-raised-button class="ml-2" (click)="showRemoveAdmin()"><i class="fas fa-minus-circle"></i>Удалить</button>
+      <button *ngIf="addAdmin || removeAdmin" mat-raised-button class="ml-2" (click)="closeAddRemoveAdmin()"><i class="fas fa-times"></i>Отмена</button>
+      <div *ngIf="!addAdmin && !removeAdmin">
+      <div *ngFor ='let user of admins' align="center">
+        <app-user-card [(us)]="user" routerLink="/userPage/{{user.userId}}"></app-user-card>
+      </div>
+    </div>
+    <div *ngIf="removeAdmin">
+    <div *ngFor ='let user of admins' align="center">
+      <app-user-card [(us)]="user" (click)="deleteAdmin(user)"></app-user-card>
+    </div>
+    </div>
+    <div *ngIf="addAdmin">
+      <form [formGroup]="gs.getUserSearchForm()">
+        <h5>Поиск</h5>
+        <label for="">Имя</label>
+        <input type="text" class="form-control" formControlName="firstName" autocomplete="off" placeholder="first name">
+        <div *ngIf="gs.getUserSearchForm().controls['firstName'].invalid && gs.getUserSearchForm().controls['firstName'].touched" >
+          <small  *ngIf="gs.getUserSearchForm().controls['firstName'].errors.minlength">name is too short</small>
+          <small  *ngIf="gs.getUserSearchForm().controls['firstName'].errors.maxlength">name is too long</small>
+        </div>
+        <label for="">Фамилия</label>
+        <input type="text" class="form-control" formControlName="lastName" autocomplete="off" placeholder="last name">
+        <div *ngIf="gs.getUserSearchForm().controls['lastName'].invalid && gs.getUserSearchForm().controls['lastName'].touched" >
+          <small  *ngIf="gs.getUserSearchForm().controls['lastName'].errors.minlength">name is too short</small>
+          <small  *ngIf="gs.getUserSearchForm().controls['lastName'].errors.maxlength">name is too long</small>
+        </div>
+      </form>
+      <button mat-raised-button class="ml-2" (click)="search()"><i class="fas fa-search"></i>Поиск</button>
+      <button mat-raised-button class="ml-2" (click)="cancelSearch()"><i class="fas fa-minus-circle"></i>Отмена</button>
+    <div *ngFor ='let user of users' align="center">
+      <app-user-card [(us)]="user" (click)="makeAdmin(user)"></app-user-card>
+    </div>
+   </div>
+  </div>
