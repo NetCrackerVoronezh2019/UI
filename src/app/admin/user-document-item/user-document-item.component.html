@@ -1,0 +1,27 @@
+<div class="card m-3">
+    <div class="part1"> 
+        <img src="https://images.pexels.com/photos/464509/man-portrait-guy-person-464509.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;h=627&amp;w=1200" class="avatar" />
+        <div class="name">{{user.firstname}} {{user.lastname}}</div>
+        <div>Учитель</div>
+    </div>
+    <div class="part2">
+       <div class="data mt-1">
+        <div class="tools" style="min-height:5px; color:red; font-weight:555;">
+                {{message}}
+           </div>
+           <h4 сlass="title">Документы и Сертификаты </h4>
+        </div>
+        <div class="documents mt-1">
+            <span *ngFor="let doc of user.documents; let i = index" class="document mr-2">
+                    <span style="text-align:center;"><i style="font-size:30px;" class="fas fa-download"></i></span>
+                    <section class="example-section">
+                        <mat-checkbox class="example-margin" (click)="getDoc()" [(ngModel)]="doc.isValid">{{doc.documentKey.split('_')[1]}}</mat-checkbox>
+                    </section>
+            </span>
+            
+        </div>
+        <span style="display:flex; justify-content:end;">
+            <button type="button" class="btn btn-success" (click)="saveUserChanges()">Сохранить</button> 
+        </span>
+    </div>
+</div>      

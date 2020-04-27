@@ -11,6 +11,7 @@ import {Routes, RouterModule} from '@angular/router';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import {MatChipsModule} from '@angular/material/chips';
+
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {SignInService} from './sign-in/Services/signIn.Service';
 import {WebSocketService} from './home/Services/WebSocket.Service';
@@ -58,7 +59,12 @@ import {FriendListComponent} from "./UserAndGroupComponents/friend-list/friend-l
 import {FriendCardComponent} from './UserAndGroupComponents/friend-card/friend-card.component';
 import { Userpage2Component } from './userpage2/userpage2.component';
 import { FeedbackComponent } from './allusers/my-orders/feedback/feedback.component';
-import { TeacherDocumentsComponent } from './admin/teacher-documents/teacher-documents.component'
+import { TeacherDocumentsComponent } from './admin/teacher-documents/teacher-documents.component';
+import { UserControllComponent } from './admin/user-controll/user-controll.component';
+import { OrderItemComponent } from './allusers/order-item/order-item.component';
+import { UserDocumentItemComponent } from './admin/user-document-item/user-document-item.component';
+import { UserFeedBackComponent } from './userpage2/user-feed-back/user-feed-back.component';
+
 const appRoutes: Routes =[
   {path: 'registration', component:RegistrationComponent},
   {path: 'adv/:id', component:AdvertisementComponent},
@@ -80,7 +86,8 @@ const appRoutes: Routes =[
   {path:'email/:emailAdress',component:EmailPageComponent},
   {path: 'friends', component:FriendListComponent},
   {path: 'userPage/:id',component:Userpage2Component},
-  {path:"allDocuments",component:TeacherDocumentsComponent}
+  {path:"admin/allDocuments",component:TeacherDocumentsComponent},
+  {path:"userControl",component:UserControllComponent}
 ];
 
 @NgModule({
@@ -120,6 +127,10 @@ const appRoutes: Routes =[
     Userpage2Component,
     FeedbackComponent,
     TeacherDocumentsComponent,
+    UserControllComponent,
+    OrderItemComponent,
+    UserDocumentItemComponent,
+    UserFeedBackComponent,
     GroupPageComponent
   ],
   imports: [

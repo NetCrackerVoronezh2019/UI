@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {UserDocument} from '../../classes/userDocument'
+import {User} from '../../classes/user'
 import {MatTableDataSource} from '@angular/material/table'
 import {DocumentService} from './document.service';
 import * as fileSaver from 'file-saver';
+
 
 @Component({
   selector: 'app-teacher-documents',
@@ -12,76 +13,22 @@ import * as fileSaver from 'file-saver';
 })
 export class TeacherDocumentsComponent implements OnInit {
 
+  users:User[]=[]
   constructor(private service:DocumentService) { }
 
-  displayedColumns: string[] = ['userId', 'userFIO', 'document','action'];
-  dataSource:MatTableDataSource<any>;
-  message:String;
-  check="valid";
-  userDocumentLive:UserDocument;
+    ngOnInit()
+    {
+      this.getAllTeachers();         
+    }
 
-  ngOnInit() {
+    getAllTeachers(){
+      this.service.getAllTeachers()
+          .subscribe(
+            (data:User[])=>{this.users=data,console.log(this.users)},
+            error=>console.log(error)
+          )
+    }
 
-    this.getValid();
-  }
-
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-
-  getValid()
-  {
-    this.check="valid"
-    this.service.getAllValidDocuments()
-        .subscribe(
-          (data:UserDocument[])=>this.dataSource=new MatTableDataSource(data),
-          error=>console.log(error)
-
-        )
-  }
-
-  getUnValid()
-  {
-
-    this.check="unValid";
-    this.service.getAllUnValidDocuments()
-        .subscribe(
-          (data:UserDocument[])=>this.dataSource=new MatTableDataSource(data),
-          error=>console.log(error)
-
-        )     
-  }
-
-  checkIconEvent(row:UserDocument)
-  {
-    this.message="Документ является действительным ?";
-    this.userDocumentLive=row;
-  }
-
-  banIconEvent(row:UserDocument)
-  {
-    this.message="Документ не является действительным ?";
-    this.userDocumentLive=row;
-  }
-
-  submit()
-  {
-    console.log("sumit")
-    this.service.changeDocumentValidaton(this.userDocumentLive)
-    .subscribe(
-      data=>{
-        this.message="Всё прошло успешно"
-        if(this.check=="valid")
-          this.getValid();
-        else
-          this.getUnValid;
-      },
-      error=>{this.message="Ошибка"; console.log(error)}
-    )
-  }
 
 
   download(key:String)

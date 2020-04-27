@@ -61,6 +61,12 @@ export class OrderService
     getMyRole(){
         return this.http.get(this.baseUrl+"/getRole");
     }
+
+    getOrder(id)
+    {
+        return this.http.get('http://localhost:1122/getOrder/'+id);
+    }
+
     changeOrderStatus(order:Order)
     {
 
@@ -72,15 +78,19 @@ export class OrderService
         return this.http.post(this.baseUrl+"/user/changeOrderStatus",body);
     }
 
-    getMyOrders()
+    getMyOrders(state)
     {
-        return this.http.get(this.baseUrl+"/user/getMyOrders");
+        let body={
+            status:state
+        }
+
+        return this.http.post(this.baseUrl+"/user/getUserOrdersByOrderStatus",body);
     }
 
     sendFeedBack(rating:any,order:Order)
     {
         let body={
-            order:order,
+            orderId:order.orderId,
             rating:rating,
             comment:this.orderForm.value.comment
         }

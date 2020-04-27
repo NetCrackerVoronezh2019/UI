@@ -1,3 +1,5 @@
+
+import {Advertisement} from '../classes/advertisement'
 export class Order
 {
     public orderId:Number;
@@ -6,9 +8,11 @@ export class Order
     public advertisementId:Number;
     public status:String;
     public nextStatus:String;
-    public starsForWork:String;
+    public starsForWork:Number;
     public freelancerFIO:String;
     public customerFIO:String;
     public comment:String;
+    public advertisement:Advertisement;
+    public customerImageKey:String;
     public constructor(){}
 }

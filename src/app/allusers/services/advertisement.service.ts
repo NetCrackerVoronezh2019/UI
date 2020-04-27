@@ -7,7 +7,6 @@ import {Http, ResponseContentType} from '@angular/http';
 import {Observable} from 'rxjs';
 import {File} from '../../classes/file'
 
-
 @Injectable()
 export class AdvertisementService1
 {
@@ -88,7 +87,7 @@ export class AdvertisementService1
 
     sendNotificationResponse(x:AdvNotification)
     {
-        return this.http.post(this.baseUrl+'/user/notificationResponse',x)
+        return this.http.post(this.baseUrl+'/user/notificationResponse',x.notification)
     }
 
     canSendRequest(id:Number)

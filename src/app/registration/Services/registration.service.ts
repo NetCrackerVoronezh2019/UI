@@ -42,6 +42,12 @@ export class RegistrationService
         return this.myForm;
     }
 
+
+    checkEmail()
+    {
+        let email=this.myForm.value.userEmail;
+        return this.http.get(this.baseUrl+'/checkEmail/'+email);
+    }
     sendRegistrationInformation(role:any,allFiles){
          
         const body = {

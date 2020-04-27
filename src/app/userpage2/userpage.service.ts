@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Http, ResponseContentType} from '@angular/http';
 import {File} from '../classes/file'
+import {AdvNotification} from '../classes/advNotification'
 
 
 @Injectable()
@@ -48,13 +49,21 @@ export class UserPageService
     }
 
     downloadProfileImage(key:String): Observable<any>{
-
         return this.http2.get('http://localhost:1234/getuserimg/'+key, {responseType: ResponseContentType.Blob});
     }
 
+    getNotifications(id)
+    {
+      return this.http.get('http://localhost:9080/getCommonNots/'+id);
+    }
 
     startDialogWithUser(userId) {
         return this.http.post('http://localhost:9080/users/startDialog',null,{params:new HttpParams().set("userId",userId)})
+    }
+
+    getFeedBack(id)
+    {
+      return this.http.get('http://localhost:9080/getFreelancerAllFeedBack/'+id);
     }
 
     getYourFriends() {

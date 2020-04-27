@@ -1,10 +1,27 @@
-<div class="notifications">
-  <div  class="notification"  *ngFor="let not of notifications; let i = index">
-       <span><a class="advHref" href='userPage/{{not.senderId}}'>{{not.senderFIO}}</a> &nbsp;</span><span>{{not.message}}</span> 
-       <div class="notif-buttons">
-        <button *ngIf="not.type=='TAKE_ADVERTISEMENT' || not.type=='RECEIVE_SERVICE'" type="button b" class="btn btn-success" (click)="onAccept(not)">Принять</button>
-        <button type="button" *ngIf="not.type=='TAKE_ADVERTISEMENT' || not.type=='RECEIVE_SERVICE'" class="btn btn-warning"(click)="onReject(not)">Отклонить</button>
-        <button  type="button" class="btn btn-success" ><a href="/adv/{{not.advertisementId}}" class="ft">O заказе</a></button>
-      </div>
-   <div>
+<div  class="notifications w-100">
+	<div class="notification_wrap w-100">
+	<div class="dropdown active w-100">
+		<div *ngFor="let not of notifications; let i = index">
+		<div class="notify_item"  >
+			<div *ngIf="not.notification.userImageKey!=undefined" class="notify_img">
+				<img src="http://localhost:1234/getuserimg/{{not.notification.userImageKey}}" alt="profile_pic" style="width:70px; height:70px; border-radius:50%;">
+			</div>
+			<div *ngIf="not.notification.userImageKey==undefined" class="notify_img">
+				<img src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg" alt="profile_pic" style="width:55px">
+			</div>
+			<div class="notify_info">
+				<p>{{not.notification.senderFIO}} {{not.notification.message}}<span>{{not.advertisementName}}</span></p>
+				<span class="notify_time">10 minutes ago</span>
+			</div>
+		</div>
+		<div class="all">
+			<a href="/myorders"><button *ngIf="not.notification.type=='TAKE_ADVERTISEMENT' || not.notification.type=='RECEIVE_SERVICE'" type="button b" class="btn btn-success" (click)="onAccept(not)">Принять</button></a>
+			<button type="button" *ngIf="not.notification.type=='TAKE_ADVERTISEMENT' || not.notification.type=='RECEIVE_SERVICE'" class="btn btn-warning ml-2"(click)="onReject(not)">Отклонить</button>
+			<button  type="button" class="btn btn-success ml-2 " ><a href="/adv/{{not.notification.advertisementId}}" class="ft">O заказе</a></button>
+			</div>
+		</div>
+		
+	</div>
 </div>
+</div>
+

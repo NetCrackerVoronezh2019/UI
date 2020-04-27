@@ -1,6 +1,7 @@
 <app-navbar></app-navbar>
+<div class="add-page pt-5">
 <form *ngIf="!sendData" [formGroup]="advService.getAdvForm()" class="signIn">
-    <div class="container mt-5 ">
+    <div class="container">
         <div class="row d-flex flex-column justify-content-center  align-items-center">
             <div class="col-md-6 col-sm-12 text-center text-uppercase  signin-label font-weight-bold">Новое Объявление</div>
 			<div class="sign-in-errors">
@@ -50,7 +51,7 @@
                 <div class="form-group">
                     <div class="example-2 mb-3">
                         <div class="form-group">
-                          <input type="file" name="file" id="file2"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
+                          <input type="file" name="file" id="file2"  (change)="handleFileInput($event.target.files)" multiple accept="image/*, .pdf, .txt, .docx" class="input-file"/>
                           <label for="file2" class="btn btn-tertiary js-labelFile">
                             <i class="fas fa-paperclip"></i>
                             <span class="js-fileName">  Прикрепить файлы</span>
@@ -63,7 +64,7 @@
                         <span  matBadge="x"  matBadgeOverlap="false" >{{not}}</span>
                     </div>
                </div>
-                <div class="">
+                <div>
                     <mat-form-field class="example-chip-list">
                         <mat-chip-list #chipList aria-label="tag selection">
                           <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
@@ -71,7 +72,7 @@
                             {{tag.name}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                           </mat-chip>
-                          <input placeholder="Теги"
+                          <input class="tagss" placeholder="Теги"
                                  [matChipInputFor]="chipList"
                                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                  [matChipInputAddOnBlur]="addOnBlur"
@@ -87,7 +88,7 @@
         </div>
     </div>
 </form>
-
+</div>
 <div *ngIf='sendData' class="loading">
     <mat-spinner></mat-spinner>
 </div>

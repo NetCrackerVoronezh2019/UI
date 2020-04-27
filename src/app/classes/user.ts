@@ -1,3 +1,4 @@
+import {UserDocument} from './userDocument'
 export class User
 {
     public userId:Number;
@@ -13,5 +14,5 @@ export class User
     public roleName:String;
     public isOnline:Boolean;
     public userImageKey:String;
-    public documentKeys:String[];
+    public documents:UserDocument[];
 }

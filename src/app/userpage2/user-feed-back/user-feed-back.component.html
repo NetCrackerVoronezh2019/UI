@@ -1,0 +1,14 @@
+<div  class="feedback-block;">
+    <div class="comment-info " >
+        <img class="avatar mr-2" src="https://miro.medium.com/max/1200/1*QQuqrtBQOd_XgE7fwwN8BA.jpeg"/>
+        <div class="comment-user-info">
+            <span style="font-weight:555;">{{order.customerFIO}}</span>
+                <span class="rating-result">
+                    <span *ngFor="let o of rating1; let i = index" class="active"></span>	
+                    <span *ngFor="let o of rating2; let i = index"></span>	       
+                </span>
+                <span class="comment">
+                   {{order.comment}}
+                </span>
+        </div>
+    </div> 

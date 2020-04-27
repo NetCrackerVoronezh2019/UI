@@ -35,7 +35,7 @@
 
 .reg
 {
-  background-color:#FCFCFC;
+  background-color:#f6f8fa !important;
 }
 
 
@@ -72,4 +72,9 @@
 .check-button-border
 {
     border:2px solid #e64927;
+}
+
+
+input{
+  box-shadow: 0 3px 7px -1px rgba(#000, .1);
 }

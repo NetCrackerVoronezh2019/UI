@@ -1,6 +1,7 @@
 import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {UserDocument} from '../../classes/userDocument'
+import {User} from '../../classes/user'
 import {ChangeDocumentValidation} from '../../classes/changeDocumentValidation'
 import {Observable} from 'rxjs';
 import {Http, ResponseContentType} from '@angular/http';
@@ -12,18 +13,6 @@ export class DocumentService
     baseUrl:String='http://localhost:9080';
     constructor(private http:HttpClient,private http2: Http){}
 
-
-    getAllValidDocuments()
-    {
-        return this.http.get(this.baseUrl+'/getAllValidDocuments');
-    }
-
-
-    getAllUnValidDocuments()
-    {
-        return this.http.get(this.baseUrl+'/getAllUnValidDocuments');   
-    }
-
     changeDocumentValidaton(row:UserDocument)
     {
         let body:ChangeDocumentValidation=new ChangeDocumentValidation();
@@ -31,6 +20,17 @@ export class DocumentService
         body.validation=!row.isValid;
         console.log(body);
        return this.http.post(this.baseUrl+'/changeDocumentValidation',body)
+    }
+
+
+    saveUserChanges(user:User)
+    {
+        return this.http.post(this.baseUrl+'/saveUserChanges',user)
+    }
+
+    getAllTeachers()
+    {
+        return this.http.get(this.baseUrl+'/getAllTeachers');
     }
    
     downloadFile(key:String): Observable<any>{
