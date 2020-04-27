@@ -15,4 +15,6 @@ export class Order
     public advertisement:Advertisement;
     public customerImageKey:String;
     public constructor(){}
+
+
 }

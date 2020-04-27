@@ -15,4 +15,7 @@ export class User
     public isOnline:Boolean;
     public userImageKey:String;
     public documents:UserDocument[];
+
+
+
 }

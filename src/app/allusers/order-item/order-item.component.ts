@@ -1,4 +1,4 @@
-import { Component, OnInit,Input} from '@angular/core';
+import { Component, OnInit,Input, ɵNG_INJECTABLE_DEF} from '@angular/core';
 import {Order} from '../../classes/order'
 import {OrderService} from '../services/order.service'
 @Component({
@@ -15,6 +15,11 @@ export class OrderItemComponent implements OnInit {
   reiting:any;
   rating1:any[]=[];
   rating2:any[]=[];
+  statusTranslate;
+  nextStatusTranslate;
+
+
+
   constructor(private service:OrderService) { }
 
   ngOnInit() {
@@ -35,6 +40,24 @@ export class OrderItemComponent implements OnInit {
     
     this.reiting=event.target.attributes.value.value;
   }
+
+
+  getStatus(status){
+        if(status=='ACCEPTED')
+          return 'Принят';
+        if(status=="INPROGRESS")
+          return 'В процессе';
+        if(status=='СOMPLETED')
+          return 'Завершен'
+  }
+
+  getNextStatus(status){
+
+    if(status=="INPROGRESS")
+      return 'Начать работу';
+    if(status=='СOMPLETED')
+      return 'Завершить'
+}
 
 
   getOrder()

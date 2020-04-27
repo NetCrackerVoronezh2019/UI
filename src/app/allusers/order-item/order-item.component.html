@@ -6,9 +6,9 @@
     <div class="description">
       <h1>{{order.advertisement.advertisementName}}</h1>
      <h2>Заказчик - Armen Tovmasyan</h2>        
-      <div><span class="title">Cтатус заказа - </span>{{order.status}}</div>
+      <div><span class="title">Cтатус заказа - </span>{{getStatus(order.status)}}</div>
       <div><span class="title">Дата принятия заказа - </span>24.04.2020</div>
-      <div><span class="title">Дедлайн до - </span>{{order.advertisement.deadline.split('T')[0]}}</div>
+   
       <div *ngIf="order.starsForWork!='0' && order.status=='СOMPLETED'" >
         <div> <span class="title">Оценка - </span>
           <span class="rating-result">
@@ -18,9 +18,9 @@
         </div>
         <div> <span class="title">Комментарий - </span>{{order.comment}} </div>
       </div>
-      <button *ngIf="myRole=='ROLE_TEACHER' && order.nextStatus!=undefined" (click)="changeOrderStatus(order)" class="btn btn-success mt-3" >{{order.nextStatus}}</button>
-       <button *ngIf="myRole=='ROLE_STUDENT' && order.starsForWork=='0' && order.status=='СOMPLETED'" (click)="show(order)" class="btn btn-success"  >Оценить работу</button>
-       <button *ngIf="myRole=='ROLE_STUDENT' && order.starsForWork!='0' && order.status=='СOMPLETED'" (click)="show(order)" class="btn btn-success" >Переоценить работу</button>
+      <button *ngIf="myRole=='ROLE_TEACHER' && order.nextStatus!=undefined" (click)="changeOrderStatus(order)" class="btn btn-success mt-3" >{{getNextStatus(order.nextStatus)}}</button>
+       <button *ngIf="myRole=='ROLE_STUDENT' && order.starsForWork=='0' && order.status=='СOMPLETED'" (click)="show(order)" class="btn btn-success mt-3"  >Оценить работу</button>
+       <button *ngIf="myRole=='ROLE_STUDENT' && order.starsForWork!='0' && order.status=='СOMPLETED'" (click)="show(order)" class="btn btn-success mt-3" >Переоценить работу</button>
       <div *ngIf="ok" class="rating-area">           
         <input (click)="raitingClick($event,not)"  type="radio" id="star-5" name="rating" value="5">
         <label for="star-5" title="Оценка «5»"></label>	

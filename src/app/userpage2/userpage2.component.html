@@ -79,7 +79,7 @@
                                 <div class="profile-info-name">Пол</div>
 
                                 <div class="profile-info-value">
-                                    <span>{{user.gender}}</span>
+                                    <span>{{gender()}}</span>
                                 </div>
                             </div>
                             <div *ngIf="user.roleName=='ROLE_TEACHER'" class="profile-info-row">
@@ -94,7 +94,7 @@
                                 <div class="profile-info-name"> Роль </div>
 
                                 <div class="profile-info-value">
-                                    <span>{{user.roleName}}</span>
+                                    <span>{{role()}}</span>
                                 </div>
                             </div>
 

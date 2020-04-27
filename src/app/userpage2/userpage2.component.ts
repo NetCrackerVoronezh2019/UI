@@ -25,7 +25,7 @@ import {AdvertisementService1} from '../allusers/services/advertisement.service'
 })
 export class Userpage2Component implements OnInit {
 
-  private user:User
+  public user:User
   id:Number;
   myId:Number;
   checkFeedBack=false;
@@ -35,6 +35,7 @@ export class Userpage2Component implements OnInit {
   checkAboutMe=false;
   checkDocuments=false;
   checkRequests=false;
+  genderTranslate;
   subscription:Subscription;
   dataSource:Order[]=[];
   advs:Advertisement[]=[];
@@ -115,6 +116,22 @@ export class Userpage2Component implements OnInit {
       )
   }
 
+  gender()
+  {
+    if(this.user.gender=="MALE")
+      return 'Мужской'
+    if(this.user.gender=="FEMALE")
+    return 'Женский'
+  }
+
+  role()
+  {
+   
+    if(this.user.roleName=="ROLE_STUDENT")
+      return 'студент'
+    if(this.user.roleName=="ROLE_TEACHER")
+    return 'Преподaватель'
+  }
   checkDocumentsEvent()
   {
     this.checkFeedBack=false;
