@@ -1,6 +1,7 @@
 <div class="card m-3">
-    <div class="part1"> 
-        <img src="https://images.pexels.com/photos/464509/man-portrait-guy-person-464509.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;h=627&amp;w=1200" class="avatar" />
+    <div  routerLink="/userPage/{{user.userId}}" class="part1"> 
+        <img *ngIf="user.userImageKey!=undefined" src="http://localhost:1234/getuserimg/{{user.userImageKey}}" alt="profile_pic" style="width:70px; height:70px; border-radius:50%;">
+        <img  *ngIf="user.userImageKey==undefined" src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg" alt="profile_pic" style="width:55px">
         <div class="name">{{user.firstname}} {{user.lastname}}</div>
         <div>Учитель</div>
     </div>

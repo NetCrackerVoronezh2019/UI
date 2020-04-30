@@ -18,6 +18,11 @@ export class UserPageService
         return this.http.get('http://localhost:9080/getUser/'+id);
     }
 
+    getAllValidDocuments(id)
+    {
+      console.log(id);
+      return this.http.get("http://localhost:9080/getAllValidDocuments/"+id);
+    }
 
     getOrders(id:Number)
     {

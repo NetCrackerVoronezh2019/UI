@@ -158,6 +158,10 @@ a {
 	font-size: 12px;
 }
 
+a{
+	text-decoration:none;
+	color:black !important;
+}
 .notification_wrap .dropdown:before{
 	content: "";
 	position: absolute;

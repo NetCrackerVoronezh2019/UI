@@ -14,6 +14,7 @@ export class User
     public roleName:String;
     public isOnline:Boolean;
     public userImageKey:String;
+    public teacherStatus:String;
     public documents:UserDocument[];
 
 

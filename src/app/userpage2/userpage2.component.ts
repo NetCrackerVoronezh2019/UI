@@ -14,7 +14,7 @@ import { Group } from '@UserAndGroupClasses/group'
 import { User as UserAndGroupsUser } from '@UserAndGroupClasses/user'
 import {AdvNotification} from '../classes/advNotification'
 import {AdvertisementService1} from '../allusers/services/advertisement.service'
-
+import {UserDocument} from '../classes/userDocument'
 
 
 @Component({
@@ -54,6 +54,7 @@ export class Userpage2Component implements OnInit {
   groups:Group[];
   public feed:Order[]=[];
   public getFB=true;
+  documents:UserDocument[]=[];
   constructor(private service:UserPageService,private activateRoute: ActivatedRoute,
     private router: Router,private sanitizer: DomSanitizer,private advService:AdvertisementService1) { }
 
@@ -73,11 +74,15 @@ export class Userpage2Component implements OnInit {
     x.notification.responseStatus="ACCEPTED";
     console.log(x);
    // this.router.navigate(['/myorders/']);
+
+   
     this.advService.sendNotificationResponse(x)
     .subscribe(
       (data)=>this.getNotifications(),
       error=>console.log(error)
     )
+
+    
 
   }
 
@@ -96,7 +101,7 @@ export class Userpage2Component implements OnInit {
   {
     this.service.getNotifications(this.id)
       .subscribe(
-        (data:AdvNotification[])=>this.notifications=data,
+        (data:AdvNotification[])=>{this.notifications=data,console.log(this.notifications)},
         error=>console.log(error)
       )
   }
@@ -141,6 +146,11 @@ export class Userpage2Component implements OnInit {
     this.checkFriends = false;
     this.checkAboutMe=false;
     this.checkDocuments=true;
+    this.service.getAllValidDocuments(this.user.userId)
+        .subscribe(
+          (data:UserDocument[])=>{this.documents=data,console.log(this.documents)},
+          error=>console.log(error)
+        )
   }
 
   checkRequestEvent()

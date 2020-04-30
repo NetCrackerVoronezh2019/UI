@@ -12,4 +12,7 @@ export class Notif
     public status:String;
     public responseStatus:String;
     public userImageKey:String;
+    public date:Date;
+    public certificateName:String;
+    
 }

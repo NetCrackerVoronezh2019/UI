@@ -54,7 +54,7 @@ export class MyOrdersComponent implements OnInit {
     this.service.getMyOrders(this.state)
     .subscribe(
       (data:Order[])=>{this.dataSource=data,console.log(data)},
-      error=>console.log(error)
+      error=>{console.log(error),this.dataSource=[]}
     )
   }
 

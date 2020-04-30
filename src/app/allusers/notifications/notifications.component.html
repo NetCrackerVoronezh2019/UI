@@ -1,27 +1,47 @@
 <div  class="notifications w-100">
 	<div class="notification_wrap w-100">
-	<div class="dropdown active w-100">
-		<div *ngFor="let not of notifications; let i = index">
-		<div class="notify_item"  >
-			<div *ngIf="not.notification.userImageKey!=undefined" class="notify_img">
-				<img src="http://localhost:1234/getuserimg/{{not.notification.userImageKey}}" alt="profile_pic" style="width:70px; height:70px; border-radius:50%;">
-			</div>
-			<div *ngIf="not.notification.userImageKey==undefined" class="notify_img">
-				<img src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg" alt="profile_pic" style="width:55px">
-			</div>
-			<div class="notify_info">
-				<p>{{not.notification.senderFIO}} {{not.notification.message}}<span>{{not.advertisementName}}</span></p>
-				<span class="notify_time">10 minutes ago</span>
-			</div>
-		</div>
-		<div class="all">
-			<a href="/myorders"><button *ngIf="not.notification.type=='TAKE_ADVERTISEMENT' || not.notification.type=='RECEIVE_SERVICE'" type="button b" class="btn btn-success" (click)="onAccept(not)">Принять</button></a>
-			<button type="button" *ngIf="not.notification.type=='TAKE_ADVERTISEMENT' || not.notification.type=='RECEIVE_SERVICE'" class="btn btn-warning ml-2"(click)="onReject(not)">Отклонить</button>
-			<button  type="button" class="btn btn-success ml-2 " ><a href="/adv/{{not.notification.advertisementId}}" class="ft">O заказе</a></button>
-			</div>
+		<div class="dropdown active w-100">
+				<div *ngFor="let not of notifications; let i = index">
+					<div *ngIf="not.notification.type!='ACCEPTED_CERTIFICATION' && not.notification.type!='REJECTED_CERTIFICATION'">
+						<div class="notify_item"  >
+							<div *ngIf="not.notification.userImageKey!=undefined" class="notify_img">
+								<img src="http://localhost:1234/getuserimg/{{not.notification.userImageKey}}" alt="profile_pic" style="width:70px; height:70px; border-radius:50%;">
+							</div>
+							<div *ngIf="not.notification.userImageKey==undefined" class="notify_img">
+								<img src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg" alt="profile_pic" style="width:55px">
+							</div>
+							<div class="notify_info">
+								<a href='/userPage/{{not.notification.senderId}}'>{{not.notification.senderFIO}}</a> {{not.notification.message}}
+									<a href="/adv/{{not.notification.advertisementId}}"><span>{{not.advertisementName}}</span></a>
+								<span class="notify_time"></span>
+							</div>
+						</div>
+						<div class="all">
+							<a><button *ngIf="not.notification.type=='TAKE_ADVERTISEMENT' || not.notification.type=='RECEIVE_SERVICE'" type="button b" class="btn btn-success" (click)="onAccept(not)">Принять</button></a>
+							<button type="button" *ngIf="not.notification.type=='TAKE_ADVERTISEMENT' || not.notification.type=='RECEIVE_SERVICE'" class="btn btn-warning ml-2"(click)="onReject(not)">Отклонить</button>
+							<button  type="button" class="btn btn-success ml-2 " ><a href="/adv/{{not.notification.advertisementId}}" class="ft">O заказе</a></button>
+						</div>
+					</div>
+					<div *ngIf="not.notification.type=='ACCEPTED_CERTIFICATION' || not.notification.type=='REJECTED_CERTIFICATION'">
+						<div class="notify_item"  >
+							
+							<div  class="notify_img">
+								<img src="https://conquestimaging.com/wp-content/uploads/2018/03/cs.png" alt="profile_pic" style="width:55px">
+							</div>
+							<div class="notify_info">
+								<p>Адинистратор {{not.notification.message}}<span>{{not.notification.certificateName.split('_')[1]}}</span></p>
+								<span class="notify_time"></span>
+							</div>
+						</div>
+						<div class="all">
+							
+						</div>
+					</div>
+						
+				</div>
+				
 		</div>
 		
 	</div>
-</div>
 </div>
 
