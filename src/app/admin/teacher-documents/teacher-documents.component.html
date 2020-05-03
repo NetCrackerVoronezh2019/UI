@@ -1,13 +1,30 @@
   
  <app-navbar></app-navbar>
-<div class="container mt-5">
+<div class="container-additional mt-5">
     <div class="checkBlock">
-      <mat-button-toggle-group name="fontStyle" aria-label="Font Style" value="{{check}}">
-        <mat-button-toggle  (click)="getValid()" value="valid">Действительные</mat-button-toggle>
-        <mat-button-toggle (click)="getUnValid()" value="unValid">Недействительные</mat-button-toggle>
-      </mat-button-toggle-group>
+        <div class="check-buttons mb-3">
+            <div state='!CERTIFICATES_ARE_NOT_CHECKED' [ngClass]="state!='CERTIFICATES_ARE_NOT_CHECKED'?'check-button check-button-border':'check-button'" (click)="getAllCheckedTeachers($event)" >
+               Проверенные 
+            </div>
+            <div  state='CERTIFICATES_ARE_NOT_CHECKED' [ngClass]="state=='CERTIFICATES_ARE_NOT_CHECKED'?'check-button check-button-border':'check-button'" (click)="getAllUncheckedTeachers($event)">
+            Непроверенные
+            </div>
+       </div>
     </div>
-    <div *ngFor="let user of users; let i = index">
-      <app-user-document-item [(user)]="user"></app-user-document-item>
+
+
+    <div class="wrap">
+      <div  [formGroup]="service.getSearchForm()" class="search">
+          <input formControlName="search" type="text" class="searchTerm" placeholder="Ivan Ivanov">
+          <button type="submit" (click)="filterTeachers()" class="searchButton">
+            <i class="fa fa-search"></i>
+          </button>
+      </div>
+   </div>
+
+    <div class="cards">
+      <div *ngFor="let user of users; let i = index">
+        <app-user-document-item [(user)]="user"></app-user-document-item>
+      </div>
     </div>
   </div>

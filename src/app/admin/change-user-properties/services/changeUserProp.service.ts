@@ -18,12 +18,27 @@ export class ChangeUserProp
             "userIsActivate":[""],
             "userIsDeleted":[""]
         }
-        
     );
+
+    SearchForm=this.fb.group(
+        {
+            "search":[""],
+            
+        }
+    );
+
+
+   
 
     getEditForm(){
         return this.EditForm;
     }
+
+    getSearchForm(){
+        return this.SearchForm;
+    }
+
+
 
     setDefaultValuesForEditForm(data)
     {
@@ -43,6 +58,12 @@ export class ChangeUserProp
     getAllUsers()
     {
         return this.http.get(this.baseUrl+'/getAllUsers');
+    }
+
+    filterUsers(searchText:String)
+    {
+       
+        return this.http.get(this.baseUrl+"/filterUser/"+this.SearchForm.value.search)
     }
   
     changeUserProperties()

@@ -3,6 +3,14 @@
  <app-navbar></app-navbar>
 
   <div class="user-control p-4">
+   <div class="wrap">
+      <div  [formGroup]="service.getSearchForm()" class="search">
+          <input formControlName="search" type="text" class="searchTerm" placeholder="Ivan Ivanov">
+          <button (click)="filterUsers()" type="submit" class="searchButton">
+            <i class="fa fa-search"></i>
+          </button>
+      </div>
+   </div>
     <div *ngFor="let user of allUsers; let i = index"  class="card m-3">
         <div routerLink="/userPage/{{user.userId}}" class="part1">  
             <img *ngIf="user.userImageKey!=undefined" src="http://localhost:1234/getuserimg/{{user.userImageKey}}" alt="profile_pic" style="width:70px; height:70px; border-radius:50%;">
@@ -18,7 +26,7 @@
                <div><span>Почта - </span>{{user.email}}</div>
                <div><span>Дата рождения - </span>{{user.birthDate.split('T')[0]}}</div>
                <div><span> Пол- </span>{{user.gender}}</div>
-               <div><span> Статус - </span>Активный</div>
+               <div><span> Статус - </span>{{user.IsActivate}}</div>
             </div>
         </div>
     </div>      

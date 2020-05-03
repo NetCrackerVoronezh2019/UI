@@ -20,9 +20,17 @@ export class ChangeUserPropertiesComponent implements OnInit {
     this.getAllUsers();
    }
 
-   applyFilter(filterValue: string) {
-    this.list.filter = filterValue.trim().toLowerCase();
-  }
+   filterUsers()
+   {
+     this.service.filterUsers("ArmenJan")
+        .subscribe(
+          (data:User[])=>
+        {this.allUsers=data
+          console.log(data);
+        },
+          error=>console.log(error)
+        )
+   }
 
   ngOnInit() {
     this.getAllUsers();
@@ -55,7 +63,7 @@ export class ChangeUserPropertiesComponent implements OnInit {
     .subscribe(
       (data:User[])=>{
 			  this.allUsers=data; 
-        this.getAllUsers();
+        this.filterUsers();
         
 		  },
       error=>console.log(error)

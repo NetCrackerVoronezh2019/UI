@@ -14,14 +14,26 @@ import * as fileSaver from 'file-saver';
 export class TeacherDocumentsComponent implements OnInit {
 
   users:User[]=[]
+  state="CERTIFICATES_ARE_NOT_CHECKED"
   constructor(private service:DocumentService) { }
 
     ngOnInit()
     {
-      this.getAllTeachers();         
+      //this.getAllTeachers();    
+      this.getAllUncheckedTeachers()     
     }
 
-    getAllTeachers(){
+    filterTeachers()
+    {
+      this.service.filterTeachers(this.state)
+          .subscribe(
+            (data:User[])=>{this.users=data,console.log(data)},
+            error=>console.log(error)
+          )
+    }
+
+    getAllCheckedTeachers(){
+      this.state="EMPTY"
       this.service.getAllTeachers()
           .subscribe(
             (data:User[])=>{this.users=data,console.log(this.users)},
@@ -29,6 +41,18 @@ export class TeacherDocumentsComponent implements OnInit {
           )
     }
 
+    getAllUncheckedTeachers()
+    {
+      this.state="CERTIFICATES_ARE_NOT_CHECKED"
+      this.service.getAllUnCheckedTeachers()
+          .subscribe(
+            (data:User[])=>{this.users=data,console.log(this.users)},
+            error=>console.log(error)
+          ) 
+    }
+
+
+    
 
 
   download(key:String)

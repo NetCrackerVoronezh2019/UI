@@ -17,6 +17,6 @@ export class Advertisement
     type:String;
     tags:Tag[];
     coverImageKey:String;
-    attachments:String[];
+    attachments:any[];
     constructor() {}
 }

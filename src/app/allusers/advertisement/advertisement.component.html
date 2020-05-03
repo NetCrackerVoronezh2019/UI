@@ -54,7 +54,7 @@
                                   <div class="attachments mt-3">                                   
                                     <span *ngFor="let doc of adv.attachments; let i = index" class="mr-2">
                                       <div (click)="download(doc)" ><i class="fas fa-file fontFile"></i></div>
-                                      <div class="fontFileName">{{doc.split('_')[1]}}</div>
+                                      <div class="fontFileName">{{doc.key.split('_')[1]}}</div>
                                     </span> 
                     
                                   </div>                                
