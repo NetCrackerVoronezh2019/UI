@@ -67,20 +67,18 @@
      <div class="container">
        <div class="form-group">
          <textarea id="message" placeholder="Write your message" type="text" class="form-control" formControlName="text" [(ngModel)]="textbox"></textarea>
-         <button class="btn btn-light btn-primary-spacing" (click)="sendMessage()">Send</button>
+         <button class="btn btn-light btn-primary-spacing" (click)="sendMessage()">Отправить</button>
+         <div class="example-2 mb-3">
+               <input type="file" name="file" id="file"  (change)="handleFileMessageInput($event.target.files)"  multiple accept="image/*, application/pdf" class="input-file"/>
+               <label for="file" class="btn btn-tertiary js-labelFile">
+                 <i class="icon fa fa-check"></i>
+                 <span class="js-fileName"> Загрузить Файлы</span>
+               </label>
+            </div>
        </div>
     </div>
    </form>
    <div class="form-group">
-     <div class="example-2 mb-3">
-         <div class="form-group">
-           <input type="file" name="file" id="file"  (change)="handleFileMessageInput($event.target.files)"  multiple accept="image/*, application/pdf" class="input-file"/>
-           <label for="file" class="btn btn-tertiary js-labelFile">
-             <i class="icon fa fa-check"></i>
-             <span class="js-fileName"> Загрузить Файлы</span>
-           </label>
-         </div>
-        </div>
    </div>
    <div class="mb-2 all-images">
        <div class="mb-3" *ngFor="let not of allNames; let i = index" (click)="deleteImageFromList(i)">
@@ -90,17 +88,7 @@
  </div>
  <div id="content" #scrollMe [scrollTop]="scrollMe.scrollHeight">
        <ul *ngFor ='let message of messages'>
-         <div *ngIf="message.sender.userId == user.userId; then thisUserMessage else enatherUserMessage"></div>
-              <ng-template #thisUserMessage>
-                <div align="right">
-                  <app-message-card [(message)]="message" (imageClick)="openImage($event)"></app-message-card>
-                </div>
-              </ng-template>
-              <ng-template #enatherUserMessage>
-                <div align="left">
-                  <app-message-card [(message)]="message"></app-message-card>
-                </div>
-            </ng-template>
+         <app-message-card [(message)]="message" (imageClick)="openImage($event)" [(mymessage)]="message.sender.userId == user.userId"></app-message-card>
        </ul>
  </div>
  <div *ngIf="fullImage!=null" class="fullImage">

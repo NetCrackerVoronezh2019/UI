@@ -14,6 +14,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 export class MessageCardComponent implements OnInit {
 
   @Input() message:Message;
+  @Input() mymessage:boolean;
   images:string[] = [];
   files:string[] = [];
   fileNames:string[] = [];

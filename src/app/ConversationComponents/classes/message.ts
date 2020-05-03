@@ -11,4 +11,5 @@ export class Message
   messageId:number;
   files:string[];
   names:string[];
+  readBySomebody:boolean;
 }

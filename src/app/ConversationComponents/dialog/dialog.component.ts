@@ -25,6 +25,7 @@ export class DialogComponent implements OnInit {
   messages:Message[] = [];
   private serverUrl = 'ws://localhost:9080/socket/websocket'
   private stompClient:Client;
+  private stompClient2:Client;
   dialog:Dialog;
   user:User;
   textbox:string = "";
@@ -50,7 +51,9 @@ export class DialogComponent implements OnInit {
         }
       setInterval(() => {this.cleanNotifications();},10000);
       const websocket: WebSocket = new WebSocket(this.serverUrl);
+      const websocket2: WebSocket = new WebSocket(this.serverUrl);
       this.stompClient = Webstomp.over(websocket);
+      this.stompClient2 = Webstomp.over(websocket2);
       this.stompClient.connect({ login: null, passcode: null }, () => {
           this.stompClient.subscribe("/dialog/" + this.dialogId, (message) => {
             var mes:Message = JSON.parse(message.body);
@@ -58,6 +61,21 @@ export class DialogComponent implements OnInit {
               mes.isNoRead = true;
             }
             this.messages.push(mes);
+          });
+      });
+      this.stompClient2.connect({ login: null, passcode: null }, () => {
+          this.stompClient.subscribe("/readMessages/" + this.dialogId, (message) => {
+            var us:User = JSON.parse(message.body);
+            if (us.userId != this.user.userId) {
+                let i = 0;
+                while (i < this.messages.length && this.messages[this.messages.length -1 -i].sender.userId !=this.user.userId) {
+                  i++;
+                }
+                while (i < this.messages.length && !this.messages[this.messages.length -1 -i].readBySomebody) {
+                  this.messages[this.messages.length -1 -i].readBySomebody = true;
+                  i++;
+                }
+            }
           });
       });
     });
@@ -101,15 +119,16 @@ export class DialogComponent implements OnInit {
       "dialogId": this.dialog.dialogId
     }))
     let i = 0;
-    while (i < this.messages.length && this.messages[this.messages.length -1 -i].isNoRead == true) {
+    while (i < this.messages.length && this.messages[this.messages.length -1 -i].isNoRead) {
       this.messages[this.messages.length -1 -i].isNoRead = false;
+      this.messages[this.messages.length -1 -i].readBySomebody = true;
       i++;
     }
   }
 
   sendMessage(){
     this.cleanNotifications();
-    if (this.dgService.getMessageForm().invalid) {
+    if (this.dgService.getMessageForm().invalid && this.allFiles.length == 0) {
       alert("message is empty")
     } else {
       this.dgService.sendMessage(this.user,this.dialogId,this.allFiles, this.allNames).subscribe();

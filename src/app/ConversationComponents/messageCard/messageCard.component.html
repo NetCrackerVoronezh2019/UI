@@ -1,20 +1,39 @@
 
-<div *ngIf="true" class="blog-card" [ngStyle]="{'background': message.isNoRead ? 'LightBlue' : 'white'}">
-    <div class="inner-part">
-      <label class="img">
-        <img  src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSaY9UGZkwA_Am-IgAiVJkD0VoluyIJXM8OOi57ioAp5gj5CAkM'/>
-      </label>
-      <div class="content ">
-        <div class="title">{{message.sender.name}}</div>
-        <span>{{message.text}}</span>
-        <div class="files">
-          <div class="imag">
-            <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
-          </div>
-            <span class="doc" *ngFor="let doc of files; let i = index" class="mr-2">
-                <button (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
-            </span>
+<div [ngStyle]="{'background': (message.isNoRead || message.readBySomebody==false) ? 'LightBlue' : 'white'}">
+  <div *ngIf="mymessage" class="clearfix">
+     <div class="message-data align-right">
+       <span class="message-data-name" >{{message.sender.name}}</span>
+       <br>
+       <span class="message-data-time" >{{message.date}}</span>
+     </div>
+     <div class="message other-message float-right">
+       {{message.text}}
+       <div class="files">
+         <div class="imag">
+           <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
+         </div>
+           <span class="doc" *ngFor="let doc of files; let i = index" class="mr-2">
+               <button (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
+           </span>
+       </div>
+     </div>
+   </div>
+   <div *ngIf="!mymessage">
+        <div class="message-data">
+          <span class="message-data-name" >{{message.sender.name}}</span>
+          <br>
+          <span class="message-data-time" >{{message.date}}</span>
         </div>
+        <div class="message my-message">
+          {{message.text}}
+          <div class="files">
+            <div class="imag">
+              <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
+            </div>
+              <span class="doc" *ngFor="let doc of files; let i = index" class="mr-2">
+                  <button (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
+              </span>
+          </div>
         </div>
     </div>
   </div>
