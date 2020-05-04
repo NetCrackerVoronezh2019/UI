@@ -1,6 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import {UserDocument} from '../../classes/UserDocument'
 import { User } from '@MainClasses/user';
+import * as fileSaver from 'file-saver';
 import {DocumentService} from '../teacher-documents/document.service'
 
 @Component({
@@ -24,6 +25,26 @@ export class UserDocumentItemComponent implements OnInit {
   getDoc()
   {
     console.log(this.user.documents);
+  }
+
+
+  download(key:String)
+  {
+    let name:String=key.split('_')[1];
+    let fileType:any;
+    if(name.split('.')[1]=='pdf')
+    fileType='application/pdf; charset=utf-8';
+    else
+      fileType='image/jpg; charset=utf-8';
+    this.service.downloadFile(key)
+      .subscribe(
+        (response) => {
+          let blob:any = new Blob([response.blob()], { type:fileType});
+
+          fileSaver.saveAs(blob,name);
+        },
+         error => console.log('Error downloading the file')
+      )
   }
 
   saveUserChanges()

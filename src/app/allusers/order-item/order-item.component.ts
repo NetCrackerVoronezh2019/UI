@@ -90,6 +90,7 @@ export class OrderItemComponent implements OnInit {
     .subscribe(
       (data:Order)=>
       {this.order=data
+        console.log(data)
         this.rating1=[]
         this.rating2=[]
         if(this.order.starsForWork!=0)
