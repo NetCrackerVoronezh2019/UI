@@ -10,7 +10,7 @@
             </div>
             <div class="search_bar col-6">
                 <input type="text" formControlName="searchRow" class="search_input" placeholder="Поиск"/>
-                <span class="search_icon"><i class="fas fa-search"></i></span>                   
+                <span (click)="refresh()" class="search_icon"><i class="fas fa-search"></i></span>                   
             </div>
             <div class="col-3"></div>
         </div>
@@ -53,9 +53,6 @@
                      (matChipInputTokenEnd)="add($event)">
             </mat-chip-list>
           </mat-form-field>      
-    </div>
-    <div class="d-flex justify-content-center">
-        <button type="button"  (click)="refresh()" class="btn btn-success">Фильтровать</button>
     </div>
 </mat-expansion-panel>
 </mat-accordion>

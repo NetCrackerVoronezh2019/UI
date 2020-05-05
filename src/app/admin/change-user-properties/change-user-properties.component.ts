@@ -71,6 +71,32 @@ export class ChangeUserPropertiesComponent implements OnInit {
     
   }
 
+  getGender(gender)
+  {
+    if(gender=='MALE')
+      return 'Мужской'
+      if(gender=='FEMALE')
+      return 'Женский'
+  }
+
+  getStatus(status)
+  {
+    if(status==true)
+      return 'Активный'
+    if(status=false)
+      return 'Неактивный' 
+  }
+
+  getRole(role)
+  {
+    if(role=='ROLE_TEACHER')
+    return 'Преподаватель'
+   if(role=='ROLE_STUDENT')
+    return 'Студент'
+    if(role=='ROLE_ADMIN')
+    return 'Администратор'  
+  }
+
   getAllUsers()
   {
     this.service.getAllUsers()

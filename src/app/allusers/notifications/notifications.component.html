@@ -17,7 +17,7 @@
 							</div>
 						</div>
 						<div class="all">
-							<a><button *ngIf="not.notification.type=='TAKE_ADVERTISEMENT' || not.notification.type=='RECEIVE_SERVICE'" type="button b" class="btn btn-success" (click)="onAccept(not)">Принять</button></a>
+							<a href="/myorders" ><button *ngIf="not.notification.type=='TAKE_ADVERTISEMENT' || not.notification.type=='RECEIVE_SERVICE'" type="button b" class="btn btn-success" (click)="onAccept(not)">Принять</button></a>
 							<button type="button" *ngIf="not.notification.type=='TAKE_ADVERTISEMENT' || not.notification.type=='RECEIVE_SERVICE'" class="btn btn-warning ml-2"(click)="onReject(not)">Отклонить</button>
 							<button  type="button" class="btn btn-success ml-2 " ><a href="/adv/{{not.notification.advertisementId}}" class="ft">O заказе</a></button>
 						</div>

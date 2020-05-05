@@ -96,6 +96,7 @@ export class AdvertisementComponent implements OnInit {
     .subscribe(
       (data:Advertisement)=>{
         this.adv=data;this.isLoading=true;
+        console.log(this.adv);
         this.downloadCoverImage(this.adv.coverImageKey)
       },
       error=>console.log(error)
