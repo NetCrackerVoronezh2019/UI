@@ -11,12 +11,12 @@ import $ from 'jquery';
 import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
-  selector: 'app-dialog',
+  selector: 'app-chat',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
   providers:[DialogService]
 })
-export class DialogComponent implements OnInit {
+export class ChatComponent implements OnInit {
 
   dialogId:string;
   access:boolean = false;
@@ -38,6 +38,7 @@ export class DialogComponent implements OnInit {
   allFiles:any[]=[];
   allNames:any[]=[];
   fullImage:any = null;
+  sidebarVisible = false;
 
   constructor(public dgService:DialogService,private route: ActivatedRoute,private location: Router, private sanitizer: DomSanitizer) {
   }
@@ -266,4 +267,7 @@ export class DialogComponent implements OnInit {
         this.fullImage = null;
       }
 
+      sidebarOpen() {
+        this.sidebarVisible = !this.sidebarVisible;
+      }
 }

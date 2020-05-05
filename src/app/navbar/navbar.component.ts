@@ -7,12 +7,14 @@ import {AdvertisementService1} from '../allusers/services/advertisement.service'
 import * as Webstomp from 'webstomp-client';
 import {AdvNotification} from '../classes/advNotification'
 import { Client} from 'webstomp-client';
+import { FriendListService } from "src/app/UserAndGroupComponents/friend-list/Services/friend-list.service";
+import { FriendsNotification } from "@UserAndGroupClasses/friendsNotification";
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  providers:[AuthService,WebSocketService,AppService,AdvertisementService1]
+  providers:[AuthService,WebSocketService,AppService,AdvertisementService1,FriendListService]
 })
 export class NavbarComponent implements OnInit {
 
@@ -32,9 +34,10 @@ export class NavbarComponent implements OnInit {
   private groupsNot=""
   notificationsClick=false;
   private notifications:AdvNotification[];
+  private friendsNotifications:FriendsNotification[];
 
   constructor(private authService:AuthService, private appService:AppService,
-    private wsService:WebSocketService,private advService:AdvertisementService1) { }
+    private wsService:WebSocketService,private advService:AdvertisementService1,private friendService:FriendListService) { }
 
 
     initializeWebSocketConnection(userId:Number){
@@ -63,6 +66,7 @@ export class NavbarComponent implements OnInit {
       this.stompClient3.connect({ login: null, passcode: null }, () => {
         this.stompClient3.subscribe("/friends/"+userId, (message) => {
           this.friendsNot=JSON.parse(message.body);
+          this.getFriendsNot();
         });
       });
 
@@ -180,6 +184,18 @@ export class NavbarComponent implements OnInit {
       },
        error=>console.log(error)
     )
+  }
+
+  getFriendsNot() {
+    this.friendService.getNotifications().subscribe((data:FriendsNotification[]) => {
+      this.friendsNotifications = data;
+      console.log(data);
+    })
+  }
+
+  deleteFriendsNot(index) {
+    this.friendsNotifications.splice(index,1);
+    this.getFriendsNotifications();
   }
 
 }

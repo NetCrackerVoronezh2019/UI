@@ -1,39 +1,26 @@
-
-<div [ngStyle]="{'background': (message.isNoRead || message.readBySomebody==false) ? 'LightBlue' : 'white'}">
-  <div *ngIf="mymessage" class="clearfix">
-     <div class="message-data align-right">
-       <span class="message-data-name" >{{message.sender.name}}</span>
-       <br>
-       <span class="message-data-time" >{{message.date}}</span>
-     </div>
-     <div class="message other-message float-right">
-       {{message.text}}
-       <div class="files">
-         <div class="imag">
-           <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
-         </div>
-           <span class="doc" *ngFor="let doc of files; let i = index" class="mr-2">
-               <button (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
-           </span>
-       </div>
-     </div>
-   </div>
-   <div *ngIf="!mymessage">
-        <div class="message-data">
-          <span class="message-data-name" >{{message.sender.name}}</span>
-          <br>
-          <span class="message-data-time" >{{message.date}}</span>
-        </div>
-        <div class="message my-message">
-          {{message.text}}
-          <div class="files">
-            <div class="imag">
-              <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
-            </div>
-              <span class="doc" *ngFor="let doc of files; let i = index" class="mr-2">
-                  <button (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
-              </span>
-          </div>
-        </div>
-    </div>
+<li *ngIf="!mymessage" class="other">
+    <div *ngIf="userImage==null" class="avatar"><img src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg" draggable="false"/></div>
+    <div *ngIf="userImage!=null" class="avatar"><img [src]="userImage" draggable="false"/></div>
+  <div class="msg" [ngStyle]="{'background': (message.isNoRead || message.readBySomebody==false) ? 'LightBlue' : 'white'}">
+    <h6>{{message.sender.name}}</h6>
+    <p>{{message.text}}</p>
+    <time>{{message.date}}</time>
+    <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
+    <span class="doc" *ngFor="let doc of files; let i = index" class="mr-2">
+        <button (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
+    </span>
   </div>
+</li>
+<li *ngIf="mymessage" class="self">
+    <div *ngIf="userImage==null" class="avatar"><img src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg" draggable="false"/></div>
+    <div *ngIf="userImage!=null" class="avatar"><img [src]="userImage" draggable="false"/></div>
+  <div class="msg" [ngStyle]="{'background': (message.isNoRead || message.readBySomebody==false) ? 'LightBlue' : 'white'}">
+    <h6>{{message.sender.name}}</h6>
+    <p>{{message.text}}</p>
+    <time>{{message.date}}</time>
+    <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
+    <span class="doc" *ngFor="let doc of files; let i = index" class="mr-2">
+        <button (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
+    </span>
+  </div>
+</li>

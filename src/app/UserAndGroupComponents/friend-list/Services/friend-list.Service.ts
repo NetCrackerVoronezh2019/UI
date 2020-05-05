@@ -45,4 +45,16 @@ export class FriendListService
     deleteNotifications() {
       return this.http.delete('http://localhost:9080/user/cleanNotifications')
     }
+
+    ignoreNotification(notificationId) {
+      return this.http.delete('http://localhost:9080/user/ignoreNotifications',{params: new HttpParams().set("notificationId",notificationId)})
+    }
+
+    getNotifications() {
+      return this.http.get('http://localhost:9080/user/friendshipNotifications')
+    }
+
+    addFriend(userId) {
+      return this.http.put('http://localhost:9080/friend/add',null,{params: new HttpParams().set('ingoingId',userId)})
+    }
 }

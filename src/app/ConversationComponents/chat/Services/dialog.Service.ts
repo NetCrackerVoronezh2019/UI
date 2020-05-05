@@ -127,4 +127,8 @@ export class DialogService
           }
           return this.http.post('http://localhost:9080/sendMessage/',body)
         }
+
+        downloadProfileImage(key:String): Observable<any>{
+            return this.http2.get('http://localhost:1234/getuserimg/'+key, {responseType: ResponseContentType.Blob});
+        }
 }

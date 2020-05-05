@@ -1,0 +1,17 @@
+<div  class="notifications w-100">
+	<div class="notification_wrap w-100">
+		<div class="dropdown active w-100">
+				<div *ngFor="let not of notifications; let i = index">
+						<div class="notify_item">
+							<div class="notify_info">
+								<a href='/userPage/{{not.outgoingId}}'>{{not.outgoingName}}</a> отправил вам заявку в друзья
+							</div>
+						</div>
+						<div class="all">
+							<button type="button" class="btn btn-success" (click)="accept(not.outgoingId,i)">Принять</button>
+							<button type="button" class="btn btn-warning ml-2"(click)="ignore(not.notificationId,i)">Игнорировать</button>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>

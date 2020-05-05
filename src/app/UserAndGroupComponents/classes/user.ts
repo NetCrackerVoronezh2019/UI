@@ -6,4 +6,5 @@ export class User
   lastName:string;
   birthday:Date;
   userId:number;
+  image:string;
 }

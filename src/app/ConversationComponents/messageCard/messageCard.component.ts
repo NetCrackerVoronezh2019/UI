@@ -19,10 +19,15 @@ export class MessageCardComponent implements OnInit {
   files:string[] = [];
   fileNames:string[] = [];
   messageImages:any[] = [];
+  userImage:any = null;
+  loading = false;
   @Output() imageClick = new EventEmitter()
   constructor(private service:DialogService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    if (this.message.sender.image != null) {
+      this.downloadProfileImage(this.message.sender.image);
+    }
     for (let i = 0;i < this.message.files.length;i++) {
       if(this.message.names[i].split('.')[1]!='pdf') {
         this.images.push(this.message.files[i]);
@@ -70,6 +75,23 @@ export class MessageCardComponent implements OnInit {
 
   openImage(img) {
     this.imageClick.emit(img);
+  }
+
+
+  downloadProfileImage(key:String)
+  {
+
+    this.service.downloadProfileImage(key)
+      .subscribe(
+        (response) => {
+          let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+          this.userImage=URL.createObjectURL(blob)
+          this.userImage=this.sanitizer.bypassSecurityTrustUrl(this.userImage);
+          this.loading = true;
+        },
+         error => console.log('Error')
+      )
+
   }
 
 }

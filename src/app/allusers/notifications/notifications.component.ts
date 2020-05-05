@@ -22,13 +22,13 @@ export class NotificationsComponent implements OnInit {
   constructor(private service:AdvertisementService1, private router:Router,
     private userService:UserPageService,
     private sanitizer: DomSanitizer) { }
-  
+
   ngOnInit() {
   //  this.getImages()
   }
 
 
-  
+
   getImages()
   {
       for(let i=0;i<this.notifications.length;i++)
@@ -45,7 +45,7 @@ export class NotificationsComponent implements OnInit {
                 this.images[i]=this.profileImage;
               },
               error => {console.log('Error'),this.images[i]='https://dk-almanah.ru/wp-content/uploads/2018/04/197-person-1824144.png'}
-              
+
             )
         }
         else
@@ -56,7 +56,7 @@ export class NotificationsComponent implements OnInit {
       this.ready=true;
   }
 
- 
+
   getMyAllNotifications()
   {
     this.service.getMyNotifications()
@@ -90,7 +90,7 @@ export class NotificationsComponent implements OnInit {
     .subscribe(
       (data)=>this.getMyAllNotifications(),
       error=>console.log(error)
-    ) 
+    )
   }
 
   sendReiting()
@@ -99,7 +99,7 @@ export class NotificationsComponent implements OnInit {
     .subscribe(
       (data)=>{console.log("change"); this.getMyAllNotifications()},
       error=>console.log(error)
-    ) 
+    )
   }
 
   raitingClick(event,not:AdvNotification)
@@ -107,6 +107,6 @@ export class NotificationsComponent implements OnInit {
     this.reiting=event.target.attributes.value.value;
     this.not=not;
     console.log(not);
-    
+
   }
 }

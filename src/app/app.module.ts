@@ -34,7 +34,7 @@ import {RegistrationComponent} from './registration/registration.component';
 import {SignInComponent} from './sign-in/sign-in.component'
 import { SubjectControlComponent } from './admin/subject-control/subject-control.component'
 import { DialogsListComponent } from './ConversationComponents/dialogsList/dialogsList.component';
-import { DialogComponent } from './ConversationComponents/dialog/dialog.component';
+import { ChatComponent } from './ConversationComponents/chat/dialog.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UpdateAdvertisementComponent } from './student/update-advertisement/update-advertisement.component';
 import {MatBadgeModule} from '@angular/material/badge'
@@ -44,6 +44,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AdvertisementFilterComponent } from './allusers/advertisement-filter/advertisement-filter.component';
 import { NotificationsComponent } from './allusers/notifications/notifications.component';
+import { FriendsNotificationsComponent } from './allusers/friendsNotifications/notifications.component';
 import { MyOrdersComponent } from './allusers/my-orders/my-orders.component'
 import { GroupPageComponent } from './UserAndGroupComponents/group-page/group-page.component';
 import { MessageCardComponent} from "./ConversationComponents/messageCard/messageCard.component"
@@ -77,7 +78,7 @@ const appRoutes: Routes =[
   {path:'admin/rolecontrol', component:RoleControlComponent,canActivate:[AuthGuard]},
   {path:'admin/subjectcontrol', component:SubjectControlComponent,canActivate:[AuthGuard]},
   {path: 'dialogsList',component:DialogsListComponent},
-  {path: 'dialog/:dialogId', component:DialogComponent},
+  {path: 'dialog/:dialogId', component:ChatComponent},
   {path: 'groupPage/:groupId', component:GroupPageComponent},
   {path:'myadvertisements', component:MyAdvertisementsComponent},
   {path: "groupList", component:GroupListComponent},
@@ -105,7 +106,6 @@ const appRoutes: Routes =[
     RoleControlComponent,
     SubjectControlComponent,
     DialogsListComponent,
-    DialogComponent,
     DialogCardComponent,
     NavbarComponent,
     UpdateAdvertisementComponent,
@@ -131,7 +131,9 @@ const appRoutes: Routes =[
     OrderItemComponent,
     UserDocumentItemComponent,
     UserFeedBackComponent,
-    GroupPageComponent
+    GroupPageComponent,
+    ChatComponent,
+    FriendsNotificationsComponent
   ],
   imports: [
     MatInputModule,

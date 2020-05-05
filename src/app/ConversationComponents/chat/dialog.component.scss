@@ -1,0 +1,216 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+
+html, body {
+    background: #e5e5e5;
+    font-family: 'Lato', sans-serif;
+    margin: 0px auto;
+}
+::selection{
+  background: rgba(82,179,217,0.3);
+  color: inherit;
+}
+a{
+  color: rgba(82,179,217,0.9);
+}
+
+/* M E N U */
+
+.menu {
+    position: absolute;
+    top: 10vh;
+    left: 0px;
+    height: 50px;
+    background: rgba(82,179,217,0.9);
+    z-index: 100;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.back {
+    position: absolute;
+    width: 90px;
+    height: 50px;
+    top: 0px;
+    left: 0px;
+    color: #fff;
+    line-height: 50px;
+    font-size: 30px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+.back img {
+    position: absolute;
+    top: 5px;
+    left: 30px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255,255,255,0.98);
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    margin-left: 15px;
+    }
+.back:active {
+    background: rgba(255,255,255,0.2);
+}
+.name{
+    position: absolute;
+    top: 3px;
+    left: 110px;
+    font-family: 'Lato';
+    font-size: 25px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.98);
+    cursor: default;
+}
+.last{
+    position: absolute;
+    top: 30px;
+    left: 115px;
+    font-family: 'Lato';
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+    cursor: default;
+}
+
+.settings {
+  position: absolute;
+  width: 90px;
+  height: 50px;
+  right: 0px;
+  top: 0px;
+  color: #fff;
+  line-height: 50px;
+  font-size: 30px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.settings:active {
+    background: rgba(255,255,255,0.2);
+}
+
+.chat {
+  position: absolute;
+    top:9vh;
+    bottom: 100px;
+    left: 0;
+    list-style: none;
+    background: none;
+    margin: 0;
+    padding: 0 0 50px 0;
+    margin-top: 60px;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+.fullImage {
+  position: absolute;
+  z-index: 10000;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  display: flex;
+  align-items: center;
+  background: rgba(0,0,0,0.8);
+}
+
+.fullImage img{
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.example-2 .btn-tertiary{color:#555;line-height:40px;width:200px;margin-top:7px;margin-left: 5px;border:2px solid #555}
+.example-2 .btn-tertiary:hover,.example-2 .btn-tertiary:focus{color:#888;border-color:#888}
+.example-2 .input-file{width:.1px;height:.1px;opacity:0;overflow:hidden;position:absolute;z-index:-1}
+.example-2 .input-file + .js-labelFile{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 10px;cursor:pointer}
+.example-2 .input-file + .js-labelFile .icon:before{content:"\f093"}
+.example-2 .input-file + .js-labelFile.has-file .icon:before{content:"\f00c";color:#5AAC7B}
+
+
+#Sending {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 100px;
+    z-index: 99;
+    background: #fafafa;
+    color: #666;
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+}
+
+#Sending form{
+  display: flex;
+}
+
+#Sending input.textarea {
+  margin: auto;
+  position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 99%;
+    height: 50px;
+    z-index: 100;
+    background: #fafafa;
+    border: none;
+    outline: none;
+    padding-left: 55px;
+    padding-right: 55px;
+    color: #666;
+    font-weight: 400;
+}
+
+.file {
+  margin: auto;
+  margin-left: 20px;
+}
+
+#sidebar {
+  position: absolute;
+  overflow: auto;
+ width:220px;
+ top: 10%; /* Расстояние от верхнего края */
+ bottom: 0; /* Расстояние снизу  */
+ right: 0;
+ background: #708090;
+ ul{
+   left:0px;
+ }
+}
+
+#sidebar button{
+  margin: 5px;
+}
+
+
+.dialog {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dialog img {
+  width: 45px;
+  height: 45px;
+  border-radius: 30px;
+  border: 2px solid #AAA;
+  object-fit: cover;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.dialog .name {
+  font-size: 18px;
+}
