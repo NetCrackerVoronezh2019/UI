@@ -8,36 +8,26 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build"
-  },
-  "resolutions": {
-    "@babel/preset-env": "7.5.5"
+    "postinstall": "ng build --output-path angularapp --aot --prod"
   },
   "engines": {
-    "node": "v12.14.0",
-    "npm": "6.13.4"
+    "node": "v13.3.0",
+    "npm": "6.13.1"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~8.1.2",
+    "@angular/animations": "~9.1.4",
     "@angular/cdk": "^8.2.3",
-    "@angular/cli": "^8.2.0",
-    "@angular/common": "~8.1.2",
-<<<<<<< HEAD
-=======
-    "@angular/compiler": "^8.2.0",
->>>>>>> 98f95878f0a7025da28874412a50c9a8644708cb
-    "@angular/compiler-cli": "^8.2.0",
-    "@angular/core": "~8.1.2",
-    "@angular/forms": "~8.1.2",
+    "@angular/common": "~9.1.4",
+    "@angular/compiler": "~9.1.4",
+    "@angular/compiler-cli": "^9.1.4",
+    "@angular/core": "~9.1.4",
+    "@angular/forms": "~9.1.4",
     "@angular/http": "^7.2.16",
     "@angular/material": "^8.2.3",
-    "@angular/platform-browser": "~8.1.2",
-    "@angular/platform-browser-dynamic": "~8.1.2",
-    "@angular/router": "^8.2.14",
-    "@babel/compat-data": "^7.8.0",
-    "@babel/plugin-proposal-numeric-separator": "^7.8.3",
-    "@babel/preset-env": "7.5.5",
+    "@angular/platform-browser": "~9.1.4",
+    "@angular/platform-browser-dynamic": "~9.1.4",
+    "@angular/router": "^9.1.4",
     "@stomp/ng2-stompjs": "^7.2.0",
     "angular-material": "^1.1.21",
     "core-js": "^3.6.5",
@@ -47,24 +37,18 @@
     "jquery": "^3.5.1",
     "path": "^0.12.7",
     "promise-polyfill": "8.1.3",
-    "rxjs": "~6.4.0",
+    "rxjs": "~6.5.5",
     "sockjs-client": "^1.4.0",
     "stompjs": "^2.3.3",
     "tslib": "^1.11.2",
-    "typescript": "~3.4.3",
+    "typescript": "~3.8.3",
     "webstomp-client": "1.2.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.10.3"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "@angular-devkit/build-angular": "^0.801.3",
-=======
-    "@babel/preset-env": "7.5.5",
-    "@angular-devkit/build-angular": "^0.803.24",
->>>>>>> 98f95878f0a7025da28874412a50c9a8644708cb
-    "@angular/cli": "^8.2.0",
-    "@angular/compiler-cli": "^8.2.0",
-    "@angular/language-service": "~8.1.2",
+    "@angular/cli": "^9.1.4",
+    "@angular/language-service": "~9.1.4",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
@@ -78,7 +62,6 @@
     "karma-jasmine-html-reporter": "^1.5.3",
     "protractor": "^5.4.4",
     "ts-node": "~7.0.0",
-    "tslint": "~5.15.0",
-    "typescript": "~3.4.3"
+    "tslint": "~5.15.0"
   }
 }
