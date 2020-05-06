@@ -1,6 +1,6 @@
 import { Component, Input,OnInit } from '@angular/core';
 import { Dialog } from '@ConversationClasses/dialog'
-import {DialogService} from '../dialog/Services/dialog.Service'
+import {DialogService} from '../chat/Services/dialog.Service'
 import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
