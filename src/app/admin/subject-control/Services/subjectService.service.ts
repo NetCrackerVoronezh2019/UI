@@ -12,8 +12,7 @@ export class SubjectService
         {  
             "id": [""],
             "name": [""],
-            "translateName": [""],
-            "url": [""]
+            "translateName": [""]
         } 
     );
 
@@ -31,10 +30,10 @@ export class SubjectService
         let body={
             name:this.subjectForm.value.name,
             translateName:this.subjectForm.value.translateName,
-            url:this.subjectForm.value.url
         }
-
-        return this.http.post("http://localhost:9080/addNewSubject",body);
+        
+        console.log(body);
+        return this.http.post("http://localhost:9080/admin/addNewSubject",body);
     }
 
 }

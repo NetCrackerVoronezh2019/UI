@@ -43,6 +43,19 @@ export class AdvertisementComponent implements OnInit {
     );
   }
 
+  changeAdvStatus()
+  {
+    let status;
+    if(this.adv.status=='ACTIVE')
+      status='ARCHIVED';
+    else
+      status="ACTIVE"
+    this.service.changeAdvertisementStatus(this.id,status)
+        .subscribe(
+          (data:Advertisement)=>this.adv=data,
+          error=>console.log(error)
+        )
+  }
 
   isMyOrder()
   {

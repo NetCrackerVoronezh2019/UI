@@ -23,6 +23,10 @@ export class AdvertisementService1
         return this.http.post(this.baseUrl+'/user/isMyOrder',body);
     }
 
+    changeAdvertisementStatus(advId,status)
+    {
+        return this.http.get(this.baseUrl+"/user/changeAdvStatus/"+advId+"/"+status);
+    }
     getAllAdvertisements()
     {
         return this.http.get(this.baseUrl+'/allAdvertisements');

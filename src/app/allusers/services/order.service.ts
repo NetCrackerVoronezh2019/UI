@@ -64,7 +64,7 @@ export class OrderService
 
     getOrder(id)
     {
-        return this.http.get('http://localhost:1122/getOrder/'+id);
+        return this.http.get(this.baseUrl+'/user/getOrder/'+id);
     }
 
     changeOrderStatus(order:Order)

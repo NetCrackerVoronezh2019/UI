@@ -14,6 +14,7 @@ export class Advertisement
     name:String;
 	dateOfPublication:String;
     deadline:String;
+    status:String;
     type:String;
     tags:Tag[];
     coverImageKey:String;

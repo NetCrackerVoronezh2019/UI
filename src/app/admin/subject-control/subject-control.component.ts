@@ -12,7 +12,7 @@ export class SubjectControlComponent implements OnInit {
 
   subjects:Subject[];
   load=false;
-  displayedColumns: string[] = ['id', 'name','translateName','url'];
+  displayedColumns: string[] = ['name','translateName'];
   constructor(private service:SubjectService) { }
 
   ngOnInit() {
