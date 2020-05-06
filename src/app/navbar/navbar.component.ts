@@ -1,6 +1,6 @@
 import { Component, OnInit,OnDestroy} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
-import {WebSocketService} from '../home/Services/WebSocket.Service'
+import {WebSocketService} from '../home/Services/WebSocket.service'
 import {AppService} from '../app.service'
 import {interval} from 'rxjs'
 import {AdvertisementService1} from '../allusers/services/advertisement.service'
