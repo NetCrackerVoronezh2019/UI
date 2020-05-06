@@ -1,5 +1,4 @@
 import { Component, OnInit,Input } from '@angular/core';
-import {UserDocument} from '../../classes/UserDocument'
 import { User } from '@MainClasses/user';
 import * as fileSaver from 'file-saver';
 import {DocumentService} from '../teacher-documents/document.service'
