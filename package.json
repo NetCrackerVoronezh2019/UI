@@ -19,6 +19,7 @@
   },
   "private": true,
   "dependencies": {
+    "@babel/preset-env": "7.5.5",
     "@angular/animations": "~8.1.2",
     "@angular/cdk": "^8.2.3",
     "@angular/common": "~8.1.2",
@@ -50,6 +51,7 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "7.5.5",
     "@angular-devkit/build-angular": "^0.803.24",
     "@angular/cli": "^8.2.0",
     "@angular/compiler-cli": "^8.2.0",
