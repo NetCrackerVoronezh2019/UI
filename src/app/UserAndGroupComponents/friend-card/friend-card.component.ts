@@ -1,5 +1,5 @@
 import { Component, Input,OnInit } from '@angular/core';
-import { FriendCardService} from './Services/friend-card.service'
+import { FriendCardService} from './Services/friendCard.service'
 import { User } from '@UserAndGroupClasses/user'
 
 @Component({

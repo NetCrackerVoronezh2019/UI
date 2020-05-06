@@ -2,7 +2,7 @@ import { Component, OnInit,Output,Input,EventEmitter } from '@angular/core';
 import { Router} from '@angular/router';
 import { DomSanitizer } from "@angular/platform-browser";
 import { FriendsNotification } from "@UserAndGroupClasses/friendsNotification";
-import { FriendListService } from "src/app/UserAndGroupComponents/friend-list/Services/friend-list.service";
+import { FriendListService } from "src/app/UserAndGroupComponents/friend-list/Services/friendList.service";
 
 @Component({
   selector: 'app-friends-notifications',

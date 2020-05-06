@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FriendListService} from './Services/friend-list.service'
+import { FriendListService} from './Services/friendList.service'
 import { User } from '@UserAndGroupClasses/user'
 
 @Component({

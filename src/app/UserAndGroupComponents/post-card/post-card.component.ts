@@ -3,7 +3,7 @@ import { Post } from '@UserAndGroupClasses/post'
 import { Group } from '@UserAndGroupClasses/group'
 import { Comment } from '@UserAndGroupClasses/comment'
 import { User } from '@UserAndGroupClasses/user'
-import {PostService} from './services/post-card.service'
+import {PostService} from './services/postCard.service'
 import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({

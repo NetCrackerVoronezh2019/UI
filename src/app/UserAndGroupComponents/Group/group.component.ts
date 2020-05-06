@@ -3,7 +3,7 @@ import { ActivatedRoute, Router} from '@angular/router';
 import { Group } from '@UserAndGroupClasses/group'
 import { User } from '@UserAndGroupClasses/user'
 import { Post } from '@UserAndGroupClasses/post'
-import {GroupService} from './Services/group.service'
+import {GroupService} from './Services/groups.service'
 import {Subject } from '@UserAndGroupClasses/subject'
 import { DomSanitizer } from "@angular/platform-browser";
 

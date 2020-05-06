@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupListService} from './Services/group-list.service'
+import { GroupListService} from './Services/groupList.service'
 import { Group } from '@UserAndGroupClasses/group'
 import { User } from '@UserAndGroupClasses/user'
 import {Subject } from '@UserAndGroupClasses/subject'

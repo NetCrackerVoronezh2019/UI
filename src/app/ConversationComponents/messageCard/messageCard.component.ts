@@ -1,7 +1,7 @@
 import { Component, Input,OnInit,Output, EventEmitter } from '@angular/core';
 import { Message } from '@ConversationClasses/message'
 import { Notification } from '@ConversationClasses/Notification'
-import {DialogService} from '../chat/Services/dialog.service'
+import {DialogService} from '../chat/Services/chat.service'
 import * as fileSaver from 'file-saver';
 import { DomSanitizer } from "@angular/platform-browser";
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogsListService} from './Services/dialogsList.service'
+import { DialogsListService} from './Services/chatsList.service'
 import { User } from '@UserAndGroupClasses/user'
 import { Dialog } from '@ConversationClasses/dialog'
 import { Router } from '@angular/router';

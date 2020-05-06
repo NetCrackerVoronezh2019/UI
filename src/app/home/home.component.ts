@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../auth/auth.service';
-import {WebSocketService} from './Services/WebSocket.service'
+import {WebSocketService} from './Services/Socket.service'
 import {of} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
