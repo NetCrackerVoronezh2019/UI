@@ -3,7 +3,7 @@ const path = require('path');
  
 const app = express();
  
-app.use(express.static(__dirname + '/help-student'));
+app.use(express.static(__dirname + '/src'));
 
 app.get('/*', function(req,res) {
 
