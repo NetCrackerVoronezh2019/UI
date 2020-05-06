@@ -134,8 +134,6 @@ const appRoutes: Routes =[
     GroupPageComponent,
     ChatComponent,
     FriendsNotificationsComponent,
-	GroupComponent,
-	UserPageComponent
   ],
   imports: [
     MatInputModule,
