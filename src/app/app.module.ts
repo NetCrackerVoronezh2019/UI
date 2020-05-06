@@ -14,7 +14,7 @@ import {MatChipsModule} from '@angular/material/chips';
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {SignInService} from './sign-in/Services/signIn.Service';
-import {WebSocketService} from './home/Services/Socket.Service';
+import {WebSocketService} from './home/Services/Socket.service';
 import { ActivatePageComponent } from './activate-page/activate-page.component';
 import { ChangeUserPropertiesComponent } from './admin/change-user-properties/change-user-properties.component'
 import {MatTableModule} from '@angular/material/table';
