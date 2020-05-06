@@ -1,6 +1,9 @@
 {
   "name": "help-student",
   "version": "0.0.0",
+  "engines": {
+    "node": "12.14.x"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
