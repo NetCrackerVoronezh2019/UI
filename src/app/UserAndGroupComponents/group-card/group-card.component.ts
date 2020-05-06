@@ -1,6 +1,6 @@
 import { Component, Input,OnInit } from '@angular/core';
 import { Group } from '@UserAndGroupClasses/group'
-import {GroupService} from "../Group/Services/groups.service"
+import {GroupService} from "../group-page/Services/groups.service"
 import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
