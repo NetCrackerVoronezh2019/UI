@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../auth/auth.service';
-import {WebSocketService} from './Services/WebSocket.Service'
+import {WebSocketService} from './Services/WebSocket.service'
 import {of} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -12,7 +12,7 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
 
-  
+
   constructor(private authService:AuthService, private wsService:WebSocketService) { }
 
   ngOnInit() {
