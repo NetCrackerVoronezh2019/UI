@@ -4,7 +4,7 @@ import {RegistrationService} from './Services/registration.service';
 import {MatInputModule} from '@angular/material/input';
 import { Router} from '@angular/router';
 import {File} from '../classes/file' 
-
+import {Subject} from '../classes/subject'
 
 @Component({
   selector: 'app-registration',
@@ -17,6 +17,7 @@ export class RegistrationComponent implements OnInit {
   role="STUDENT";
   public allFiles:File[]=[];
   public allNames:any[]=[]
+  public subjects:Subject[];
   sendData:Boolean=false;
   isValid=true;
   checkEmailMessage;
@@ -24,7 +25,7 @@ export class RegistrationComponent implements OnInit {
   
   }
   ngOnInit() {
-    
+    this.getAllSubjects()
   }
 
   onSubmit()
@@ -61,10 +62,8 @@ export class RegistrationComponent implements OnInit {
           error=>this.isValid=false
         )
   }
-   
 
   
-
   setRole(someobject)
   {
     let myRole=someobject.target.attributes['role'].value
@@ -96,14 +95,19 @@ export class RegistrationComponent implements OnInit {
      }; 
    }
 
-
-   
-   
-
   deleteImageFromList(index)
   {
     this.allNames.splice(index,1);
     this.allFiles.splice(index,1);
+  }
+
+  getAllSubjects()
+  {
+    this.regService.getSubjects()
+        .subscribe(
+          (data:Subject[])=>{this.subjects=data, console.log(this.subjects)},
+          error=>console.log(error)          
+        )
   }
  
 }

@@ -1,5 +1,6 @@
 
 import {Advertisement} from '../classes/advertisement'
+import { OrderDocument } from './orderDocument';
 export class Order
 {
     public orderId:Number;
@@ -14,6 +15,7 @@ export class Order
     public comment:String;
     public advertisement:Advertisement;
     public customerImageKey:String;
+    public orderDocuments:OrderDocument[];
     public constructor(){}
 
 

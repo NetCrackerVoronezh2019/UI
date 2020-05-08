@@ -97,4 +97,15 @@ export class OrderService
         console.log(body);
         return this.http.post(this.baseUrl+'/user/changeReiting',body);
     }
+
+    completeOrder(orderId:Number,allFiles)
+    {
+        let body={
+            orderId,
+            allFiles
+        }        
+
+        console.log(body)
+        return this.http.post('http://localhost:1122/completeOrder',body)
+    }
 }

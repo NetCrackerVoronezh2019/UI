@@ -12,7 +12,6 @@
       <div><span class="title">Cтатус заказа - </span>{{getStatus(order.status)}}</div>
       <div><span class="title">Дата принятия заказа - </span>24.04.2020</div>
       <div><span class="title">Дедлайн - </span>24.04.2020</div>
-   
       <div *ngIf="order.starsForWork!='0' && order.status=='СOMPLETED'" >
         <div> <span class="title">Оценка - </span>
           <span class="rating-result">
@@ -22,6 +21,33 @@
         </div>
         <div> <span class="title">Комментарий - </span>{{order.comment}} </div>
       </div>
+      <span *ngIf="order.status=='СOMPLETED' "class="title">Файлы</span>
+      <div *ngIf="order.status=='СOMPLETED'" class="documents">
+          <div *ngFor="let doc of order.orderDocuments; let i = index" class="document mr-3">
+            <span (click)="download(doc.documentKey)" style="text-align:center;"><i style="font-size:30px;" class="fas fa-download"></i></span>
+              {{doc.documentName}}
+      
+          </div>
+      </div>
+      <div *ngIf="openResultBlock">
+        <div class="form-group mt-3">
+          <div class="example-2 mb-3">
+              <div class="form-group">
+                <input type="file" name="file" id="file2"  (change)="handleFileInput($event.target.files)" multiple accept="image/*, .pdf, .txt, .docx" class="input-file"/>
+                <label for="file2" class="btn btn-tertiary js-labelFile">
+                  <i class="fas fa-paperclip"></i>
+                  <span class="js-fileName">  Прикрепить файлы</span>
+                </label>
+              </div>
+          </div>
+      </div>
+      <div class="mb-2 all-images">
+          <div class="mb-3" *ngFor="let not of allNames; let i = index" (click)="deleteImageFromList(i)">
+              <span  matBadge="x"  matBadgeOverlap="false" >{{not}}</span>
+          </div>
+     </div>
+      </div>
+     
       <button *ngIf="myRole=='ROLE_TEACHER' && order.nextStatus!=undefined" (click)="changeOrderStatus(order)" class="btn btn-success mt-3" >{{getNextStatus(order.nextStatus)}}</button>
        <button *ngIf="myRole=='ROLE_STUDENT' && order.starsForWork=='0' && order.status=='СOMPLETED' && !clickRate " (click)="show(order)" class="btn btn-success mt-3"  >Оценить работу</button>
        <button *ngIf="myRole=='ROLE_STUDENT' && order.starsForWork!='0' && order.status=='СOMPLETED' && !clickRate" (click)="show(order)" class="btn btn-success mt-3" >Переоценить работу</button>

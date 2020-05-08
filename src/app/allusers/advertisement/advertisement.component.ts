@@ -176,6 +176,15 @@ export class AdvertisementComponent implements OnInit {
         },
          error => console.log('Error')
       )
+  }
 
+
+  deleteAdvertisement()
+  {
+      this.service.deleteAdvertisement(this.id)
+          .subscribe(
+            data=>{},
+            error=>console.log(error)
+          )
   }
 }

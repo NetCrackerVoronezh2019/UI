@@ -1,5 +1,6 @@
 import { Component, OnInit,Input, ɵNG_INJECTABLE_DEF} from '@angular/core';
 import {Order} from '../../classes/order'
+import {File} from '../../classes/file'
 import {OrderService} from '../services/order.service'
 import { DomSanitizer } from "@angular/platform-browser";
 import {AdvertisementService1} from '../services/advertisement.service';
@@ -16,12 +17,15 @@ export class OrderItemComponent implements OnInit {
   @Input() myRole:String;
   public clickRate=false;
   public ok=false;
+  openResultBlock=false;
   reiting:any;
   rating1:any[]=[];
   rating2:any[]=[];
   statusTranslate;
   coverImage:any;
   nextStatusTranslate;
+  allFiles:File[]=[];
+  allNames:any[]=[]
 
 
 
@@ -112,16 +116,35 @@ export class OrderItemComponent implements OnInit {
     this.ok=true;
     this.clickRate=true
   }
-  changeOrderStatus()
+  changeOrderStatus(order:Order)
   {
-    console.log(this.order);
-    this.service.changeOrderStatus(this.order)
-    .subscribe(
-      (data)=>{this.getOrder()},
-      (error)=>console.log(error)
-    )    
+    if(order.nextStatus!='СOMPLETED' && this.openResultBlock==false)
+    {
+       this.service.changeOrderStatus(this.order)
+        .subscribe(
+        (data)=>{this.getOrder()},
+        (error)=>console.log(error)
+        )
+    }    
+    else
+    {
+      if(this.openResultBlock==false)
+        this.openResultBlock=true;
+      else
+        this.completeOrder()
+    }
   }
 
+
+  completeOrder()
+  {
+    this.service.completeOrder(this.order.orderId,this.allFiles)
+        .subscribe(
+          (data)=>{this.getOrder(),this.openResultBlock=false},
+          (error)=>console.log(error)
+        )
+
+  }
   sendFeedBack(order:Order)
   {
     console.log(order);
@@ -132,4 +155,38 @@ export class OrderItemComponent implements OnInit {
         )
   }
 
+  handleFileInput(file: FileList) {
+    console.log("files");
+    console.log(file);
+    for(let i=0;i<file.length;i++)
+    {
+      let newfile:File=new File(); 
+      newfile.contentType=file.item(i).type;
+      newfile.name=file.item(i).name;
+      this.allNames.push(file.item(i).name);
+       this.readFile(file.item(i),newfile);
+    }
+    
+    console.log(this.allFiles);
+  }
+  
+  deleteImageFromList(index)
+  {
+    this.allNames.splice(index,1);
+    this.allFiles.splice(index,1);
+  }
+
+  readFile(file,newfile:File)
+  {
+    let reader;
+    reader=new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+       newfile.content=reader.result;
+       this.allFiles.push(newfile);
+    }; 
+  }
+  
 }
+
+

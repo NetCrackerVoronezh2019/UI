@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 import { Advertisement } from '@MainClasses/advertisement';
 import { AdvNotification } from '@MainClasses/advNotification';
 import {Http, ResponseContentType} from '@angular/http';
+import {FormBuilder} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {File} from '../../classes/file'
 
@@ -11,8 +12,34 @@ import {File} from '../../classes/file'
 export class AdvertisementService1
 {
     baseUrl:String='http://localhost:9080';
-    constructor(private http:HttpClient,private http2: Http){}
+    constructor(private fb:FormBuilder,private http:HttpClient,private http2: Http){}
 
+    deleteForm=this.fb.group(
+        {
+            "comment":[""],
+        }
+        
+    );
+
+    deleteAdvertisement(id:Number)
+    {
+        let comment=this.deleteForm.value.comment;
+        let body={
+            id,
+            comment
+        }
+
+
+        console.log(body);
+
+     return this.http.get("http://localhost:1122/deleteAdvertisement/"+id+"/"+comment);
+    }
+    getDeleteForm()
+    {
+        
+        return this.deleteForm;
+    }
+    
     myOrder(id)
     {
         let body={

@@ -71,6 +71,9 @@ export class RegistrationService
 
     
 
-
+    getSubjects()
+    {
+        return this.http.get(this.baseUrl+"/getAllSubjects");
+    }
     
 }
