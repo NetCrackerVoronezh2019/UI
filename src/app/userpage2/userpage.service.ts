@@ -40,7 +40,10 @@ export class UserPageService
         return this.http.get('http://localhost:9080/getMyId');
     }
 
-
+    getAllValidSubjects(userId:Number)
+    {
+      return this.http.get("http://localhost:9080/getAllValidSubjects/"+userId);
+    }
     updateImage(file:File)
     {
 

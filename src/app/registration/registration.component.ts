@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,NgModule} from '@angular/core';
 import { FormGroup, FormControl, Validators,FormBuilder} from '@angular/forms';
 import {RegistrationService} from './Services/registration.service';
 import {MatInputModule} from '@angular/material/input';
 import { Router} from '@angular/router';
 import {File} from '../classes/file' 
 import {Subject} from '../classes/subject'
+import {CertificateFile} from '../classes/certificateFile'
 
 @Component({
   selector: 'app-registration',
@@ -17,20 +18,29 @@ export class RegistrationComponent implements OnInit {
   role="STUDENT";
   public allFiles:File[]=[];
   public allNames:any[]=[]
+  public certificateFiles:CertificateFile[]=[]
   public subjects:Subject[];
   sendData:Boolean=false;
   isValid=true;
   checkEmailMessage;
+  currentIndex;
+  forNgModel="";
   constructor(public regService:RegistrationService,private router:Router) {
   
   }
   ngOnInit() {
+    this.certificateFiles.push(new CertificateFile());
     this.getAllSubjects()
+  }
+
+  addSection()
+  {
+    this.certificateFiles.push(new CertificateFile());
   }
 
   onSubmit()
   {   
-      
+      console.log(this.certificateFiles)
       this.checkEmailMessage='';
       this.regService.checkEmail()
         .subscribe(
@@ -39,7 +49,7 @@ export class RegistrationComponent implements OnInit {
             {
               this.sendData=true;
               this.isValid=true;
-              this.regService.sendRegistrationInformation(this.role,this.allFiles) 
+              this.regService.sendRegistrationInformation(this.role,this.certificateFiles) 
               .subscribe(
                   data => {
                     console.log(data)
@@ -72,35 +82,49 @@ export class RegistrationComponent implements OnInit {
   }
 
   handleFileInput(file: FileList) {
+  
+    let files=this.certificateFiles[this.currentIndex].allFiles;
+    
      for(let i=0;i<file.length;i++)
      {
        let newfile:File=new File(); 
        newfile.contentType=file.item(i).type;
        newfile.name=file.item(i).name;
        this.allNames.push(file.item(i).name);
-        this.readFile(file.item(i),newfile);
+        this.readFile(file.item(i),newfile,files);
      }
      
-     console.log(this.allFiles);
+     console.log(files);
+     
   }
 
-  readFile(file,newfile:File)
+  readFile(file,newfile:File,files)
    {
      let reader;
      reader=new FileReader();
      reader.readAsDataURL(file);
      reader.onload = () => {
         newfile.content=reader.result;
-        this.allFiles.push(newfile);
+        files.push(newfile);
      }; 
    }
 
+   current(e)
+   {
+     if(e!=undefined)
+      this.currentIndex=e;
+   }
   deleteImageFromList(index)
   {
     this.allNames.splice(index,1);
     this.allFiles.splice(index,1);
   }
 
+  sectionChange(value,i)
+  {
+    this.certificateFiles[i].section=value;
+    console.log(value);
+  }
   getAllSubjects()
   {
     this.regService.getSubjects()

@@ -15,14 +15,14 @@
         <div class="documents mt-1">
             <span  *ngFor="let doc of user.documents; let i = index" class="document mr-2">
                     <span (click)="download(doc.documentKey)" style="text-align:center;"><i style="font-size:30px;" class="fas fa-download"></i></span>
-                    <section class="example-section">
-                        <mat-checkbox class="example-margin" (click)="getDoc()" [(ngModel)]="doc.isValid">{{doc.documentKey.split('_')[1]}}</mat-checkbox>
-                    </section>
+                    <span>{{doc.documentKey.split('_')[1]}}</span>
+                    <button (click)="changeDocument(doc)" type="button" class="btn btn-success">
+                      <span *ngIf="!doc.isValid"> <i class="fas fa-check-circle"></i> Принять </span>
+                      <span *ngIf="doc.isValid"><i class="fas fa-minus-circle"></i> Отклонить</span>
+                    </button> 
+                    
             </span>
             
         </div>
-        <span style="display:flex; justify-content:end;">
-            <button type="button" class="btn btn-success" (click)="saveUserChanges()">Сохранить</button> 
-        </span>
     </div>
 </div>      

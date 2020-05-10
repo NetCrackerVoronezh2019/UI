@@ -88,28 +88,34 @@
                         <label for="exampleInputEmail1 mb-3"><b>Расскажите о себе</b></label>
                         <textarea  formControlName="aboutMe" type="text" class="form-control" id="Input2" rows="5" aria-describedby="emailHelp" placeholder="О себе"></textarea>
                     </div>
-                    <div class="example-2 mb-3">
-                        <label for="exampleInputEmail1"><b>Документы и Сертификаты</b></label>
-                        <p> <i style="font-size:25px;" class="fas fa-plus-circle"></i> Добавить новый раздел</p>
-                        <div class="form-group">
-                            <label  for="sel1">Раздел</label>
-                            <select  class="custom-select" id="sel1" placeholder="Выберите Раздел">  
-                                <option *ngFor="let subject of subjects" value="{{subject.name}}">{{subject.translateName}}</option>  
-                              </select>
+                    <label for="exampleInputEmail1"><b>Документы и Сертификаты</b></label>
+                    <p (click)="addSection()"> <i style="font-size:25px;" class="fas fa-plus-circle"></i> Добавить новый раздел</p>
+                    <div *ngFor="let file of certificateFiles; let i = index" >
+                        <div class="example-2 mb-3">
+                        
+                            <div class="form-group">
+                                <label  for="sel1">Раздел</label>
+                                <select (change)="sectionChange($event.target.value,i)" class="custom-select" id="sel1" placeholder="Выберите Раздел">  
+                                    <option  *ngFor="let subject of subjects"  value="{{subject.name}}">{{subject.translateName}}</option>  
+                                </select>
+                            </div>
+
+                            <div  class="form-group">
+                            <div>
+                             <input  type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*, application/pdf" class="input-file"/>
+                            </div >
+                                <label  (click)="current(i)" for="file" class="btn btn-tertiary js-labelFile">
+                                    <i class="icon fa fa-check"></i>
+                                    <span class="js-fileName"> Загрузить файлы</span>
+                                </label>
+                            </div>
                         </div>
-                        <div class="form-group">
-                          <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*, application/pdf" class="input-file"/>
-                          <label for="file" class="btn btn-tertiary js-labelFile">
-                            <i class="icon fa fa-check"></i>
-                            <span class="js-fileName"> Загрузить файлы</span>
-                          </label>
+                        <div class="mb-2 all-images">
+                                <div class="mb-3" *ngFor="let file of certificateFiles[i].allFiles; let i = index" (click)="deleteImageFromList(i)">
+                                    <span  matBadge="x"  matBadgeOverlap="false" >{{file.name}}</span>
+                                </div>
                         </div>
                     </div>
-                       <div class="mb-2 all-images">
-                            <div class="mb-3" *ngFor="let not of allNames; let i = index" (click)="deleteImageFromList(i)">
-                                <span  matBadge="x"  matBadgeOverlap="false" >{{not}}</span>
-                            </div>
-                       </div>
                 </div>
                
             </div>

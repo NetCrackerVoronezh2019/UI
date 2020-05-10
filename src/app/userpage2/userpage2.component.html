@@ -48,7 +48,7 @@
                     <div class="col-xs-12 col-sm-9">
                         <h4 class="blue">
                             <span class="middle mr-3">{{user.firstname}} {{user.lastname}}  
-                                <span *ngIf="user.teacherStatus=='CERTIFIED_SPECIALIST'"><i class="fas fa-check-circle"></i></span>
+                                <span *ngIf="user.teacherStatus=='CERTIFIED_SPECIALIST'"><i style="color:#6495ED;" class="fas fa-check-circle"></i></span>
                             </span>
 
                             <span *ngIf="user.isOnline" span class="label label-purple  c-orange arrowed-in-right">
@@ -100,6 +100,16 @@
                                     <span *ngIf="user.teacherStatus=='NOT_A_CERTIFIED_SPECIALIST'">Несертифицированный специалист</span>
                                     <span *ngIf="user.teacherStatus=='CERTIFICATES_ARE_NOT_CHECKED'">Сертификаты проверяются</span>
                                     <span *ngIf="user.teacherStatus=='EMPTY'">Не предоставил сертификаты</span>
+                                </div>
+                            </div>
+
+                            <div *ngIf="user.roleName=='ROLE_TEACHER'" class="profile-info-row">
+                                <div class="profile-info-name">Специальности</div>
+
+                                <div class="profile-info-value">
+                                    <div *ngFor="let sub of validSubjects; let i = index" >{{sub}}  <i style="color:orange" class="fas fa-check"></i> </div>
+                                    
+            
                                 </div>
                             </div>
                            
@@ -166,7 +176,7 @@
                                         <div class="notif-buttons mt-2">
                                             <a routerLink="/myorders"><button type="button b" class="btn btn-success mr-2" (click)="onAccept(not)">Принять</button></a>
                                             <button type="button" class="btn btn-warning mr-2" (click)="onReject(not)">Отклонить</button>
-                                            <button  type="button" class="btn btn-success" ><a href="/adv/{{not.advertisementId}}" class="ft">Поднобнее</a></button>
+                                            <button  type="button" class="btn btn-success" ><a href="/adv/{{not.advertisementId}}" class="ft">Подробнее</a></button>
                                             </div>
                                         </div>  
                                 </div>

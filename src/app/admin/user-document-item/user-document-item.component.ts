@@ -1,6 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { User } from '@MainClasses/user';
 import * as fileSaver from 'file-saver';
+import {UserDocument} from '../../classes/userDocument' 
 import {DocumentService} from '../teacher-documents/document.service'
 
 @Component({
@@ -21,12 +22,12 @@ export class UserDocumentItemComponent implements OnInit {
   }
 
 
-  getDoc()
+  changeDocument(doc:UserDocument)
   {
-    console.log(this.user.documents);
+    doc.isValid=!doc.isValid;
+    console.log(doc);
+    this.saveUserChanges(doc)
   }
-
-
   download(key:String)
   {
     let name:String=key.split('_')[1];
@@ -46,10 +47,10 @@ export class UserDocumentItemComponent implements OnInit {
       )
   }
 
-  saveUserChanges()
+  saveUserChanges(doc)
   {
     console.log(this.user)
-    this.service.saveUserChanges(this.user)
+    this.service.saveUserChanges(this.user,doc)
           .subscribe(
             (data)=>{
               this.message = "Успешно!";

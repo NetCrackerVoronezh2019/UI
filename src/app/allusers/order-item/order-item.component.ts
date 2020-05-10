@@ -3,6 +3,7 @@ import {Order} from '../../classes/order'
 import {File} from '../../classes/file'
 import {OrderService} from '../services/order.service'
 import { DomSanitizer } from "@angular/platform-browser";
+import * as fileSaver from 'file-saver';
 import {AdvertisementService1} from '../services/advertisement.service';
 
 @Component({
@@ -32,6 +33,24 @@ export class OrderItemComponent implements OnInit {
   constructor(private service:OrderService,
     private service2:AdvertisementService1, private sanitizer: DomSanitizer) { }
 
+    download(key:String,docName:String)
+  {
+    let name:String=key.split('_')[1];
+    let fileType:any;
+    if(name.split('.')[1]=='pdf')
+    fileType='application/pdf; charset=utf-8';
+    else
+      fileType='image/jpg; charset=utf-8';
+    this.service2.downloadFile(key)
+      .subscribe(
+        (response) => {
+          let blob:any = new Blob([response.blob()], { type:fileType});
+
+          fileSaver.saveAs(blob,docName);
+        },
+         error => console.log('Error downloading the file')
+      )
+  }
 
   downloadCoverImage(key:String)
   {

@@ -37,9 +37,14 @@ export class DocumentService
     }
 
 
-    saveUserChanges(user:User)
+    saveUserChanges(user:User,doc)
     {
-        return this.http.post(this.baseUrl+'/saveUserChanges',user)
+        let body={
+            userId:user.userId,
+            userDocument:doc
+        }
+        console.log(body);
+        return this.http.post(this.baseUrl+'/saveUserChanges',body)
     }
 
     getAllTeachers()

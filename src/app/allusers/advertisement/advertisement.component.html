@@ -42,6 +42,7 @@
                             <div class="col-12 p-0 advertisement-img">
                               <img [src]="coverImage" />    
                             </div>
+                            
                             <div class="col-12  advertisement-des">                     
                                 <p class="tittle">Описание</p>
                                 <p class="adv-des">
@@ -55,6 +56,10 @@
                                     Цена
                                 </p>
                                 <p>{{adv.budget}}</p>
+                                <p class="tittle">
+                                  Раздел
+                              </p>
+                              <p>{{adv.section}}</p>
                                 <div class="tegs">
                                   <p class="tittle">Теги:</p>
                                   <mat-chip-list>
@@ -98,6 +103,23 @@
   </div>
 
 
+
+  <div class="modal fade" id="RequestModel1" tabindex="-1" role="dialog" aria-labelledby="RequestModal1Label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h3> {{message}} </h3>
+        </div>
+        <div *ngIf="buttonHidden" class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+          <button type="button" (click)="sendNotification()" class="btn btn-primary">Отправить</button>
+        </div>
+        </div>
+    </div>
+  </div>
+
+
+  
   <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -118,18 +140,4 @@
         </div>
       </div>
       
-  </div>
-
-  <div class="modal fade" id="RequestModel1" tabindex="-1" role="dialog" aria-labelledby="RequestModal1Label" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <h3> {{message}} </h3>
-        </div>
-        <div *ngIf="buttonHidden" class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
-          <button type="button" (click)="sendNotification()" class="btn btn-primary">Отправить</button>
-        </div>
-        </div>
-    </div>
   </div>

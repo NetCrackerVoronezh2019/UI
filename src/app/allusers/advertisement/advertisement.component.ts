@@ -6,8 +6,9 @@ import {AdvertisementService1} from '../services/advertisement.service';
 import {AdvertisementService} from '../../student/services/advertisement.service'
 import {Order} from '../../classes/order'
 import * as fileSaver from 'file-saver';
-import {OrderService} from '../services/order.service'
 import { DomSanitizer } from "@angular/platform-browser";
+import {OrderService} from '../services/order.service'
+
 
 @Component({
   selector: 'app-advertisement',

@@ -106,6 +106,6 @@ export class OrderService
         }        
 
         console.log(body)
-        return this.http.post('http://localhost:1122/completeOrder',body)
+        return this.http.post(this.baseUrl+'/user/completeOrder',body)
     }
 }

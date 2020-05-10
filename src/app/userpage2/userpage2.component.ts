@@ -41,6 +41,7 @@ export class Userpage2Component implements OnInit {
   advs:Advertisement[]=[];
   public allFiles:File[]=[];
   public allNames:any[]=[]
+  public validSubjects:String[]=[]
   public notifications:AdvNotification[]=[];
   profileImage:any;
   profileImageUploaded=false;
@@ -62,6 +63,7 @@ export class Userpage2Component implements OnInit {
   ngOnInit() {
     this.subscription=this.activateRoute.params.subscribe(params=>{
       this.id=params['id'];
+      this.getAllValidSubjects(this.id)
       this.getUserData(this.id);
       this.initVariagles()
       this.getMyId();
@@ -69,13 +71,19 @@ export class Userpage2Component implements OnInit {
   }
 
   
+
+  getAllValidSubjects(id)
+  {
+    this.service.getAllValidSubjects(id)
+        .subscribe(
+          (data:String[])=>{this.validSubjects=data,console.log(this.validSubjects)},
+          error=>console.log(error)
+        )
+  }
   onAccept(x:AdvNotification)
   {
     x.notification.responseStatus="ACCEPTED";
     console.log(x);
-   // this.router.navigate(['/myorders/']);
-
-   
     this.advService.sendNotificationResponse(x)
     .subscribe(
       (data)=>this.getNotifications(),

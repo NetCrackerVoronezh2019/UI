@@ -24,7 +24,7 @@
       <span *ngIf="order.status=='СOMPLETED' "class="title">Файлы</span>
       <div *ngIf="order.status=='СOMPLETED'" class="documents">
           <div *ngFor="let doc of order.orderDocuments; let i = index" class="document mr-3">
-            <span (click)="download(doc.documentKey)" style="text-align:center;"><i style="font-size:30px;" class="fas fa-download"></i></span>
+            <span (click)="download(doc.documentKey,doc.documentName)" style="text-align:center;"><i style="font-size:30px;" class="fas fa-download"></i></span>
               {{doc.documentName}}
       
           </div>
