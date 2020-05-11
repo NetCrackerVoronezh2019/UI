@@ -2,7 +2,7 @@ import { Component, Input,OnInit } from '@angular/core';
 import { Dialog } from '@ConversationClasses/dialog'
 import {DialogService} from '../chat/Services/chat.service'
 import { DomSanitizer } from "@angular/platform-browser";
-import { User } from '@ConversationClasses/user'
+import { User } from '@ConversationClasses/User'
 
 @Component({
   selector: 'app-dialog-card',
