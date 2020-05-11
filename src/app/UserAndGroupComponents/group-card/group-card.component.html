@@ -11,6 +11,7 @@
       </div>
       <div class="mr-4 notification">
           <mat-icon class="userInfo cursor" *ngIf="group.countNot>0" matBadge={{group.countNot}} matBadgeColor="warn"></mat-icon>
+          <p *ngIf="group.admin">Администратор</p>
       </div>
     </div>
   </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DialogService } from './Services/chat.service'
 import { ActivatedRoute, Router} from '@angular/router';
-import { User } from '@UserAndGroupClasses/user'
+import { User } from '@ConversationClasses/user'
+import { User as Friend } from '@UserAndGroupClasses/user'
 import { Dialog } from '@ConversationClasses/dialog'
 import { Message } from '@ConversationClasses/message'
 import { Notification } from '@ConversationClasses/Notification'
@@ -28,8 +29,9 @@ export class ChatComponent implements OnInit {
   private stompClient2:Client;
   dialog:Dialog;
   user:User;
+  anUser:User;
   textbox:string = "";
-  users:User[];
+  users:Friend[];
   dialogImage:any;
   loading = false;
   settingsVisible = false;
@@ -39,6 +41,7 @@ export class ChatComponent implements OnInit {
   allNames:any[]=[];
   fullImage:any = null;
   sidebarVisible = false;
+  name:string = "";
 
   constructor(public dgService:DialogService,private route: ActivatedRoute,private location: Router, private sanitizer: DomSanitizer) {
   }
@@ -91,9 +94,6 @@ export class ChatComponent implements OnInit {
         this.dialogId=params['dialogId'];
         this.dgService.getDialogInfo(this.dialogId).subscribe((data:Dialog) =>{
         this.dialog = data;
-        if (this.dialog.image!=null) {
-          this.downloadProfileImage(this.dialog.image);
-        }
       this.dgService.getDialogMembers(this.dialogId).subscribe((data:User[]) => {
         this.dialogMembers = data;
         data.forEach(user => {
@@ -103,6 +103,27 @@ export class ChatComponent implements OnInit {
         });
         if (this.access) {
           this.initializeWebSocketConnection();
+          if (this.dialog.type=="private") {
+              if (this.dialogMembers[0].userId == this.user.userId) {
+                this.anUser = this.dialogMembers[0]
+              } else {
+                this.anUser = this.dialogMembers[1]
+              }
+              this.name = this.anUser.name;
+              if (this.anUser.image != null) {
+                this.downloadUserImage(this.anUser.image);
+              }
+            } else if (this.dialog.type == "group") {
+              this.name = this.dialog.name;
+              if (this.dialog.image!=null) {
+               this.downloadGroupImage(this.dialog.image);
+              }
+            } else {
+            this.name = this.dialog.name;
+            if (this.dialog.image!=null) {
+             this.downloadProfileImage(this.dialog.image);
+            }
+          }
         };
       },
       error => console.log(error)
@@ -140,7 +161,7 @@ export class ChatComponent implements OnInit {
   }
 
   openUserAddForm() {
-    this.dgService.getFriends().subscribe((data:User[]) => {
+    this.dgService.getFriends().subscribe((data:Friend[]) => {
       this.users = data;
       this.userSearchPanelVisible = true;
     })
@@ -164,17 +185,22 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  invite(user:User) {
-      if (confirm("Добавить " + user.lastName + user.firstName)) {
+  invite(user:Friend) {
+      if (confirm("Добавить " + user.lastName + ' ' + user.firstName)) {
       this.dgService.addUserInDialog(this.dialogId, user.userId).subscribe(data => {
-        this.dialogMembers.push(user);
+        let us:User = {
+          name: user.lastName + ' ' + user.firstName,
+          userId: user.userId,
+          image: user.image
+        }
+        this.dialogMembers.push(us);
       });
       this.closeUserAddForm();
     }
   }
 
   search() {
-    this.dgService.search().subscribe((data:User[]) => {
+    this.dgService.search().subscribe((data:Friend[]) => {
       this.users = data;
     })
   }
@@ -230,6 +256,8 @@ export class ChatComponent implements OnInit {
     setAvatar() {
       this.dgService.submitAvatar(this.dialogId,this.avatar).subscribe(data => {
         this.dialogImage = this.avatar;
+        this.dialog.image = "";
+        this.loading = true;
       })
     }
 
@@ -269,5 +297,36 @@ export class ChatComponent implements OnInit {
 
       sidebarOpen() {
         this.sidebarVisible = !this.sidebarVisible;
+      }
+
+      downloadUserImage(key:String)
+      {
+        this.dgService.downloadProfileImage(key)
+          .subscribe(
+            (response) => {
+              let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+              this.dialogImage=URL.createObjectURL(blob)
+              this.dialogImage=this.sanitizer.bypassSecurityTrustUrl(this.dialogImage);
+              this.loading = true;
+            },
+             error => console.log('Error')
+          )
+
+      }
+
+      downloadGroupImage(key:String)
+      {
+
+        this.dgService.downloadGroupImage(key)
+          .subscribe(
+            (response) => {
+              let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+              this.dialogImage=URL.createObjectURL(blob)
+              this.dialogImage=this.sanitizer.bypassSecurityTrustUrl(this.dialogImage);
+              this.loading = true;
+            },
+             error => console.log('Error')
+          )
+
       }
 }

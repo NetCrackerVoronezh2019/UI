@@ -20,10 +20,12 @@ export class PostCardComponent implements OnInit {
   @Input() admin:boolean;
   @Input() user:User;
   comments:Comment[];
+  showedComments:Comment[];
   showComments = false;
   createCommentVisible = false;
   postSettingsVisible = false;
   deleted = false;
+  showAllComents = false;
   postImages:any[] = [] ;
   constructor(private ps:PostService, private sanitizer: DomSanitizer) { }
 
@@ -35,6 +37,7 @@ export class PostCardComponent implements OnInit {
   getComments() {
     this.ps.getPostComments(this.post.postId).subscribe((data:Comment[]) =>{
       this.comments = data;
+      this.showedComments = data.slice(0,2);
       console.log(data);
     })
   }
@@ -42,10 +45,22 @@ export class PostCardComponent implements OnInit {
   showCommentsPart() {
     this.getComments();
     this.showComments = true;
+    this.showAllComents = false;
   }
 
   closeCommentsPart() {
     this.showComments = false;
+    this.showAllComents = false;
+  }
+
+  openAllcoments() {
+    this.showAllComents = true;
+    this.showedComments = this.comments;
+  }
+
+  closeAllComments() {
+      this.showAllComents = false;
+      this.showedComments = this.comments.slice(0,2);
   }
 
   showCreateComment() {

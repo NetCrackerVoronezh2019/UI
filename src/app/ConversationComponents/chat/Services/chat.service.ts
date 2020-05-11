@@ -43,7 +43,7 @@ export class DialogService
         return this.userSearchForm
       }
 
-    getDialogMembers(dialogId:string) {
+    getDialogMembers(dialogId) {
         return this.http.get('http://localhost:9080/user/getDialogMembers/',
                             {params:new HttpParams().set('dialogId',dialogId)});
       }
@@ -130,5 +130,9 @@ export class DialogService
 
         downloadProfileImage(key:String): Observable<any>{
             return this.http2.get('http://localhost:1234/getuserimg/'+key, {responseType: ResponseContentType.Blob});
+        }
+
+        downloadGroupImage(key:String): Observable<any>{
+            return this.http2.get('http://localhost:1234/getGroupImg/'+key, {responseType: ResponseContentType.Blob});
         }
 }

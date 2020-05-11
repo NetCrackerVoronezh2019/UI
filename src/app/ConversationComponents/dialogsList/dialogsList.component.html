@@ -34,7 +34,7 @@
   <div id="content">
     <div class="container">
         <ul *ngFor ='let dialog of dialogs'>
-          <app-dialog-card [(dg)]="dialog"></app-dialog-card>
+          <app-dialog-card [(dg)]="dialog" [(userId)]="user.userId"></app-dialog-card>
         </ul>
     </div>
   </div>

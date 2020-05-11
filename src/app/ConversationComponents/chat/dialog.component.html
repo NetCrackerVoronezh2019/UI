@@ -2,8 +2,10 @@
   <app-navbar></app-navbar>
   <div class="menu" [ngStyle]="{'right' :sidebarVisible ? '220px' : '0'}">
           <div class="back" routerLink="/dialogsList"><i class="fa fa-chevron-left"></i>  <img *ngIf="dialog?.image==null" src='https://www.egalochkina.ru/wp-content/uploads/2018/03/dialog-sokrata.jpg'/>
-           <img *ngIf="dialog?.image!=null && loading"  [src]="dialogImage"/></div>
-        <div class="name">{{dialog?.name}}</div>
+            <img *ngIf="dialog?.image==null && dialog?.type!='private'" src='https://www.egalochkina.ru/wp-content/uploads/2018/03/dialog-sokrata.jpg'/>
+            <img *ngIf="loading"  [src]="dialogImage"/>
+            <img *ngIf="dialog?.type == 'private' && anUser?.image == null" src='https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg'/></div>
+        <div class="name">{{name}}</div>
       <div class="last">{{dialog?.lastMessageDate}}</div>
       <div class="settings" (click)="sidebarOpen()">
         <i class="fa fa-cog" aria-hidden="true"></i>
@@ -16,7 +18,7 @@
   </ol>
   <div id="Sending" [ngStyle]="{'right' :sidebarVisible ? '220px' : '0'}">
     <form class="mt-5" [formGroup]="dgService.getMessageForm()">
-          <input id="message" placeholder="Write your message" type="text" class="form-control textarea" formControlName="text" [(ngModel)]="textbox"/>
+          <input id="message" maxlength="255" placeholder="Write your message" type="text" class="form-control textarea" formControlName="text" [(ngModel)]="textbox"/>
           <button class="btn btn-light btn-primary-spacing" (click)="sendMessage()">Отправить</button>
           <div class="example-2">
                 <input type="file" name="file" id="file"  (change)="handleFileMessageInput($event.target.files)"  multiple accept="image/*, application/pdf" class="input-file"/>

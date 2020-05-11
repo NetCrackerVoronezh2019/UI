@@ -9,7 +9,8 @@
   min-height: 3vh;
   max-height: 5vh;
   min-width:200px;
-  max-width: 15vw;
+  max-width: 800px;
+  min-height: 40px;
   display:flex;
   cursor: pointer;
    align-items: left;
@@ -52,7 +53,6 @@
 }
 
 .content{
-  width:5px;
   height:98%;
   transition: .6s;
   margin-left: 0px;

@@ -22,6 +22,7 @@ export class GroupPageComponent implements OnInit {
   subscriber = false;
   users:User[];
   admins:User[];
+  searchadmin:User[];
   subscriversVisible = false;
   settingsVisible = false;
   thisusergroups:Group[];
@@ -37,6 +38,7 @@ export class GroupPageComponent implements OnInit {
   groupImage:any;
   loading = false;
   isNotificationsOn = false;
+  showingUsers:User[];
 
   constructor(private route: ActivatedRoute,private location: Router,private gs: GroupService, private sanitizer: DomSanitizer) {
   }
@@ -44,6 +46,10 @@ export class GroupPageComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.groupId=params['groupId'];
+      this.gs.getGroupUsers(this.groupId).subscribe((data:User[]) => {
+        this.users = data;
+        this.showingUsers = data.slice(0,10);
+      });
       this.gs.cleanNotifications(this.groupId).subscribe();
       this.gs.getAdmins(this.groupId).subscribe((data:User[]) => {
         this.admins = data;
@@ -92,14 +98,7 @@ export class GroupPageComponent implements OnInit {
 
 
   showSubscribers() {
-    if (!this.subscriversVisible) {
-      this.gs.getGroupUsers(this.groupId).subscribe((data:User[]) => {
-        this.users = data;
-        this.subscriversVisible = true;
-      });
-    } else {
-      this.subscriversVisible = false;
-    }
+
   }
 
 
@@ -158,7 +157,7 @@ export class GroupPageComponent implements OnInit {
     showAddAdmin() {
       if (!this.addAdmin) {
         this.gs.getGroupUsers(this.groupId).subscribe((data:User[]) => {
-          this.users = data;
+          this.searchadmin = data;
           this.addAdmin = true;
         });
 
@@ -182,13 +181,13 @@ export class GroupPageComponent implements OnInit {
 
     cancelSearch() {
       this.gs.getGroupUsers(this.groupId).subscribe((data:User[]) => {
-        this.users = data;
+        this.searchadmin = data;
       });
     }
 
     search() {
       this.gs.searchUsers(this.groupId).subscribe((data:User[]) => {
-        this.users = data;
+        this.searchadmin = data;
       })
     }
 

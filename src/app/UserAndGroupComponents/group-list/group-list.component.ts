@@ -61,7 +61,10 @@ export class GroupListComponent implements OnInit {
     }
 
     showGropList() {
-        this.groupService.showGroupList().subscribe((data:Group[]) => {this.groups = data})
+        this.groupService.showGroupList().subscribe((data:Group[]) => {
+          this.groups = data;
+          console.log(data);
+        })
     }
 
     createGroup() {
