@@ -31,7 +31,6 @@ export class GroupListComponent implements OnInit {
   ngOnInit() {
     this.groupService.getAllSubjects().subscribe((data:Subject[]) => {
       this.subjects = data;
-      console.log(this.subjects);
     })
   }
 

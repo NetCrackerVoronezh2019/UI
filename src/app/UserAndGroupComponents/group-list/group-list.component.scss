@@ -7,6 +7,10 @@ body { margin: 0; }
  bottom: 0; /* Расстояние снизу  */
  background: #708090;
 }
+
+#sidebar button{
+  margin-top: 20px;
+}
 #content {
  top: 10vh; /* Расстояние от верхнего края */
  left: 220px; /* Расстояние от левого края */

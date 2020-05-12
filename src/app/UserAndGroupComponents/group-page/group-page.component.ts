@@ -266,6 +266,11 @@ export class GroupPageComponent implements OnInit {
         };
       }
 
+      deleteImage() {
+        this.fileName = null;
+        this.avatar = null;
+      }
+
       setAvatar() {
         this.gs.setAvatar(this.groupId,this.avatar).subscribe(data => {
           if (this.group.image==null) {

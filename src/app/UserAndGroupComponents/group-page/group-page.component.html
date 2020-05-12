@@ -140,7 +140,7 @@
           </div>
           <div class="mb-2 all-images">
               <div class="mb-3" *ngIf="fileName!=null">
-                  <span  matBadgeOverlap="false" >{{fileName}}</span>
+                  <span  matBadge="x"  matBadgeOverlap="false" (click)="deleteImage()">{{fileName}}</span>
               </div>
          </div>
           <div class="modal-footer none-border">
