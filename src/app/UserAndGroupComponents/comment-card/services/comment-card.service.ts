@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl} from '@angular/forms';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { User } from '@UserAndGroupClasses/user'
+import {Observable} from 'rxjs';
+import {Http, ResponseContentType} from '@angular/http';
 
 @Injectable()
 export class CommentService {
 
-  constructor(private http: HttpClient, private fb:FormBuilder) { }
+  constructor(private http: HttpClient, private fb:FormBuilder, private http2: Http) { }
 
 
   commentSettingsForm=this.fb.group(
@@ -29,6 +31,10 @@ export class CommentService {
 
   deleteComment(commentId) {
     return this.http.delete('http://localhost:9080/comments/delete',{params: new HttpParams().set('commentId',commentId)})
+  }
+
+  downloadProfileImage(key:String): Observable<any>{
+      return this.http2.get('http://localhost:1234/getuserimg/'+key, {responseType: ResponseContentType.Blob});
   }
 
 }
