@@ -4,11 +4,15 @@
   <div class="msg" [ngStyle]="{'background': (message.isNoRead || message.readBySomebody==false) ? 'LightBlue' : 'white'}">
     <h6>{{message.sender.name}}</h6>
     <p>{{message.text}}</p>
-    <time>{{message.date}}</time>
-    <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
-    <span class="doc" *ngFor="let doc of files; let i = index" class="mr-2">
-        <button (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
+    <div class="imag">
+      <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
+      <br>
+    </div>
+    <span class="doc" class="mr-2">
+        <button *ngFor="let doc of files; let i = index" (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
+        <br>
     </span>
+    <p><time>{{message.date}}</time></p>
   </div>
 </li>
 <li *ngIf="mymessage" class="self">
@@ -17,10 +21,12 @@
   <div class="msg" [ngStyle]="{'background': (message.isNoRead || message.readBySomebody==false) ? 'LightBlue' : 'white'}">
     <h6>{{message.sender.name}}</h6>
     <p>{{message.text}}</p>
-    <time>{{message.date}}</time>
-    <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
-    <span class="doc" *ngFor="let doc of files; let i = index" class="mr-2">
-        <button (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
+    <div class="imag">
+      <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
+    </div>
+    <span class="doc" class="mr-2">
+        <button *ngFor="let doc of files; let i = index" (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
     </span>
+    <p><time>{{message.date}}</time></p>
   </div>
 </li>

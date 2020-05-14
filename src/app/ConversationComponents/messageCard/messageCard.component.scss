@@ -96,6 +96,7 @@ li {
     padding: 10px;
     border-radius: 2px;
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.07);
+    word-wrap: break-word;
 }
 .msg p {
     font-size: 0.8rem;
@@ -105,7 +106,8 @@ li {
 .msg img {
     position: relative;
     display: block;
-    width: 450px;
+    max-height: 250px;
+    max-width: 250px;
     border-radius: 5px;
     box-shadow: 0px 0px 3px #eee;
     transition: all .4s cubic-bezier(0.565, -0.260, 0.255, 1.410);
@@ -128,7 +130,7 @@ li {
 
 .msg time {
     font-size: 0.7rem;
-    color: #ccc;
+    color: #000000;
     margin-top: 3px;
     float: right;
     cursor: default;
@@ -144,6 +146,11 @@ li {
     display: inline-block;
     margin-right: 4px;
 }
+
+.imag {
+  display: flex;
+}
+
 
 emoji{
     display: inline-block;

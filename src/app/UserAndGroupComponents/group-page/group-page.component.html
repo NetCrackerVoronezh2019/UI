@@ -51,7 +51,7 @@
                             <span class="bigger-110"> Выключить уведомления</span>
                           </button>
 
-                          <button *ngIf="myId==id" data-toggle="modal" data-target="#uploadModel" class="btn btn-sm btn-block btn-primary">
+                          <button *ngIf="admin" data-toggle="modal" data-target="#uploadModel" class="btn btn-sm btn-block btn-primary">
                               <i class="ace-icon fa fa-envelope-o bigger-110"></i>
                               <span class="bigger-110">Обновить фотографию</span>
                           </button>
@@ -68,13 +68,13 @@
 
                               <div class="all-tables mt-3">
                                   <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                                      <mat-button-toggle (click)="showSubscribers()" value="Subscribers">Участники</mat-button-toggle>
+                                      <mat-button-toggle data-toggle="modal" data-target="#UsersModal" value="Subscribers">Участники</mat-button-toggle>
                                     </mat-button-toggle-group>
                               </div>
                                       </div>
-                                      <ul *ngIf="subscriversVisible" id='friend-list'>
-                                        <div *ngFor="let us of users">
-                                            <app-user-card [(us)]="user" routerLink="/userPage/{{user.userId}}"></app-user-card>
+                                      <ul id='friend-list'>
+                                        <div *ngFor="let us of showingUsers">
+                                            <app-user-card [(us)]="us" routerLink="/userPage/{{user?.userId}}"></app-user-card>
                                         </div>
                                       </ul>
                             </div>
@@ -100,7 +100,7 @@
                                           </div>
                                      </div>
                                       <label for="">Текст</label>
-                                      <textarea id="Name" type="text" class="form-control" formControlName="text" autocomplete="off" placeholder="text"></textarea>
+                                      <textarea maxlength="255" id="Name" type="text" class="form-control" formControlName="text" autocomplete="off" placeholder="text"></textarea>
                                       <div *ngIf="gs.getPostCreateForm().controls['text'].invalid && gs.getPostCreateForm().controls['text'].touched" >
                                         <small  *ngIf="gs.getGroupSettingsForm().controls['groupName'].errors.minlength">text is too short</small>
                                       </div>
@@ -140,7 +140,7 @@
           </div>
           <div class="mb-2 all-images">
               <div class="mb-3" *ngIf="fileName!=null">
-                  <span  matBadgeOverlap="false" >{{fileName}}</span>
+                  <span  matBadge="x"  matBadgeOverlap="false" (click)="deleteImage()">{{fileName}}</span>
               </div>
          </div>
           <div class="modal-footer none-border">
@@ -201,8 +201,25 @@
       </form>
       <button mat-raised-button class="ml-2" (click)="search()"><i class="fas fa-search"></i>Поиск</button>
       <button mat-raised-button class="ml-2" (click)="cancelSearch()"><i class="fas fa-minus-circle"></i>Отмена</button>
-    <div *ngFor ='let user of users' align="center">
+    <div *ngFor ='let user of searchadmin' align="center">
       <app-user-card [(us)]="user" (click)="makeAdmin(user)"></app-user-card>
     </div>
    </div>
   </div>
+  <div  class="modal fade" id="UsersModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Участники</h5>
+            <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-0 m-0">
+            				<div *ngFor="let user of users">
+            						<app-user-card [(us)]="user" routerLink="/userPage/{{user.userId}}"></app-user-card>
+            				</div>
+                </div>
+              </div>
+            </div>
+          </div>

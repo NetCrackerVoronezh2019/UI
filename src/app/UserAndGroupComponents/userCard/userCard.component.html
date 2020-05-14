@@ -2,10 +2,11 @@
 <div *ngIf="true" class="blog-card">
     <div class="inner-part">
       <label class="img">
-        <img  src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSaY9UGZkwA_Am-IgAiVJkD0VoluyIJXM8OOi57ioAp5gj5CAkM'/>
+        <div *ngIf="userImage==null" class="avatar"><img src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg" draggable="false"/></div>
+        <div *ngIf="userImage!=null" class="avatar"><img [src]="userImage" draggable="false"/></div>
       </label>
       <div class="content ">
-        {{us.lastName}} {{us.firstName}}
+        {{us?.lastName}} {{us?.firstName}}
       </div>
     </div>
   </div>

@@ -8,4 +8,5 @@ export class Group
   image:string;
   notificationsOn:boolean;
   countNot:number;
+  admin:boolean;
 }

@@ -2,6 +2,7 @@ import { Component, Input,OnInit } from '@angular/core';
 import { Comment } from '@UserAndGroupClasses/comment'
 import { User } from '@UserAndGroupClasses/user'
 import {CommentService} from './services/comment-card.service'
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-comment-card',
@@ -16,10 +17,17 @@ export class CommentCardComponent implements OnInit {
   @Input() user:User;
   commentSettingsVisible = false;
   deleted = false;
-  constructor(private cs:CommentService) { }
+  userImage:any = null;
+  loading = false;
+  constructor(private cs:CommentService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    if (this.user.image != null) {
+      this.downloadProfileImage(this.user.image);
+    }
   }
+
+
 
  showCommentSettings() {
    this.cs.getCommentSettingsForm().reset({text:this.comment.text})
@@ -43,6 +51,22 @@ export class CommentCardComponent implements OnInit {
       this.deleted = true;
     })
   }
+ }
+
+ downloadProfileImage(key:String)
+ {
+
+   this.cs.downloadProfileImage(key)
+     .subscribe(
+       (response) => {
+         let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+         this.userImage=URL.createObjectURL(blob)
+         this.userImage=this.sanitizer.bypassSecurityTrustUrl(this.userImage);
+         this.loading = true;
+       },
+        error => console.log('Error')
+     )
+
  }
 
 }

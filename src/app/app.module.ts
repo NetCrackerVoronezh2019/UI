@@ -65,6 +65,7 @@ import { UserControllComponent } from './admin/user-controll/user-controll.compo
 import { OrderItemComponent } from './allusers/order-item/order-item.component';
 import { UserDocumentItemComponent } from './admin/user-document-item/user-document-item.component';
 import { UserFeedBackComponent } from './userpage2/user-feed-back/user-feed-back.component';
+import {GroupCreateComponent} from './UserAndGroupComponents/group-create/group-create.component'
 
 const appRoutes: Routes =[
   {path: 'registration', component:RegistrationComponent},
@@ -88,7 +89,8 @@ const appRoutes: Routes =[
   {path: 'friends', component:FriendListComponent},
   {path: 'userPage/:id',component:Userpage2Component},
   {path:"admin/allDocuments",component:TeacherDocumentsComponent},
-  {path:"userControl",component:UserControllComponent}
+  {path:"userControl",component:UserControllComponent},
+  {path:"groupCreate",component:GroupCreateComponent}
 ];
 
 @NgModule({
@@ -134,6 +136,7 @@ const appRoutes: Routes =[
     GroupPageComponent,
     ChatComponent,
     FriendsNotificationsComponent,
+    GroupCreateComponent
   ],
   imports: [
     MatInputModule,

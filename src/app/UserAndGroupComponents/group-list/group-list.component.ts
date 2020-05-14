@@ -31,7 +31,6 @@ export class GroupListComponent implements OnInit {
   ngOnInit() {
     this.groupService.getAllSubjects().subscribe((data:Subject[]) => {
       this.subjects = data;
-      console.log(this.subjects);
     })
   }
 
@@ -61,7 +60,10 @@ export class GroupListComponent implements OnInit {
     }
 
     showGropList() {
-        this.groupService.showGroupList().subscribe((data:Group[]) => {this.groups = data})
+        this.groupService.showGroupList().subscribe((data:Group[]) => {
+          this.groups = data;
+          console.log(data);
+        })
     }
 
     createGroup() {

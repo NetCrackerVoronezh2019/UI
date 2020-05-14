@@ -17,7 +17,7 @@
         <form [formGroup]="ps.getPostSettingsForm()">
             <div class="form-group">
               <label for="">Текст</label>
-              <textarea id="Name" type="text" class="form-control" formControlName="text" autocomplete="off" placeholder="text"></textarea>
+              <textarea maxlength="255" id="Name" type="text" class="form-control" formControlName="text" autocomplete="off" placeholder="text"></textarea>
               <div *ngIf="ps.getPostSettingsForm().controls['text'].invalid && ps.getPostSettingsForm().controls['text'].touched" >
                 <small  *ngIf="ps.getPostSettingsForm().controls['text'].errors.minlength">text is too short</small>
               </div>
@@ -36,13 +36,14 @@
         <button *ngIf="!showComments" mat-raised-button class="ml-2" (click)="showCommentsPart()"><i class="fa fa-comment"></i>Коментарии</button>
         <button *ngIf="showComments" mat-raised-button class="ml-2" (click)="closeCommentsPart()"><i class="fas fa-times"></i>Закрыть коментарии</button>
         <button mat-raised-button class="ml-2" *ngIf="!createCommentVisible && showComments"(click)="showCreateComment()"><i class="fas fa-plus-circle"></i>Написать коментарий</button>
+        <button *ngIf="showComments && showAllComents" mat-raised-button class="ml-2" (click)="closeAllComments()"><i class="fa fa-comments" aria-hidden="true"></i> скрыть все</button>
       </div>
       <div  *ngIf="showComments">
       <div class="comments-inner-part">
       <form *ngIf="createCommentVisible" [formGroup]="ps.getCommentCreateForm()">
           <div class="form-group">
             <label for="">Текст</label>
-            <textarea id="Name" type="text" class="form-control" formControlName="text" autocomplete="off" placeholder="text"></textarea>
+            <textarea maxlength="255" id="Name" type="text" class="form-control" formControlName="text" autocomplete="off" placeholder="text"></textarea>
             <div *ngIf="ps.getCommentCreateForm().controls['text'].invalid && ps.getCommentCreateForm().controls['text'].touched" >
               <small  *ngIf="ps.getCommentCreateForm().controls['text'].errors.minlength">text is too short</small>
             </div>
@@ -50,9 +51,10 @@
       </form>
       <button mat-raised-button class="ml-2" *ngIf="createCommentVisible" (click)="sendComment()"><i class="fas fa-check-circle"></i>Отправить</button>
       <button mat-raised-button class="ml-2" *ngIf="createCommentVisible" (click)="closeCreateComment()"><i class="fas fa-times"></i>Отмена</button>
-      <div *ngFor="let comment of comments">
+      <div *ngFor="let comment of showedComments">
         <app-comment-card [(comment)]="comment" [(admin)]="admin" [(user)]="user"></app-comment-card>
       </div>
+          <button class="ml-2" mat-raised-button *ngIf="!showAllComents && comments?.length > 2" (click)="openAllcoments()"><i class="fa fa-comments" aria-hidden="true"></i> показать все</button>
       </div>
     </div>
     </div>

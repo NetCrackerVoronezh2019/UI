@@ -2,15 +2,18 @@ body { margin: 0; }
 #sidebar, #content { position: absolute; }
 #sidebar, #content { overflow: auto; padding: 10px; }
 #sidebar {
-  min-width:220px;
-  max-width: 15vw;
+ width:220px;
  top: 10vh; /* Расстояние от верхнего края */
  bottom: 0; /* Расстояние снизу  */
  background: #708090;
 }
+
+#sidebar button{
+  margin-top: 20px;
+}
 #content {
  top: 10vh; /* Расстояние от верхнего края */
- left: 10vw; /* Расстояние от левого края */
+ left: 220px; /* Расстояние от левого края */
  bottom: 0; right: 0;
 }
 .btn-primary-spacing
