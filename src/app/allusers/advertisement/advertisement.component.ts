@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs'
 import {AdvertisementService1} from '../services/advertisement.service';
 import {AdvertisementService} from '../../student/services/advertisement.service'
 import {Order} from '../../classes/order'
+import { Router} from '@angular/router';
 import * as fileSaver from 'file-saver';
 import { DomSanitizer } from "@angular/platform-browser";
 import {OrderService} from '../services/order.service'
@@ -29,8 +30,10 @@ export class AdvertisementComponent implements OnInit {
   coverImage:any;
   message:String='Вы точно хотите получить этот заказ ?'
   buttonHidden:Boolean=true;
+  deleteMessage;
   constructor(private service:AdvertisementService1, private service2:AdvertisementService,
     private activateRoute: ActivatedRoute,
+    private router:Router,
     private orderService:OrderService,
     private sanitizer: DomSanitizer) { }
 
@@ -184,8 +187,8 @@ export class AdvertisementComponent implements OnInit {
   {
       this.service.deleteAdvertisement(this.id)
           .subscribe(
-            data=>{},
-            error=>console.log(error)
+            data=>{this.router.navigate(['/'])},
+            error=>console.log(this.deleteMessage="Произошла ошибка")
           )
   }
 }

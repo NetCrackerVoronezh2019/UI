@@ -27,29 +27,29 @@ export class OrderItemComponent implements OnInit {
   nextStatusTranslate;
   allFiles:File[]=[];
   allNames:any[]=[]
-
+  deleteNames:String[]=[];
 
 
   constructor(private service:OrderService,
     private service2:AdvertisementService1, private sanitizer: DomSanitizer) { }
 
     download(key:String,docName:String)
-  {
-    let name:String=key.split('_')[1];
-    let fileType:any;
-    if(name.split('.')[1]=='pdf')
-    fileType='application/pdf; charset=utf-8';
-    else
-      fileType='image/jpg; charset=utf-8';
-    this.service2.downloadFile(key)
-      .subscribe(
-        (response) => {
-          let blob:any = new Blob([response.blob()], { type:fileType});
+    {
+      let name:String=key.split('_')[1];
+      let fileType:any;
+      if(name.split('.')[1]=='pdf')
+      fileType='application/pdf; charset=utf-8';
+      else
+        fileType='image/jpg; charset=utf-8';
+      this.service2.downloadFile(key)
+        .subscribe(
+          (response) => {
+            let blob:any = new Blob([response.blob()], { type:fileType});
 
-          fileSaver.saveAs(blob,docName);
-        },
-         error => console.log('Error downloading the file')
-      )
+            fileSaver.saveAs(blob,docName);
+          },
+          error => console.log('Error downloading the file')
+        )
   }
 
   downloadCoverImage(key:String)
@@ -88,7 +88,19 @@ export class OrderItemComponent implements OnInit {
     this.reiting=event.target.attributes.value.value;
   }
 
-
+ 
+  deleteClickEvent(key){
+     console.log(key)
+     console.log(this.deleteNames.indexOf(key))
+    if(this.deleteNames.indexOf(key)==-1)
+        this.deleteNames.push(key);
+    else
+    {
+      let index=this.deleteNames.indexOf(key);
+      this.deleteNames.splice(index,1)
+    }
+    console.log(this.deleteNames)
+  }
   getStatus(status){
         if(status=='ACCEPTED')
           return 'Принят';
@@ -137,6 +149,7 @@ export class OrderItemComponent implements OnInit {
   }
   changeOrderStatus(order:Order)
   {
+    /*
     if(order.nextStatus!='СOMPLETED' && this.openResultBlock==false)
     {
        this.service.changeOrderStatus(this.order)
@@ -152,6 +165,22 @@ export class OrderItemComponent implements OnInit {
       else
         this.completeOrder()
     }
+
+    */
+
+   this.service.changeOrderStatus(this.order)
+   .subscribe(
+     (data)=>{this.getOrder()},
+     (error)=>console.log(error)
+   )
+  }
+
+  sendAttachments()
+  {
+    if(this.openResultBlock==false)
+     this.openResultBlock=true;
+   else
+    this.completeOrder() 
   }
 
 

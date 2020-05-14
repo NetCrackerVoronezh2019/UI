@@ -89,7 +89,7 @@
                         <textarea  formControlName="aboutMe" type="text" class="form-control" id="Input2" rows="5" aria-describedby="emailHelp" placeholder="О себе"></textarea>
                     </div>
                     <label for="exampleInputEmail1"><b>Документы и Сертификаты</b></label>
-                    <p (click)="addSection()"> <i style="font-size:25px;" class="fas fa-plus-circle"></i> Добавить новый раздел</p>
+                    <p (click)="addSection()"> <i style="font-size:25px;cursor:pointer;" class="fas fa-plus-circle"></i> Добавить новый раздел</p>
                     <div *ngFor="let file of certificateFiles; let i = index" >
                         <div class="example-2 mb-3">
                         
@@ -109,10 +109,11 @@
                                     <span class="js-fileName"> Загрузить файлы</span>
                                 </label>
                             </div>
+                            <p (click)="deleteSection(i)"> <i class="far fa-trash-alt"></i> Удалить раздел</p>
                         </div>
                         <div class="mb-2 all-images">
-                                <div class="mb-3" *ngFor="let file of certificateFiles[i].allFiles; let i = index" (click)="deleteImageFromList(i)">
-                                    <span  matBadge="x"  matBadgeOverlap="false" >{{file.name}}</span>
+                                <div class="mb-3" *ngFor="let file of certificateFiles[i].allFiles; let j = index" (click)="deleteImageFromList(i)">
+                                    <span (click)="deleteImageFromList(i,j)" matBadge="x"  matBadgeOverlap="false" >{{file.name}}</span>
                                 </div>
                         </div>
                     </div>

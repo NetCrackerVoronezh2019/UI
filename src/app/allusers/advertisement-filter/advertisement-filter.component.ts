@@ -17,6 +17,7 @@ export class AdvertisementFilterComponent implements OnInit {
   constructor(private service:FilterService) { }
 
   isLoaded=false;
+  state="ORDER";
   filters:Filters;
   panelOpenState = false;
   advs:Advertisement[];
@@ -25,6 +26,16 @@ export class AdvertisementFilterComponent implements OnInit {
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
  
+  changeState(event)
+  {
+    console.log('changeStatus')
+    let state2=event.target.attributes['state'].value;
+    console.log(state2);
+    if(state2!='ORDER')
+      this.state='FREELANCE'
+    else
+      this.state='ORDER'
+  }
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -77,7 +88,7 @@ export class AdvertisementFilterComponent implements OnInit {
   refresh()
   {
     console.log(this.tags);
-    this.service.sendFilterResults(this.filters,this.tags)
+    this.service.sendFilterResults(this.filters,this.tags,this.state)
     .subscribe(
       (data:Advertisement[])=>this.advs=data,
       (error)=>console.log(error)

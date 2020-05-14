@@ -34,12 +34,12 @@ export class FilterService
         return this.http.get(this.baseUrl+"/getAllFilters");
     }
 
-    sendFilterResults(filters:Filters,tags:Tag[])
+    sendFilterResults(filters:Filters,tags:Tag[],state)
     {
         filters.minPrice=this.filterForm.value.minPrice;
         filters.maxPrice=this.filterForm.value.maxPrice;
         filters.searchRow=this.filterForm.value.searchRow;
-        filters.type=this.filterForm.value.type
+        filters.type=state;
         filters.tags=tags;
 
         console.log(filters);

@@ -114,10 +114,12 @@ export class RegistrationComponent implements OnInit {
      if(e!=undefined)
       this.currentIndex=e;
    }
-  deleteImageFromList(index)
+  deleteImageFromList(i,j)
   {
-    this.allNames.splice(index,1);
-    this.allFiles.splice(index,1);
+    console.log("deleteImage");
+    console.log(i);
+    console.log(j);
+    this.certificateFiles[i].allFiles.splice(j,1);
   }
 
   sectionChange(value,i)
@@ -132,6 +134,11 @@ export class RegistrationComponent implements OnInit {
           (data:Subject[])=>{this.subjects=data, console.log(this.subjects)},
           error=>console.log(error)          
         )
+  }
+
+  deleteSection(i)
+  {
+    this.certificateFiles.splice(i,1);
   }
  
 }
