@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DialogService } from './Services/chat.service'
 import { ActivatedRoute, Router} from '@angular/router';
-import { User } from '@ConversationClasses/user'
-import { User as Friend } from '@UserAndGroupClasses/User'
+import { User } from '@ConversationClasses/User'
+import { User as Friend } from '@UserAndGroupClasses/user'
 import { Dialog } from '@ConversationClasses/dialog'
 import { Message } from '@ConversationClasses/message'
 import { Notification } from '@ConversationClasses/Notification'
