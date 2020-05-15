@@ -5,7 +5,7 @@ import {CertificateFile} from '../../classes/certificateFile'
 @Injectable()
 export class RegistrationService
 {
-    baseUrl:String='http://localhost:9080';
+    baseUrl:String='http://95.30.222.140:9080';
     constructor(private fb:FormBuilder,private http: HttpClient) {}
         myForm=this.fb.group(
             {

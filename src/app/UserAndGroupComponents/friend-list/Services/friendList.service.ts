@@ -17,7 +17,7 @@ export class FriendListService
 
 
     getUser() {
-      return this.http.get('http://localhost:9080/userAndGroup/getThisUser',
+      return this.http.get('http://95.30.222.140:9080/userAndGroup/getThisUser',
                           {params:new HttpParams()});
       }
 
@@ -26,35 +26,35 @@ export class FriendListService
     }
 
     getFriends() {
-      return this.http.get('http://localhost:9080/thisUser/friends')
+      return this.http.get('http://95.30.222.140:9080/thisUser/friends')
     }
 
     getOutgoing() {
-      return this.http.get('http://localhost:9080/thisUser/outgoingFriends')
+      return this.http.get('http://95.30.222.140:9080/thisUser/outgoingFriends')
     }
 
     getIngoing() {
-      return this.http.get('http://localhost:9080/thisUser/ingoingFriends')
+      return this.http.get('http://95.30.222.140:9080/thisUser/ingoingFriends')
     }
 
     search() {
-      return this.http.get('http://localhost:9080/users/search',{params: new HttpParams().set("firstName",this.userSearchPanel.value.firstName)
+      return this.http.get('http://95.30.222.140:9080/users/search',{params: new HttpParams().set("firstName",this.userSearchPanel.value.firstName)
                                                                                                   .set("lastName",this.userSearchPanel.value.lastName)})
     }
 
     deleteNotifications() {
-      return this.http.delete('http://localhost:9080/user/cleanNotifications')
+      return this.http.delete('http://95.30.222.140:9080/user/cleanNotifications')
     }
 
     ignoreNotification(notificationId) {
-      return this.http.delete('http://localhost:9080/user/ignoreNotifications',{params: new HttpParams().set("notificationId",notificationId)})
+      return this.http.delete('http://95.30.222.140:9080/user/ignoreNotifications',{params: new HttpParams().set("notificationId",notificationId)})
     }
 
     getNotifications() {
-      return this.http.get('http://localhost:9080/user/friendshipNotifications')
+      return this.http.get('http://95.30.222.140:9080/user/friendshipNotifications')
     }
 
     addFriend(userId) {
-      return this.http.put('http://localhost:9080/friend/add',null,{params: new HttpParams().set('ingoingId',userId)})
+      return this.http.put('http://95.30.222.140:9080/friend/add',null,{params: new HttpParams().set('ingoingId',userId)})
     }
 }

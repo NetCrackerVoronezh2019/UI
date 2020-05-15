@@ -31,7 +31,7 @@ export class PostService {
   }
 
   getPostComments(postId) {
-    return this.http.get('http://localhost:9080/posts/getComments',{params: new HttpParams().set('postId',postId)})
+    return this.http.get('http://95.30.222.140:9080/posts/getComments',{params: new HttpParams().set('postId',postId)})
   }
 
   sendComment(user:User,postId) {
@@ -40,7 +40,7 @@ export class PostService {
       sender:user,
       text:this.commentCreatForm.value.text
     }
-    return this.http.post('http://localhost:9080/comments/send',body)
+    return this.http.post('http://95.30.222.140:9080/comments/send',body)
   }
 
   sendPostSettings(postId) {
@@ -48,15 +48,15 @@ export class PostService {
       postId:postId,
       text: this.postSettingsForm.value.text
     }
-    return this.http.put('http://localhost:9080/posts/redact',body)
+    return this.http.put('http://95.30.222.140:9080/posts/redact',body)
   }
 
   deletePost(postId) {
-    return this.http.delete('http://localhost:9080/posts/delete',{params: new HttpParams().set('postId',postId)})
+    return this.http.delete('http://95.30.222.140:9080/posts/delete',{params: new HttpParams().set('postId',postId)})
   }
 
   downloadGroupImage(key:String): Observable<any>{
-      return this.http2.get('http://localhost:1234/getGroupImg/'+key, {responseType: ResponseContentType.Blob});
+      return this.http2.get('http://95.30.222.140:1234/getGroupImg/'+key, {responseType: ResponseContentType.Blob});
   }
 
 }

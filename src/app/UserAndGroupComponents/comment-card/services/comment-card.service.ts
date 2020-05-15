@@ -26,15 +26,15 @@ export class CommentService {
       commentId:commentId,
       text:this.commentSettingsForm.value.text
     }
-    return this.http.put('http://localhost:9080/comments/redact',body)
+    return this.http.put('http://95.30.222.140:9080/comments/redact',body)
   }
 
   deleteComment(commentId) {
-    return this.http.delete('http://localhost:9080/comments/delete',{params: new HttpParams().set('commentId',commentId)})
+    return this.http.delete('http://95.30.222.140:9080/comments/delete',{params: new HttpParams().set('commentId',commentId)})
   }
 
   downloadProfileImage(key:String): Observable<any>{
-      return this.http2.get('http://localhost:1234/getuserimg/'+key, {responseType: ResponseContentType.Blob});
+      return this.http2.get('http://95.30.222.140:1234/getuserimg/'+key, {responseType: ResponseContentType.Blob});
   }
 
 }

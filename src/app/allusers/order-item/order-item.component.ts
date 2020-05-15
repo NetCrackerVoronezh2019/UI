@@ -82,6 +82,15 @@ export class OrderItemComponent implements OnInit {
         }
   }
 
+  deleteAttachments()
+  {
+      this.service.deleteAttachments(this.deleteNames)
+          .subscribe(
+            (data)=>this.getOrder(),
+            error=>console.log(error)
+          )
+  }
+  
   raitingClick(event)
   {
     
@@ -149,25 +158,6 @@ export class OrderItemComponent implements OnInit {
   }
   changeOrderStatus(order:Order)
   {
-    /*
-    if(order.nextStatus!='СOMPLETED' && this.openResultBlock==false)
-    {
-       this.service.changeOrderStatus(this.order)
-        .subscribe(
-        (data)=>{this.getOrder()},
-        (error)=>console.log(error)
-        )
-    }    
-    else
-    {
-      if(this.openResultBlock==false)
-        this.openResultBlock=true;
-      else
-        this.completeOrder()
-    }
-
-    */
-
    this.service.changeOrderStatus(this.order)
    .subscribe(
      (data)=>{this.getOrder()},

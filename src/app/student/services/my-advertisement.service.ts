@@ -6,7 +6,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class MyAdvService
 {
-    baseUrl:String='http://localhost:9080'
+    baseUrl:String='http://95.30.222.140:9080'
     constructor(private fb:FormBuilder,private http: HttpClient) {}
      myAdvForm=this.fb.group(
         {  

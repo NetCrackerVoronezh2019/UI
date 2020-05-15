@@ -10,7 +10,7 @@ import { FormGroup, FormControl, Validators,FormBuilder,AbstractControl} from '@
 
 export class DocumentService
 {
-    baseUrl:String='http://localhost:9080';
+    baseUrl:String='http://95.30.222.140:9080';
     constructor(private http:HttpClient,private http2: Http,private fb:FormBuilder){}
 
 
@@ -59,7 +59,7 @@ export class DocumentService
     }
    
     downloadFile(key:String): Observable<any>{
-        return this.http2.get('http://localhost:1234/getCertFile/'+key, {responseType: ResponseContentType.Blob});
+        return this.http2.get('http://95.30.222.140:1234/getCertFile/'+key, {responseType: ResponseContentType.Blob});
     }
 
 

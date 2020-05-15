@@ -11,7 +11,7 @@ import {File} from '../../classes/file'
 @Injectable()
 export class AdvertisementService1
 {
-    baseUrl:String='http://localhost:9080';
+    baseUrl:String='http://95.30.222.140:9080';
     constructor(private fb:FormBuilder,private http:HttpClient,private http2: Http){}
 
     deleteForm=this.fb.group(
@@ -32,7 +32,7 @@ export class AdvertisementService1
 
         console.log(body);
 
-     return this.http.get("http://localhost:1122/deleteAdvertisement/"+id+"/"+comment);
+     return this.http.get("http://95.30.222.140:1122/deleteAdvertisement/"+id+"/"+comment);
     }
     getDeleteForm()
     {
@@ -137,12 +137,12 @@ export class AdvertisementService1
 
     getBytesForImg(adv:Advertisement)
     {
-        return this.http.get('http://localhost:1234/getimg/'+adv.imageKeys[0]);
+        return this.http.get('http://95.30.222.140:1234/getimg/'+adv.imageKeys[0]);
     }
 
 
     downloadFile(key:String): Observable<any>{
-        return this.http2.get('http://localhost:1234/getAdvImg/'+key, {responseType: ResponseContentType.Blob});
+        return this.http2.get('http://95.30.222.140:1234/getAdvImg/'+key, {responseType: ResponseContentType.Blob});
     }
 
 

@@ -96,7 +96,7 @@
                             <div class="form-group">
                                 <label  for="sel1">Раздел</label>
                                 <select (change)="sectionChange($event.target.value,i)" class="custom-select" id="sel1" placeholder="Выберите Раздел">  
-                                    <option  *ngFor="let subject of subjects"  value="{{subject.name}}">{{subject.translateName}}</option>  
+                                    <option  *ngFor="let subject of subjects"  value="{{subject.translateName}}">{{subject.translateName}}</option>  
                                 </select>
                             </div>
 

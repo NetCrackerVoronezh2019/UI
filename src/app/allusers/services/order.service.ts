@@ -8,7 +8,7 @@ import { Advertisement } from '../../classes/advertisement';
 export class OrderService
 {
    
-     baseUrl:String='http://localhost:9080';
+     baseUrl:String='http://95.30.222.140:9080';
     constructor(private fb:FormBuilder,private http:HttpClient){}
 
     EditOrderForm=this.fb.group(
@@ -96,6 +96,15 @@ export class OrderService
         }
         console.log(body);
         return this.http.post(this.baseUrl+'/user/changeReiting',body);
+    }
+
+    deleteAttachments(keys)
+    {
+        let body={
+            keys
+        }
+        console.log(body);
+        return this.http.post('http://95.30.222.140:1122/deleteOrderAttachments',body)
     }
 
     completeOrder(orderId:Number,allFiles)

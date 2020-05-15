@@ -6,7 +6,7 @@ import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/for
 
 export class SubjectService
 {
-    baseUrl:String='http://localhost:9080';
+    baseUrl:String='http://95.30.222.140:9080';
     constructor(private http:HttpClient,private fb:FormBuilder){}
     subjectForm=this.fb.group(
         {  
@@ -33,7 +33,7 @@ export class SubjectService
         }
         
         console.log(body);
-        return this.http.post("http://localhost:9080/admin/addNewSubject",body);
+        return this.http.post("http://95.30.222.140:9080/admin/addNewSubject",body);
     }
 
 }

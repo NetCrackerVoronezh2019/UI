@@ -18,7 +18,10 @@ export class UserDocumentItemComponent implements OnInit {
   disabled=false;
   isTrue=true;
   message=''
+  displayedColumns: String[] = ['document', 'subject', 'button'];
+  dataSource:UserDocument[]=[];
   ngOnInit() {
+    this.dataSource=this.user.documents
   }
 
 

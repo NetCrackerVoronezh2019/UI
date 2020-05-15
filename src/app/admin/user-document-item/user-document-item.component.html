@@ -13,14 +13,35 @@
            <h4 сlass="title">Документы и Сертификаты </h4>
         </div>
         <div class="documents mt-1">
-            <span  *ngFor="let doc of user.documents; let i = index" class="document mr-2">
-                    <span (click)="download(doc.documentKey)" style="text-align:center;"><i style="font-size:30px;" class="fas fa-download"></i></span>
-                    <span>{{doc.documentKey.split('_')[1]}}</span>
-                    <button (click)="changeDocument(doc)" type="button" class="btn btn-success">
-                      <span *ngIf="!doc.isValid"> <i class="fas fa-check-circle"></i> Принять </span>
-                      <span *ngIf="doc.isValid"><i class="fas fa-minus-circle"></i> Отклонить</span>
-                    </button>          
-            </span>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="document">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.documentKey.split('_')[1]}} </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="subject">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td mat-cell *matCellDef="let element">Программирование </td>
+                </ng-container>
+              
+                <!-- Weight Column -->
+                <ng-container matColumnDef="button">
+                  <th mat-header-cell *matHeaderCellDef> Weight </th>
+                  <td mat-cell *matCellDef="let element">
+                    <button (click)="changeDocument(element)" type="button" class="btn btn-success">
+                        <span *ngIf="!element.isValid"> <i class="fas fa-check-circle"></i> Принять &nbsp; &nbsp;</span>
+                        <span *ngIf="element.isValid"><i class="fas fa-minus-circle"></i> Отклонить</span>
+                    </button> 
+                  </td>
+                </ng-container>
+            
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+                            
         </div>
     </div>
 </div>      

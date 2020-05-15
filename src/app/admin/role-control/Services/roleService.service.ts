@@ -7,7 +7,7 @@ import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/for
 export class RoleService
 {
 
-    baseUrl:String='http://localhost:9080/admin';
+    baseUrl:String='http://95.30.222.140:9080/admin';
     constructor(private http:HttpClient,private fb:FormBuilder){}
 
     roleForm=this.fb.group(

@@ -5,7 +5,7 @@ import { HttpClient} from '@angular/common/http';
 export class AuthService
 {
 
-    baseUrl:String='http://localhost:9080';
+    baseUrl:String='http://95.30.222.140:9080';
     constructor(private http:HttpClient){}
 
     getlicense()

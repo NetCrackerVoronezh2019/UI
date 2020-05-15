@@ -6,7 +6,7 @@ import {Injectable} from '@angular/core';
 
 export class ChangeUserProp
 {
-    baseUrl:String='http://localhost:9080/admin';
+    baseUrl:String='http://95.30.222.140:9080/admin';
     constructor(private fb:FormBuilder,private http:HttpClient){}
     EditForm=this.fb.group(
         {
