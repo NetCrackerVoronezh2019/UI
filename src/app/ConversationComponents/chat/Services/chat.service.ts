@@ -3,6 +3,7 @@ import { HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Http, ResponseContentType} from '@angular/http';
+import {AppProperties} from 'src/app/appProperties'
 
 @Injectable()
 export class DialogService
@@ -44,17 +45,17 @@ export class DialogService
       }
 
     getDialogMembers(dialogId) {
-        return this.http.get('http://95.30.222.140:9080/user/getDialogMembers/',
+        return this.http.get(AppProperties.ip+':9080/user/getDialogMembers/',
                             {params:new HttpParams().set('dialogId',dialogId)});
       }
 
       getDialogMessages(dialogId:string) {
-        return this.http.get('http://95.30.222.140:9080/user/getDialogMessages/',
+        return this.http.get(AppProperties.ip+':9080/user/getDialogMessages/',
                               {params:new HttpParams().set('dialogId',dialogId)});
       }
 
       getDialogInfo(dialogId:string) {
-        return this.http.get('http://95.30.222.140:9080/user/getDialog/',
+        return this.http.get(AppProperties.ip+':9080/user/getDialog/',
                               {params:new HttpParams().set('dialogId',dialogId)});
       }
 
@@ -66,39 +67,39 @@ export class DialogService
         }
 
         getUser() {
-          return this.http.get('http://95.30.222.140:9080/user/getUser/',
+          return this.http.get(AppProperties.ip+':9080/user/getUser/',
                               {params:new HttpParams()});
           }
 
           deleteDialog(dialogId:string) {
-            return this.http.delete('http://95.30.222.140:9080/user/deleteDialog/',
+            return this.http.delete(AppProperties.ip+':9080/user/deleteDialog/',
                               {params:new HttpParams().set('dialogId',dialogId)})
           }
 
           liveDialog(dialogId:string) {
-            return this.http.delete('http://95.30.222.140:9080/user/liveDialog/',
+            return this.http.delete(AppProperties.ip+':9080/user/liveDialog/',
                               {params:new HttpParams().set('dialogId',dialogId)})
           }
 
           addUserInDialog(dialogId:string,userId) {
-            return this.http.get('http://95.30.222.140:9080/user/addUserInDialog/',{params:new HttpParams().set('dialogId',dialogId).set('userId', userId)})
+            return this.http.get(AppProperties.ip+':9080/user/addUserInDialog/',{params:new HttpParams().set('dialogId',dialogId).set('userId', userId)})
           }
 
           getNotifications(dialogId) {
-            return this.http.get('http://95.30.222.140:9080/dialog/getNotification',{params:new HttpParams().set('dialogId',dialogId)})
+            return this.http.get(AppProperties.ip+':9080/dialog/getNotification',{params:new HttpParams().set('dialogId',dialogId)})
           }
 
           getFriends() {
-            return this.http.get('http://95.30.222.140:9080/thisUser/friends')
+            return this.http.get(AppProperties.ip+':9080/thisUser/friends')
           }
 
           search() {
-            return this.http.get('http://95.30.222.140:9080/users/search',{params: new HttpParams().set("firstName",this.userSearchForm.value.firstName)
+            return this.http.get(AppProperties.ip+':9080/users/search',{params: new HttpParams().set("firstName",this.userSearchForm.value.firstName)
                                                                                                         .set("lastName",this.userSearchForm.value.lastName)})
           }
 
           downloadDialogFile(key:String): Observable<any>{
-              return this.http2.get('http://95.30.222.140:1234/getDialogFile/'+key, {responseType: ResponseContentType.Blob});
+              return this.http2.get(AppProperties.ip+':1234/getDialogFile/'+key, {responseType: ResponseContentType.Blob});
           }
 
         submitSettings(dialogId) {
@@ -106,7 +107,7 @@ export class DialogService
             dialogId: dialogId,
             name: this.dialogSettingsForm.value.name
           }
-          return this.http.put('http://95.30.222.140:9080/dialog/settings',body)
+          return this.http.put(AppProperties.ip+':9080/dialog/settings',body)
         }
 
         submitAvatar(dialogId,avatar) {
@@ -114,7 +115,7 @@ export class DialogService
             dialogId: dialogId,
             image : avatar
           }
-          return this.http.put('http://95.30.222.140:9080/dialog/setAvatar',body)
+          return this.http.put(AppProperties.ip+':9080/dialog/setAvatar',body)
         }
 
         sendMessage(user,dialogId,files,names) {
@@ -125,14 +126,14 @@ export class DialogService
             files : files,
             names: names
           }
-          return this.http.post('http://95.30.222.140:9080/sendMessage/',body)
+          return this.http.post(AppProperties.ip+':9080/sendMessage/',body)
         }
 
         downloadProfileImage(key:String): Observable<any>{
-            return this.http2.get('http://95.30.222.140:1234/getuserimg/'+key, {responseType: ResponseContentType.Blob});
+            return this.http2.get(AppProperties.ip+':1234/getuserimg/'+key, {responseType: ResponseContentType.Blob});
         }
 
         downloadGroupImage(key:String): Observable<any>{
-            return this.http2.get('http://95.30.222.140:1234/getGroupImg/'+key, {responseType: ResponseContentType.Blob});
+            return this.http2.get(AppProperties.ip+':1234/getGroupImg/'+key, {responseType: ResponseContentType.Blob});
         }
 }

@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/forms';
+import {AppProperties} from 'src/app/appProperties'
 
 @Injectable()
 
 export class RoleService
 {
 
-    baseUrl:String='http://95.30.222.140:9080/admin';
+    baseUrl:String=AppProperties.ip+':9080/admin';
     constructor(private http:HttpClient,private fb:FormBuilder){}
 
     roleForm=this.fb.group(

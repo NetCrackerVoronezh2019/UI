@@ -26,7 +26,7 @@
       </div>
       <span *ngIf="order.status=='СOMPLETED' "class="title">Файлы</span>
 
-      <div *ngIf="order.status=='СOMPLETED'" class="documents mb-3">
+      <div  class="documents mb-3">
           <div *ngFor="let doc of order.orderDocuments; let i = index" class="document mr-3">
             <span (click)="download(doc.documentKey,doc.documentName)" style="text-align:center;"><i style="font-size:30px;" class="fas fa-download"></i></span>
             <mat-checkbox (click)="deleteClickEvent(doc.documentKey)" class="example-margin">{{doc.documentName}} </mat-checkbox>  
@@ -55,7 +55,7 @@
      
       
        
-      <button  (click)="changeOrderStatus(order)"  *ngIf="myRole=='ROLE_TEACHER' && order.nextStatus!=undefined" class="btn btn-success mr-3">
+      <button  (click)="changeOrderStatus(order)"  *ngIf="myRole=='ROLE_TEACHER' && order.nextStatus!=undefined" class="btn btn-success mt-2 mr-3">
         <span class="button-text">{{getNextStatus(order.nextStatus)}}</span>
       </button>
 
@@ -68,11 +68,11 @@
       </button>
 
 
-      <button *ngIf="myRole=='ROLE_TEACHER'" (click)="sendAttachments(order)" class="btn btn-success mr-3">
+      <button *ngIf="myRole=='ROLE_TEACHER'" (click)="sendAttachments(order)" class="btn btn-success mt-2 mr-3">
         <span class="button-text">Добавить файлы</span>
       </button>
 
-      <button *ngIf="myRole=='ROLE_TEACHER'" (click)="deleteAttachments()" class="btn btn-success mr-3">
+      <button *ngIf="myRole=='ROLE_TEACHER' && order.orderDocuments.length!=0" (click)="deleteAttachments()" class="btn btn-success mt-2 mr-3">
         <span class="button-text">Удалить файлы</span>
       </button>
 

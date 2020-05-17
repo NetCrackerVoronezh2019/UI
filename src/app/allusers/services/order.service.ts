@@ -3,12 +3,14 @@ import {Injectable} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {Order} from '@MainClasses/order';
 import { Advertisement } from '../../classes/advertisement';
+import {AppProperties} from 'src/app/appProperties'
+
 
 @Injectable()
 export class OrderService
 {
    
-     baseUrl:String='http://95.30.222.140:9080';
+    baseUrl:String=AppProperties.ip+':9080';
     constructor(private fb:FormBuilder,private http:HttpClient){}
 
     EditOrderForm=this.fb.group(
@@ -104,7 +106,7 @@ export class OrderService
             keys
         }
         console.log(body);
-        return this.http.post('http://95.30.222.140:1122/deleteOrderAttachments',body)
+        return this.http.post(AppProperties.ip+':9080/deleteOrderAttachments',body)
     }
 
     completeOrder(orderId:Number,allFiles)

@@ -12,6 +12,7 @@ export class User
     public birthDate:String;
     public aboutMe:String;
     public roleName:String;
+    public blockType:String;
     public isOnline:Boolean;
     public userImageKey:String;
     public teacherStatus:String;

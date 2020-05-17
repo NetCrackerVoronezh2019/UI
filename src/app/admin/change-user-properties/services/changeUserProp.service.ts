@@ -1,12 +1,14 @@
 import { HttpClient} from '@angular/common/http';
 import { FormGroup, FormControl, Validators,FormBuilder,AbstractControl} from '@angular/forms';
 import {Injectable} from '@angular/core';
+import {AppProperties} from 'src/app/appProperties'
+
 
 @Injectable()
 
 export class ChangeUserProp
 {
-    baseUrl:String='http://95.30.222.140:9080/admin';
+    baseUrl:String=AppProperties.ip+':9080/admin';
     constructor(private fb:FormBuilder,private http:HttpClient){}
     EditForm=this.fb.group(
         {
@@ -16,7 +18,9 @@ export class ChangeUserProp
             "userEmail": ["",[Validators.required,Validators.email]],
             "userRole":[""],
             "userIsActivate":[""],
-            "userIsDeleted":[""]
+            "userIsDeleted":[""],
+            "userIsBlocked":[""],
+
         }
     );
 
@@ -40,6 +44,7 @@ export class ChangeUserProp
 
 
 
+
     setDefaultValuesForEditForm(data)
     {
         this.EditForm.setValue({
@@ -49,7 +54,8 @@ export class ChangeUserProp
             userEmail:data.email,
             userRole:data.role.roleName,
             userIsActivate:data.IsActivate,
-            userIsDeleted:data.isDeleted
+            userIsDeleted:data.isDeleted,
+            userIsBlocked:data.blockType
             
          },{onlySelf:true});
          console.log(this.EditForm.value.userIsActivate);
@@ -75,7 +81,8 @@ export class ChangeUserProp
             email:this.EditForm.value.userEmail,
             isActivate:this.EditForm.value.userIsActivate,
             role:this.EditForm.value.userRole,
-            isDeleted:this.EditForm.value.userIsDeleted
+            isDeleted:this.EditForm.value.userIsDeleted,
+            blockType:this.EditForm.value.userIsBlocked
         }
 
         console.log(body);

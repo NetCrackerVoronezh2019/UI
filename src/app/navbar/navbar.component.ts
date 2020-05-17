@@ -9,7 +9,7 @@ import {AdvNotification} from '../classes/advNotification'
 import { Client} from 'webstomp-client';
 import { FriendListService } from "src/app/UserAndGroupComponents/friend-list/Services/friendList.service";
 import { FriendsNotification } from "@UserAndGroupClasses/friendsNotification";
-
+import { Router} from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
   private stompClient3:Client;
   private stompClient4:Client;
   private count="";
-  private countNot:String="0"
+  private countNot:String=""
   private friendsNot=""
   private groupsNot=""
   notificationsClick=false;
@@ -37,7 +37,8 @@ export class NavbarComponent implements OnInit {
   private friendsNotifications:FriendsNotification[];
 
   constructor(private authService:AuthService, private appService:AppService,
-    private wsService:WebSocketService,private advService:AdvertisementService1,private friendService:FriendListService) { }
+    private router:Router, private wsService:WebSocketService,
+    private advService:AdvertisementService1,private friendService:FriendListService) { }
 
 
     initializeWebSocketConnection(userId:Number){
@@ -86,6 +87,23 @@ export class NavbarComponent implements OnInit {
       this.stompClient4.disconnect();
     }
 
+    getBanTime()
+    {
+      let banTime:String="";
+      if(this.UserInfo.banTime!=undefined)
+      {
+        banTime+=this.UserInfo.banTime.split('T')[0];
+        banTime+=" "+ this.UserInfo.banTime.split('T')[1].split('.')[0];
+      } 
+
+      return banTime;
+    }
+
+    addNewAdvertisement()
+    {
+      if(this.UserInfo.banTime==undefined)
+        this.router.navigate(['/user/addnewAdvertisement'])
+    }
     getMessageNotificationCount()
     {
       this.wsService.getMessageNotificationCount()
@@ -117,6 +135,7 @@ export class NavbarComponent implements OnInit {
           this.getMessageNotificationCount();
            this.isLogin=true;
            this.UserInfo=data;
+           console.log(this.UserInfo);
            if(this.UserInfo.roleName=="ROLE_ADMIN")
               this.isAdmin=true;
            this.initializeWebSocketConnection(this.UserInfo.userId);

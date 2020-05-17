@@ -3,11 +3,13 @@ import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Advertisement} from '../../classes/advertisement'
 import {Tag} from '../../classes/tag'
+import {AppProperties} from 'src/app/appProperties'
+
 
 @Injectable()
 export class AdvertisementService
 {
-    baseUrl:String='http://95.30.222.140:9080';
+    baseUrl:String=AppProperties.ip+':9080';
     constructor(private fb:FormBuilder,private http: HttpClient) {}
      advertisementForm=this.fb.group(
         {
@@ -60,7 +62,7 @@ export class AdvertisementService
                 content:null
             };
             console.log(body);
-            return this.http.post("http://95.30.222.140:1122/"+'updateAdvertisementInformation',body);
+            return this.http.post(":1122/"+'updateAdvertisementInformation',body);
         }
         sendData(tags:Tag[],allFiles,coverImage)
         {

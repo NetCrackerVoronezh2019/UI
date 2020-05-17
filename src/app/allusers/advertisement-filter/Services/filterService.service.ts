@@ -4,11 +4,13 @@ import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/for
 import {Injectable} from '@angular/core';
 import {Filters} from '../../../classes/filters'
 import {Tag} from '../../../classes/tag'
+import {AppProperties} from 'src/app/appProperties'
+
 
 @Injectable()
 export class FilterService
 {
-    baseUrl:String='http://95.30.222.140:9080';
+    baseUrl:String=AppProperties.ip+':9080';
     constructor(private http:HttpClient,private fb:FormBuilder){
 
     }

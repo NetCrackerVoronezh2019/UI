@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/forms';
+import {AppProperties} from 'src/app/appProperties'
+
 
 @Injectable()
 
 export class SubjectService
 {
-    baseUrl:String='http://95.30.222.140:9080';
+    baseUrl:String=AppProperties.ip+':9080';
     constructor(private http:HttpClient,private fb:FormBuilder){}
     subjectForm=this.fb.group(
         {  

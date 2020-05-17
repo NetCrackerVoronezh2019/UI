@@ -1,6 +1,7 @@
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl} from '@angular/forms';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable} from '@angular/core';
+import {AppProperties} from 'src/app/appProperties'
 
 @Injectable()
 export class DialogsListService
@@ -25,10 +26,10 @@ export class DialogsListService
       }
 
     getUser() {
-      return this.http.get('http://95.30.222.140:9080/userAndGroup/getThisUser')
+      return this.http.get(AppProperties.ip+':9080/userAndGroup/getThisUser')
       }
     getUserDialogs() {
-        return this.http.get('http://95.30.222.140:9080/user/getUserDialogs/',
+        return this.http.get(AppProperties.ip+':9080/user/getUserDialogs/',
                             {params:new HttpParams()});
       }
 
@@ -42,25 +43,25 @@ export class DialogsListService
                        image: avatar
                    };
         this.dialogCreationForm.value.dialogName = "";
-        return this.http.post('http://95.30.222.140:9080/user/dialogCreate/',body);
+        return this.http.post(AppProperties.ip+':9080/user/dialogCreate/',body);
     }
 
     getUserDialogsByType(type) {
-        return this.http.get('http://95.30.222.140:9080/user/getUserDialogs/',
+        return this.http.get(AppProperties.ip+':9080/user/getUserDialogs/',
                             {params:new HttpParams().set("type",type)});
       }
 
 
     startDialogWithUser(userId) {
-        return this.http.post('http://95.30.222.140:9080/users/startDialog',null,{params:new HttpParams().set("userId",userId)})
+        return this.http.post(AppProperties.ip+':9080/users/startDialog',null,{params:new HttpParams().set("userId",userId)})
     }
 
     getFriends() {
-      return this.http.get('http://95.30.222.140:9080/thisUser/friends')
+      return this.http.get(AppProperties.ip+':9080/thisUser/friends')
     }
 
     search() {
-      return this.http.get('http://95.30.222.140:9080/users/search',{params: new HttpParams().set("firstName",this.userSearchForm.value.firstName)
+      return this.http.get(AppProperties.ip+':9080/users/search',{params: new HttpParams().set("firstName",this.userSearchForm.value.firstName)
                                                                                                   .set("lastName",this.userSearchForm.value.lastName)})
     }
 

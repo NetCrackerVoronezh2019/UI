@@ -4,13 +4,14 @@ import {UserDocument} from '../../classes/userDocument'
 import {User} from '../../classes/user'
 import {ChangeDocumentValidation} from '../../classes/changeDocumentValidation'
 import {Observable} from 'rxjs';
+import {AppProperties} from 'src/app/appProperties'
 import {Http, ResponseContentType} from '@angular/http';
 import { FormGroup, FormControl, Validators,FormBuilder,AbstractControl} from '@angular/forms';
 @Injectable()
 
 export class DocumentService
 {
-    baseUrl:String='http://95.30.222.140:9080';
+    baseUrl:String=AppProperties.ip+':9080';
     constructor(private http:HttpClient,private http2: Http,private fb:FormBuilder){}
 
 

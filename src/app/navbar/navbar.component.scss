@@ -23,6 +23,24 @@
 	
 }
 
+.block
+{
+  height:7vh;
+  background-color:red;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:600;
+  font-size:20px;
+}
+
+.disabled {
+  opacity: 0.65; 
+  cursor: not-allowed;
+}
+
+
 .cursor
 {
   cursor:pointer

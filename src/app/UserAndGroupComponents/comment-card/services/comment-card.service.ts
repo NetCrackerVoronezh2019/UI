@@ -4,6 +4,8 @@ import { HttpClient, HttpParams} from '@angular/common/http';
 import { User } from '@UserAndGroupClasses/user'
 import {Observable} from 'rxjs';
 import {Http, ResponseContentType} from '@angular/http';
+import {AppProperties} from 'src/app/appProperties'
+
 
 @Injectable()
 export class CommentService {
@@ -26,15 +28,15 @@ export class CommentService {
       commentId:commentId,
       text:this.commentSettingsForm.value.text
     }
-    return this.http.put('http://95.30.222.140:9080/comments/redact',body)
+    return this.http.put(AppProperties.ip+':9080/comments/redact',body)
   }
 
   deleteComment(commentId) {
-    return this.http.delete('http://95.30.222.140:9080/comments/delete',{params: new HttpParams().set('commentId',commentId)})
+    return this.http.delete(AppProperties.ip+':9080/comments/delete',{params: new HttpParams().set('commentId',commentId)})
   }
 
   downloadProfileImage(key:String): Observable<any>{
-      return this.http2.get('http://95.30.222.140:1234/getuserimg/'+key, {responseType: ResponseContentType.Blob});
+      return this.http2.get(AppProperties.ip+':1234/getuserimg/'+key, {responseType: ResponseContentType.Blob});
   }
 
 }

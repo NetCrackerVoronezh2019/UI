@@ -2,11 +2,12 @@ import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import * as Webstomp from 'webstomp-client';
 import { Client} from 'webstomp-client';
+import {AppProperties} from 'src/app/appProperties'
 
 @Injectable()
 export class WebSocketService
 {
-    baseUrl:String='http://95.30.222.140:9080';
+    baseUrl:String=AppProperties.ip+':9080';
     constructor(private http: HttpClient) {}
 
 

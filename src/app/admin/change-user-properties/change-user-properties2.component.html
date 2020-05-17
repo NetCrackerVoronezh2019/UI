@@ -44,6 +44,18 @@
                    <option value="false">Неактивный</option>
                 </select>
                 </div>
+                <div class="row d-flex flex-column justify-content-center  align-items-center">
+                  <div class="form-group" >
+                    <label >Бан</label>
+                   <select  formControlName="userIsBlocked" class="custom-select">
+                     <option value="NONE">0</option>
+                     <option value="ONE_DAY">на 1 день</option>
+                     <option value="TWO_DAYS">на 2 дня</option>
+                     <option value="ONE_MONTH">на месяц</option>
+                     <option value="ONE_YEAR">на год</option>
+                  </select>
+                  </div>
+                </div>
             <div class="form-group" >
               <label for="exampleInputEmail1">Заблокировать</label>
              <select  formControlName="userIsDeleted" class="custom-select">

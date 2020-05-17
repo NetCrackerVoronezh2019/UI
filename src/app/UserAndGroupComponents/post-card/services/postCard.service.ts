@@ -4,6 +4,7 @@ import { HttpClient, HttpParams} from '@angular/common/http';
 import { User } from '@UserAndGroupClasses/user'
 import {Http, ResponseContentType} from '@angular/http';
 import {Observable} from 'rxjs';
+import {AppProperties} from 'src/app/appProperties'
 
 @Injectable()
 export class PostService {
@@ -31,7 +32,7 @@ export class PostService {
   }
 
   getPostComments(postId) {
-    return this.http.get('http://95.30.222.140:9080/posts/getComments',{params: new HttpParams().set('postId',postId)})
+    return this.http.get(AppProperties.ip+':9080/posts/getComments',{params: new HttpParams().set('postId',postId)})
   }
 
   sendComment(user:User,postId) {
@@ -40,7 +41,7 @@ export class PostService {
       sender:user,
       text:this.commentCreatForm.value.text
     }
-    return this.http.post('http://95.30.222.140:9080/comments/send',body)
+    return this.http.post(AppProperties.ip+':9080/comments/send',body)
   }
 
   sendPostSettings(postId) {
@@ -48,15 +49,15 @@ export class PostService {
       postId:postId,
       text: this.postSettingsForm.value.text
     }
-    return this.http.put('http://95.30.222.140:9080/posts/redact',body)
+    return this.http.put(AppProperties.ip+':9080/posts/redact',body)
   }
 
   deletePost(postId) {
-    return this.http.delete('http://95.30.222.140:9080/posts/delete',{params: new HttpParams().set('postId',postId)})
+    return this.http.delete(AppProperties.ip+':9080/posts/delete',{params: new HttpParams().set('postId',postId)})
   }
 
   downloadGroupImage(key:String): Observable<any>{
-      return this.http2.get('http://95.30.222.140:1234/getGroupImg/'+key, {responseType: ResponseContentType.Blob});
+      return this.http2.get(AppProperties.ip+':1234/getGroupImg/'+key, {responseType: ResponseContentType.Blob});
   }
 
 }

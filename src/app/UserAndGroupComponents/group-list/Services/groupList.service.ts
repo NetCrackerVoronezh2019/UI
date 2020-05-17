@@ -1,6 +1,7 @@
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl} from '@angular/forms';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable} from '@angular/core';
+import {AppProperties} from 'src/app/appProperties'
 
 @Injectable()
 export class GroupListService
@@ -23,7 +24,7 @@ export class GroupListService
 
 
     getUser() {
-      return this.http.get('http://95.30.222.140:9080/userAndGroup/getThisUser',
+      return this.http.get(AppProperties.ip+':9080/userAndGroup/getThisUser',
                           {params:new HttpParams()});
       }
 
@@ -35,7 +36,7 @@ export class GroupListService
     }
 
     showGroupList() {
-      return this.http.get('http://95.30.222.140:9080/groups/getThisUserGroups',{params:new HttpParams()})
+      return this.http.get(AppProperties.ip+':9080/groups/getThisUserGroups',{params:new HttpParams()})
     }
 
    CreateGroup(avatar){
@@ -44,16 +45,16 @@ export class GroupListService
                        subjectName: this.groupCreationForm.value.groupSection,
                        image:avatar
                   };
-        return this.http.post('http://95.30.222.140:9080/userAndGroup/createGroup/',body);
+        return this.http.post(AppProperties.ip+':9080/userAndGroup/createGroup/',body);
 
     }
 
     search() {
       const name =this.groupSearchPanel.value.searchName;
-      return this.http.get('http://95.30.222.140:9080/group/search',{params:new HttpParams().set('name',name).set("subjectName",this.groupSearchPanel.value.groupSection)})
+      return this.http.get(AppProperties.ip+':9080/group/search',{params:new HttpParams().set('name',name).set("subjectName",this.groupSearchPanel.value.groupSection)})
     }
 
     getAllSubjects() {
-      return this.http.get('http://95.30.222.140:9080/groups/getAllSubjects')
+      return this.http.get(AppProperties.ip+':9080/groups/getAllSubjects')
     }
 }

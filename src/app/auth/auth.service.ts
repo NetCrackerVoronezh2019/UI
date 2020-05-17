@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import { HttpClient} from '@angular/common/http';
+import {AppProperties} from 'src/app/appProperties'
+
 
 @Injectable()
 export class AuthService
 {
 
-    baseUrl:String='http://95.30.222.140:9080';
+    baseUrl:String=AppProperties.ip+':9080';
     constructor(private http:HttpClient){}
 
     getlicense()

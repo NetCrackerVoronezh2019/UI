@@ -2,10 +2,11 @@ import { FormGroup, FormArray,FormControl, Validators,FormBuilder,AbstractContro
 import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {CertificateFile} from '../../classes/certificateFile'
+import {AppProperties} from 'src/app/appProperties'
 @Injectable()
 export class RegistrationService
 {
-    baseUrl:String='http://95.30.222.140:9080';
+    baseUrl:String=AppProperties.ip+':9080';
     constructor(private fb:FormBuilder,private http: HttpClient) {}
         myForm=this.fb.group(
             {
