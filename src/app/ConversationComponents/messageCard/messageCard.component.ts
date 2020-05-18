@@ -21,6 +21,7 @@ export class MessageCardComponent implements OnInit {
   messageImages:any[] = [];
   userImage:any = null;
   loading = false;
+  @Input() isAdvertisment:boolean;
   @Output() imageClick = new EventEmitter()
   constructor(private service:DialogService, private sanitizer: DomSanitizer) { }
 
