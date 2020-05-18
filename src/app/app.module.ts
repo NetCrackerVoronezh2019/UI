@@ -11,6 +11,7 @@ import {Routes, RouterModule} from '@angular/router';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import {MatChipsModule} from '@angular/material/chips';
+import {MatMenuModule} from '@angular/material/menu'
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {SignInService} from './sign-in/Services/signIn.Service';
@@ -153,6 +154,7 @@ const appRoutes: Routes =[
     MatButtonModule,
     MatExpansionModule,
     MatChipsModule,
+    MatMenuModule,
     MatButtonToggleModule,
     HttpModule,
     HttpClientModule,
