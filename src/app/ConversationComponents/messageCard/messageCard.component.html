@@ -25,23 +25,22 @@
 <li *ngIf="mymessage" class="self">
     <div *ngIf="userImage==null" class="avatar"><img src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg" draggable="false"/></div>
     <div *ngIf="userImage!=null" class="avatar"><img [src]="userImage" draggable="false"/></div>
-    <mat-menu #appMenu="matMenu">
+    <mat-menu #appMenu1="matMenu">
       <button *ngIf="message.sender.userId == user.userId" mat-menu-item>Удалить</button>
       <button *ngIf="message.sender.userId == user.userId" mat-menu-item>Редактировать</button>
       <button *ngIf="dialog?.type == 'advertisement'" mat-menu-item>Пометить как решение</button>
     </mat-menu>
-    <div mat-icon-button [matMenuTriggerFor]="appMenu">
+    <div mat-icon-button [matMenuTriggerFor]="appMenu1">
   <div class="msg" [ngStyle]="{'background': (message.isNoRead || message.readBySomebody==false) ? 'LightBlue' : 'white'}">
     <h6>{{message.sender.name}}</h6>
     <p>{{message.text}}</p>
     <div class="imag">
       <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
-      <br>
     </div>
     <span class="doc" class="mr-2">
         <button *ngFor="let doc of files; let i = index" (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
-        <br>
     </span>
     <p><time>{{message.date}}</time></p>
+  </div>
   </div>
 </li>
