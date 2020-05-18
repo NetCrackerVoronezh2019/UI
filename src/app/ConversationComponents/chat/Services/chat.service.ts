@@ -144,4 +144,12 @@ export class DialogService
           }
           return this.http.put(AppProperties.ip+':9080/dialog/setMessage',body)
         }
+
+        addAttachmentsFromDialog(chatId,files:any[]) {
+          const body = {
+            chatId:chatId,
+            allFiles:files
+          }
+          return this.http.post(AppProperties.ip+':9080/addAttachmentsFromDialog',body)
+        }
 }

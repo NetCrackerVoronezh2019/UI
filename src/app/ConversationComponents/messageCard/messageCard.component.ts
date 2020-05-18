@@ -53,7 +53,9 @@ export class MessageCardComponent implements OnInit {
     this.service.downloadDialogFile(key)
       .subscribe(
         (response) => {
+          console.log(response);
           let blob:any = new Blob([response.blob()], { type:fileType});
+          console.log(blob);
           fileSaver.saveAs(blob,name);
         },
          error => console.log('Error downloading the file')
@@ -99,6 +101,15 @@ export class MessageCardComponent implements OnInit {
 
   startSetMessage() {
     this.setMessage.emit(this.message)
+  }
+
+  addAttachmentsFromDialog() {
+    let files:any[] = [];
+    for (let i = 0;i < this.message.files.length;i++) {
+      let file = {
+
+      }
+    }
   }
 
 }

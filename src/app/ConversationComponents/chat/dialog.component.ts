@@ -351,4 +351,10 @@ export class ChatComponent implements OnInit {
         this.dgService.getMessageForm().reset();
         this.isSet = false;
       }
+
+      addAttachmentsFromDialog(files) {
+        this.dgService.addAttachmentsFromDialog(this.dialogId,files).subscribe(data => {
+          alert("Файлы сообщения помечены, как решение")
+        })
+      }
 }
