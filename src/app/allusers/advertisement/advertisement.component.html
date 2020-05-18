@@ -11,7 +11,7 @@
                                     <div *ngIf="!isUserAdv" class="userName">
                                       <a routerLink="../../userPage/{{adv.authorId}}">{{adv.firstName}} {{adv.surName}}</a> 
                                     </div>
-                                    <p *ngIf="!isUserAdv && can && role!='ROLE_ADMIN'" data-toggle="modal" data-target="#RequestModel1">
+                                    <p *ngIf="!isUserAdv && role!='ROLE_ADMIN'" [ngClass]="can!=true? 'disabled mr-2':'mr-2'"  (clock)="sendRequest()" data-toggle="modal" data-target="#RequestModel1">
                                         <i class="far fa-handshake h2"></i>
                                     </p>
                                     <p *ngIf="role=='ROLE_ADMIN'" data-toggle="modal" data-target="#deleteModalCenter" >
@@ -112,7 +112,7 @@
 
 
 
-  <div class="modal fade" id="RequestModel1" tabindex="-1" role="dialog" aria-labelledby="RequestModal1Label" aria-hidden="true">
+  <div *ngIf="can || showMessage" class="modal fade" id="RequestModel1" tabindex="-1" role="dialog" aria-labelledby="RequestModal1Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body">
@@ -144,7 +144,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
-          <button type="button" (click)="deleteAdvertisement()" class="btn btn-primary">Удалить</button>
+          <a href="/"><button type="button" (click)="deleteAdvertisement()" class="btn btn-primary">Удалить</button></a>
         </div>
       </div>
       

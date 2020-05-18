@@ -26,6 +26,7 @@ export class AdvertisementComponent implements OnInit {
   isLoading=false;
   subscription:Subscription;
   can:Boolean=false;
+  showMessage=false;
   order:Order;
   coverImage:any;
   message:String='Вы точно хотите получить этот заказ ?'
@@ -59,6 +60,11 @@ export class AdvertisementComponent implements OnInit {
           (data:Advertisement)=>this.adv=data,
           error=>console.log(error)
         )
+  }
+
+  sendRequest()
+  {
+    
   }
 
   isMyOrder()
@@ -133,7 +139,7 @@ export class AdvertisementComponent implements OnInit {
   {
     this.service.sendNotification(this.adv,this.role)
     .subscribe(
-      (data)=>{this.message="Всё прошло успешно !", this.canSendRequest(); this.buttonHidden=false},
+      (data)=>{this.message="Всё прошло успешно !", this.canSendRequest(); this.showMessage=true; this.buttonHidden=false},
       error=>{this.message="Ошибка при отправке"; this.buttonHidden=false}
       )
   }  
@@ -175,8 +181,6 @@ export class AdvertisementComponent implements OnInit {
           let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
           this.coverImage=URL.createObjectURL(blob)
           this.coverImage=this.sanitizer.bypassSecurityTrustUrl(this.coverImage);
-          //this.loading=true;
-        //  console.log(this.loading);
         },
          error => console.log('Error')
       )
@@ -187,7 +191,7 @@ export class AdvertisementComponent implements OnInit {
   {
       this.service.deleteAdvertisement(this.id)
           .subscribe(
-            data=>{this.router.navigate(['/'])},
+            data=>{},
             error=>console.log(this.deleteMessage="Произошла ошибка")
           )
   }
