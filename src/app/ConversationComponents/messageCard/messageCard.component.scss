@@ -68,6 +68,16 @@ li {
   overflow:hidden;
 }
 
+.other mat-menu{
+  position: absolute;
+  left: 10px;
+}
+
+.self mat-menu{
+  position: absolute;
+  right: 10px;
+}
+
 .self {
     justify-content: flex-end;
     align-items: flex-end;

@@ -15,7 +15,7 @@ export class MessageCardComponent implements OnInit {
 
   @Input() message:Message;
   @Input() mymessage:boolean;
-  @Input() isAdvertisment:boolean;
+  @Input() type:string;
   images:string[] = [];
   files:string[] = [];
   fileNames:string[] = [];
