@@ -29,9 +29,9 @@ export class NavbarComponent implements OnInit {
   private stompClient3:Client;
   private stompClient4:Client;
   private count="";
-  private countNot:String=""
-  private friendsNot=""
-  private groupsNot=""
+  private countNot:String="";
+  private friendsNot="";
+  private groupsNot="";
   notificationsClick=false;
   private notifications:AdvNotification[];
   private friendsNotifications:FriendsNotification[];
