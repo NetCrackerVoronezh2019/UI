@@ -13,7 +13,7 @@
   </div>
   <ol class="chat" #scrollMe [scrollTop]="scrollMe.scrollHeight" [ngStyle]="{'right' :sidebarVisible ? '220px' : '0'}">
     <ul *ngFor ='let message of messages' class="ms">
-      <mat-menu #appMenu="matMenu">
+      <mat-menu #appMenu="matMenu" [ngStyle]="{'float' :message.sender.userId == user.userId ? 'right' : 'left'}">
         <button *ngIf="message.sender.userId == user.userId" (click)="startSetMessage(message)" mat-menu-item>Редактировать</button>
         <button *ngIf="dialog?.type == 'advertisement'" mat-menu-item>Пометить как решение</button>
       </mat-menu>

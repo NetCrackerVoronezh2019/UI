@@ -1,4 +1,4 @@
-<li *ngIf="!mymessage" class="other" align="left">
+<li *ngIf="!mymessage" class="other">
     <div *ngIf="userImage==null" class="avatar"><img src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg" draggable="false"/></div>
     <div *ngIf="userImage!=null" class="avatar"><img [src]="userImage" draggable="false"/></div>
   <div class="msg" [ngStyle]="{'background': (message.isNoRead || message.readBySomebody==false) ? 'LightBlue' : 'white'}">
@@ -15,7 +15,7 @@
     <p><time>{{message.date}}</time></p>
   </div>
 </li>
-<li *ngIf="mymessage" class="self" align="right">
+<li *ngIf="mymessage" class="self">
     <div *ngIf="userImage==null" class="avatar"><img src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg" draggable="false"/></div>
     <div *ngIf="userImage!=null" class="avatar"><img [src]="userImage" draggable="false"/></div>
   <div class="msg" [ngStyle]="{'background': (message.isNoRead || message.readBySomebody==false) ? 'LightBlue' : 'white'}">
