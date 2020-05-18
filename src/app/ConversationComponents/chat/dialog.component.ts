@@ -104,7 +104,7 @@ export class ChatComponent implements OnInit {
         if (this.access) {
           this.initializeWebSocketConnection();
           if (this.dialog.type=="private") {
-              if (this.dialogMembers[0].userId == this.user.userId) {
+              if (this.dialogMembers[0].userId != this.user.userId) {
                 this.anUser = this.dialogMembers[0]
               } else {
                 this.anUser = this.dialogMembers[1]
