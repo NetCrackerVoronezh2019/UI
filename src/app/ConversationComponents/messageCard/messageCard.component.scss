@@ -64,9 +64,14 @@ li {
     border-bottom-color: transparent;
 }
 
+.other {
+  overflow:hidden;
+}
+
 .self {
     justify-content: flex-end;
     align-items: flex-end;
+    overflow:hidden;
 }
 .self .msg {
     order: 1;
