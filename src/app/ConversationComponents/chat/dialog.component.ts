@@ -24,7 +24,7 @@ export class ChatComponent implements OnInit {
   userSearchPanelVisible:boolean = false;
   dialogMembers:User[] = [];
   messages:Message[] = [];
-  private serverUrl = 'ws://localhost:9080/socket/websocket'
+  private serverUrl = 'ws://95.30.222.140:9080/socket/websocket'
   private stompClient:Client;
   private stompClient2:Client;
   dialog:Dialog;
