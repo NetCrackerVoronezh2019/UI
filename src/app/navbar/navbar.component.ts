@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   private isAdmin=false
   private UserInfo:any;
   private OnlineSubscription:any;
-  private serverUrl = 'ws://localhost:9080/socket/websocket'
+  private serverUrl = 'ws://95.30.222.140:9080/socket/websocket'
   private stompClient1:Client;
   private stompClient2:Client;
   private stompClient3:Client;
@@ -94,7 +94,7 @@ export class NavbarComponent implements OnInit {
       {
         banTime+=this.UserInfo.banTime.split('T')[0];
         banTime+=" "+ this.UserInfo.banTime.split('T')[1].split('.')[0];
-      } 
+      }
 
       return banTime;
     }
