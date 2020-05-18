@@ -24,7 +24,7 @@
     <div *ngIf="userImage==null" class="avatar"><img src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg" draggable="false"/></div>
     <div *ngIf="userImage!=null" class="avatar"><img [src]="userImage" draggable="false"/></div>
     <mat-menu #appMenu="matMenu">
-      <button (click)="startSetMessage(message)" mat-menu-item>Редактировать</button>
+      <button (click)="startSetMessage()" mat-menu-item>Редактировать</button>
       <button *ngIf="type == 'advertisement'" mat-menu-item>Пометить как решение</button>
     </mat-menu>
     <div mat-icon-button [matMenuTriggerFor]="appMenu">

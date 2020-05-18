@@ -13,7 +13,7 @@
   </div>
   <ol class="chat" #scrollMe [scrollTop]="scrollMe.scrollHeight" [ngStyle]="{'right' :sidebarVisible ? '220px' : '0'}">
     <ul *ngFor ='let message of messages'>
-        <app-message-card [(type)]="dialog.type" [(message)]="message" (imageClick)="openImage($event)" [(mymessage)]="message.sender.userId == user.userId"></app-message-card>
+        <app-message-card [(type)]="dialog.type" [(message)]="message" (imageClick)="openImage($event)" [(mymessage)]="message.sender.userId == user.userId" (setMessage)="startSetMessage($event)"></app-message-card>
   </ul>
   </ol>
   <div id="Sending" [ngStyle]="{'right' :sidebarVisible ? '220px' : '0'}">

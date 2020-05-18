@@ -23,6 +23,8 @@ export class MessageCardComponent implements OnInit {
   userImage:any = null;
   loading = false;
   @Output() imageClick = new EventEmitter()
+  @Output() setMessage = new EventEmitter()
+  @Output() addAdvertismentFiles = new EventEmitter()
   constructor(private service:DialogService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
@@ -93,6 +95,10 @@ export class MessageCardComponent implements OnInit {
          error => console.log('Error')
       )
 
+  }
+
+  startSetMessage() {
+    this.setMessage.emit(this.message)
   }
 
 }
