@@ -23,7 +23,7 @@ export class DialogCardComponent implements OnInit {
   ngOnInit() {
     if (this.dg.type=="private") {
       this.ds.getDialogMembers(this.dg.dialogId).subscribe((data:User) => {
-        if (data[0].userId == this.userId) {
+        if (data[0].userId != this.userId) {
           this.user = data[0]
         } else {
           this.user = data[1]
