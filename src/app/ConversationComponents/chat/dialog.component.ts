@@ -42,6 +42,8 @@ export class ChatComponent implements OnInit {
   fullImage:any = null;
   sidebarVisible = false;
   name:string = "";
+  setId:number;
+  isSet = false;
 
   constructor(public dgService:DialogService,private route: ActivatedRoute,private location: Router, private sanitizer: DomSanitizer) {
   }
@@ -328,5 +330,20 @@ export class ChatComponent implements OnInit {
              error => console.log('Error')
           )
 
+      }
+
+      startSetMessage(message) {
+        this.setId = message.messageId;
+        this.dgService.getMessageForm().reset({text:this.message.text});
+        this.isSet = true;
+      }
+
+      setMessage() {
+        this.dgService.setMessage(this.setId);
+      }
+
+      closeSetMessage() {
+        this.dgService.getMessageForm().reset();
+        this.isSet = false;
       }
 }

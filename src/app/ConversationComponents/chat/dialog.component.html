@@ -14,8 +14,7 @@
   <ol class="chat" #scrollMe [scrollTop]="scrollMe.scrollHeight" [ngStyle]="{'right' :sidebarVisible ? '220px' : '0'}">
     <ul *ngFor ='let message of messages' class="ms">
       <mat-menu #appMenu="matMenu">
-        <button *ngIf="message.sender.userId == user.userId" mat-menu-item>Удалить</button>
-        <button *ngIf="message.sender.userId == user.userId" mat-menu-item>Редактировать</button>
+        <button *ngIf="message.sender.userId == user.userId" (click)="startSetMessage(message)" mat-menu-item>Редактировать</button>
         <button *ngIf="dialog?.type == 'advertisement'" mat-menu-item>Пометить как решение</button>
       </mat-menu>
       <div mat-icon-button [matMenuTriggerFor]="appMenu">
@@ -26,6 +25,7 @@
   <div id="Sending" [ngStyle]="{'right' :sidebarVisible ? '220px' : '0'}">
     <form class="mt-5" [formGroup]="dgService.getMessageForm()">
           <input id="message" maxlength="255" placeholder="Write your message" type="text" class="form-control textarea" formControlName="text" [(ngModel)]="textbox"/>
+          <div *ngIf="!isSet">
           <button class="btn btn-light btn-primary-spacing" (click)="sendMessage()">Отправить</button>
           <div class="example-2">
                 <input type="file" name="file" id="file"  (change)="handleFileMessageInput($event.target.files)"  multiple accept="image/*, application/pdf" class="input-file"/>
@@ -37,6 +37,11 @@
           <div class="mb-3 file" *ngFor="let not of allNames; let i = index" (click)="deleteImageFromList(i)">
               <span  matBadge="x"  matBadgeOverlap="false" >{{not}}</span>
            </div>
+        </div>
+        <div *ngIf="isSet">
+            <button class="btn btn-light btn-primary-spacing" (click)="setMessage()">Изменить</button>
+            <button class="btn btn-light btn-primary-spacing" (click)="closeSetMessage()">Отмена</button>
+        </div>
     </form>
   </div>
   <div *ngIf="sidebarVisible" id="sidebar">

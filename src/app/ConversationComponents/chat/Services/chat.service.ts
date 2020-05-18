@@ -136,4 +136,12 @@ export class DialogService
         downloadGroupImage(key:String): Observable<any>{
             return this.http2.get(AppProperties.ip+':1234/getGroupImg/'+key, {responseType: ResponseContentType.Blob});
         }
+
+        setMessage(messageId) {
+          const body = {
+            text: this.messageForm.value.text,
+            messageId:messageId
+          }
+          return this.http.put(AppProperties.ip+':9080/dialog/setMessage',body)
+        }
 }
