@@ -342,6 +342,7 @@ export class ChatComponent implements OnInit {
         this.dgService.setMessage(this.setId).subscribe(data => {
           this.dgService.getDialogMessages(this.dialogId).subscribe((data:Message[]) => {
             this.messages = data;
+            this.closeSetMessage();
           });
         });
       }
