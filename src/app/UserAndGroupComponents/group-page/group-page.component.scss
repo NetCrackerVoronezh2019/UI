@@ -126,6 +126,11 @@ table {
 .bt button{
   margin-top: 20px;
   margin-left: 20px;
+  margin-right: 20px;
+}
+
+.bt {
+  margin-left: 10px;
 }
 
 
@@ -254,6 +259,7 @@ table {
 
 .post-part {
   min-width: 700px;
+  max-width: 1200px;
 }
 .user-profile .ace-thumbnails li {
     border: 1px solid #CCC;
