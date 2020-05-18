@@ -15,13 +15,13 @@ export class MessageCardComponent implements OnInit {
 
   @Input() message:Message;
   @Input() mymessage:boolean;
+  @Input() isAdvertisment:boolean;
   images:string[] = [];
   files:string[] = [];
   fileNames:string[] = [];
   messageImages:any[] = [];
   userImage:any = null;
   loading = false;
-  @Input() isAdvertisment:boolean;
   @Output() imageClick = new EventEmitter()
   constructor(private service:DialogService, private sanitizer: DomSanitizer) { }
 
