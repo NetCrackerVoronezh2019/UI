@@ -107,9 +107,12 @@ export class MessageCardComponent implements OnInit {
     let files:any[] = [];
     for (let i = 0;i < this.message.files.length;i++) {
       let file = {
-
+        content: this.message.files[i],
+        name: this.message.names[i]
       }
+      files.push(file);
     }
+    this.addAdvertismentFiles.emit(files)
   }
 
 }
