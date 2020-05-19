@@ -9,7 +9,7 @@
       <div class="content ">
         <div class="title">{{name}}</div>
         <span>Дата создния: {{dg.creationDate.split('T')[0]}}</span>
-        <span>Дата последнего сообщения: {{dg.lastMessageDate.split('T')[0]}}</span>
+        <span>Дата последнего сообщения: {{dg.lastMessageDate.split('T')[0]]}} {{dg.lastMessageDate.split('T')[1].split('.')[0]]}}</span>
       </div>
       <div class="mr-4 notification">
           <mat-icon class="userInfo cursor" *ngIf="dg.countNotification>0" matBadge={{dg.countNotification}} matBadgeColor="warn"></mat-icon>

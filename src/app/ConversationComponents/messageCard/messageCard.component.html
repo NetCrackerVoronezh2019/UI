@@ -16,7 +16,7 @@
         <button *ngFor="let doc of files; let i = index" (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
         <br>
     </span>
-    <p><time>{{message.date.split('T')[0]}}</time></p>
+    <p><time>{{message.date.split('T')[0]}} {{message.date.split('T')[1].split('.')[0]}}</time></p>
   </div>
   </div>
 </li>
@@ -37,7 +37,7 @@
     <span class="doc" class="mr-2">
         <button *ngFor="let doc of files; let i = index" (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
     </span>
-    <p><time>{{message.date.split('T')[0]}}</time></p>
+    <p><time>{{message.date.split('T')[0].split('.')[0]}}</time></p>
   </div>
   </div>
 </li>
