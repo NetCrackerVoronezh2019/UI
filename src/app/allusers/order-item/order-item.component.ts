@@ -41,7 +41,7 @@ export class OrderItemComponent implements OnInit {
       fileType='application/pdf; charset=utf-8';
       else
         fileType='image/jpg; charset=utf-8';
-      if (key.split('_'[0]=='order')){
+      if (key.split('_')[0]=='order'){
       this.service2.downloadFile(key)
         .subscribe(
           (response) => {
