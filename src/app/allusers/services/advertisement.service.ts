@@ -19,7 +19,7 @@ export class AdvertisementService1
         {
             "comment":[""],
         }
-        
+
     );
 
     deleteAdvertisement(id:Number)
@@ -37,10 +37,10 @@ export class AdvertisementService1
     }
     getDeleteForm()
     {
-        
+
         return this.deleteForm;
     }
-    
+
     myOrder(id)
     {
         let body={
@@ -153,11 +153,14 @@ export class AdvertisementService1
         let body={
             rating:r,
             notif:not
-        }       
-        
+        }
+
         console.log(body);
         return this.http.post(this.baseUrl+"/user/changeReiting",body);
     }
 
-    
+    downloadDialogFile(key:String): Observable<any>{
+        return this.http2.get(AppProperties.ip+':1234/getDialogFile/'+key, {responseType: ResponseContentType.Blob});
+    }
+
 }
