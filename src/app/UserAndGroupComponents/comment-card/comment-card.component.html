@@ -7,7 +7,7 @@
       </label>
       <div class="content" *ngIf="!commentSettingsVisible">
         <div class="title">{{comment.sender.lastName}} {{comment.sender.firstName}}</div>
-        <h6>{{comment.date}}</h6>
+        <h6>{{comment.date.split('T')[0]}}</h6>
         <span>{{comment.text}}</span>
       </div>
       <div class="content" *ngIf="commentSettingsVisible">

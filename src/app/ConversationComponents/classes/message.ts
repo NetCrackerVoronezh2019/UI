@@ -5,7 +5,7 @@ export class Message
   text:string;
   sender:User;
   dialog:number;
-  date:Date;
+  date:string;
   isModified:boolean;
   isNoRead:boolean;
   messageId:number;

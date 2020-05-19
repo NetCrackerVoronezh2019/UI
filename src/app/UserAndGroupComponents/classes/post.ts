@@ -2,7 +2,7 @@ export class Post
 {
   text:string;
   groupId:number;
-  date:Date;
+  date:string;
   postId:number;
   images:string[];
 }

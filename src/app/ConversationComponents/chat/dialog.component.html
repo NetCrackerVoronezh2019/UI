@@ -6,7 +6,7 @@
             <img *ngIf="loading"  [src]="dialogImage"/>
             <img *ngIf="dialog?.type == 'private' && anUser?.image == null" src='https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg'/></div>
         <div class="name">{{name}}</div>
-      <div class="last">{{dialog?.lastMessageDate}}</div>
+      <div class="last">{{dialog?.lastMessageDate.split('T')[0]}}</div>
       <div class="settings" (click)="sidebarOpen()">
         <i class="fa fa-cog" aria-hidden="true"></i>
       </div>

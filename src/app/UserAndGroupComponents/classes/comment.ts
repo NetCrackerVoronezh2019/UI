@@ -3,7 +3,7 @@ export class Comment
 {
   text:string;
   sender:User;
-  date:Date;
+  date:string;
   postId:number;
   commentId:number;
 }
