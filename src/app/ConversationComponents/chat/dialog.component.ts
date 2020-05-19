@@ -44,6 +44,7 @@ export class ChatComponent implements OnInit {
   name:string = "";
   setId:number;
   isSet = false;
+  date:string = '';
 
   constructor(public dgService:DialogService,private route: ActivatedRoute,private location: Router, private sanitizer: DomSanitizer) {
   }
@@ -96,6 +97,7 @@ export class ChatComponent implements OnInit {
         this.dialogId=params['dialogId'];
         this.dgService.getDialogInfo(this.dialogId).subscribe((data:Dialog) =>{
         this.dialog = data;
+        this.date = this.dialog.lastMessageDate.split('T')[0]+' '+ this.dialog.lastMessageDate.split('T')[1].split('.')[0];
       this.dgService.getDialogMembers(this.dialogId).subscribe((data:User[]) => {
         this.dialogMembers = data;
         data.forEach(user => {

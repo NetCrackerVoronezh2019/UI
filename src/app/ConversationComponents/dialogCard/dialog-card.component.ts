@@ -18,9 +18,13 @@ export class DialogCardComponent implements OnInit {
   loading = false;
   user:User;
   name:string = "";
+  crDate:string = ' ';
+  mDate:string = ' ';
   constructor( private sanitizer: DomSanitizer,private ds:DialogService) { }
 
   ngOnInit() {
+    this.crDate = this.dg.creationDate.split('T')[0]+' '+ this.dg.creationDate.split('T')[1].split('.')[0];
+    this.mDate = this.dg.lastMessageDate.split('T')[0]+' '+ this.dg.lastMessageDate.split('T')[1].split('.')[0];
     if (this.dg.type=="private") {
       this.ds.getDialogMembers(this.dg.dialogId).subscribe((data:User) => {
         if (data[0].userId != this.userId) {

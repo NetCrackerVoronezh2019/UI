@@ -22,12 +22,14 @@ export class MessageCardComponent implements OnInit {
   messageImages:any[] = [];
   userImage:any = null;
   loading = false;
+  date:string = '';
   @Output() imageClick = new EventEmitter()
   @Output() setMessage = new EventEmitter()
   @Output() addAdvertismentFiles = new EventEmitter()
   constructor(private service:DialogService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.date = this.message.date.split('T')[0]+' '+ this.message.date.split('T')[1].split('.')[0];
     if (this.message.sender.image != null) {
       this.downloadProfileImage(this.message.sender.image);
     }
