@@ -29,7 +29,7 @@ export class MessageCardComponent implements OnInit {
   constructor(private service:DialogService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.date = this.message.date.split('T')[0]+' '+ this.message.date.split('T')[1].split('.')[0];
+    this.date = this.message.date.split('T')[0]+' '+ (this.message.date.split('T')[1]).split('.')[0];
     if (this.message.sender.image != null) {
       this.downloadProfileImage(this.message.sender.image);
     }

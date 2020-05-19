@@ -23,7 +23,7 @@ export class CommentCardComponent implements OnInit {
   constructor(private cs:CommentService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.date = this.comment.date.split('T')[0]+ ' ' + this.comment.date.split('T')[1].split('.')[0]
+    this.date = this.comment.date.split('T')[0]+ ' ' + (this.comment.date.split('T')[1]).split('.')[0]
     if (this.user.image != null) {
       this.downloadProfileImage(this.user.image);
     }

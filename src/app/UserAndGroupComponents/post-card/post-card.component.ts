@@ -31,7 +31,7 @@ export class PostCardComponent implements OnInit {
   constructor(private ps:PostService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.date = this.post.date.split('T')[0]+ ' ' + this.post.date.split('T')[1].split('.')[0]
+    this.date = this.post.date.split('T')[0]+ ' ' + (this.post.date.split('T')[1]).split('.')[0]
     this.downloadPostImages(this.post.images);
   }
 
