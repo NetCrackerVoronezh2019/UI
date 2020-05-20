@@ -123,8 +123,6 @@ export class ChatComponent implements OnInit {
                this.downloadGroupImage(this.dialog.image);
               }
             } else if (this.dialog.type == "advertisement") {
-              console.log("dialog")
-              console.log(this.dialog)
               this.name = this.dialog.name;
               if (this.dialog.image != null) {
                 this.downloadCoverImage(this.dialog.image);
@@ -350,6 +348,7 @@ export class ChatComponent implements OnInit {
               let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
               this.dialogImage=URL.createObjectURL(blob)
               this.dialogImage=this.sanitizer.bypassSecurityTrustUrl(this.dialogImage);
+              this.loading = true;
             },
              error => console.log('Error')
           )
