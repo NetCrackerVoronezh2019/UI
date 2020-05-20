@@ -122,6 +122,11 @@ export class ChatComponent implements OnInit {
               if (this.dialog.image!=null) {
                this.downloadGroupImage(this.dialog.image);
               }
+            } else if (this.dialog.type == "advertisement") {
+              this.name = this.dialog.name;
+              if (this.dialog.image != null) {
+                this.downloadCoverImage(this.dialog.image);
+              }
             } else {
             this.name = this.dialog.name;
             if (this.dialog.image!=null) {
@@ -332,6 +337,20 @@ export class ChatComponent implements OnInit {
              error => console.log('Error')
           )
 
+      }
+
+      downloadCoverImage(key:String)
+      {
+
+        this.dgService.downloadFile(key)
+          .subscribe(
+            (response) => {
+              let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+              this.dialogImage=URL.createObjectURL(blob)
+              this.dialogImage=this.sanitizer.bypassSecurityTrustUrl(this.dialogImage);
+            },
+             error => console.log('Error')
+          )
       }
 
       startSetMessage(message) {

@@ -152,4 +152,8 @@ export class DialogService
           }
           return this.http.post(AppProperties.ip+':9080/addAttachmentsFromDialog',body)
         }
+
+        downloadFile(key:String): Observable<any>{
+            return this.http2.get(AppProperties.ip+':1234/getAdvImg/'+key, {responseType: ResponseContentType.Blob});
+        }
 }

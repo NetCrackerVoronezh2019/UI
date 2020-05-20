@@ -42,6 +42,11 @@ export class DialogCardComponent implements OnInit {
       if (this.dg.image!=null) {
        this.downloadGroupImage(this.dg.image);
       }
+    } else if (this.dg.type == "advertisement") {
+      this.name = this.dg.name;
+      if (this.dg.image != null) {
+        this.downloadCoverImage(this.dg.image);
+      }
     } else {
       this.name = this.dg.name;
       if (this.dg.image!=null) {
@@ -64,6 +69,20 @@ export class DialogCardComponent implements OnInit {
          error => console.log('Error')
       )
 
+  }
+
+  downloadCoverImage(key:String)
+  {
+
+    this.ds.downloadFile(key)
+      .subscribe(
+        (response) => {
+          let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+          this.dialogImage=URL.createObjectURL(blob)
+          this.dialogImage=this.sanitizer.bypassSecurityTrustUrl(this.dialogImage);
+        },
+         error => console.log('Error')
+      )
   }
 
   downloadUserImage(key:String)
