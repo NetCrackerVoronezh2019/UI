@@ -116,6 +116,7 @@ export class NavbarComponent implements OnInit {
 
     getFriendsNotifications() {
       this.wsService.getFriendsNotificationCount().subscribe((data:string) => {
+        console.log(data);
         this.friendsNot = data;
       })
     }
