@@ -1,5 +1,6 @@
 import { HttpClient, HttpSentEvent} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {AppProperties} from 'src/app/appProperties'
 
 
 @Injectable()
