@@ -123,6 +123,8 @@ export class ChatComponent implements OnInit {
                this.downloadGroupImage(this.dialog.image);
               }
             } else if (this.dialog.type == "advertisement") {
+              console.log("dialog")
+              console.log(this.dialog)
               this.name = this.dialog.name;
               if (this.dialog.image != null) {
                 this.downloadCoverImage(this.dialog.image);

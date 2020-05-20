@@ -199,7 +199,7 @@
           </div>
           <div class="modal-body p-0 m-0">
             				<div *ngFor="let us of users">
-            						<app-user-card [(us)]="user" routerLink="/userPage/{{us.userId}}"></app-user-card>
+            						<app-user-card [(us)]="us" routerLink="/userPage/{{us.userId}}"></app-user-card>
             				</div>
                 </div>
               </div>
