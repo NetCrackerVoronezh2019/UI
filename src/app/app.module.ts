@@ -65,7 +65,8 @@ import { UserControllComponent } from './admin/user-controll/user-controll.compo
 import { OrderItemComponent } from './allusers/order-item/order-item.component';
 import { UserDocumentItemComponent } from './admin/user-document-item/user-document-item.component';
 import { UserFeedBackComponent } from './userpage2/user-feed-back/user-feed-back.component';
-import {GroupCreateComponent} from './UserAndGroupComponents/group-create/group-create.component'
+import {GroupCreateComponent} from './UserAndGroupComponents/group-create/group-create.component';
+import { ChangePropertiesComponent } from './userpage2/change-properties/change-properties.component'
 
 const appRoutes: Routes =[
   {path: 'registration', component:RegistrationComponent},
@@ -90,7 +91,8 @@ const appRoutes: Routes =[
   {path: 'userPage/:id',component:Userpage2Component},
   {path:"admin/allDocuments",component:TeacherDocumentsComponent},
   {path:"userControl",component:UserControllComponent},
-  {path:"groupCreate",component:GroupCreateComponent}
+  {path:"groupCreate",component:GroupCreateComponent},
+  {path:"changeProperties/:id",component:ChangePropertiesComponent}
 ];
 
 @NgModule({
@@ -136,7 +138,8 @@ const appRoutes: Routes =[
     GroupPageComponent,
     ChatComponent,
     FriendsNotificationsComponent,
-    GroupCreateComponent
+    GroupCreateComponent,
+    ChangePropertiesComponent
   ],
   imports: [
     MatInputModule,

@@ -33,6 +33,50 @@
                     <textarea formControlName='description' type="password" class="form-control" id="Input2" rows="5" aria-describedby="emailHelp" placeholder="Описание"></textarea>
                 </div>
             </div>
+            <div  class="col-lg-10 col-md-11">
+                <div class="form-group">
+                <mat-form-field class="example-chip-list">
+                    <mat-chip-list #chipList aria-label="tag selection">
+                      <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                               [removable]="removable" (removed)="remove(tag)">
+                        {{tag.name}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input class="tagss" placeholder="Теги"
+                             [matChipInputFor]="chipList"
+                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                             [matChipInputAddOnBlur]="addOnBlur"
+                             (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+                  </mat-form-field>
+                  </div>
+            </div>
+            <div  class="col-lg-10 col-md-11">
+                <div  class="documents mb-3">
+                    <div *ngFor="let doc of advertisement.attachments; let i = index" class="document mr-3">
+                    <span  style="text-align:center;"><i style="font-size:30px;" class="fas fa-download"></i></span>
+                    <span><i class="fas fa-trash"></i> {{doc.key.split('_')[1]}} </span>  
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10 col-md-11">
+                <div class="form-group">
+                    <div class="example-2 mb-3">
+                        <div class="form-group">
+                          <input type="file" name="file" id="file2"  (change)="handleFileInput($event.target.files)" multiple accept="image/*, .pdf, .txt, .docx" class="input-file"/>
+                          <label for="file2" class="btn btn-tertiary js-labelFile">
+                            <i class="fas fa-paperclip"></i>
+                            <span class="js-fileName">  Прикрепить файлы</span>
+                          </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2 all-images">
+                    <div class="mb-3" *ngFor="let not of allNames; let i = index" (click)="deleteImageFromList(i)">
+                        <span  matBadge="x"  matBadgeOverlap="false" >{{not}}</span>
+                    </div>
+               </div>
+            </div>
             <div class="col-6 m-2 d-flex justify-content-center">
                 <button type="button "  data-dismiss="modal" (click)="onSubmit()" class="btn btn-success">Cохранить изменения</button>
               </div> 

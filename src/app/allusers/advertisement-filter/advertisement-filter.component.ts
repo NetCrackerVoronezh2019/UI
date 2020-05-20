@@ -22,7 +22,10 @@ export class AdvertisementFilterComponent implements OnInit {
   panelOpenState = false;
   advs:Advertisement[];
   tags: Tag[] = [];
-  
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
  

@@ -56,7 +56,9 @@ export class AddAdvertisementComponent implements OnInit {
       this.tags.splice(index, 1);
     }
   }
+
   ngOnInit() {
+    
 	   this.advService.getSubjects()
    .subscribe(
      (data:Subject[])=>{this.subjects=data; console.log(this.subjects)},
