@@ -68,6 +68,7 @@ export class NavbarComponent implements OnInit {
         this.stompClient3.subscribe("/friends/"+userId, (message) => {
           this.friendsNot=JSON.parse(message.body);
           this.getFriendsNot();
+          this.getFriendsNotifications();
         });
       });
 
@@ -141,6 +142,7 @@ export class NavbarComponent implements OnInit {
            this.initializeWebSocketConnection(this.UserInfo.userId);
            this.setOnline();
            this.getMyNotificationsSize();
+           this.getFriendsNot();
            this.getFriendsNotifications();
            this.getGroupNotifications();
          }
@@ -214,6 +216,7 @@ export class NavbarComponent implements OnInit {
 
   deleteFriendsNot(index) {
     this.friendsNotifications.splice(index,1);
+    this.getFriendsNot();
     this.getFriendsNotifications();
   }
 

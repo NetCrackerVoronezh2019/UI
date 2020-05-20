@@ -17,7 +17,7 @@
                 <p class="mr-4 notification">
                     <mat-icon (click)="getMyAllNotifications()" class="userInfo cursor mr-4" data-toggle="modal" data-target="#notificationModal"  matBadge={{countNot}} matBadgeColor="warn">notifications</mat-icon>
                     <mat-icon class="userInfo cursor mr-4" routerLink="/dialogsList" matBadge={{count}} matBadgeColor="warn">mail</mat-icon>
-                    <mat-icon class="userInfo cursor mr-4" (click)="getFriendsNotifications();" data-toggle="modal" data-target="#friendsNotificationModal" matBadge={{friendsNot}} matBadgeColor="warn">account_circle</mat-icon>
+                    <mat-icon class="userInfo cursor mr-4" (click)="getFriendsNot()" data-toggle="modal" data-target="#friendsNotificationModal" matBadge={{friendsNot}} matBadgeColor="warn">account_circle</mat-icon>
                     <mat-icon class="userInfo cursor" routerLink="/groupList" matBadge={{groupsNot}} matBadgeColor="warn">people</mat-icon>
                 </p>
                 <a mat-raised-button class="mr-2" routerLink="/friends">Друзья</a>
