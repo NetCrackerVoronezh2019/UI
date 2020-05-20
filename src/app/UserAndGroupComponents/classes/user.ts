@@ -4,7 +4,7 @@ export class User
   firstName:string;
   middleName:string;
   lastName:string;
-  birthday:Date;
+  birthday:string;
   userId:number;
   image:string;
 }

@@ -41,6 +41,7 @@ export class OrderItemComponent implements OnInit {
       fileType='application/pdf; charset=utf-8';
       else
         fileType='image/jpg; charset=utf-8';
+      if (key.split('_')[0]=='order'){
       this.service2.downloadFile(key)
         .subscribe(
           (response) => {
@@ -50,6 +51,17 @@ export class OrderItemComponent implements OnInit {
           },
           error => console.log('Error downloading the file')
         )
+      } else {
+        this.service2.downloadDialogFile(key)
+          .subscribe(
+            (response) => {
+              let blob:any = new Blob([response.blob()], { type:fileType});
+
+              fileSaver.saveAs(blob,docName);
+            },
+            error => console.log('Error downloading the file')
+          )
+      }
   }
 
   downloadCoverImage(key:String)
@@ -90,14 +102,14 @@ export class OrderItemComponent implements OnInit {
             error=>console.log(error)
           )
   }
-  
+
   raitingClick(event)
   {
-    
+
     this.reiting=event.target.attributes.value.value;
   }
 
- 
+
   deleteClickEvent(key){
      console.log(key)
      console.log(this.deleteNames.indexOf(key))
@@ -170,7 +182,7 @@ export class OrderItemComponent implements OnInit {
     if(this.openResultBlock==false)
      this.openResultBlock=true;
    else
-    this.completeOrder() 
+    this.completeOrder()
   }
 
 
@@ -198,16 +210,16 @@ export class OrderItemComponent implements OnInit {
     console.log(file);
     for(let i=0;i<file.length;i++)
     {
-      let newfile:File=new File(); 
+      let newfile:File=new File();
       newfile.contentType=file.item(i).type;
       newfile.name=file.item(i).name;
       this.allNames.push(file.item(i).name);
        this.readFile(file.item(i),newfile);
     }
-    
+
     console.log(this.allFiles);
   }
-  
+
   deleteImageFromList(index)
   {
     this.allNames.splice(index,1);
@@ -222,9 +234,7 @@ export class OrderItemComponent implements OnInit {
     reader.onload = () => {
        newfile.content=reader.result;
        this.allFiles.push(newfile);
-    }; 
+    };
   }
-  
+
 }
-
-

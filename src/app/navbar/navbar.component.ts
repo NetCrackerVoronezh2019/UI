@@ -23,15 +23,15 @@ export class NavbarComponent implements OnInit {
   private isAdmin=false
   private UserInfo:any;
   private OnlineSubscription:any;
-  private serverUrl = 'ws://localhost:9080/socket/websocket'
+  private serverUrl = 'ws://95.30.222.140:9080/socket/websocket'
   private stompClient1:Client;
   private stompClient2:Client;
   private stompClient3:Client;
   private stompClient4:Client;
   private count="";
-  private countNot:String=""
-  private friendsNot=""
-  private groupsNot=""
+  private countNot:String="";
+  private friendsNot="";
+  private groupsNot="";
   notificationsClick=false;
   private notifications:AdvNotification[];
   private friendsNotifications:FriendsNotification[];
@@ -68,6 +68,7 @@ export class NavbarComponent implements OnInit {
         this.stompClient3.subscribe("/friends/"+userId, (message) => {
           this.friendsNot=JSON.parse(message.body);
           this.getFriendsNot();
+          this.getFriendsNotifications();
         });
       });
 
@@ -94,7 +95,7 @@ export class NavbarComponent implements OnInit {
       {
         banTime+=this.UserInfo.banTime.split('T')[0];
         banTime+=" "+ this.UserInfo.banTime.split('T')[1].split('.')[0];
-      } 
+      }
 
       return banTime;
     }
@@ -141,6 +142,7 @@ export class NavbarComponent implements OnInit {
            this.initializeWebSocketConnection(this.UserInfo.userId);
            this.setOnline();
            this.getMyNotificationsSize();
+           this.getFriendsNot();
            this.getFriendsNotifications();
            this.getGroupNotifications();
          }
@@ -214,6 +216,7 @@ export class NavbarComponent implements OnInit {
 
   deleteFriendsNot(index) {
     this.friendsNotifications.splice(index,1);
+    this.getFriendsNot();
     this.getFriendsNotifications();
   }
 

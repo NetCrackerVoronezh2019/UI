@@ -18,9 +18,13 @@ export class DialogCardComponent implements OnInit {
   loading = false;
   user:User;
   name:string = "";
+  crDate:string = ' ';
+  mDate:string = ' ';
   constructor( private sanitizer: DomSanitizer,private ds:DialogService) { }
 
   ngOnInit() {
+    this.crDate = this.dg.creationDate.split('T')[0]+' '+ (this.dg.creationDate.split('T')[1]).split('.')[0];
+    this.mDate = this.dg.lastMessageDate.split('T')[0]+' '+ (this.dg.lastMessageDate.split('T')[1]).split('.')[0];
     if (this.dg.type=="private") {
       this.ds.getDialogMembers(this.dg.dialogId).subscribe((data:User) => {
         if (data[0].userId != this.userId) {
@@ -37,6 +41,11 @@ export class DialogCardComponent implements OnInit {
       this.name = this.dg.name;
       if (this.dg.image!=null) {
        this.downloadGroupImage(this.dg.image);
+      }
+    } else if (this.dg.type == "advertisement") {
+      this.name = this.dg.name;
+      if (this.dg.image != null) {
+        this.downloadCoverImage(this.dg.image);
       }
     } else {
       this.name = this.dg.name;
@@ -60,6 +69,21 @@ export class DialogCardComponent implements OnInit {
          error => console.log('Error')
       )
 
+  }
+
+  downloadCoverImage(key:String)
+  {
+
+    this.ds.downloadFile(key)
+      .subscribe(
+        (response) => {
+          let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+          this.dialogImage=URL.createObjectURL(blob)
+          this.dialogImage=this.sanitizer.bypassSecurityTrustUrl(this.dialogImage);
+          this.loading = true;
+        },
+         error => console.log('Error')
+      )
   }
 
   downloadUserImage(key:String)

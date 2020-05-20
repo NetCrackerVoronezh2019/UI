@@ -2,8 +2,8 @@ export class Dialog
 {
   name:string;
   countNotification:number;
-  creationDate:Date;
-  lastMessageDate:Date;
+  creationDate:string;
+  lastMessageDate:string;
   creatorId:number;
   dialogId:number;
   type:string;

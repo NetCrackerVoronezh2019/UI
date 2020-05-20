@@ -15,16 +15,21 @@ export class MessageCardComponent implements OnInit {
 
   @Input() message:Message;
   @Input() mymessage:boolean;
+  @Input() type:string;
   images:string[] = [];
   files:string[] = [];
   fileNames:string[] = [];
   messageImages:any[] = [];
   userImage:any = null;
   loading = false;
+  date:string = '';
   @Output() imageClick = new EventEmitter()
+  @Output() setMessage = new EventEmitter()
+  @Output() addAdvertismentFiles = new EventEmitter()
   constructor(private service:DialogService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.date = this.message.date.split('T')[0]+' '+ (this.message.date.split('T')[1]).split('.')[0];
     if (this.message.sender.image != null) {
       this.downloadProfileImage(this.message.sender.image);
     }
@@ -50,7 +55,9 @@ export class MessageCardComponent implements OnInit {
     this.service.downloadDialogFile(key)
       .subscribe(
         (response) => {
+          console.log(response);
           let blob:any = new Blob([response.blob()], { type:fileType});
+          console.log(blob);
           fileSaver.saveAs(blob,name);
         },
          error => console.log('Error downloading the file')
@@ -92,6 +99,22 @@ export class MessageCardComponent implements OnInit {
          error => console.log('Error')
       )
 
+  }
+
+  startSetMessage() {
+    this.setMessage.emit(this.message)
+  }
+
+  addAttachmentsFromDialog() {
+    let files:any[] = [];
+    for (let i = 0;i < this.message.files.length;i++) {
+      let file = {
+        content: this.message.files[i],
+        name: this.message.names[i]
+      }
+      files.push(file);
+    }
+    this.addAdvertismentFiles.emit(files)
   }
 
 }

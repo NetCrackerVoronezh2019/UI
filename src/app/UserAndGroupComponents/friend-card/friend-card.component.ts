@@ -25,8 +25,8 @@ export class FriendCardComponent implements OnInit {
 
   ngOnInit() {
     this.type = this.i_type;
-    if (this.user.image != null) {
-      this.downloadProfileImage(this.user.image);
+    if (this.friend.image != null) {
+      this.downloadProfileImage(this.friend.image);
     }
     if (this.type == 0) {
       this.friends.forEach(element => {

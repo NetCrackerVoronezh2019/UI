@@ -17,6 +17,9 @@ a{
 /* M E N U */
 
 .menu {
+  position: absolute;
+}
+.menu {
     position: absolute;
     top: 10vh;
     left: 0px;
@@ -153,6 +156,10 @@ a{
 }
 
 #Sending form{
+  display: flex;
+}
+
+#Sending form div{
   display: flex;
 }
 

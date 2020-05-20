@@ -4,5 +4,5 @@ export class Notification
   messageId:number;
   userName:string;
   senderName:string;
-  date:Date;
+  date:string;
 }

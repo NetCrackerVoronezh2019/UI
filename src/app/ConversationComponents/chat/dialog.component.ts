@@ -24,7 +24,7 @@ export class ChatComponent implements OnInit {
   userSearchPanelVisible:boolean = false;
   dialogMembers:User[] = [];
   messages:Message[] = [];
-  private serverUrl = 'ws://localhost:9080/socket/websocket'
+  private serverUrl = 'ws://95.30.222.140:9080/socket/websocket'
   private stompClient:Client;
   private stompClient2:Client;
   dialog:Dialog;
@@ -42,6 +42,9 @@ export class ChatComponent implements OnInit {
   fullImage:any = null;
   sidebarVisible = false;
   name:string = "";
+  setId:number;
+  isSet = false;
+  date:string = '';
 
   constructor(public dgService:DialogService,private route: ActivatedRoute,private location: Router, private sanitizer: DomSanitizer) {
   }
@@ -94,6 +97,7 @@ export class ChatComponent implements OnInit {
         this.dialogId=params['dialogId'];
         this.dgService.getDialogInfo(this.dialogId).subscribe((data:Dialog) =>{
         this.dialog = data;
+        this.date = this.dialog.lastMessageDate.split('T')[0]+' '+ (this.dialog.lastMessageDate.split('T')[1]).split('.')[0];
       this.dgService.getDialogMembers(this.dialogId).subscribe((data:User[]) => {
         this.dialogMembers = data;
         data.forEach(user => {
@@ -117,6 +121,11 @@ export class ChatComponent implements OnInit {
               this.name = this.dialog.name;
               if (this.dialog.image!=null) {
                this.downloadGroupImage(this.dialog.image);
+              }
+            } else if (this.dialog.type == "advertisement") {
+              this.name = this.dialog.name;
+              if (this.dialog.image != null) {
+                this.downloadCoverImage(this.dialog.image);
               }
             } else {
             this.name = this.dialog.name;
@@ -328,5 +337,46 @@ export class ChatComponent implements OnInit {
              error => console.log('Error')
           )
 
+      }
+
+      downloadCoverImage(key:String)
+      {
+
+        this.dgService.downloadFile(key)
+          .subscribe(
+            (response) => {
+              let blob:any= new Blob([response.blob()], { type:'image/jpg; charset=utf-8'});
+              this.dialogImage=URL.createObjectURL(blob)
+              this.dialogImage=this.sanitizer.bypassSecurityTrustUrl(this.dialogImage);
+              this.loading = true;
+            },
+             error => console.log('Error')
+          )
+      }
+
+      startSetMessage(message) {
+        this.setId = message.messageId;
+        this.dgService.getMessageForm().reset({text:message.text});
+        this.isSet = true;
+      }
+
+      setMessage() {
+        this.dgService.setMessage(this.setId).subscribe(data => {
+          this.dgService.getDialogMessages(this.dialogId).subscribe((data:Message[]) => {
+            this.messages = data;
+            this.closeSetMessage();
+          });
+        });
+      }
+
+      closeSetMessage() {
+        this.dgService.getMessageForm().reset();
+        this.isSet = false;
+      }
+
+      addAttachmentsFromDialog(files) {
+        this.dgService.addAttachmentsFromDialog(this.dialogId,files).subscribe(data => {
+          alert("Файлы сообщения помечены, как решение")
+        })
       }
 }
