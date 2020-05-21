@@ -112,7 +112,7 @@ export class GroupPageComponent implements OnInit {
       this.gs.getAllSubjects().subscribe((data:Subject[]) => {
         this.subjects = data;
         this.subjects.forEach(element => {
-            if (element.name == this.group.subjectName) {
+            if (element.translateName == this.group.subjectName) {
               this.gs.getGroupSettingsForm().reset({groupSection: element.translateName, groupName: this.group.name});
             }
         });
@@ -148,7 +148,7 @@ export class GroupPageComponent implements OnInit {
         this.group.name = this.gs.getGroupSettingsForm().value.groupName;
         this.subjects.forEach(element => {
             if (element.translateName == this.gs.getGroupSettingsForm().value.groupSection) {
-              this.group.subjectName = element.name;
+              this.group.subjectName = element.translateName;
             }
         });
       })
