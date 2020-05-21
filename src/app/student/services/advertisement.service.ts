@@ -1,4 +1,4 @@
-import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder,AbstractControl,Validators} from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Advertisement} from '../../classes/advertisement'
@@ -13,12 +13,12 @@ export class AdvertisementService
     constructor(private fb:FormBuilder,private http: HttpClient) {}
      advertisementForm=this.fb.group(
         {
-            "advertisementId":[],
-            "advertisementName":[""],
-            "advertisementSection":[""],
-            "deadlineDate":[""],
-            "description":[""],
-            "budget":[""],
+            "advertisementId":[""],
+            "advertisementName":["",[Validators.required]],
+            "advertisementSection":["",[Validators.required]],
+            "deadlineDate":["",[Validators.required]],
+            "description":["",[Validators.required]],
+            "budget":["",[Validators.required]],
             "image":[""]
         })
 

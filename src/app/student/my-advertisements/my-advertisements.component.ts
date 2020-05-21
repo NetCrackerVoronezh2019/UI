@@ -14,7 +14,10 @@ export class MyAdvertisementsComponent implements OnInit {
   constructor(private service:MyAdvService) { }
 
   ngOnInit() {
+    this.service.setFormValues();
+    this.getAdvByStatus();
   }
+
 
   onClick()
   {

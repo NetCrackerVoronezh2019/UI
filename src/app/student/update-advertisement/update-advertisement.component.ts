@@ -30,7 +30,7 @@ export class UpdateAdvertisementComponent implements OnInit {
 
   constructor(private router: Router,private service:AdvertisementService) { }
 
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  readonly separatorKeysCodes: number[] = [ENTER];
  
 
   add(event: MatChipInputEvent): void {

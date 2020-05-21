@@ -19,6 +19,10 @@ export class AdvertisementCardComponent implements OnInit {
       this.downloadCoverImage(this.adv.coverImageKey);
   }
 
+  getDate()
+  {
+    return this.adv.dateOfPublication.split('T')[0]
+  }
   downloadCoverImage(key:String)
   {
 

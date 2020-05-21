@@ -27,7 +27,7 @@ export class AdvertisementFilterComponent implements OnInit {
   removable = true;
   addOnBlur = true;
 
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  readonly separatorKeysCodes: number[] = [ENTER];
  
   changeState(event)
   {

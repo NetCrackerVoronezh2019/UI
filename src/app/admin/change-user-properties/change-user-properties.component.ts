@@ -25,7 +25,8 @@ export class ChangeUserPropertiesComponent implements OnInit {
      this.service.filterUsers("ArmenJan")
         .subscribe(
           (data:User[])=>
-        {this.allUsers=data
+        {
+          this.allUsers=data
           console.log(data);
         },
           error=>console.log(error)
@@ -58,12 +59,12 @@ export class ChangeUserPropertiesComponent implements OnInit {
 
   Edit()
   {
-    
     this.service.changeUserProperties()
     .subscribe(
       (data:User[])=>{
 			  this.allUsers=data; 
-        this.filterUsers();
+   //     this.filterUsers();
+   this.getAllUsers()
         
 		  },
       error=>console.log(error)

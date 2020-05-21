@@ -1,7 +1,11 @@
 <div class="blog-card">
     <div class="meta">
-      <div class="photo">
+      <div *ngIf="order.advertisement.coverImageKey!=undefined" class="photo">
         <img class="cover-img" [src]="coverImage"/>
+      </div>
+
+      <div *ngIf="order.advertisement.coverImageKey==undefined" class="photo">
+        <img class="cover-img" src="https://traxfix.com/wp-content/uploads/2018/10/ads.jpg"/>
       </div>
       
     </div>
