@@ -2,10 +2,11 @@
 <div *ngIf="true" class="blog-card" routerLink="/adv/{{adv.advertisementId}}">
     <div class="inner-part">
       <label class="img">
-        <img [src]="coverImage"/> 
+        <img *ngIf="adv.coverImageKey!=undefined" img [src]="coverImage"/> 
+        <img *ngIf="adv.coverImageKey==undefined" img src="https://traxfix.com/wp-content/uploads/2018/10/ads.jpg"/> 
       </label>
       <div class="content ">
-        <span>30 Январь 2020</span>
+        <span>{{getDate()}}</span>
         <div class="title">{{adv.advertisementName}}</div>
         <div class="text">Цена - {{adv.budget}} руб. </div>
       </div>

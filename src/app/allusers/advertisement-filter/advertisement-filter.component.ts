@@ -22,9 +22,12 @@ export class AdvertisementFilterComponent implements OnInit {
   panelOpenState = false;
   advs:Advertisement[];
   tags: Tag[] = [];
-  
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
 
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  readonly separatorKeysCodes: number[] = [ENTER];
  
   changeState(event)
   {

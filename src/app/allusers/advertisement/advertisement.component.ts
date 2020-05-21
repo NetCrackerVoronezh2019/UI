@@ -21,6 +21,7 @@ export class AdvertisementComponent implements OnInit {
   img:any;
   id:Number;
   role:any;
+  userId;
   adv:Advertisement;
   isUserAdv:Boolean=false;
   isLoading=false;
@@ -95,6 +96,24 @@ export class AdvertisementComponent implements OnInit {
       this.message='Вы точно хотите получить этy услугу ?';
     }
   }
+
+  getStatus(status){
+    if(status=='ACCEPTED')
+      return 'Принят';
+    if(status=="INPROGRESS")
+      return 'В процессе';
+    if(status=='СOMPLETED')
+      return 'Завершен'
+}
+
+getNextStatus(status){
+
+if(status=="INPROGRESS")
+  return 'Начать работу';
+if(status=='СOMPLETED')
+  return 'Завершить'
+}
+
   
   getRole()
   {
@@ -103,6 +122,8 @@ export class AdvertisementComponent implements OnInit {
       (data:any)=>
       {
         this.role=data.roleName;
+        this.userId=data.userId;
+        console.log(data);
         this.isMyAdv(this.id);
         this.canSendRequest();
         this.isMyOrder();

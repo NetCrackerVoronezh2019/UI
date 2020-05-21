@@ -11,36 +11,39 @@
                                     <div *ngIf="!isUserAdv" class="userName">
                                       <a routerLink="../../userPage/{{adv.authorId}}">{{adv.firstName}} {{adv.surName}}</a> 
                                     </div>
-                                    <p *ngIf="!isUserAdv && role!='ROLE_ADMIN'" [ngClass]="can!=true? 'disabled mr-2':'mr-2'"  (clock)="sendRequest()" data-toggle="modal" data-target="#RequestModel1">
+                                    <p *ngIf="!isUserAdv && can && role!='ROLE_ADMIN'" [ngClass]="can!=true? 'disabled mr-2':'mr-2'" title = "Отправить запрос"  (clock)="sendRequest()" data-toggle="modal" data-target="#RequestModel1">
                                         <i class="far fa-handshake h2"></i>
                                     </p>
                                     <p *ngIf="role=='ROLE_ADMIN'" data-toggle="modal" data-target="#deleteModalCenter" >
                                       <i class="fas fa-trash-alt"></i>
                                     </p>
                                     <div *ngIf="order">
-                                      <p  class="order-status m-0">статус заказа - {{order.status}}</p>
-                                      <button *ngIf="order.nextStatus!=undefined"  (click)="changeStatus()" class="btn btn-success order-status m-0">{{order.nextStatus}}</button>
+                                      <p  class="order-status m-0">статус заказа - {{getStatus(order.status)}}</p>
+                                      <button *ngIf="userId==order.freelancerId && order.nextStatus!=undefined" (click)="changeStatus()" class="btn btn-success order-status m-0">{{getNextStatus(order.nextStatus)}}</button>
                                     </div>
                                 </div>
                                 <div *ngIf="isUserAdv" class="prop d-flex justify-content-end w-100 edit">
-                                    <p (click)="changeAdvStatus()" *ngIf="adv.status=='ACTIVE'" class="mr-4">
+                                    <p (click)="changeAdvStatus()" title = "Архивировать" *ngIf="adv.status=='ACTIVE'" class="mr-4">
                                       <i class="fas fa-lock"></i>
                                     </p>
-                                    <p (click)="changeAdvStatus()" class="mr-4" *ngIf="adv.status=='ARCHIVED'">
+                                    <p (click)="changeAdvStatus()" class="mr-4" title = "Открыть доступ" *ngIf="adv.status=='ARCHIVED'">
                                       <i class="fas fa-lock-open"></i>
                                     </p>
-                                    <p data-toggle="modal" class="mr-4" data-target="#exampleModalCenter" >
+                                    <p data-toggle="modal" class="mr-4" data-target="#exampleModalCenter" title = "Редактировать" >
                                         <i class="fas fa-edit"></i>
                                     </p>
-                                     <p>  
+                                     <p title = "Обновить фото">  
                                         <i class="fas fa-camera"></i>
                                     </p>
                                    
                                    </div>
                                 {{adv.advertisementName}}                            
                             </div>
-                            <div class="col-12 p-0 advertisement-img">
+                            <div *ngIf="adv.coverImageKey!=undefined"class="col-12 p-0 advertisement-img">
                               <img [src]="coverImage" />    
+                            </div>
+                            <div *ngIf="adv.coverImageKey==undefined"class="col-12 p-0 advertisement-img">
+                              <img src="https://traxfix.com/wp-content/uploads/2018/10/ads.jpg" />    
                             </div>
                             
                             <div class="col-12  advertisement-des">                     

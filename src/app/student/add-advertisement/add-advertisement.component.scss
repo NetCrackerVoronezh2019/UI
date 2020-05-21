@@ -2,7 +2,7 @@
     width: 100%;
   }
 
-  .all-images
+.all-images
 {
   margin-bottom:5px;
   display:flex;
@@ -13,6 +13,8 @@
   cursor:pointer;
 
 }
+
+
 
 input{
   box-shadow: 0 3px 7px -1px rgba(#000, .1);
@@ -48,3 +50,6 @@ textarea
 .example-2 .input-file + .js-labelFile{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 10px;cursor:pointer}
 .example-2 .input-file + .js-labelFile .icon:before{content:"\f093"}
 .example-2 .input-file + .js-labelFile.has-file .icon:before{content:"\f00c";color:#5AAC7B}
+
+
+

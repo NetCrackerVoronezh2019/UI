@@ -117,6 +117,6 @@ export class OrderService
         }        
 
         console.log(body)
-        return this.http.post(this.baseUrl+'/user/completeOrder',body)
+        return this.http.post(this.baseUrl+'/user/addAttachments',body)
     }
 }

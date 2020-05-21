@@ -10,8 +10,8 @@ export class RegistrationService
     constructor(private fb:FormBuilder,private http: HttpClient) {}
         myForm=this.fb.group(
             {
-                "userName":["",[Validators.required,Validators.minLength(3),Validators.maxLength(15)]],
-                "userSurname":["",[Validators.required,Validators.minLength(3),Validators.maxLength(15)]],
+                "userName":["",[Validators.required,Validators.maxLength(20)]],
+                "userSurname":["",[Validators.required,Validators.maxLength(20)]],
                 "userEmail": ["",[Validators.required,Validators.email]],
                 "userImg":[""],
                 "education":[null],
@@ -33,7 +33,25 @@ export class RegistrationService
             let file=new CertificateFile();
             (<FormArray>this.myForm.controls["certificateFiles"]).push(new FormControl(file));
         }
-    		
+            
+        dateValidator(control:AbstractControl)
+        {
+            console.log("validator");
+            let bd=control;
+            console.log(bd.value)
+           if( bd.value=="0012-11-11")
+           {
+
+            console.log("tut");
+            this.myForm.setValue({
+                birthDate:null,
+             },{onlySelf:true});
+           }
+           else{
+               console.log("is NULL");
+           }
+            return "11.11.11"
+        }
 		ConfirmPasswordValidator(control: AbstractControl){
 
             const password=control.get("password");

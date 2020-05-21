@@ -1,4 +1,4 @@
-import { FormGroup, FormControl, FormBuilder,AbstractControl} from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder,AbstractControl,Validators} from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Advertisement} from '../../classes/advertisement'
@@ -13,12 +13,12 @@ export class AdvertisementService
     constructor(private fb:FormBuilder,private http: HttpClient) {}
      advertisementForm=this.fb.group(
         {
-            "advertisementId":[],
-            "advertisementName":[""],
-            "advertisementSection":[""],
-            "deadlineDate":[""],
-            "description":[""],
-            "budget":[""],
+            "advertisementId":[""],
+            "advertisementName":["",[Validators.required]],
+            "advertisementSection":["",[Validators.required]],
+            "deadlineDate":["",[Validators.required]],
+            "description":["",[Validators.required]],
+            "budget":["",[Validators.required]],
             "image":[""]
         })
 
@@ -40,17 +40,11 @@ export class AdvertisementService
         getExistsAdvertisement(id)
         {
             console.log("send request");
-            this.http.get(this.baseUrl+'/advertisement/'+id)
-            .subscribe(
-                (adv:Advertisement)=>{
-                    console.log(adv);
-                    this.setFormValues(adv)
-                },
-                (error)=>console.log(error)
-            )
+            return this.http.get(this.baseUrl+'/advertisement/'+id)
+            
         }
 
-        updateData(id:Number)
+        updateData(id:Number,tags,allFiles)
         {
             let body={
                 advertisementId:id,
@@ -59,10 +53,11 @@ export class AdvertisementService
                 deadline:this.advertisementForm.value.deadlineDate+"T00:00:00",
                 description:this.advertisementForm.value.description,
                 budget:this.advertisementForm.value.budget,
-                content:null
+                tags,
+                allFiles,
             };
             console.log(body);
-            return this.http.post(":1122/"+'updateAdvertisementInformation',body);
+            return this.http.post("http://localhost:1122"+'/updateAdvertisementInformation',body);
         }
         sendData(tags:Tag[],allFiles,coverImage)
         {

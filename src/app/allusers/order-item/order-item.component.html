@@ -1,7 +1,11 @@
 <div class="blog-card">
     <div class="meta">
-      <div class="photo">
+      <div *ngIf="order.advertisement.coverImageKey!=undefined" class="photo">
         <img class="cover-img" [src]="coverImage"/>
+      </div>
+
+      <div *ngIf="order.advertisement.coverImageKey==undefined" class="photo">
+        <img class="cover-img" src="https://traxfix.com/wp-content/uploads/2018/10/ads.jpg"/>
       </div>
       
     </div>
@@ -31,7 +35,6 @@
             <span (click)="download(doc.documentKey,doc.documentName)" style="text-align:center;"><i style="font-size:30px;" class="fas fa-download"></i></span>
             <mat-checkbox (click)="deleteClickEvent(doc.documentKey)" class="example-margin">{{doc.documentName}} </mat-checkbox>  
            </div>
-         
       </div>
       <div *ngIf="openResultBlock" class="mb-3">
         <div class="form-group mt-3">

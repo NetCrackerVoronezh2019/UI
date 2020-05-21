@@ -16,6 +16,14 @@ export class MyAdvService
         })  
 
         
+
+        setFormValues(){
+            this.myAdvForm.setValue({
+                advStatus:"ACTIVE"              
+             },{onlySelf:true});
+
+    }
+
     getMyAdvForm()
     {
         return this.myAdvForm;

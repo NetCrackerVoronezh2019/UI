@@ -30,10 +30,11 @@ export class AddAdvertisementComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  errorMessage;
   constructor(private advService:AdvertisementService,private router:Router) { }
 
   
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  readonly separatorKeysCodes: number[] = [ENTER];
  
 
   add(event: MatChipInputEvent): void {
@@ -56,7 +57,9 @@ export class AddAdvertisementComponent implements OnInit {
       this.tags.splice(index, 1);
     }
   }
+
   ngOnInit() {
+    
 	   this.advService.getSubjects()
    .subscribe(
      (data:Subject[])=>{this.subjects=data; console.log(this.subjects)},
@@ -113,15 +116,30 @@ export class AddAdvertisementComponent implements OnInit {
   
   
 
+  
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
+  }
+  
   onSubmit()
   {
-    this.sendData=true;
-    this.advService.sendData(this.tags,this.allFiles,this.coverFile)
-      .subscribe(
-        (data:any) => this.router.navigate(['/']),
-        (error:any) => console.log(error) 
-      );
-   
+    if(!this.advService.getAdvForm().invalid)
+    {
+      this.sendData=true;
+      this.advService.sendData(this.tags,this.allFiles,this.coverFile)
+        .subscribe(
+          (data:any) => this.router.navigate(['/']),
+          (error:any) => console.log(error) 
+        );
+    }
+    else{
+      this.errorMessage="Некоторые поля заполнены неверно"
+    }
    
    
   }
