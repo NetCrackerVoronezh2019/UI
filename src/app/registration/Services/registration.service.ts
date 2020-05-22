@@ -16,7 +16,7 @@ export class RegistrationService
                 "userImg":[""],
                 "education":[null],
                 "aboutMe":[""],
-                "gender":[""],
+                "gender":["MALE"],
                 "birthDate":[""],
 				"Passwords":this.fb.group({
 					            "password":["",[Validators.required,Validators.minLength(0),Validators.maxLength(15)]],

@@ -26,11 +26,14 @@ export class AddAdvertisementComponent implements OnInit {
   coverFile:File=new File();
   tags: Tag[] = [];
   sendData:Boolean=false;
+  isValid=true;
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   errorMessage;
+  dateError1;
+  dateError2;
   constructor(private advService:AdvertisementService,private router:Router) { }
 
   
@@ -125,12 +128,37 @@ export class AddAdvertisementComponent implements OnInit {
     return true;
 
   }
-  
+
+  dateEvent($event)
+  {
+    let year=this.advService.getAdvForm().value.deadlineDate;
+    console.log(year);
+    let date: Date = new Date(year);
+    let now: Date = new Date();
+    
+     
+    if(now>date)
+      this.dateError1="Вы выбрали прошедшую дату"
+      else
+      {
+        this.dateError1=undefined;
+      }
+    if(date.getFullYear()>2022)
+        this.dateError2="до 2022"
+      else
+      {
+        this.dateError2=undefined
+      }
+
+    
+  }
+
   onSubmit()
   {
-    if(!this.advService.getAdvForm().invalid)
+    if(this.dateError1==undefined && this.dateError2==undefined && !this.advService.getAdvForm().invalid)
     {
       this.sendData=true;
+      this.isValid=true;
       this.advService.sendData(this.tags,this.allFiles,this.coverFile)
         .subscribe(
           (data:any) => this.router.navigate(['/']),
@@ -139,6 +167,8 @@ export class AddAdvertisementComponent implements OnInit {
     }
     else{
       this.errorMessage="Некоторые поля заполнены неверно"
+      this.sendData=false;
+      this.isValid=false;
     }
    
    

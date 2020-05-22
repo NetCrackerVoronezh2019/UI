@@ -23,6 +23,7 @@ export class RegistrationComponent implements OnInit {
   sendData:Boolean=false;
   isValid=true;
   checkEmailMessage;
+  yearMessage;
   currentIndex;
   forNgModel="";
   constructor(public regService:RegistrationService,private router:Router) {
@@ -38,6 +39,22 @@ export class RegistrationComponent implements OnInit {
     this.certificateFiles.push(new CertificateFile());
   }
 
+
+  dateEvent(event)
+  {
+    let year=this.regService.getRegForm().value.birthDate.split('-')[0];
+    console.log(year);
+    if(year<1950 || year>2015)
+    {
+       
+        this.yearMessage="Год должен быть больше 1950 и меньше 2015";
+    }
+    else
+    this.yearMessage=null;
+      
+
+
+  }
   onSubmit()
   {   
       console.log(this.certificateFiles)
@@ -45,7 +62,7 @@ export class RegistrationComponent implements OnInit {
       this.regService.checkEmail()
         .subscribe(
           (data:Boolean)=>{
-            if(data==false && !this.regService.getRegForm().invalid)
+            if(!this.regService.getRegForm().invalid)
             {
               this.sendData=true;
               this.isValid=true;

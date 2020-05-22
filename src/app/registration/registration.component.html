@@ -6,17 +6,17 @@
                 <div class="form-group" >
                     <label for="exampleInputEmail1">Имя</label>
                     <input type="text" formControlName="userName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Имя">
-                    <div *ngIf="regService.getRegForm().controls['userName'].invalid && regService.getRegForm().controls['userName'].touched" >    
-                        <b class="form-text text-muted" *ngIf="regService.getRegForm().controls['userName'].errors.required">Обязательное поле</b>
-                        <b  class="form-text text-muted" *ngIf="regService.getRegForm().controls['userName'].errors.maxlength">Максимальное количество букв-20</b>
+                    <div *ngIf="regService.getRegForm().controls['userName'].invalid && (!isValid || regService.getRegForm().controls['userName'].touched)" >    
+                        <b class="form-text" *ngIf="regService.getRegForm().controls['userName'].errors.required">Обязательное поле</b>
+                        <b  class="form-text" *ngIf="regService.getRegForm().controls['userName'].errors.maxlength">Максимальное количество букв-20</b>
                     </div>
                 </div>
                 <div class="form-group" >
                     <label for="exampleInputEmail1">Фамилия</label>
                     <input type="text" formControlName="userSurname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Фамилия">
-                    <div *ngIf="regService.getRegForm().controls['userSurname'].invalid && regService.getRegForm().controls['userSurname'].touched" >    
-                        <b class="form-text text-muted" *ngIf="regService.getRegForm().controls['userSurname'].errors.required">Обязательное поле</b>
-                        <b  class="form-text text-muted" *ngIf="regService.getRegForm().controls['userSurname'].errors.maxlength">Максимальное количество букв-20</b>
+                    <div *ngIf="regService.getRegForm().controls['userSurname'].invalid && (!isValid || regService.getRegForm().controls['userSurname'].touched)" >    
+                        <b class="form-text" *ngIf="regService.getRegForm().controls['userSurname'].errors.required">Обязательное поле</b>
+                        <b  class="form-text" *ngIf="regService.getRegForm().controls['userSurname'].errors.maxlength">Максимальное количество букв-20</b>
                     </div>
                 </div>
             </div>
@@ -35,17 +35,25 @@
             </div>
             <div class="col-md-4 col-sm-12">
                 <label for="example-date-input">Дата рождения</label>
-                <input class="form-control" formControlName="birthDate" type="date" value="" id="example-date-input">
+                <input (change)="dateEvent($event)" class="form-control" formControlName="birthDate" type="date" value="" id="example-date-input">
+                <div class="registration-field mb-3">  
+                        <b>{{yearMessage}}</b>    
+                </div>
+                <div *ngIf="regService.getRegForm().controls['birthDate'].invalid && (!isValid || regService.getRegForm().controls['birthDate'].touched)" >    
+                    <b class="form-text" *ngIf="regService.getRegForm().controls['birthDate'].errors.required">Обязательное поле</b>
+                   
+                </div>
             </div>
             <div class="col-md-4 col-sm-12">
                 <div class="form-group" >
                     <label for="exampleInputEmail1">Email</label>
                     <input type="text" formControlName="userEmail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
                     <div class="registration-field"
-                        *ngIf="regService.getRegForm().controls['userEmail'].invalid && regService.getRegForm().controls['userEmail'].touched">  
-                        <span *ngIf="regService.getRegForm().controls['userEmail'].errors.email"> Некоректный  Email</span>    
+                        *ngIf="regService.getRegForm().controls['userEmail'].invalid && (!isValid || regService.getRegForm().controls['userEmail'].touched)">  
+                        <b *ngIf="regService.getRegForm().controls['userEmail'].errors.email"> Некоректный  Email</b>    
+                        <b class="form-text" *ngIf="regService.getRegForm().controls['userEmail'].errors.required">Обязательное поле</b>
                     </div>
-                    <span>{{checkEmailMessage}}</span>
+                    <b>{{checkEmailMessage}}</b>
                 </div>
             </div> 
             <div class="col-md-4 col-sm-12">
@@ -54,7 +62,8 @@
                     <label for="exampleInputEmail1">Пароль</label>
                     <input type="password" formControlName="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Пароль">
                     <div class="registration-field"
-                    *ngIf="regService.getRegForm().controls['Passwords'].controls['password'].invalid && regService.getRegForm().controls['Passwords'].controls['password'].touched">  
+                    *ngIf="regService.getRegForm().controls['Passwords'].controls['password'].invalid && (!isValid || regService.getRegForm().controls['Passwords'].controls['password'].touched )">  
+                    <b class="form-text" *ngIf="regService.getRegForm().controls['Passwords'].controls['password'].errors.required">Обязательное поле</b>
                     <b *ngIf="regService.getRegForm().controls['Passwords'].controls['password'].errors.minlength">Минимальное количество букв-5</b>    
                     </div>
                 </div>
@@ -62,7 +71,7 @@
                     <label for="exampleInputEmail1">Повторите Пароль</label>
                     <input type="password" formControlName="confirmPassword" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Пароль">
                     <div class="registration-field"
-                        *ngIf="regService.getRegForm().controls['Passwords'].controls['confirmPassword'].invalid && regService.getRegForm().controls['Passwords'].controls['confirmPassword'].touched">  
+                        *ngIf="regService.getRegForm().controls['Passwords'].controls['confirmPassword'].invalid && (!isValid || regService.getRegForm().controls['Passwords'].controls['confirmPassword'].touched)">  
                         <b *ngIf="regService.getRegForm().controls['Passwords'].controls['confirmPassword'].errors.confirm">Не совпадают</b>    
                     </div>
                 </div>
@@ -77,7 +86,7 @@
                 </div>
                 <div *ngIf="role=='TEACHER'" class="additional-info">
                     <div class="mb-3">
-                        <label  for="sel1"><b>Уровень образования</b></label>
+                        <label  for="sel1">Уровень образования</label>
                         <select formControlName="education" class="custom-select" id="sel1" placeholder="Выберите науный степень">  
                             <option  value="SECONDARY_GENERAL_EDUCATION">Среднее общее образование</option>
                             <option  value="SECONDARY_PROFESSIONAL_EDUCATION">Среднее професиональное образование</option>
@@ -85,10 +94,10 @@
                           </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1 mb-3"><b>Расскажите о себе</b></label>
+                        <label for="exampleInputEmail1 mb-3">Расскажите о себе</label>
                         <textarea  formControlName="aboutMe" type="text" class="form-control" id="Input2" rows="5" aria-describedby="emailHelp" placeholder="О себе"></textarea>
                     </div>
-                    <label for="exampleInputEmail1"><b>Документы и Сертификаты</b></label>
+                    <label for="exampleInputEmail1">Документы и Сертификаты</label>
                     <p (click)="addSection()"> <i style="font-size:25px;cursor:pointer;" class="fas fa-plus-circle"></i> Добавить новый раздел</p>
                     <div *ngFor="let file of certificateFiles; let i = index" >
                         <div class="example-2 mb-3">
@@ -113,7 +122,7 @@
                         </div>
                         <div class="mb-2 all-images">
                                 <div class="mb-3" *ngFor="let file of certificateFiles[i].allFiles; let j = index" (click)="deleteImageFromList(i)">
-                                    <span (click)="deleteImageFromList(i,j)" matBadge="x"  matBadgeOverlap="false" >{{file.name}}</span>
+                                    <span> <i  (click)="deleteImageFromList(i,j)" class="fas fa-trash"></i> {{file.name}}</span>
                                 </div>
                         </div>
                     </div>
@@ -132,8 +141,5 @@
 <div *ngIf='sendData' class="loading">
     <mat-spinner></mat-spinner>
 </div>
-
-
-
 
 
