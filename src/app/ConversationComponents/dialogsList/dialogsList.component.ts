@@ -25,7 +25,6 @@ export class DialogsListComponent implements OnInit {
   fileName:any;
 
   ngOnInit() {
-      this.creationDialogVisible=false;
       this.dgService.getUser().subscribe(
         (data:User) => {
           console.log(data);
@@ -45,31 +44,6 @@ export class DialogsListComponent implements OnInit {
       },
       error => console.log(error)
     );
-  }
-
-  openDialogform() {
-     if (!this.creationDialogVisible) {
-       this.creationDialogVisible = true;
-     }
-  }
-
-  closeDialogForm() {
-    this.creationDialogVisible = false;
-  }
-
-  createDialog() {
-    if (this.dgService.getDialogCreationForm().invalid) {
-      alert("Invalid dialog name")
-    } else {
-      this.dgService.CreateDialog(this.avatar).subscribe(
-        data => {
-          this.showDialogList();
-        },
-        error => console.log(error)
-      );
-      this.creationDialogVisible = false;
-    }
-    this.newDialogName = "";
   }
 
   showDialogListByType(type) {
@@ -106,22 +80,5 @@ export class DialogsListComponent implements OnInit {
   cancelSearch() {
     this.userSearchPanelVisible = false;
   }
-
-  handleFileInput(file: FileList) {
-
-  this.fileName = file.item(0).name;
-  this.readFile(file.item(0));
-  }
-
-    readFile(file)
-    {
-      let reader;
-      reader=new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-      this.avatar = reader.result;
-      console.log(this.avatar);
-      };
-    }
 
 }

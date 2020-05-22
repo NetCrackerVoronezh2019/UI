@@ -1,7 +1,7 @@
  <body>
   <app-navbar></app-navbar>
   <div id="sidebar">
-        <button *ngIf="type == 'all' || type == 'public'" mat-raised-button class="ml-2" (click)="openDialogform()"><i class="fas fa-plus-circle"></i> Создать диалог</button>
+        <button *ngIf="type == 'all' || type == 'public'" mat-raised-button class="ml-2" routerLink="/dialogCreate"><i class="fas fa-plus-circle"></i> Создать диалог</button>
         <button *ngIf="type == 'private' && !userSearchPanelVisible" mat-raised-button class="ml-2" (click)="openUserSearchPanel()"><i class="fas fa-plus-circle"></i> Написать пользователю</button>
         <button mat-raised-button class="ml-2" (click)="showDialogList()" ><i class="fa fa-comments"></i> Все диалоги</button>
         <button mat-raised-button class="ml-2" (click)="showDialogListByType('public')" ><i class="fa fa-beer"></i> Общие диалоги</button>
@@ -36,26 +36,6 @@
         <ul *ngFor ='let dialog of dialogs'>
           <app-dialog-card [(dg)]="dialog" [(userId)]="user.userId"></app-dialog-card>
         </ul>
-    </div>
-  </div>
-  <div class="blog-card" *ngIf="creationDialogVisible">
-    <div class="inner-part">
-      <form [formGroup]="dgService.getDialogCreationForm()" class="mt-5">
-        <h1>Create Dialog</h1>
-          <div class="form-group">
-            <label for="">Dialog name</label>
-            <input id="Name" type="text" class="form-control" formControlName="dialogName" autocomplete="off" placeholder="Dialog name" [(ngModel)]="newMessage">
-            <div *ngIf="dgService.getDialogCreationForm().controls['dialogName'].invalid && dgService.getDialogCreationForm().controls['dialogName'].touched" >
-              <small class="form-text text-muted" *ngIf="dgService.getDialogCreationForm().controls['dialogName'].errors.minlength">name is too short</small>
-              <small  class="form-text text-muted" *ngIf="dgService.getDialogCreationForm().controls['dialogName'].errors.maxlength">name is too long</small>
-            </div>
-          </div>
-          <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
-          <label for="file" class="btn btn-tertiary js-labelFile">
-          </label>
-      </form>
-      <button class="btn btn-light btn-primary-spacing" (click)="createDialog()">Create</button>
-      <button class="btn btn-dark btn-primary-spacing" (click)="closeDialogForm()">Cancel</button>
     </div>
   </div>
  </body>
