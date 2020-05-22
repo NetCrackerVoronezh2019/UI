@@ -4,10 +4,11 @@
     <mat-menu #appMenu="matMenu">
       <button *ngIf="type == 'advertisement'" (click)="addAttachmentsFromDialog()" mat-menu-item>Пометить как решение</button>
     </mat-menu>
-    <div mat-icon-button [matMenuTriggerFor]="appMenu">
   <div class="msg" [ngStyle]="{'background': (message.isNoRead || message.readBySomebody==false) ? 'LightBlue' : 'white'}">
+    <div mat-icon-button [matMenuTriggerFor]="appMenu">
     <h6>{{message.sender.name}}</h6>
-    <p>{{message.text}}</p>
+    <h5>{{message.text}}</h5>
+    </div>
     <div class="imag">
       <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
       <br>
@@ -18,7 +19,6 @@
     </span>
     <p><time>{{date}}</time></p>
   </div>
-  </div>
 </li>
 <li *ngIf="mymessage" class="self">
     <div *ngIf="userImage==null" class="avatar"><img src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg" draggable="false"/></div>
@@ -27,10 +27,11 @@
       <button (click)="startSetMessage()" mat-menu-item>Редактировать</button>
       <button *ngIf="type == 'advertisement'" (click)="addAttachmentsFromDialog()" mat-menu-item>Пометить как решение</button>
     </mat-menu>
-    <div mat-icon-button [matMenuTriggerFor]="appMenu">
   <div class="msg" [ngStyle]="{'background': (message.isNoRead || message.readBySomebody==false) ? 'LightBlue' : 'white'}">
+    <div mat-icon-button [matMenuTriggerFor]="appMenu">
     <h6>{{message.sender.name}}</h6>
-    <p>{{message.text}}</p>
+      <h5>{{message.text}}</h5>
+    </div>
     <div class="imag">
       <img *ngFor="let img of messageImages" (click)="openImage(img)" [src]="img"/>
     </div>
@@ -38,6 +39,5 @@
         <button *ngFor="let doc of files; let i = index" (click)="download(doc,fileNames[i])" > <i class="fas fa-file fontFile"> {{fileNames[i]}}</i></button>
     </span>
     <p><time>{{date}}</time></p>
-  </div>
   </div>
 </li>
