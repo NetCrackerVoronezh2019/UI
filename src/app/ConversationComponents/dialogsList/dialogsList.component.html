@@ -1,7 +1,7 @@
  <body>
   <app-navbar></app-navbar>
   <div id="sidebar">
-        <button *ngIf="type == 'all' || type == 'public'" mat-raised-button class="ml-2" routerLink="dialogCreate"><i class="fas fa-plus-circle"></i> Создать диалог</button>
+        <button *ngIf="type == 'all' || type == 'public'" mat-raised-button class="ml-2" routerLink="/dialogCreate"><i class="fas fa-plus-circle"></i> Создать диалог</button>
         <button *ngIf="type == 'private' && !userSearchPanelVisible" mat-raised-button class="ml-2" (click)="openUserSearchPanel()"><i class="fas fa-plus-circle"></i> Написать пользователю</button>
         <button mat-raised-button class="ml-2" (click)="showDialogList()" ><i class="fa fa-comments"></i> Все диалоги</button>
         <button mat-raised-button class="ml-2" (click)="showDialogListByType('public')" ><i class="fa fa-beer"></i> Общие диалоги</button>
