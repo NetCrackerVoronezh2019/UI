@@ -14,7 +14,7 @@ export class GroupService {
   groupSettingsForm=this.fb.group(
           {
               "groupSection":[""],
-              "groupName":["",[Validators.required,Validators.minLength(5),Validators.maxLength(15)]]
+              "groupName":["",[Validators.required,Validators.minLength(5),Validators.maxLength(30)]]
           }
         )
 

@@ -11,7 +11,7 @@ export class GroupListService
     groupCreationForm=this.fb.group(
             {
                 "groupSection":[""],
-                "groupName":["",[Validators.required,Validators.minLength(5),Validators.maxLength(15)]]
+                "groupName":["",[Validators.required,Validators.minLength(5),Validators.maxLength(30)]]
             }
           )
     groupSearchPanel=this.fb.group(

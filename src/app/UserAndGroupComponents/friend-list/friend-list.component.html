@@ -11,16 +11,16 @@
               <label for="">Имя</label>
               <input id="firstName" type="text" class="form-control" formControlName="firstName" autocomplete="off" placeholder="Имя">
               <div *ngIf="fs.getUserSearchPanel().controls['firstName'].invalid && fs.getUserSearchPanel().controls['firstName'].touched" >
-                <small  class="form-text text-muted" *ngIf="fs.getUserSearchPanel().controls['firstName'].errors.maxlength">name is too long</small>
+                <small  class="form-text text-muted" *ngIf="fs.getUserSearchPanel().controls['firstName'].errors.maxlength">Имя слишком длинное</small>
               </div>
               <label for="">Фамилия</label>
               <input id="lastName" type="text" class="form-control" formControlName="lastName" autocomplete="off" placeholder="Фамилия">
               <div *ngIf="fs.getUserSearchPanel().controls['lastName'].invalid && fs.getUserSearchPanel().controls['lastName'].touched" >
-                <small  class="form-text text-muted" *ngIf="fs.getUserSearchPanel().controls['lastName'].errors.maxlength">name is too long</small>
+                <small  class="form-text text-muted" *ngIf="fs.getUserSearchPanel().controls['lastName'].errors.maxlength">Имя слишком длинное</small>
               </div>
             </div>
-            <button class="btn btn-light btn-primary-spacing" (click)="search()">Search</button>
-            <button class="btn btn-dark btn-primary-spacing" (click)="closeSearchPanel()">Cancel</button>
+            <button class="btn btn-light btn-primary-spacing" (click)="search()">Поиск</button>
+            <button class="btn btn-dark btn-primary-spacing" (click)="closeSearchPanel()">Отмена</button>
         </form>
   </div>
   <div id="content" align="center">

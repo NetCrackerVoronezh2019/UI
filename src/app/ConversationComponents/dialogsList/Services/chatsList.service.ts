@@ -10,7 +10,7 @@ export class DialogsListService
 
     dialogCreationForm=this.fb.group(
             {
-                "dialogName":["",[Validators.required,Validators.minLength(5),Validators.maxLength(15)]]
+                "dialogName":["",[Validators.required,Validators.minLength(5),Validators.maxLength(30)]]
             }
           )
 
