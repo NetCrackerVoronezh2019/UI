@@ -74,8 +74,8 @@
                                       <div (click)="download(doc.key)" ><i class="fas fa-file fontFile"></i></div>
                                       <div class="fontFileName">{{doc.key.split('_')[1]}}</div>
                                     </span>       
-                                  </div>  
-                                  <div *ngIf=" order!=undefined && order.status=='СOMPLETED'" class="mt-3">
+                                  </div> 
+                                  <div *ngIf="order!=undefined && (order.freelancerId==userId || order.customerId==userId)" class="mt-3">
                                     <div class="tittle">Ответ</div>
                                     <div class="attachments mt-3">                                   
                                       <span *ngFor="let doc of order.orderDocuments; let i = index" class="mr-2">

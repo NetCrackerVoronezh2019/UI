@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <label  for="exampleInputEmail1">Название * </label>
                     <input  formControlName="advertisementName" type="text" class="form-control" id="Input1" aria-describedby="emailHelp" placeholder="Название">
-                    <div *ngIf="advService.getAdvForm().controls['advertisementName'].invalid && advService.getAdvForm().controls['advertisementName'].touched" >    
+                    <div *ngIf="advService.getAdvForm().controls['advertisementName'].invalid && (!isValid || advService.getAdvForm().controls['advertisementName'].touched)" >    
                         <b style="color:red;"class="form-text " *ngIf="advService.getAdvForm().controls['advertisementName'].errors.required">Обязательное поле</b>
                     </div>
                 </div>
@@ -23,19 +23,25 @@
                 </div>
                 <div class="form-group">
                     <label for="example-date-input" class="col-xs-2 col-form-label">Дедлайн</label>
-                     <input formControlName='deadlineDate' class="form-control" type="date"  id="example-date-input">
+                     <input formControlName='deadlineDate' (change)="dateEvent()" class="form-control" type="date"  id="example-date-input">
+                     <div *ngIf="advService.getAdvForm().controls['deadlineDate'].invalid && (!deadlineDate || advService.getAdvForm().controls['deadlineDate'].touched)" >    
+                        <b style="color:red !important;" class="form-text" *ngIf="advService.getAdvForm().controls['deadlineDate'].errors.required">Обязательное поле</b>
+                    </div>
+                     <b style="color:red;">{{dateError1}}</b>
+                     <b style="color:red;">{{dateError2}}</b>
+                     
                 </div>
                 <div class="form-group">
                     <label for="example-date-input" class="col-xs-2 col-form-label">Цена (РУБ.) *</label>
                     <input (keypress)="numberOnly($event)" formControlName='budget' class="form-control" type="text"  id="example-number-input">
-                    <div *ngIf="advService.getAdvForm().controls['budget'].invalid && advService.getAdvForm().controls['budget'].touched" >    
+                    <div *ngIf="advService.getAdvForm().controls['budget'].invalid && (!isValid || advService.getAdvForm().controls['budget'].touched)" >    
                         <b style="color:red !important;" class="form-text" *ngIf="advService.getAdvForm().controls['budget'].errors.required">Обязательное поле</b>
                     </div>
                 </div>          
                 <div class="form-group">
                     <label for="exampleInputEmail1">Описание</label>
                     <textarea formControlName='description' type="password" class="form-control" id="Input2" rows="5" aria-describedby="emailHelp" placeholder="Описание"></textarea>
-                    <div *ngIf="advService.getAdvForm().controls['description'].invalid && advService.getAdvForm().controls['description'].touched" >    
+                    <div *ngIf="advService.getAdvForm().controls['description'].invalid && ( !isValid ||  advService.getAdvForm().controls['description'].touched)" >    
                         <b style="color:red !important;" class="form-text" *ngIf="advService.getAdvForm().controls['description'].errors.required">Обязательное поле</b>
                     </div>
                 </div>
@@ -53,7 +59,10 @@
                 </div>
                 <div *ngIf="coverName!=undefined" class="mb-2 all-images">
                     <div class="mb-3" (click)="deleteCoverImage()">
-                        <span  matBadge="x"  matBadgeOverlap="false" >{{coverName}}</span>
+                        <span  matBadge="x"  matBadgeOverlap="false" >
+                            <i (click)="deleteCoverImage" class="fas fa-trash"></i> 
+                            {{coverName}}
+                        </span>
                     </div>
                </div>
 
@@ -69,8 +78,8 @@
                     </div>
                 </div>
                 <div class="mb-2 all-images">
-                    <div class="mb-3" *ngFor="let not of allNames; let i = index" (click)="deleteImageFromList(i)">
-                        <span  matBadge="x"  matBadgeOverlap="false" >{{not}}</span>
+                    <div class="mb-3" *ngFor="let not of allNames; let i = index">
+                        <span><i (click)="deleteImageFromList(i)" class="fas fa-trash"></i> {{not}}</span>
                     </div>
                </div>
                 <div>

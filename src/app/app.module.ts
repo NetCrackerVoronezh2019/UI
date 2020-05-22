@@ -12,7 +12,9 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu'
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
 
+import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {SignInService} from './sign-in/Services/signIn.Service';
 import {WebSocketService} from './home/Services/Socket.service';
@@ -93,7 +95,9 @@ const appRoutes: Routes =[
   {path:"admin/allDocuments",component:TeacherDocumentsComponent},
   {path:"userControl",component:UserControllComponent},
   {path:"groupCreate",component:GroupCreateComponent},
-  {path:"changeProperties/:id",component:ChangePropertiesComponent}
+  {path:"changeProperties/:id",component:ChangePropertiesComponent},
+  
+
 ];
 
 @NgModule({
@@ -146,13 +150,16 @@ const appRoutes: Routes =[
     MatInputModule,
     MatBadgeModule,
     BrowserModule,
+    MatInputModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    MatDatepickerModule,
     MatCheckboxModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatTableModule,
+    MatSelectModule,
     MatIconModule,
     MatButtonModule,
     MatExpansionModule,
