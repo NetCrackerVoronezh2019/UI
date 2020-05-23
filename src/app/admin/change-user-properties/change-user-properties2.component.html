@@ -24,7 +24,7 @@
            </div>
            <div class="data mt-3">
                <div><span>Почта - </span>{{user.email}}</div>
-               <div><span>Дата рождения - </span>{{user.birthDate.split('T')[0]}}</div>
+               <div><span>Дата рождения - </span>{{birthDate(user.birthDate)}}</div>
                <div><span> Пол- </span>{{getGender(user.gender)}}</div>
                <div><span> Статус - </span>{{getStatus(user.IsActivate)}}</div>
             </div>

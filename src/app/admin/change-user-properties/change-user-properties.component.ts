@@ -80,6 +80,13 @@ export class ChangeUserPropertiesComponent implements OnInit {
       return 'Женский'
   }
 
+  birthDate(birthday)
+  {
+      if(birthday==undefined)
+        return ""
+      else
+        return birthday.split('T')[0];
+  }
   getStatus(status)
   {
     if(status==true)
