@@ -133,6 +133,10 @@ if(status=='СOMPLETED')
     )
   }
 
+  close()
+  {
+    this.getAdvById(this.id);
+  }
   getAdvById(id)
   {
     console.log("user"+id);
@@ -212,8 +216,13 @@ if(status=='СOMPLETED')
   {
       this.service.deleteAdvertisement(this.id)
           .subscribe(
-            data=>{},
-            error=>console.log(this.deleteMessage="Произошла ошибка")
+            data=>{this.deleteMessage="Объявление удалено"},
+            error=>this.deleteMessage="Произошла ошибка"
           )
+  }
+
+  deleteClose()
+  {
+    this.router.navigate(['/']); 
   }
 }

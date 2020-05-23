@@ -84,7 +84,7 @@ export class ChangeUserPropertiesComponent implements OnInit {
   {
     if(status==true)
       return 'Активный'
-    if(status=false)
+    if(status==false)
       return 'Неактивный' 
   }
 

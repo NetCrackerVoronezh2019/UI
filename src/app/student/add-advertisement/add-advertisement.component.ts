@@ -138,13 +138,13 @@ export class AddAdvertisementComponent implements OnInit {
     
      
     if(now>date)
-      this.dateError1="Вы выбрали прошедшую дату"
+      this.dateError1="Дедлайн не может быть в прошлом"
       else
       {
         this.dateError1=undefined;
       }
-    if(date.getFullYear()>2022)
-        this.dateError2="до 2022"
+    if(date.getFullYear()>2030)
+        this.dateError2="до 2030"
       else
       {
         this.dateError2=undefined

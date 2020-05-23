@@ -26,6 +26,7 @@ export class UpdateAdvertisementComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   subjects:Subject;
+  message="";
   advertisement:Advertisement;
 
   constructor(private router: Router,private service:AdvertisementService) { }
@@ -73,10 +74,19 @@ export class UpdateAdvertisementComponent implements OnInit {
 
   onSubmit()
   {
+     this.message="Отправка . . ."
      this.service.updateData(this.id,this.tags,this.allFiles).
     subscribe(
-      (data)=>  this.router.navigate(['/']),
-      (error)=>console.log(error)
+     (data)=> {   
+      this.message ='Успешно';
+     
+    },
+      
+      (error)=>{
+        setTimeout(()=>{   
+          this.message ='Ошибка';
+          }, 5000)
+      }
     )
   }
 

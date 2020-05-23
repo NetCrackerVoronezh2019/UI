@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label for="example-date-input" class="col-xs-2 col-form-label">Дедлайн</label>
                      <input formControlName='deadlineDate' (change)="dateEvent()" class="form-control" type="date"  id="example-date-input">
-                     <div *ngIf="advService.getAdvForm().controls['deadlineDate'].invalid && (!deadlineDate || advService.getAdvForm().controls['deadlineDate'].touched)" >    
+                     <div *ngIf="advService.getAdvForm().controls['deadlineDate'].invalid && (!isValid || advService.getAdvForm().controls['deadlineDate'].touched)" >    
                         <b style="color:red !important;" class="form-text" *ngIf="advService.getAdvForm().controls['deadlineDate'].errors.required">Обязательное поле</b>
                     </div>
                      <b style="color:red;">{{dateError1}}</b>

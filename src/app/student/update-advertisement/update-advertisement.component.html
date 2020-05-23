@@ -77,9 +77,11 @@
                     </div>
                </div>
             </div>
-            <div class="col-6 m-2 d-flex justify-content-center">
-                <button type="button "  data-dismiss="modal" (click)="onSubmit()" class="btn btn-success">Cохранить изменения</button>
-              </div> 
+            <div class="col-6 mt-2 d-flex justify-content-center">
+                <button type="button "(click)="onSubmit()" class="btn btn-success">Cохранить изменения</button>
+            </div>
+            <span class="mb-2">{{message}}</span>
+             
         </div>
     </div>
 </form>

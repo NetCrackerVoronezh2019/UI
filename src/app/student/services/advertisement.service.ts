@@ -57,7 +57,7 @@ export class AdvertisementService
                 allFiles,
             };
             console.log(body);
-            return this.http.post("http://localhost:1122"+'/updateAdvertisementInformation',body);
+            return this.http.post(this.baseUrl+'/updateAdvertisementInformation',body);
         }
         sendData(tags:Tag[],allFiles,coverImage)
         {

@@ -80,6 +80,11 @@ export class Userpage2Component implements OnInit {
           error=>console.log(error)
         )
   }
+
+  closeEditModal()
+  {
+    this.getUserData(this.id);
+  }
   onAccept(x:AdvNotification)
   {
     x.notification.responseStatus="ACCEPTED";

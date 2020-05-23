@@ -43,11 +43,11 @@
                             <i class="ace-icon fa fa-envelope-o bigger-110"></i>
                             <span class="bigger-110">Обновить фотографию</span>
                         </button>
-                        <button *ngIf="myId==id"  class="btn btn-sm btn-block btn-danger">
+                        <button *ngIf="myId==id" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#editModalWindow" class="btn btn-sm btn-block btn-danger">
                             <i class="ace-icon fa fa-envelope-o bigger-110"></i>
                             <span class="bigger-110">Редактировать</span>
                         </button>
-                    </div><!-- /.col -->
+                    </div>
 
                     <div class="col-xs-12 col-sm-9">
                         <h4 class="blue">
@@ -285,3 +285,21 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="editModalWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" (click)="closeEditModal()" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <app-change-properties [(user)]="user"></app-change-properties>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+

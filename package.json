@@ -36,6 +36,7 @@
     "@babel/plugin-proposal-numeric-separator": "^7.8.3",
     "@babel/preset-env": "7.5.5",
     "@stomp/ng2-stompjs": "^7.2.0",
+    "@types/jquery": "^3.3.38",
     "angular-material": "^1.1.21",
     "core-js": "^3.6.5",
     "express": "^4.17.1",

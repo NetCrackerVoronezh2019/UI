@@ -8,7 +8,6 @@ import { Message } from '@ConversationClasses/message'
 import { Notification } from '@ConversationClasses/Notification'
 import * as Webstomp from 'webstomp-client';
 import { Client} from 'webstomp-client';
-import $ from 'jquery';
 import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({

@@ -35,7 +35,7 @@ export class SubjectService
         }
         
         console.log(body);
-        return this.http.post("http://95.30.222.140:9080/admin/addNewSubject",body);
+        return this.http.post(this.baseUrl+"/admin/addNewSubject",body);
     }
 
 }
