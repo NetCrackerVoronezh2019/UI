@@ -66,13 +66,13 @@
       <button mat-raised-button class="ml-2" (click)="acceptSettings()"><i class="fas fa-check-circle"></i>Изменить</button>
       <button mat-raised-button class="ml-2" (click)="closeSetings()"><i class="fas fa-minus-circle"></i>Закрыть</button>
       <div class="example-2">
-            <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)"  multiple accept="image/*" class="input-file"/>
+            <input type="file" name="file" id="fil"  (change)="handleFileInput($event.target.files)"  multiple accept="image/*" class="input-file"/>
             <label for="file" class="btn btn-tertiary js-labelFile">
               <i class="icon fa fa-check"></i>
               <span class="js-fileName"> Загрузить Аватар</span>
             </label>
       </div>
-      <span  matBadge="x"  matBadgeOverlap="false" >{{fileName}}</span>
+      <span class="mb-3"  matBadgeOverlap="false" >{{fileName}}</span>
       <label for="file" class="btn btn-tertiary js-labelFile">
         <button class="js-fileName" *ngIf="avatar!=undefined" (click)="setAvatar()"><i class="icon fa fa-check"></i> Изменить Аватар</button>
       </label>
