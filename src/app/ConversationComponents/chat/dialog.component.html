@@ -74,7 +74,7 @@
       </div>
       <span *ngIf="fileName != null" class="mb-3"  matBadgeOverlap="false" >{{fileName}}</span>
       <label for="file" class="btn btn-tertiary js-labelFile">
-        <button class="js-fileName" *ngIf="avatar!=undefined" (click)="setAvatar()"><i class="icon fa fa-check"></i> Изменить Аватар</button>
+        <button mat-raised-button class="js-fileName" *ngIf="avatar!=undefined" (click)="setAvatar()"><i class="icon fa fa-check"></i> Изменить Аватар</button>
       </label>
       </div>
     <div *ngIf="userSearchPanelVisible">
