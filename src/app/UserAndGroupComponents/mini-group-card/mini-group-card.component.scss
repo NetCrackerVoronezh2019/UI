@@ -34,7 +34,7 @@
 .inner-part .img{
   display:flex;
   align-items:center;
-  height:70px;
+  min-height:70px;
   width: 70px;
   overflow: hidden;
   border-radius: 20px;
@@ -52,7 +52,6 @@
 }
 
 .content{
-  width:5px;
   height:98%;
   transition: .6s;
   margin-top: 10px;
