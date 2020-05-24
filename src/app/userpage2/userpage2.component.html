@@ -237,7 +237,7 @@
                                     </ul>
                                     <ul *ngIf="checkGroups" id='group-list'>
                                       <div *ngFor="let gr of groups">
-                                          <app-mini-group-card [(gr)]="gr"></app-mini-group-card>
+                                          <app-mini-group-card [(gr)]="gr" routerLink="groupPage/{{gr.groupId}}"></app-mini-group-card>
                                       </div>
                                     </ul>
                           </div>
