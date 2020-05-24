@@ -24,8 +24,8 @@ export class CommentCardComponent implements OnInit {
 
   ngOnInit() {
     this.date = this.comment.date.split('T')[0]+ ' ' + (this.comment.date.split('T')[1]).split('.')[0]
-    if (this.user.image != null) {
-      this.downloadProfileImage(this.user.image);
+    if (this.comment.sender.image != null) {
+      this.downloadProfileImage(this.comment.sender.image);
     }
   }
 
