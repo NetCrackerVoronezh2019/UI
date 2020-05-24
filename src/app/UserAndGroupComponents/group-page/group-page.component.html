@@ -156,7 +156,7 @@
       <button *ngIf="!addAdmin && !removeAdmin && creator" mat-raised-button class="ml-2" (click)="showRemoveAdmin()"><i class="fas fa-minus-circle"></i>Удалить</button>
       <button *ngIf="addAdmin || removeAdmin" mat-raised-button class="ml-2" (click)="closeAddRemoveAdmin()"><i class="fas fa-times"></i>Отмена</button>
       <div *ngIf="!addAdmin && !removeAdmin">
-      <div *ngFor ='let user of admins' align="center">
+      <div *ngFor ='let us of admins' align="center">
         <app-user-card [(us)]="us" routerLink="/userPage/{{us.userId}}"></app-user-card>
       </div>
     </div>
