@@ -236,6 +236,8 @@ export class ChatComponent implements OnInit {
 
   closeSetings() {
     this.settingsVisible = false;
+    this.fileName = null;
+    this.avatar = null;
   }
 
   acceptSettings() {
@@ -265,6 +267,8 @@ export class ChatComponent implements OnInit {
         this.dialogImage = this.avatar;
         this.dialog.image = "";
         this.loading = true;
+        this.fileName = null;
+        this.avatar = null;
       })
     }
 
