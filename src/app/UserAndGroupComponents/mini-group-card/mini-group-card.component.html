@@ -2,16 +2,12 @@
 <div *ngIf="true" class="blog-card" routerLink="/groupPage/{{group.groupId}}">
     <div class="inner-part">
       <label class="img">
-        <img *ngIf="group.image==null"  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
-        <img *ngIf="group.image!=null && loading"  [src]="groupImage"/>
+        <img *ngIf="gr.image==null"  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
+        <img *ngIf="gr.image!=null && loading"  [src]="groupImage"/>
       </label>
       <div class="content ">
-        <div class="title">{{group.name}}</div>
-        <label for="">{{group.subjectName}}</label>
-      </div>
-      <div class="mr-4 notification">
-          <mat-icon class="userInfo cursor" *ngIf="group.countNot>0" matBadge={{group.countNot}} matBadgeColor="warn"></mat-icon>
-          <p *ngIf="group.admin">Администратор</p>
+        <div class="title">{{gr.name}}</div>
+        <label for="">{{gr.subjectName}}</label>
       </div>
     </div>
   </div>
