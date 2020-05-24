@@ -19,6 +19,7 @@
                                     </p>
                                     <div *ngIf="order">
                                       <p  class="order-status m-0">статус заказа - {{getStatus(order.status)}}</p>
+                                      <p routerLink="/userPage/{{order.freelancerId}}" class="order-status">{{order.freelancerFIO}}</p>
                                       <button *ngIf="userId==order.freelancerId && order.nextStatus!=undefined" (click)="changeStatus()" class="btn btn-success order-status m-0">{{getNextStatus(order.nextStatus)}}</button>
                                     </div>
                                 </div>

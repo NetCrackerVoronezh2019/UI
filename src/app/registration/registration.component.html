@@ -41,7 +41,6 @@
                 </div>
                 <div *ngIf="regService.getRegForm().controls['birthDate'].invalid && (!isValid || regService.getRegForm().controls['birthDate'].touched)" >    
                     <b class="form-text" *ngIf="regService.getRegForm().controls['birthDate'].errors.required">Обязательное поле</b>
-                   
                 </div>
             </div>
             <div class="col-md-4 col-sm-12">

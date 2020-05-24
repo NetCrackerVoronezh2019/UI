@@ -30,8 +30,9 @@ export class RegistrationComponent implements OnInit {
   
   }
   ngOnInit() {
+    this.getAllSubjects();
     this.certificateFiles.push(new CertificateFile());
-    this.getAllSubjects()
+   
   }
 
   addSection()
@@ -39,6 +40,11 @@ export class RegistrationComponent implements OnInit {
     this.certificateFiles.push(new CertificateFile());
   }
 
+  sectionChange(value,i)
+  {
+    this.certificateFiles[i].section=value;
+    console.log(value);
+  }
 
   dateEvent(event)
   {
@@ -62,7 +68,7 @@ export class RegistrationComponent implements OnInit {
       this.regService.checkEmail()
         .subscribe(
           (data:Boolean)=>{
-            if(!this.regService.getRegForm().invalid)
+            if(this.yearMessage==undefined && !this.regService.getRegForm().invalid)
             {
               this.sendData=true;
               this.isValid=true;
@@ -139,16 +145,11 @@ export class RegistrationComponent implements OnInit {
     this.certificateFiles[i].allFiles.splice(j,1);
   }
 
-  sectionChange(value,i)
-  {
-    this.certificateFiles[i].section=value;
-    console.log(value);
-  }
   getAllSubjects()
   {
     this.regService.getSubjects()
         .subscribe(
-          (data:Subject[])=>{this.subjects=data, console.log(this.subjects)},
+          (data:Subject[])=>{this.subjects=data,  this.certificateFiles[0].section=this.subjects[0].translateName;},
           error=>console.log(error)          
         )
   }
