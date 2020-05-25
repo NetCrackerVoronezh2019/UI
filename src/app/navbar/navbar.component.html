@@ -3,7 +3,7 @@
         <div class="navbar-blocks">
             <div class="navbar-menu">
               <a  mat-raised-button class="mr-2" routerLink="/">Главная</a>
-                <a *ngIf="isLogin && !isAdmin" mat-raised-button [ngClass]="UserInfo.banTime!=undefined ? 'disabled mr-2':'mr-2'" (click)="addNewAdvertisement()"><i class="fas fa-plus-circle"></i> Добавить Объявление</a>
+                <a *ngIf="isLogin && UserInfo.roleName=='ROLE_STUDENT'" mat-raised-button [ngClass]="UserInfo.banTime!=undefined ? 'disabled mr-2':'mr-2'" (click)="addNewAdvertisement()"><i class="fas fa-plus-circle"></i> Добавить Объявление</a>
                 <a  *ngIf="isAdmin" mat-raised-button class="mr-2" routerLink="/admin/changeprop">Пользователи</a>
                 <a  *ngIf="isAdmin" mat-raised-button сlass="m-2" routerLink="/admin/allDocuments">Документы</a>
                 <a  *ngIf="isAdmin" mat-raised-button  class="ml-2"routerLink="/admin/subjectcontrol">Предметы</a>
@@ -22,7 +22,7 @@
                 </p>
                 <a mat-raised-button class="mr-2" routerLink="/friends">Друзья</a>
                 <a *ngIf="!isAdmin" mat-raised-button class="mr-2" routerLink="/myorders" >Мои заказы</a>
-                 <a *ngIf="!isAdmin" mat-raised-button class="mr-2" routerLink="/myadvertisements" >Мои объявления</a>
+                 <a *ngIf="UserInfo.roleName=='ROLE_STUDENT'" mat-raised-button class="mr-2" routerLink="/myadvertisements" >Мои объявления</a>
                   <a mat-raised-button class="mr-2" routerLink="/" (click)="Logout()">Выход</a>
                    <a mat-raised-button class="mr-2"  routerLink="/userPage/{{UserInfo.userId}}">Личный Кабинет</a>
               </div>
