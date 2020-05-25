@@ -12,16 +12,16 @@
           <form [formGroup]="dgService.getUserSearchForm()">
             <h5>Поиск</h5>
             <label for="">Имя</label>
-            <input type="text" class="form-control" formControlName="firstName" autocomplete="off" placeholder="first name">
+            <input type="text" class="form-control" formControlName="firstName" autocomplete="off" placeholder="Имя">
             <div *ngIf="dgService.getUserSearchForm().controls['firstName'].invalid && dgService.getUserSearchForm().controls['firstName'].touched" >
-              <small  *ngIf="dgService.getUserSearchForm().controls['firstName'].errors.minlength">name is too short</small>
-              <small  *ngIf="dgService.getUserSearchForm().controls['firstName'].errors.maxlength">name is too long</small>
+              <small  *ngIf="dgService.getUserSearchForm().controls['firstName'].errors.minlength">Имя слишком короткое</small>
+              <small  *ngIf="dgService.getUserSearchForm().controls['firstName'].errors.maxlength">Имя слишком длинное</small>
             </div>
             <label for="">Фамилия</label>
-            <input type="text" class="form-control" formControlName="lastName" autocomplete="off" placeholder="last name">
+            <input type="text" class="form-control" formControlName="lastName" autocomplete="off" placeholder="Фамилия">
             <div *ngIf="dgService.getUserSearchForm().controls['lastName'].invalid && dgService.getUserSearchForm().controls['lastName'].touched" >
-              <small  *ngIf="dgService.getUserSearchForm().controls['lastName'].errors.minlength">name is too short</small>
-              <small  *ngIf="dgService.getUserSearchForm().controls['lastName'].errors.maxlength">name is too long</small>
+              <small  *ngIf="dgService.getUserSearchForm().controls['lastName'].errors.minlength">Имя слишком короткое</small>
+              <small  *ngIf="dgService.getUserSearchForm().controls['lastName'].errors.maxlength">Имя слишком длинное</small>
             </div>
           </form>
           <button mat-raised-button class="ml-2" (click)="search()"><i class="fas fa-search"></i>Поиск</button>

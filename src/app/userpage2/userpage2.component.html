@@ -237,13 +237,7 @@
                                     </ul>
                                     <ul *ngIf="checkGroups" id='group-list'>
                                       <div *ngFor="let gr of groups">
-                                          <li class='group' routerLink="/groupPage/{{gr.groupId}}">
-                                            <img *ngIf="gr.image==null"  src='https://mentoringgroup.com/files/images/puzzle-team.jpg'/>
-                                            <img *ngIf="gr.image!=null"  src='http://localhost:1234/getAdvImg/{{gr.image}}'/>
-                                            <div class='name'>
-                                              {{gr.name}}
-                                            </div>
-                                          </li>
+                                          <app-mini-group-card [(gr)]="gr" routerLink="groupPage/{{gr.groupId}}"></app-mini-group-card>
                                       </div>
                                     </ul>
                           </div>
@@ -297,9 +291,7 @@
         <div class="modal-body">
             <app-change-properties [(user)]="user"></app-change-properties>
         </div>
-        
+
       </div>
     </div>
   </div>
-
-

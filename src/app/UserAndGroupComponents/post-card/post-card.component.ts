@@ -75,10 +75,12 @@ export class PostCardComponent implements OnInit {
   }
 
   sendComment() {
-    this.ps.sendComment(this.user,this.post.postId).subscribe(data => {
-      this.getComments();
-      this.createCommentVisible = false;
-    })
+    if (this.ps.getCommentCreateForm().controls['text'].invalid) {
+      this.ps.sendComment(this.user,this.post.postId).subscribe(data => {
+        this.getComments();
+        this.createCommentVisible = false;
+      })
+    }
   }
 
   showPostSettings() {

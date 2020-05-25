@@ -156,7 +156,7 @@
       <button *ngIf="!addAdmin && !removeAdmin && creator" mat-raised-button class="ml-2" (click)="showRemoveAdmin()"><i class="fas fa-minus-circle"></i>Удалить</button>
       <button *ngIf="addAdmin || removeAdmin" mat-raised-button class="ml-2" (click)="closeAddRemoveAdmin()"><i class="fas fa-times"></i>Отмена</button>
       <div *ngIf="!addAdmin && !removeAdmin">
-      <div *ngFor ='let user of admins' align="center">
+      <div *ngFor ='let us of admins' align="center">
         <app-user-card [(us)]="us" routerLink="/userPage/{{us.userId}}"></app-user-card>
       </div>
     </div>
@@ -169,13 +169,13 @@
       <form [formGroup]="gs.getUserSearchForm()">
         <h5>Поиск</h5>
         <label for="">Имя</label>
-        <input type="text" class="form-control" formControlName="firstName" autocomplete="off" placeholder="first name">
+        <input type="text" class="form-control" formControlName="firstName" autocomplete="off" placeholder="Имя">
         <div *ngIf="gs.getUserSearchForm().controls['firstName'].invalid && gs.getUserSearchForm().controls['firstName'].touched" >
           <small  *ngIf="gs.getUserSearchForm().controls['firstName'].errors.minlength">Имя слишком короткое</small>
           <small  *ngIf="gs.getUserSearchForm().controls['firstName'].errors.maxlength">Имя слишком длинное</small>
         </div>
         <label for="">Фамилия</label>
-        <input type="text" class="form-control" formControlName="lastName" autocomplete="off" placeholder="last name">
+        <input type="text" class="form-control" formControlName="lastName" autocomplete="off" placeholder="Фамилия">
         <div *ngIf="gs.getUserSearchForm().controls['lastName'].invalid && gs.getUserSearchForm().controls['lastName'].touched" >
           <small  *ngIf="gs.getUserSearchForm().controls['lastName'].errors.minlength">Имя слишком короткое</small>
           <small  *ngIf="gs.getUserSearchForm().controls['lastName'].errors.maxlength">Имя слишком длинное</small>

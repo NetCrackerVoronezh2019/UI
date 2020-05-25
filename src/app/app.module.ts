@@ -12,7 +12,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu'
-import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -96,6 +96,7 @@ const appRoutes: Routes =[
   {path:"admin/allDocuments",component:TeacherDocumentsComponent},
   {path:"userControl",component:UserControllComponent},
   {path:"groupCreate",component:GroupCreateComponent},
+  {path:"dialogCreate",component:DialogCreateComponent}
 ];
 
 @NgModule({

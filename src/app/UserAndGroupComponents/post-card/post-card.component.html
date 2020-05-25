@@ -45,7 +45,7 @@
             <label for="">Текст</label>
             <textarea maxlength="255" id="Name" type="text" class="form-control" formControlName="text" autocomplete="off" placeholder="text"></textarea>
             <div *ngIf="ps.getCommentCreateForm().controls['text'].invalid && ps.getCommentCreateForm().controls['text'].touched" >
-              <small  *ngIf="ps.getCommentCreateForm().controls['text'].errors.minlength">text is too short</small>
+              <small  *ngIf="ps.getCommentCreateForm().controls['text'].errors.minlength">Текст слишком короткий</small>
             </div>
           </div>
       </form>

@@ -58,32 +58,39 @@
             <label for="">Имя чата</label>
             <input id="Name" type="text" class="form-control" formControlName="name" autocomplete="off" placeholder="Dialog name">
             <div *ngIf="dgService.getDialogSettingsForm().controls['name'].invalid && dgService.getDialogSettingsForm().controls['name'].touched" >
-              <small  *ngIf="dgService.getDialogSettingsForm().controls['name'].errors.minlength">name is too short</small>
-              <small  *ngIf="dgService.getDialogSettingsForm().controls['name'].errors.maxlength">name is too long</small>
+              <small  *ngIf="dgService.getDialogSettingsForm().controls['name'].errors.minlength">Имя слишком короткое</small>
+              <small  *ngIf="dgService.getDialogSettingsForm().controls['name'].errors.maxlength">Имя слишком длинное</small>
             </div>
           </div>
       </form>
       <button mat-raised-button class="ml-2" (click)="acceptSettings()"><i class="fas fa-check-circle"></i>Изменить</button>
       <button mat-raised-button class="ml-2" (click)="closeSetings()"><i class="fas fa-minus-circle"></i>Закрыть</button>
-      <input type="file" name="file" id="file"  (change)="handleFileInput($event.target.files)" multiple accept="image/*" class="input-file"/>
+      <div class="example-2">
+            <input type="file" name="file" id="fil"  (change)="handleFileInput($event.target.files)"  multiple accept="image/*" class="input-file"/>
+            <label for="fil" class="btn btn-tertiary js-labelFile">
+              <i class="icon fa fa-check"></i>
+              <span class="js-fileName"> Загрузить Аватар</span>
+            </label>
+      </div>
+      <span *ngIf="fileName != null" class="mb-3"  matBadgeOverlap="false" >{{fileName}}</span>
       <label for="file" class="btn btn-tertiary js-labelFile">
-        <button class="js-fileName" *ngIf="avatar!=undefined" (click)="setAvatar()"><i class="icon fa fa-check"></i> Изменить Аватар</button>
+        <button mat-raised-button class="js-fileName" *ngIf="avatar!=undefined" (click)="setAvatar()"><i class="icon fa fa-check"></i> Изменить Аватар</button>
       </label>
       </div>
     <div *ngIf="userSearchPanelVisible">
       <form [formGroup]="dgService.getUserSearchForm()">
         <h5>Поиск</h5>
         <label for="">Имя</label>
-        <input type="text" class="form-control" formControlName="firstName" autocomplete="off" placeholder="first name">
+        <input type="text" class="form-control" formControlName="firstName" autocomplete="off" placeholder="Имя">
         <div *ngIf="dgService.getUserSearchForm().controls['firstName'].invalid && dgService.getUserSearchForm().controls['firstName'].touched" >
-          <small  *ngIf="dgService.getUserSearchForm().controls['firstName'].errors.minlength">name is too short</small>
-          <small  *ngIf="dgService.getUserSearchForm().controls['firstName'].errors.maxlength">name is too long</small>
+          <small  *ngIf="dgService.getUserSearchForm().controls['firstName'].errors.minlength">Имя слишком короткое</small>
+          <small  *ngIf="dgService.getUserSearchForm().controls['firstName'].errors.maxlength">Имя слишком длинное</small>
         </div>
         <label for="">Фамилия</label>
-        <input type="text" class="form-control" formControlName="lastName" autocomplete="off" placeholder="last name">
+        <input type="text" class="form-control" formControlName="lastName" autocomplete="off" placeholder="Фамилия">
         <div *ngIf="dgService.getUserSearchForm().controls['lastName'].invalid && dgService.getUserSearchForm().controls['lastName'].touched" >
-          <small  *ngIf="dgService.getUserSearchForm().controls['lastName'].errors.minlength">name is too short</small>
-          <small  *ngIf="dgService.getUserSearchForm().controls['lastName'].errors.maxlength">name is too long</small>
+          <small  *ngIf="dgService.getUserSearchForm().controls['lastName'].errors.minlength">Имя слишком короткое</small>
+          <small  *ngIf="dgService.getUserSearchForm().controls['lastName'].errors.maxlength">Имя слишком длинное</small>
         </div>
       </form>
       <button mat-raised-button class="ml-2" (click)="search()"><i class="fas fa-search"></i>Поиск</button>
