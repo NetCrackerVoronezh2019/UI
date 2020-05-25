@@ -7,11 +7,11 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-3 center">
 
-                        <span  *ngIf="user.userImageKey!=undefined" class="profile-picture">
+                        <span  *ngIf="user!=unedefined && user.userImageKey!=undefined" class="profile-picture">
                             <img class="prof" alt=" Avatar" style="min-width:150px;" id="avatar2" [src]="profileImage">
                         </span>
 
-                        <span  *ngIf="user.userImageKey==undefined"class="profile-picture">
+                        <span  *ngIf="user!=undefined && user.userImageKey==undefined"class="profile-picture">
                             <img class="prof" alt=" Avatar" id="avatar2" src="https://dontshake.org/media/k2/items/cache/71f67488b0857639cee631943a3fc6fa_XL.jpg">
                         </span>
 
