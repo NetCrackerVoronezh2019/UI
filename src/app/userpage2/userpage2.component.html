@@ -145,7 +145,7 @@
                             <div class="m-3">
                                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
                                     <mat-button-toggle *ngIf="user.roleName=='ROLE_TEACHER'" (click)="getFeedBack()" value="ORDER">Отзывы</mat-button-toggle>
-                                    <mat-button-toggle (click)="checkAdvEvent()" value="ADVERTISEMENT">Объявления</mat-button-toggle>
+                    
                                     <mat-button-toggle (click)="checkFriendsEvent()" value="FRIENDS">Друзья</mat-button-toggle>
                                     <mat-button-toggle (click)="checkGroupsEvent()" value="GROUPS">Группы</mat-button-toggle>
                                     <mat-button-toggle *ngIf="user.roleName=='ROLE_TEACHER'" (click)="checkAboutMeEvent()" value="AboutMe">О себе</mat-button-toggle>
