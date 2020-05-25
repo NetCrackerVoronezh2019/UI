@@ -50,10 +50,10 @@ export class RegistrationComponent implements OnInit {
   {
     let year=this.regService.getRegForm().value.birthDate.split('-')[0];
     console.log(year);
-    if(year<1950 || year>2015)
+    if(year<1900 || year>2015)
     {
        
-        this.yearMessage="Год должен быть больше 1950 и меньше 2015";
+        this.yearMessage="Год должен быть больше 1900 и меньше 2015";
     }
     else
     this.yearMessage=null;

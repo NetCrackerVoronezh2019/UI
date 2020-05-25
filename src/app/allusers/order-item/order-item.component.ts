@@ -94,6 +94,14 @@ export class OrderItemComponent implements OnInit {
         }
   }
 
+  getDate(date)
+  {
+    if(date==undefined)
+      return null;
+    else
+      return date.split('T')[0]
+  }
+
   deleteAttachments()
   {
       this.service.deleteAttachments(this.deleteNames)

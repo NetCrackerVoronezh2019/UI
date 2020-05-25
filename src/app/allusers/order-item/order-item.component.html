@@ -15,8 +15,7 @@
       <h2 *ngIf="myRole=='ROLE_STUDENT'">Преподаватель - <span style="cursor:pointer" routerLink="/userPage/{{order.freelancerId}}" >{{order.freelancerFIO}} <i routerLink="/dialog/{{order.chatId}}" class=" message far fa-paper-plane"></i>
       </span></h2>        
       <div><span class="title">Cтатус заказа - </span>{{getStatus(order.status)}}</div>
-      <div><span class="title">Дата принятия заказа - </span>24.04.2020</div>
-      <div><span class="title">Дедлайн - </span>24.04.2020</div>
+      <div><span class="title">Дедлайн - </span>{{getDate(order.advertisement.deadline)}}</div>
       <div *ngIf="order.starsForWork!='0' && order.status=='СOMPLETED'" >
         <div> <span class="title">Оценка - </span>
           <span class="rating-result">
