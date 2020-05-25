@@ -14,12 +14,10 @@
                                     <p *ngIf="!isUserAdv && can && role!='ROLE_ADMIN'" [ngClass]="can!=true? 'disabled mr-2':'mr-2'" title = "Отправить запрос"  (clock)="sendRequest()" data-toggle="modal" data-target="#RequestModel1">
                                         <i class="far fa-handshake h2"></i>
                                     </p>
-                                    <p *ngIf="role=='ROLE_ADMIN'" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#deleteModalCenter" >
-                                      <i class="fas fa-trash-alt"></i>
-                                    </p>
+                                   
                                     <div *ngIf="order">
                                       <p  class="order-status m-0">статус заказа - {{getStatus(order.status)}}</p>
-                                      <p routerLink="/userPage/{{order.freelancerId}}" class="order-status">{{order.freelancerFIO}}</p>
+                                      <p *ngIf="userId!=order.freelancerId" routerLink="/userPage/{{order.freelancerId}}" class="order-status">Преподаватель - {{order.freelancerFIO}}</p>
                                       <button *ngIf="userId==order.freelancerId && order.nextStatus!=undefined" (click)="changeStatus()" class="btn btn-success order-status m-0">{{getNextStatus(order.nextStatus)}}</button>
                                     </div>
                                 </div>
@@ -38,7 +36,9 @@
                                     </p>
                                    
                                    </div>
-                                {{adv.advertisementName}}                            
+                                {{adv.advertisementName}}   <span *ngIf="role=='ROLE_ADMIN'" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#deleteModalCenter" >
+                                  <i class="fas fa-trash-alt"></i>
+                                </span>                      
                             </div>
                             <div *ngIf="adv.coverImageKey!=undefined"class="col-12 p-0 advertisement-img">
                               <img [src]="coverImage" />    

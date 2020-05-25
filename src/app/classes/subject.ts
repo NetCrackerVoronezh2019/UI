@@ -1,6 +1,6 @@
 export class Subject
 {
-    private id:String;
+    public id:Number;
     private name:String;
     public translateName:String;
     private url:String

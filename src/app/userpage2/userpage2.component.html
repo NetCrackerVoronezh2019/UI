@@ -59,8 +59,8 @@
                                 <i class="fas fa-mobile-alt c-orange mr-1"></i>
                                 online
                             </span>
-                            <span  class="lastOnline" *ngIf="!user.isOnline">
-                                Последний раз был в сети {{user.lastTimeWasONLINE.split('T')[1].split('.')[0]}}
+                            <span  class="lastOnline" *ngIf="!user.isOnline && user.lastTimeWasONLINE!=undefined">
+                                Последний раз был в сети {{onlineDate()}}
                             </span>
 
                         </h4>

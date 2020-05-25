@@ -7,13 +7,19 @@
                 <input formControlName="translateName" type="text" class="form-control" id="translateName" placeholder="Название предмета">
             </div>
             
-            <button type="submit" (click)="Submit()" class="btn btn-primary mb-2">Добавить</button>
+            <button type="submit" *ngIf="!isEdit" (click)="submit()" class="btn btn-primary mb-2">Добавить</button>
+            <button type="submit" *ngIf="isEdit" (click)="edit()" class="btn btn-primary mb-2">Редактировать</button>
+            <span class='ml-2' style="color:red;">{{message}}</span>
         </form>
     </div>
     <table mat-table [dataSource]="subjects" class="mat-elevation-z8">
         <ng-container matColumnDef="translateName">
             <th mat-header-cell *matHeaderCellDef> Предмет (RUS) </th>
             <td mat-cell *matCellDef="let element"> {{element.translateName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Редактировать </th>
+            <td  style="font-size:18px;" (click)="setEditElement(element)" mat-cell *matCellDef="let element"><i class="fas fa-edit"></i></td>
         </ng-container>
         
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

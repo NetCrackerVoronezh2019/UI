@@ -70,7 +70,12 @@ export class Userpage2Component implements OnInit {
     } )
   }
 
-  
+  onlineDate()
+  {
+    if(this.user.lastTimeWasONLINE==undefined)
+      return ""
+    return this.user.lastTimeWasONLINE.split('T')[1].split('.')[0]
+  }
 
   getAllValidSubjects(id)
   {

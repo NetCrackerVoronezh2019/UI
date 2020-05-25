@@ -12,7 +12,10 @@ export class SubjectControlComponent implements OnInit {
 
   subjects:Subject[];
   load=false;
-  displayedColumns: string[] = ['translateName'];
+  editedSubject:Subject;
+  isEdit=false;
+  displayedColumns: string[] = ['translateName','action'];
+  message;
   constructor(private service:SubjectService) { }
 
   ngOnInit() {
@@ -26,13 +29,40 @@ export class SubjectControlComponent implements OnInit {
     )
   }
 
-  Submit()
+  edit(){
+    this.service.editSubject()
+      .subscribe(
+        (data)=>{this.isEdit=false,this.getSubjects()},
+        error=>console.log(error)
+      )
+  }
+
+  submit()
   {
     console.log("Send Data");
     this.service.sendNewSubject()
     .subscribe(
-      (data)=>{console.log(data),this.getSubjects()},
-      (error)=>console.log(error)
+      (data)=>{
+        console.log(data),
+        console.log("OK"); 
+        this.getSubjects(),
+       setTimeout(()=>{   
+         this.message ='Успешно';
+        }, 3000)
+    },
+      (error)=>{
+        setTimeout(()=>{   
+          this.message ='Ошибка';
+          }, 3000)
+      },
+      
     )
+  }
+
+  setEditElement(subject:Subject)
+  {
+    this.editedSubject=subject;
+    this.isEdit=true;
+    this.service.setFormControl(subject.id,subject.translateName)
   }
 }
