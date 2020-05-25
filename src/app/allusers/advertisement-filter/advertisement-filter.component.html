@@ -3,12 +3,7 @@
     <form [formGroup]="service.getFilterForm()">
      <div class="myrow pt-4">
             <div class=" col-3 choose_bar d-flex justify-content-end">         
-                <div state='FREELANCE'  [ngClass]="state=='FREELANCE'?'check-button check-button-border':'check-button'" (click)="changeState($event)" >
-                   Я Преподаватель
-                 </div>
-                 <div  state='ORDER' [ngClass]="state=='ORDER'?'check-button check-button-border':'check-button'" (click)="changeState($event)">
-                  Я Студент
-                 </div>
+                
             </div>
             <div class="search_bar col-6">
                 <input type="text" formControlName="searchRow" class="search_input" placeholder="Поиск"/>
