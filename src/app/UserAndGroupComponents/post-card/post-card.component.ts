@@ -75,7 +75,7 @@ export class PostCardComponent implements OnInit {
   }
 
   sendComment() {
-    if (this.ps.getCommentCreateForm().controls['text'].invalid) {
+    if (!this.ps.getCommentCreateForm().controls['text'].invalid) {
       this.ps.sendComment(this.user,this.post.postId).subscribe(data => {
         this.getComments();
         this.createCommentVisible = false;
