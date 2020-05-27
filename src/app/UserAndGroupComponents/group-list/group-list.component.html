@@ -4,13 +4,13 @@
         <button mat-raised-button class="ml-2" routerLink="/groupCreate" *ngIf="!searchPanelVisible"><i class="fas fa-plus-circle"></i> Создать группу</button>
         <button mat-raised-button class="ml-2" (click)="openSearchPanel()"><i class="fas fa-search"></i> Поиск</button>
         <form *ngIf="searchPanelVisible" [formGroup]="groupService.getGroupSearchPanel()" class="mt-5">
-          <h5>Search Group</h5>
+          <h5>Поиск группы</h5>
             <div class="form-group container" >
-              <label for="">Group name</label>
-              <input id="groupName" type="text" class="form-control" formControlName="searchName" autocomplete="off" placeholder="Group name">
+              <label for="">Имя</label>
+              <input id="groupName" type="text" class="form-control" formControlName="searchName" autocomplete="off" placeholder="Имя">
               <div *ngIf="groupService.getGroupSearchPanel().controls['searchName'].invalid && groupService.getGroupSearchPanel().controls['searchName'].touched" >
-                <small class="form-text text-muted" *ngIf="groupService.getGroupSearchPanel().controls['searchName'].errors.minlength">name is too short</small>
-                <small  class="form-text text-muted" *ngIf="groupService.getGroupSearchPanel().controls['searchName'].errors.maxlength">name is too long</small>
+                <small class="form-text text-muted" *ngIf="groupService.getGroupSearchPanel().controls['searchName'].errors.minlength">Имя слишком короткое</small>
+                <small  class="form-text text-muted" *ngIf="groupService.getGroupSearchPanel().controls['searchName'].errors.maxlength">Имя слишком длинное</small>
               </div>
               <label  for="sel1">Раздел</label>
               <select formControlName="groupSection" class="custom-select" id="sel1" placeholder="Выберите Раздел">
