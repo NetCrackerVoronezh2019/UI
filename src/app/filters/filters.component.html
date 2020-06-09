@@ -1,0 +1,43 @@
+<div class="filters">
+        <div   class="search m-0">
+            <input  type="text" class="searchTerm" placeholder="Search">
+            <button type="submit" class="searchButton">
+              <i class="fa fa-search"></i>
+            </button>
+        </div>
+        <div class="base-filters m-0">
+            <mat-accordion>       
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Фильтры
+                    </mat-panel-title>
+                   
+                  </mat-expansion-panel-header>
+                  <div class="form-group price">
+                    <input formControlName="minPrice" type="text" (keypress)="numberOnly($event)" class="mr-3 col-2 form-control" id="min" placeholder="мин. цена">
+                    <input type="text"  formControlName="maxPrice" (keypress)="numberOnly($event)" class="form-control col-2" id="max" placeholder="макс. цена">
+                </div>
+                <div class="mb-2 price">
+                 
+                  <section class="example-section">
+                      <mat-checkbox class="example-margin mr-2" [(ngModel)]="red">Красный</mat-checkbox>
+                      <mat-checkbox class="example-margin mr-2" [(ngModel)]="black">Черный</mat-checkbox>
+                      <mat-checkbox class="example-margin mr-2" [(ngModel)]="white">Белый</mat-checkbox>
+                      <mat-checkbox class="example-margin mr-2" [(ngModel)]="yellow">Жёлтый</mat-checkbox>
+                    </section>
+              </div>
+              <div class="mb-2 price">
+                  <section class="example-section">
+                      <mat-checkbox class="example-margin mr-2" [(ngModel)]="S">S</mat-checkbox>
+                      <mat-checkbox class="example-margin mr-2" [(ngModel)]="M">M</mat-checkbox>
+                      <mat-checkbox class="example-margin mr-2" [(ngModel)]="XXL">XXL</mat-checkbox>
+                      <mat-checkbox class="example-margin mr-2" [(ngModel)]="XXXL">XXXL</mat-checkbox>
+                    </section>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+              
+        </div>
+</div>

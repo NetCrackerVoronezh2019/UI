@@ -1,0 +1,99 @@
+.preparation-title
+{
+   text-transform: uppercase;
+   font-weight:600;
+   font-size:24px;
+   color:#9e9e9e;
+}
+
+.order-reg-page
+{
+    padding:0 10% 50px 10%;
+    
+}
+.preparation
+{
+    background-color:white;
+    box-shadow:0px 4px 8px 0px rgba(5,5,5,0.33);
+    margin-bottom:55px;
+    margin-top:20px;
+
+}
+
+.btn-div
+{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.error-message
+{
+    color:teal;
+    font-size:15px;
+}
+
+
+.contact-info-text
+{
+    color:#9e9e9e;
+    font-size: 15px;
+    font-weight:500;
+}
+
+
+.check-button
+{
+    width:100%;
+    padding:7px 0;
+    background-color:#fbfbfb;
+    display:flex;
+    justify-content:center;
+
+    &:hover
+    {
+        cursor:pointer;
+    }
+}
+
+.check-button-border
+{
+    border:2px solid #e64927;
+}
+
+.cart-item-info-title
+{
+    font-size:18px;
+    font-weight:500;
+}
+
+.orderx
+{
+    width:100%;
+    display:flex;
+}
+.cart-img
+{
+    width:111px;
+}
+.preparation-cart
+{
+    border:2px solid teal;
+    padding: 15px;
+}
+
+.preparation-cart-title
+{
+    font-weight:500;
+}
+
+.edit-cart
+{
+    color:blue;
+}
+
+.total-sum
+{
+    font-size:24px;
+    font-weight:555;
+}

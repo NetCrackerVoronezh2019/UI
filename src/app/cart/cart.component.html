@@ -1,0 +1,22 @@
+<div class="cart">
+    <div class="cart-container">
+       
+      <p *ngFor="let cartItem of allItems; let i = index" >
+         <app-cart-item [(cartItem)]="cartItem"></app-cart-item>
+      </p>
+        
+         <div class="cart-footer cart-footer">
+       <div class="container">
+          <div class="row">
+              <div class="col">
+                 Итого:
+                 <span class="cart-total-price"> 990руб.</span>
+              </div>
+              <div class="col d-flex justify-content-end">
+                 <button type="button" class="btn btn-secondary">Оформить заказ</button>
+              </div>
+          </div>
+       </div>
+      </div>
+    </div>       
+ </div>

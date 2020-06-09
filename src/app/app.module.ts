@@ -1,180 +1,73 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
-import {MatExpansionModule} from '@angular/material/expansion';
-import { AppComponent } from './app.component';
 import { ReactiveFormsModule }   from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { SigninComponent } from './signin/signin.component';
+import {Routes, RouterModule} from '@angular/router'
 import { HttpClientModule } from '@angular/common/http';
-import {Routes, RouterModule} from '@angular/router';
-import { AuthInterceptor } from './auth/auth.interceptor';
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import {MatChipsModule} from '@angular/material/chips';
-import {MatMenuModule} from '@angular/material/menu'
-import {MatDatepickerModule} from '@angular/material/datepicker';
-
-import {MatSelectModule} from '@angular/material/select';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {SignInService} from './sign-in/Services/signIn.Service';
-import {WebSocketService} from './home/Services/Socket.service';
-import { ActivatePageComponent } from './activate-page/activate-page.component';
-import { ChangeUserPropertiesComponent } from './admin/change-user-properties/change-user-properties.component'
-import {MatTableModule} from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import {AuthService} from './auth/auth.service';
-import {AuthGuard} from './auth/auth.guard';
-import {HttpModule} from '@angular/http';
-import { HomeComponent } from './home/home.component';
-import {MatButtonModule} from '@angular/material/button';
-import { AddAdvertisementComponent } from './student/add-advertisement/add-advertisement.component';
-import {AdvertisementComponent} from './allusers/advertisement/advertisement.component';
-import { AllAdvertisementsComponent } from './allusers/all-advertisements/all-advertisements.component';
-import { AdvertisementCardComponent } from './allusers/advertisement-card/advertisement-card.component';
-import { DialogCardComponent } from './ConversationComponents/dialogCard/dialog-card.component';
-import { RoleControlComponent } from './admin/role-control/role-control.component';
-import {RegistrationComponent} from './registration/registration.component';
-import {SignInComponent} from './sign-in/sign-in.component'
-import { SubjectControlComponent } from './admin/subject-control/subject-control.component'
-import { DialogsListComponent } from './ConversationComponents/dialogsList/dialogsList.component';
-import { ChatComponent } from './ConversationComponents/chat/dialog.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { UpdateAdvertisementComponent } from './student/update-advertisement/update-advertisement.component';
-import {MatBadgeModule} from '@angular/material/badge'
-import { MatIconModule } from '@angular/material';
-import { MyAdvertisementsComponent } from './student/my-advertisements/my-advertisements.component'
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { CreateNewItemComponent } from './admin/create-new-item/create-new-item.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import { AllItemsComponent } from './all-items/all-items.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { AdvertisementFilterComponent } from './allusers/advertisement-filter/advertisement-filter.component';
-import { NotificationsComponent } from './allusers/notifications/notifications.component';
-import { FriendsNotificationsComponent } from './allusers/friendsNotifications/notifications.component';
-import { MyOrdersComponent } from './allusers/my-orders/my-orders.component'
-import { GroupPageComponent } from './UserAndGroupComponents/group-page/group-page.component';
-import { MessageCardComponent} from "./ConversationComponents/messageCard/messageCard.component"
-import { DialogMemberCardComponent } from "./ConversationComponents/dialogMemberCard/dialogMemberCard.component"
-import {GroupCardComponent } from "./UserAndGroupComponents/group-card/group-card.component"
-import {GroupListComponent} from "./UserAndGroupComponents/group-list/group-list.component"
-import {UserCardComponent} from "./UserAndGroupComponents/userCard/userCard.component"
-import {MiniGroupComponent} from "./UserAndGroupComponents/mini-group-card/mini-group-card.component";
-import { EmailPageComponent } from './registration/email-page/email-page.component'
-import {PostCardComponent} from './UserAndGroupComponents/post-card/post-card.component'
-import {CommentCardComponent} from './UserAndGroupComponents/comment-card/comment-card.component'
-import {FriendListComponent} from "./UserAndGroupComponents/friend-list/friend-list.component"
-import {FriendCardComponent} from './UserAndGroupComponents/friend-card/friend-card.component';
-import { Userpage2Component } from './userpage2/userpage2.component';
-import { FeedbackComponent } from './allusers/my-orders/feedback/feedback.component';
-import { TeacherDocumentsComponent } from './admin/teacher-documents/teacher-documents.component';
-import { UserControllComponent } from './admin/user-controll/user-controll.component';
-import { OrderItemComponent } from './allusers/order-item/order-item.component';
-import { UserDocumentItemComponent } from './admin/user-document-item/user-document-item.component';
-import { UserFeedBackComponent } from './userpage2/user-feed-back/user-feed-back.component';
-import {GroupCreateComponent} from './UserAndGroupComponents/group-create/group-create.component';
-import { ChangePropertiesComponent } from './userpage2/change-properties/change-properties.component';
-import {DialogCreateComponent} from './ConversationComponents/createdialog/dialog-create.component'
+import { ProductPageComponent } from './product-page/product-page.component';
+import { CartComponent } from './cart/cart.component';
+import { CartItemComponent } from './cart/cart-item/cart-item.component';
+import { OrderRegistrationComponent } from './order-registration/order-registration.component';
+import { OrderCartComponent } from './order-registration/order-cart/order-cart.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { FiltersComponent } from './filters/filters.component'; 
+import {MatExpansionModule} from '@angular/material/expansion';
+import { UserPageComponent } from './user-page/user-page.component'
 
 const appRoutes: Routes =[
-  {path: 'registration', component:RegistrationComponent},
-  {path: 'adv/:id', component:AdvertisementComponent},
-  {path: 'alladv', component:AllAdvertisementsComponent},
-  {path:'',component:HomeComponent},
-  {path: 'signin',component:SignInComponent},
-  {path:'activate/:activateCode',component:ActivatePageComponent},
-  {path:'admin/changeprop',component:ChangeUserPropertiesComponent,canActivate:[AuthGuard]},
-  {path: 'user/addnewAdvertisement',component:AddAdvertisementComponent},
-  {path:'admin/rolecontrol', component:RoleControlComponent,canActivate:[AuthGuard]},
-  {path:'admin/subjectcontrol', component:SubjectControlComponent,canActivate:[AuthGuard]},
-  {path: 'dialogsList',component:DialogsListComponent},
-  {path: 'dialog/:dialogId', component:ChatComponent},
-  {path: 'groupPage/:groupId', component:GroupPageComponent},
-  {path:'myadvertisements', component:MyAdvertisementsComponent},
-  {path: "groupList", component:GroupListComponent},
-  {path: 'myorders', component:MyOrdersComponent},
-  {path:'myadvertisements', component:MyAdvertisementsComponent},
-  {path:'email/:emailAdress',component:EmailPageComponent},
-  {path: 'friends', component:FriendListComponent},
-  {path: 'userPage/:id',component:Userpage2Component},
-  {path:"admin/allDocuments",component:TeacherDocumentsComponent},
-  {path:"userControl",component:UserControllComponent},
-  {path:"groupCreate",component:GroupCreateComponent},
-  {path:"dialogCreate",component:DialogCreateComponent}
+  { path: 'registration', component:RegistrationComponent},
+  {path:'signin',component:SigninComponent},
+  { path: 'addNew', component:CreateNewItemComponent},
+  { path: 'all', component:AllItemsComponent},
+  { path: 'product', component:ProductPageComponent},
+  {path:'cart',component:CartComponent},
+  {path:'orderRegistration',component:OrderRegistrationComponent},
+  {path:'',component:HomePageComponent},
+  {path:'userPage',component:UserPageComponent}
+
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    SignInComponent,
-    ActivatePageComponent,
-    ChangeUserPropertiesComponent,
-    HomeComponent,
-    AddAdvertisementComponent,
-    AdvertisementComponent,
-    AllAdvertisementsComponent,
-    AdvertisementCardComponent,
-    RoleControlComponent,
-    SubjectControlComponent,
-    DialogsListComponent,
-    DialogCardComponent,
+    SigninComponent,
+    CreateNewItemComponent,
+    AllItemsComponent,
+    ProductPageComponent,
+    CartComponent,
+    CartItemComponent,
+    OrderRegistrationComponent,
+    OrderCartComponent,
     NavbarComponent,
-    UpdateAdvertisementComponent,
-    MyAdvertisementsComponent,
-    MessageCardComponent,
-    DialogMemberCardComponent,
-    GroupCardComponent,
-    GroupListComponent,
-    UserCardComponent,
-    AdvertisementFilterComponent,
-    NotificationsComponent,
-    MyOrdersComponent,
-    MiniGroupComponent,
-    EmailPageComponent,
-    PostCardComponent,
-    CommentCardComponent,
-    FriendListComponent,
-    FriendCardComponent,
-    Userpage2Component,
-    FeedbackComponent,
-    TeacherDocumentsComponent,
-    UserControllComponent,
-    OrderItemComponent,
-    UserDocumentItemComponent,
-    UserFeedBackComponent,
-    GroupPageComponent,
-    ChatComponent,
-    FriendsNotificationsComponent,
-    GroupCreateComponent,
-    ChangePropertiesComponent,
-    DialogCreateComponent
+    HomePageComponent,
+    FiltersComponent,
+    UserPageComponent
   ],
   imports: [
-    MatInputModule,
-    MatBadgeModule,
     BrowserModule,
-    MatInputModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     FormsModule,
-    MatDatepickerModule,
     MatCheckboxModule,
-    BrowserAnimationsModule,
-    MatProgressSpinnerModule,
-    MatTableModule,
-    MatSelectModule,
-    MatIconModule,
-    MatButtonModule,
+    MatCardModule,
+    ReactiveFormsModule,
     MatExpansionModule,
-    MatChipsModule,
-    MatMenuModule,
-    MatButtonToggleModule,
-    HttpModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  },AuthService,AuthGuard],
+  providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

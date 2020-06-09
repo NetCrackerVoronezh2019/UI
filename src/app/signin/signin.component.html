@@ -1,0 +1,25 @@
+<div class="x p-5">
+    <form [formGroup]="signInService.getSignInForm()" class="signIn" >
+        <div class="container ">
+            <div class="row d-flex flex-column justify-content-center  align-items-center ">
+                <div class="col-md-6 col-sm-12 text-center text-uppercase  signin-label font-weight-bold">Вход</div>
+                <div class="sign-in-errors">
+                    <p>{{this.errorMessage}}</p>
+                </div>
+                <div class="col-lg-4 col-md-10">
+                    <div class="form-group">
+                        <label  for="exampleInputEmail1">Email</label>
+                        <input formControlName="userEmail" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Пароль</label>
+                        <input formControlName="userPassword" type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Пароль">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 d-flex justify-content-center">
+                    <button type="button" class="btn btn-success" (click)="onSubmit()">Войти</button>
+                </div> 
+            </div>
+        </div>
+    </form>
+    </div>

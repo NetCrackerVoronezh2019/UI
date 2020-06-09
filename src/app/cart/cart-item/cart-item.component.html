@@ -1,0 +1,17 @@
+<div *ngIf="cartItem!=undefined" class="container">
+    <div class="row pb-3 mt-2 cart-row">
+     <div  class="col-1  d-flex align-items-center justify-content-center ">
+       <i (click)="deleteItem()" class="fa fa-times-circle close-icon" aria-hidden="true"></i>
+     </div>
+      <div class="col-2 p-0 m-0">
+        <img class="p-0 m-0 cart-item-img"src="{{cartItem.item.picturePath}}" alt="Cartimg"/>
+      </div>
+      <div class="col-5 label">{{cartItem.item.name}}</div>
+      <div class="col-2  p-0 m-0 d-flex align-items-center justify-content-between">
+        <div (click)="minusCount()" class="minus"><i class="fa fa-minus" aria-hidden="true"></i></div>
+        <input class="cart-input" value={{cartItem.count}}/>
+        <div (click)="plusCount()" class="plus"><i class="fa fa-plus" aria-hidden="true"></i></div>
+      </div>
+      <div class="col-2  p-0 m-0 label d-flex align-items-center justify-content-center ">{{getTotalPrice()}} руб. </div>
+    </div>
+  </div>  

@@ -1,0 +1,22 @@
+<div class="container  preparation-cart">
+    <div class='row'>
+       <div class='col-12 preparation-cart-title mb-2'>Ваш заказ</div>
+       <div *ngFor="let cartItem of cartItems; let i = index" class="orderx container">
+           <div class="col-4 preparation-cart-item-image">
+             <img class="cart-img" src="https://storage.vsemayki.ru/images/0/0/824/824077/previews/people_13_manshortfull_front_white_500.jpg" alt="img"/>
+           </div>
+           <div class="col-8 preparation-cart-item-info mb-4">
+              <div class="cart-item-info-title">{{cartItem.item.name}}</div>
+              <div class="cart-item-info-size">Размер - {{cartItem.size}}</div>
+              <div class="cart-item-info-count">Количество - {{cartItem.count}}</div>
+              <div class="cart-item-info-price">Общая Цена - {{totalPriceForItem(cartItem)}}</div>
+           </div>
+         </div>
+       <div class="col-12 edit-cart d-flex justify-content-end">
+            Редактировать заказ
+       </div>
+       <div class="col-12 total-sum d-flex justify-content-center">
+         Итого {{totalPrice()}} руб.
+       </div>
+    </div>
+ </div>

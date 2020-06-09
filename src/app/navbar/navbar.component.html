@@ -1,63 +1,16 @@
-<div class="fix">
-    <nav class="navbar navbarx navbar-dark bg-dark">
-        <div class="navbar-blocks">
-            <div class="navbar-menu">
-              <a  mat-raised-button class="mr-2" routerLink="/">Главная</a>
-                <a *ngIf="isLogin && UserInfo.roleName=='ROLE_STUDENT'" mat-raised-button [ngClass]="UserInfo.banTime!=undefined ? 'disabled mr-2':'mr-2'" (click)="addNewAdvertisement()"><i class="fas fa-plus-circle"></i> Добавить Объявление</a>
-                <a  *ngIf="isAdmin" mat-raised-button class="mr-2" routerLink="/admin/changeprop">Пользователи</a>
-                <a  *ngIf="isAdmin" mat-raised-button сlass="m-2" routerLink="/admin/allDocuments">Документы</a>
-                <a  *ngIf="isAdmin" mat-raised-button  class="ml-2"routerLink="/admin/subjectcontrol">Предметы</a>
-
-            </div>
-              <div class="navbar-auth" *ngIf="!isLogin">
-                  <a mat-raised-button class="mr-4" routerLink="/signin">Войти</a>
-                  <a mat-raised-button routerLink="/registration">Регистрация</a>
-              </div>
-              <div class="navbar-auth" *ngIf="isLogin">
-                <p class="mr-4 notification">
-                    <mat-icon (click)="getMyAllNotifications()" class="userInfo cursor mr-4" data-toggle="modal" data-target="#notificationModal"  matBadge={{countNot}} matBadgeColor="warn">notifications</mat-icon>
-                    <mat-icon class="userInfo cursor mr-4" routerLink="/dialogsList" matBadge={{count}} matBadgeColor="warn">mail</mat-icon>
-                    <mat-icon class="userInfo cursor mr-4" (click)="getFriendsNot()" data-toggle="modal" data-target="#friendsNotificationModal" matBadge={{friendsNot}} matBadgeColor="warn">account_circle</mat-icon>
-                    <mat-icon class="userInfo cursor" routerLink="/groupList" matBadge={{groupsNot}} matBadgeColor="warn">people</mat-icon>
-                </p>
-                <a mat-raised-button class="mr-2" routerLink="/friends">Друзья</a>
-                <a *ngIf="!isAdmin" mat-raised-button class="mr-2" routerLink="/myorders" >Мои заказы</a>
-                 <a *ngIf="UserInfo.roleName=='ROLE_STUDENT'" mat-raised-button class="mr-2" routerLink="/myadvertisements" >Мои объявления</a>
-                  <a mat-raised-button class="mr-2" routerLink="/" (click)="Logout()">Выход</a>
-                   <a mat-raised-button class="mr-2"  routerLink="/userPage/{{UserInfo.userId}}">Личный Кабинет</a>
-              </div>
-        </div>
-      </nav>
-      <div *ngIf="UserInfo!=undefined && UserInfo.banTime!=undefined" class="block">
-        Ваша страница заблокирована до {{getBanTime()}}
-        </div>
-    <div  class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Уведомления</h5>
-              <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div *ngIf="notificationsClick" class="modal-body p-0 m-0">
-                <app-notifications  [(notifications)]="notifications"></app-notifications>
-            </div>
-          </div>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-labels">
+      <div class="navber-leftlabels">
+        <a class="navbar-brand" href="#">Главная</a>
+        <a class="navbar-brand" href="#">О нас</a>
       </div>
-      <div  class="modal fade" id="friendsNotificationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Заявки в друзья</h5>
-                <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body p-0 m-0">
-                <app-friends-notifications (deleteNot)="deleteFriendsNot($event)" [(notifications)]="friendsNotifications"></app-friends-notifications>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="navber-rightlabels">
+        <a class="navbar-brand" href="#">Войти</a>
+        <a class="navbar-brand" href="#">Регистрация</a>
+      </div>
+   </div>
+    
+  </nav>

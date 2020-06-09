@@ -1,67 +1,7 @@
-.navbar-blocks
+.navbar-labels
 {
+    padding:0 20px 0 20px;
     display:flex;
-    width:100%;
     justify-content:space-between;
-}
-
-.userInfo
-{
-  color:white;
-}
-
-.navbar-auth
-{
-    display:flex;
-}
-
-.navbarx
-{
-  width:100vw;
-	height:10vh;
-	background-color:#24292e !important;
-	
-}
-
-.block
-{
-  height:7vh;
-  background-color:red;
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-weight:600;
-  font-size:20px;
-}
-
-.disabled {
-  opacity: 0.65; 
-  cursor: not-allowed;
-}
-
-
-.cursor
-{
-  cursor:pointer
-}
-.fix
-{
-  margin:0;
-  padding:0;
-}
-
-.notification
-{
-  margin:auto;
-}
-
-a {
-  color:black !important;
-  text-decoration: none;
-}
-
-.marg
-{
-  margin-left:20px;
+    width:100%;
 }

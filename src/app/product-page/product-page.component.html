@@ -1,0 +1,53 @@
+<div class="productPage">
+<div class="currentItem m-4">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5 p-0 m-0">
+                 <img src="{{item.picturePath}}"  alt="img"/>
+            </div>
+            <div class="col-md-7 mt-3">
+               <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-lg-12  d-flex justify-content-center">
+                      <div class="details-title">
+                        {{item.name}}
+                       </div>
+                    </div>
+                    <div class="col-lg-12">
+                       <div class="details-block">
+                           <div class="details-state">В наличии</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                         <div class="price-item">Цена - {{item.price}} ₽</div>
+                    </div>
+                    <div class='col-lg-12 mt-2'>
+                     <span class="mt-6 font-weight-bold">Pазмер</span>
+                      <div class="sizes">
+                          <div class='size'>M</div>
+                          <div class='choosedsize size'>S</div>
+                          <div class='size'>XXL</div>
+                          <div class='size'>XXXL</div>
+                      </div>
+                    </div>
+                    <div class='col-lg-12 mt-2'>
+                        <span class="mt-6 font-weight-bold">Цвет</span>
+                         <div class="sizes">
+                             <div class='size'>Белая</div>
+                             <div class='choosedsize size'>Черная</div>
+                         </div>
+                       </div>
+                    <div class='col-lg-12 mt-4'>
+                        <span class="mt-6 font-weight-bold">Описание</span>
+                        <p class='mt-2'>
+                           {{item.description}}
+                        </p>
+                    </div>
+                    <div (click)="addInCart()" class="tocart"><span class=" buyButton btn btn-success">В Корзину</span></div>
+                  </div>
+               </div>
+            </div>
+        </div>
+    </div>
+ </div>
+ </div>

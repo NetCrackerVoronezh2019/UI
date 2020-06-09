@@ -1,0 +1,60 @@
+<div class="order-reg-page">
+
+       <div class="container-fluid preparation">
+           <div class="row contact">
+               <div class='col-7'>
+               <form>    
+                     <div  class="col-12 preparation-title">Доставка</div>
+                     <div class="checkboxs row mt-3 col-12">
+                       <div class="col-4  p-0 mr-3">
+                         <div [ngClass]="pochta== true ?'check-button check-button-border':'check-button'"  (click)="setPochtaTrue()" style="cursor:pointer;">Почта</div>
+                       </div>
+                       <div class="col-4 p-0">
+                         <div [ngClass]="curier==true?'check-button check-button-border':'check-button'"  (click)="setCurierTrue()" style="cursor:pointer;" >Курьер</div>
+                     </div>
+                   </div>
+                   <div *ngIf="pochta==true"class="pochta">
+                      <div class="form-group row mt-3">
+                        <label htmlFor="city-input" class="col-4 col-form-label">Город*</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="city-input" placeholder="Укажите ваш город" required/>
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+                        <label htmlFor="post-input" class="col-4 col-form-label">№ отделения</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="post-input" placeholder="Номер ближайшего отделения" required/>
+                        </div>
+                    </div>
+                    <div class="col-12 contact-info-text p-0">Укажите город и адрес доставки и курьер доставит Ваш заказ прямо в руки. Курьер, по телефону предварительно согласует удобное для Вас время доставки.</div>
+                   </div>
+                   <div *ngIf="curier" class="curier">
+                      <div class="form-group row mt-3">
+                      <label htmlFor="city-input" class="col-4 col-form-label">Город*</label>
+                      <div class="col-8">
+                            <input class="form-control" type="text" id="city-input" placeholder="Укажите ваш город" required/>
+                      </div>
+                    </div>
+                    <div class="form-group row ">
+                      <label htmlFor="adress-input" class="col-4 col-form-label">Адрес*</label>
+                      <div class="col-8">
+                            <input class="form-control" type="text" id="adress-input" placeholder="Укажите ваш Адрес" required/>
+                      </div>
+                    </div>
+                    <div class="col-12 contact-info-text p-0">Отправка среднем занимает 1-3 дня. Обратите внимание, стоимость доставки оплачивается Вами.</div>
+                   </div>
+                   <div class="col-12 mt-3 preparation-title">Премечание к заказу</div>
+                   <div class="form-group mt-2">
+                      <textarea class="form-control" id="textarea1" rows="3" placeholder="Укажите здесь Ваши пожелания "></textarea>
+                   </div>
+                   <div class="col-12 btn-div mb-4">
+                        <button type="submit" class=" col-3 btn-div btn btn-outline-danger">Отправить</button>
+                   </div>
+               </form>
+               </div>  
+              <div class="col-5">
+                  <app-order-cart></app-order-cart>
+              </div>
+           </div>
+       </div>
+</div>

@@ -1,19 +1,10 @@
-import { Component,OnInit} from '@angular/core';
-import {AppService} from './app.service'
-import { interval } from 'rxjs';
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers:[AppService]
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-
-  constructor(private service:AppService) { }
-
-  ngOnInit() {
-  }
-
+export class AppComponent {
+  title = 'market';
 }
